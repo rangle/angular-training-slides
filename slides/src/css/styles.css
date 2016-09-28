@@ -1,0 +1,16 @@
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal pre {
+  width: 100%;
+  font-size: 0.8em;
+}
+
+.reveal pre code {
+  max-height: 700px;
+}
+
+.reveal table {
+  margin: 20px 0;
+}
