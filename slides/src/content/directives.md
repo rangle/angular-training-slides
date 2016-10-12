@@ -221,10 +221,29 @@ Equivalent to:
 
 ---
 
+## NgIf Directive
 
+Conditionally renders components or elements based on an expression
+- Removes or recreates a portion of the DOM tree 
+- The component has expensive create/destroy action? May be better to avoid using it
 
-
-
+```ts
+@Component({
+  selector: 'app',
+  template: `
+    <button type="button" (click)="toggleExists()">Toggle Component</button>
+    <if-example *ngIf="exists">
+      Hello
+    </if-example>  
+  `
+})
+export class AppComponent {
+  exists: boolean = true;
+  toggleExists() { 
+    this.exists = !this.exists;
+  }
+}
+```
 
 
 ---
