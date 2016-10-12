@@ -1,19 +1,41 @@
 # Components In Angular 2
 
+- The core concept of any Angular 2 application is the component.
+- In effect, the whole application can be modeled as a tree of these components.
+- A component controls a patch of screen real estate that we could call a view, and declares reusable UI building blocks for an application.
+
 ---
 
-## Example Structure of a component
+## Passing Data into a Component
 
-![Angular 2 App Structure](content/images/angular2-generic-application-structure.png)
+- The inputs attribute defines a set of parameters that can be passed down from the component's parent
+- For example, we can modify the Hello component so that name can be configured by the parent
 
-Notes:
+```ts
+@Component({
+  selector: 'hello',
+  template: '<p>Hello, {{name}}</p>'
+})
+export class Hello {
+  @Input() name: string;
+}
+```
 
-- An app is a collection of Modules
-- An app has only one root module
-- An app can have multiple feature modules
-- An app uses built-in modules to have access to 
-- A module defines a collection of Components, Directives, Pipes and Services
-- There's different types of modules: root, feature, built-in and third party modules.
+---
+
+- The point of making components is encapsulation and reusability
+- Inputs allow us to configure a particular component instance
+
+```html
+<!-- To bind to a raw string -->
+<hello name="World"></hello>
+<!-- To bind to a variable in the parent scope -->
+<hello [name]="name"></hello>
+```
+
+---
+
+## Responding to Component Events
 
 ---
 
