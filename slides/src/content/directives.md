@@ -186,6 +186,36 @@ Result:
 
 ## Structural Directives
 
+Are a way of handling how a component or element renders through the use of the template tag.  
+Angular 2 built-in structural directives (ngIf, ngFor and ngSwitch).  
+
+Have their own special syntax in the template:
+```ts
+@Component({
+  selector: 'directive-example',
+    template: `
+      <p *structuralDirective="expression">
+        Under a structural directive.
+      </p>
+    `
+})
+```
+
+The binding is still an expression binding even though there are no square bracket.  
+Equivalent to:
+
+```ts
+@Component({
+  selector: 'directive-example',
+  template: `
+    <template [structuralDirective]="expression">
+      <p>
+        Under a structural directive.
+      </p>
+    </template>
+    `
+})
+```
 
 
 ---
