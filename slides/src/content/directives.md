@@ -225,7 +225,7 @@ Equivalent to:
 
 Conditionally renders components or elements based on an expression
 - Removes or recreates a portion of the DOM tree 
-- The component has expensive create/destroy action? May be better to avoid using it
+- If the component has expensive create/destroy action, be aware of the costs in using it
 
 ```ts
 @Component({
