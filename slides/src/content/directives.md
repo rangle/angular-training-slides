@@ -300,6 +300,38 @@ export class AppComponent {
 
 ---
 
+## NgSwitch Directive
+
+- Very similar to a switch statement
+- Multiple components can be matched using ngSwitchCase
+- Since components are created or destroyed be aware of the costs in doing so.
+
+```ts
+@Component({
+  selector: 'app',
+  template: `
+    <div class="tabs-selection">
+      <tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</tab>
+      <tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</tab>
+    </div>
+
+    <div [ngSwitch]="tab">
+      <tab-content *ngSwitchCase="1">Tab content 1</tab-content>
+      <tab-content *ngSwitchCase="2">Tab content 2</tab-content>
+      <tab-content *ngSwitchDefault>Select a tab</tab-content>
+    </div>
+  `,
+  styles: [...]
+})
+export class AppComponent {
+  tab: number = 0;
+  setTab(num: number) { this.tab = num; }
+  isSelected(num: number) { return this.tab === num; }
+}
+```
+
+---
+
 ## Built-in Directives
 
 ---
