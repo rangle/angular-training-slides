@@ -298,6 +298,9 @@ export class AppComponent {
 }
 ```
 
+Notes: 
+You might want to talk about trackBy 
+
 ---
 
 ## NgSwitch Directive
