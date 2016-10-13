@@ -186,7 +186,7 @@ Result:
 
 ## Structural Directives
 
-Are a way of handling how a component or element renders through the use of the template tag  
+A way of handling how a component or element renders through the use of the template tag  
 Angular 2 built-in structural directives (ngIf, ngFor and ngSwitch)   
 
 - No square bracket, still an expression binding
