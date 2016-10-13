@@ -335,6 +335,27 @@ export class AppComponent {
 
 ---
 
+## Using Multiple Structural Directives
+
+When we want to combine multiple structural directives together
+- Can lead to unexpected results, so a template can only be bound to one directive at a time
+
+```ts
+@Component({
+  selector: 'app',
+  template: `
+    <template ngFor [ngForOf]="[1,2,3,4,5,6]" let-item>
+      <div *ngIf="item > 3">
+        {{item}}
+      </div>
+    </template>
+  `
+})
+export class AppComponent {}
+```
+
+---
+
 ## Built-in Directives
 
 ---
