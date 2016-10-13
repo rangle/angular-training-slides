@@ -245,6 +245,58 @@ export class AppComponent {
 }
 ```
 
+---
+
+## NgFor Directive
+
+A way of repeating a template
+- Lets you specify an iterable object to iterate over and the name to refer to each item by inside the scope
+- Similar syntax to for...of statement
+
+```ts
+@Component({
+  selector: 'app-root',
+  template: `<ol>
+    <li *ngFor="let item of list">
+      <span>({{ item.id }})</span>
+      <span>{{ item.value }}</span>
+    </li>
+  </ol>`,
+  styles: [``]
+})
+export class AppComponent {
+  list = [
+    { id: 0, value: 'zero the hero' },
+    // ... more objects
+  ];
+}
+```
+
+---
+
+## NgFor Directive (exported values)
+
+Provides some other values that can be bound to: [index, first, last, even, odd]
+
+```ts
+@Component({
+  selector: 'app',
+  template: `
+    <for-example 
+      *ngFor="let episode of episodes; let i = index; let isOdd = odd"
+      [episode]="episode"
+      [ngClass]="{ odd: isOdd }">
+      {{i+1}}. {{episode.title}}
+    </for-example>
+  `
+})
+export class AppComponent {
+  episodes: any[] = [
+    { title: 'Winter Is Coming', director: 'Tim Van Patten' },
+    // ... more objects
+  ];
+}
+```
 
 ---
 
