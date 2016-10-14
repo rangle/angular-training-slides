@@ -128,7 +128,7 @@ Angular 2 dynamically adds the component corresponding to the active route into 
 
 ```javascript
 @Component({
-  selector: 'app',
+  selector: 'rio-app',
   template: `
     <nav>
       <a [routerLink]="['/component-one']">Component One</a>
@@ -186,3 +186,60 @@ export class ProductDetails {
 Notes:
 
 The reason that the `params` property on `ActivatedRoute` is an Observable is that the router may not recreate the component when navigating to the same component. In this case the parameter may change without the component being recreated.
+
+---
+
+## Child Routes (1/3)
+
+Specify child routes by using the `children` route property.
+
+```javascript
+export const routes: Routes = [
+  { path: 'product-details/:id', component: ProductDetails,
+    children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: Overview },
+      { path: 'specs', component: Specs }
+    ]
+  }
+];
+```
+
+For example: `localhost:3000/product-details/3/specs`
+
+---
+
+## Child Routes (2/3)
+
+Using child routes requires an additional `<router-outlet></router-outlet>` just like we used in the root application component.
+
+```javascript
+@Component({
+  selector: 'rio-product-details',
+  template: `
+    <p>Product Details: {{id}}</p>
+    <router-outlet></router-outlet>
+    <!-- Overview & Specs components get added here by the router -->
+  `
+})
+```
+
+---
+
+## Child Routes (3/3)
+To access a parent's route parameters:
+
+```javascript
+export default class Overview {
+  constructor(private router: Router,
+    private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Get parent ActivatedRoute of this route.
+    this.sub = this.router.routerState.parent(this.route)
+      .params.subscribe(params => {
+        // params['id'] is parent's product id
+      });
+  }
+}
+```
