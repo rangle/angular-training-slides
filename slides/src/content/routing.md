@@ -77,7 +77,7 @@ export const routing = RouterModule.forRoot(routes);
   declarations: [ AppComponent, ComponentOne ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { ... }
+export class AppModule {}
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 ```
@@ -118,3 +118,27 @@ Alternatively, you can navigate to a route by calling the `navigate` function on
 ```javascript
 this.router.navigate(['/component-one']);
 ```
+
+---
+
+## Dynamically Adding Route Components
+
+Rather than define each route's component separately, use `RouterOutlet`.
+Angular 2 dynamically adds the component corresponding to the active route into the `<router-outlet></router-outlet>` element.
+
+```javascript
+@Component({
+  selector: 'app',
+  template: `
+    <nav>
+      <a [routerLink]="['/component-one']">Component One</a>
+      <a [routerLink]="['/component-two']">Component Two</a>
+    </nav>
+    <router-outlet></router-outlet>
+    <!-- Route components are added by router here -->
+  `
+})
+export class AppComponent {}
+```
+
+---
