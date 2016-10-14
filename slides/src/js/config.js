@@ -8,6 +8,7 @@ Reveal.initialize({
   previewLinks: true,
   width: '100%',
   height: '100%',
+  margin: 0.05,
   dependencies: [
     // Cross-browser shim that fully implements classList
     { 

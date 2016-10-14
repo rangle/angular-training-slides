@@ -2,6 +2,14 @@
   text-align: left;
 }
 
+.reveal .slides > section {
+  padding: 0;
+}
+
+.reveal h2 {
+  font-size: 1.8em;
+}
+
 .reveal pre {
   width: 100%;
   font-size: 0.8em;
