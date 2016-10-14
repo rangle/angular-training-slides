@@ -100,3 +100,21 @@ export const routes: Routes = [
 This tells the router to redirect to component-one when matching the empty path ('').
 
 When starting the application, it will automatically navigate to the route for `component-one`.
+
+---
+
+## Defining Links Between Routes
+
+Add links to routes using the `RouterLink` directive.
+
+For example the following code defines a link to the route at path `component-one`.
+
+```html
+<a [routerLink]="['/component-one']">Component One</a>
+```
+
+Alternatively, you can navigate to a route by calling the `navigate` function on the router:
+
+```javascript
+this.router.navigate(['/component-one']);
+```
