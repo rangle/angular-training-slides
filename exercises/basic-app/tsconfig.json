@@ -6,7 +6,11 @@
     "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": [
+      "core-js",
+      "node"
+    ]
   },
   "exclude": [
     "node_modules"
