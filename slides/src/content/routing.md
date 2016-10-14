@@ -142,3 +142,47 @@ export class AppComponent {}
 ```
 
 ---
+
+## Route Parameters (1/2)
+
+Adding `:id` in the path of the `product-details` route places the parameter in the route's path. For example `localhost:3000/product-details/5`
+
+```javascript
+export const routes: Routes = [
+  { path: 'product-details/:id', component: ProductDetails }
+];
+```
+
+`routerLink` directive passes an array which specifies the path and the route parameter. This links the route to the parameter.
+
+```html
+<a *ngFor="let product of products"
+  [routerLink]="['/product-details', product.id]">
+  {{ product.name }}
+</a>
+```
+
+---
+
+## Route Parameters (2/2)
+
+The `ActivatedRoute` service provides a `params` Observable which we can subscribe to to get the route parameters.
+
+```javascript
+import { ActivatedRoute } from '@angular/router';
+
+@Component({ ... })
+export class ProductDetails {
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+       // params['id'] is the product's id
+    });
+  }
+}
+```
+
+Notes:
+
+The reason that the `params` property on `ActivatedRoute` is an Observable is that the router may not recreate the component when navigating to the same component. In this case the parameter may change without the component being recreated.
