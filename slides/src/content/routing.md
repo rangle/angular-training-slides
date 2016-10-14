@@ -243,3 +243,44 @@ export default class Overview {
   }
 }
 ```
+
+---
+
+## Passing Optional Parameters (1/2)
+
+Use the `[queryParams]` directive along with `[routerLink]` to pass query parameters. For example:
+
+```html
+<a [routerLink]="['product-list']" [queryParams]="{ page: 99 }">Go to Page 99</a>
+```
+
+Alternatively, we can navigate programmatically using the `Router` service:
+
+```javascript
+  goToPage(pageNum) {
+    this.router.navigate(['/product-list'], { queryParams: { page: pageNum } });
+  }
+```
+
+---
+
+## Passing Optional Parameters (2/2)
+
+Similar to reading route parameters, the `Router` service returns an Observable we can subscribe to to read the query parameters:
+
+```javascript
+
+ngOnInit() {
+  this.sub = this.route
+    .queryParams
+    .subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      this.page = +params['page'] || 0; // (+) converts string 'page' to a number
+    });
+}
+
+nextPage() {
+  this.router.navigate(['product-list'],
+    { queryParams: { page: this.page + 1 } });
+}
+```
