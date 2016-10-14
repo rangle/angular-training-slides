@@ -6,6 +6,49 @@
 
 ---
 
+## Creating Components
+
+Components in Angular 2 build upon this idea. We define a component's application logic inside a class. To this we then attach a selector and a template.
+- selector is the element property that we use to tell Angular to create and insert an instance of this component.
+- template is a form of HTML that tells Angular how to render this component.
+
+```ts
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'hello',
+    template: '<p>Hello, {{name}}</p>'
+})
+export class Hello {
+  name: string;
+
+  constructor() {
+    this.name = 'World';
+  }
+}
+```
+
+To use this component we simply add <hello></hello> to our HTML
+
+---
+
+## Application Structure with Components
+
+A useful way of conceptualizing Angular application design is to look at it as a tree of nested components, each having an isolated scope.
+
+```html
+<TodoApp>
+  <TodoList>
+    <TodoItem></TodoItem>
+    <TodoItem></TodoItem>
+    <TodoItem></TodoItem>
+  </TodoList>
+  <TodoForm></TodoForm>
+</TodoApp>
+```
+
+---
+
 ## Passing Data into a Component
 
 - The inputs attribute defines a set of parameters that can be passed down from the component's parent
