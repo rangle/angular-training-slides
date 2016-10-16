@@ -10,7 +10,7 @@
 
 ---
 
-## What is a DI _exactly_ ?
+## What is a DI _exactly_ ? (1/11)
 Consider the following code:
 ```ts
 class ChatWidget {
@@ -31,6 +31,7 @@ class ChatWidget {
 
 ---
 
+## What is a DI _exactly_ ? (2/11)
 What if we need a chat widget that accepts `Linkedin`?
 
 One naive approach might be:
@@ -50,6 +51,7 @@ class ChatWidget {
 But what if we need a smaller auth widget? or we want to turn off encryption?
 
 ---
+## What is a DI _exactly_ ? (3/11)
 So, maybe something more generic like:
 ```ts
 class ChatWidget {
@@ -68,6 +70,7 @@ class ChatWidget {
 - Changes on any constructor of `ChatWidget`'s dependencies would also require a change on `ChatWidget`'s constructor.
 
 ---
+## What is a DI _exactly_ ? (4/11)
 Further optimize the code:
 ```ts
 class ChatWidget {
@@ -86,11 +89,15 @@ class ChatWidget {
 - Changes on its dependencies' constructor does not effect `ChatWidget`'s constructor.
 
 ---
+## What is a DI _exactly_ ? (5/11)
 This pattern in Typescript can be written as:
 ```ts
 class ChatWidget {
-  constructor(private authService: AuthService, private authWidget:
-    AuthWidget, private chatSocket: ChatSocket) {}
+  constructor(
+    private authService: AuthService,
+    private authWidget: AuthWidget,
+    private chatSocket: ChatSocket
+  ) {}
 }
 ```
 - This model of having the dependencies provided to `ChatWidget` is basic dependency injection.
@@ -99,42 +106,57 @@ class ChatWidget {
 But how DI constructs `ChatWidget`'s dependencies?
 
 ---
+## What is a DI _exactly_ ? (6/11)
 Naive first thought:
 ```ts
-const chatWidget = new ChatWidget(new AuthService(['Google']), new
-  AuthWidget('Normal'), new ChatSocket(true));
+const chatWidget = new ChatWidget(
+  new AuthService(['Google']),
+  new AuthWidget('Normal'),
+  new ChatSocket(true)
+);
 ```
 That's a lot of work to create a `ChatWidget`, and now all the different pieces of code that make `ChatWidget` have to understand how `AuthService`, `AuthWidget` and `ChatSocket` get instantiated.
 
 ---
+## What is a DI _exactly_ ? (7/11)
+
 `Factory` approach:
 ```ts
 function chatWidgetFactory() {
-    const authService = new AuthService(['Google']);
-    const authWidget = new AuthWidget('Normal');
-    const chatSocket = new ChatSocket(true);
-    return new ChatWidget(authService, authWidget, chatSocket);
+  const authService = new AuthService(['Google']);
+  const authWidget = new AuthWidget('Normal');
+  const chatSocket = new ChatSocket(true);
+  return new ChatWidget(authService, authWidget, chatSocket);
 }
 ```
 - An improvement. But when the `ChatWidget` gets more complex, this factory will become confusing.
 - The factory is also responsible for knowing how to create four different components, which is a lot for one function.
 
 ---
+## What is a DI _exactly_ ? (8/11)
+
 How DI does:
 ```ts
-const injector = new Injector([ChatWidget, AuthService, AuthWidget,
+const injector = new Injector([
+  ChatWidget,
+  AuthService,
+  AuthWidget,
   ChatSocket]);
 const chatApp = injector.get(ChatWidget);
 ```
 - An `Injector` is a lot like the previous factory function, but more general, and powerful.
-- Instead of one giant factory function, an `Injector` has a factory, or recipe (pun intended) for a collection of objects.
+- Instead of one giant factory function, an `Injector` has a factory, or recipe for a collection of objects.
 
 ---
+## What is a DI _exactly_ ? (9/11)
+
 How about Angular 2's DI?
 - Compared to the `Injector` example, Angular 2 simplifies DI even further.
 - Angular 2's DI system is (mostly) controlled through `@NgModule`. Specifically the `providers` array.
 
 ---
+## What is a DI _exactly_ ? (10/11)
+
 For example:
 
 ```ts
@@ -153,9 +175,11 @@ export class DiExample {};
 ```
 - The `DiExample` module is told about the `ChatWidget` through `providers`.
 - Angular 2 assumes that `ChatWidget` is a class.
-- How Angular knows `AuthService`, `AuthWidget` and `ChatSocket`?
+- How does Angular know about `AuthService`, `AuthWidget` and `ChatSocket`?
 
 ---
+## What is a DI _exactly_ ? (11/11)
+
 Revised version:
 ```ts
 import { Injectable, NgModule } from '@angular/core';
@@ -174,10 +198,10 @@ class ChatSocket {}
   providers: [ ChatWidget, AuthService, AuthWidget, ChatSocket ],
 })
 ```
-So, in Angular's injection system, how `ChatWidget` gets its dependencies?
+And, in Angular's injection system, how `ChatWidget` gets its dependencies?
 
 ---
-##`@Inject`, `@Injectable`:
+##`@Inject`, `@Injectable` (1/4):
 
 - `@Inject` and `@Injectable` are [decorators](http://blog.wolksoftware.com/decorators-reflection-javascript-typescript).
 - `@Inject()` is a manual mechanism for letting Angular 2 know that a parameter must be injected.
@@ -185,10 +209,10 @@ So, in Angular's injection system, how `ChatWidget` gets its dependencies?
 - `@Injectable()` is not _strictly_ required if the class has other Angular 2 decorators on it or does not have any dependencies.
 
 ---
+##`@Inject`, `@Injectable` (2/4):
 `@Inject` [example](https://plnkr.co/edit/lbRrkR03ecXecvulcsV8?p=preview):
 ```ts
-import { Component, Inject } from '@angular/core';
-import { ChatWidget } from '../components/chat-widget';
+...
 @Component({
   selector: 'app',
   template: `Encryption: {{ encryption }}`
@@ -204,6 +228,7 @@ export class App {
 -  `ChatWidget` here is only used for typings not instantiating, Angular does that for us behind the scenes.
 
 ---
+##`@Inject`, `@Injectable` (3/4):
 
 In TypeScript, `@Inject` is only needed for injecting primitives. TypeScript's types let Angular 2 know what to do in most cases.
 ```ts
@@ -223,6 +248,8 @@ export class App {
 ```
 
 ---
+##`@Inject`, `@Injectable` (4/4):
+
 `@Injectable()` [example](https://plnkr.co/edit/lbRrkR03ecXecvulcsV8?p=preview)
 ```ts
 import {Injectable} from '@angular/core';
@@ -241,7 +268,7 @@ export class ChatWidget {
 - Here, Angular 2 uses types again to decide what to do regarding to `ChatWidget`'s dependencies.
 
 ---
-##Injection Beyond Classes
+##Injection Beyond Classes (1/4)
 How about primitives dependencies? and how does injection help testing?
 - Angular 2 is not limited to injecting classes.
 - Angular 2 lets programmers specify providers with a more verbose "recipe" in `providers`:
@@ -255,6 +282,7 @@ export class DiExample {};
 - Besides `useClass`, Angular also provides `useValue`, `useFactory`.
 
 ---
+##Injection Beyond Classes (2/4)
 `useClass` example:
 ```ts
 import { NgModule } from '@angular/core';
@@ -272,6 +300,7 @@ export class DiExample {};
 - Also enables easy and neat testing process.
 
 ---
+##Injection Beyond Classes (3/4)
 `useFactory` [example](http://plnkr.co/edit/Dkm0cJF80EdmPcWZx45W?p=preview):
 ```ts
 import { NgModule } from '@angular/core';
@@ -288,6 +317,7 @@ export class DiExample {};
 - In this example, Angular 2 use `randomFactory` to produce `Random` during injection process.
 
 ---
+##Injection Beyond Classes (4/4)
 `useValue` [example](http://plnkr.co/edit/63GsCDOElY7J8LNAbTjL?p=preview)
 ```ts
 import { NgModule } from '@angular/core';
@@ -302,11 +332,12 @@ export class DiExample {};
 - In this example, the product of `Math.random` is assigned to `Random`.
 
 ---
-##The Injector Tree
+##The Injector Tree (1/2)
 How injector gets handled then?
 - In Angular 1.x, there is only one injector per application, but in Angular 2, there is a [tree of injectors](content/images/di.png).
 - The injector tree does not make a new injector for every component, but does make a new injector for every component with a `providers` array in its decorator.
 - Components that have no `providers` array look to their parent component for an injector. If the parent does not have an injector, it looks up until it reaches the root injector.
 
 ---
+##The Injector Tree (2/2)
 - _Warning_: If a child component is decorated with a providers array that contains dependencies that were also requested in the parent component(s), the dependencies the child receives will shadow the parent dependencies. This can have all sorts of unintended consequences. There is one [example](http://plnkr.co/edit/5jHB4TP3IpnkWJq2wzeX?p=preview).
