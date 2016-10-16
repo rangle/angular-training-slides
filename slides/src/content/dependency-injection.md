@@ -152,7 +152,7 @@ const chatApp = injector.get(ChatWidget);
 
 How about Angular 2's DI?
 - Compared to the `Injector` example, Angular 2 simplifies DI even further.
-- Angular 2's DI system is (mostly) controlled through `@NgModule`. Specifically the `providers` array.
+- Angular 2's DI system is (mostly) controlled through `@NgModule`. Specifically the `providers` and `declarations` array.
 
 ---
 ## What is a DI _exactly_ ? (10/11)
@@ -160,20 +160,20 @@ How about Angular 2's DI?
 For example:
 
 ```ts
-import { Injectable, NgModule } from '@angular/core';
-
-@Injectable()
 class ChatWidget {
-  constructor(private authService: AuthService, private authWidget:
-    AuthWidget, private chatSocket: ChatSocket) {}
+  constructor(
+    private authService: AuthService,
+    private authWidget: AuthWidget,
+    private chatSocket: ChatSocket
+  ) {}
 }
 
 @NgModule({
-  providers: [ ChatWidget ],
+  declarations: [ ChatWidget ],
 })
-export class DiExample {};
+export class AppModule {};
 ```
-- The `DiExample` module is told about the `ChatWidget` through `providers`.
+- The `DiExample` module is told about the `ChatWidget` through `declarations`.
 - Angular 2 assumes that `ChatWidget` is a class.
 - How does Angular know about `AuthService`, `AuthWidget` and `ChatSocket`?
 
@@ -182,8 +182,6 @@ export class DiExample {};
 
 Revised version:
 ```ts
-import { Injectable, NgModule } from '@angular/core';
-@Injectable()
 class ChatWidget {
   constructor(private authService: AuthService, private authWidget:
     AuthWidget, private chatSocket: ChatSocket) {}
@@ -191,12 +189,13 @@ class ChatWidget {
 @Injectable()
 class AuthService {}
 @Injectable()
-class AuthWidget {}
-@Injectable()
 class ChatSocket {}
+
 @NgModule({
-  providers: [ ChatWidget, AuthService, AuthWidget, ChatSocket ],
+  declarations: [ ChatWidget, AuthWidget ]
+  providers: [ AuthService, ChatSocket ],
 })
+export class AppModule {};
 ```
 And, in Angular's injection system, how `ChatWidget` gets its dependencies?
 
