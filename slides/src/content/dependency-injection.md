@@ -173,7 +173,7 @@ class ChatWidget {
 })
 export class AppModule {};
 ```
-- The `DiExample` module is told about the `ChatWidget` through `declarations`.
+- The `AppModule` is told about the `ChatWidget` through `declarations`.
 - Angular 2 assumes that `ChatWidget` is a class.
 - How does Angular know about `AuthService`, `AuthWidget` and `ChatSocket`?
 
@@ -200,16 +200,16 @@ export class AppModule {};
 And, in Angular's injection system, how `ChatWidget` gets its dependencies?
 
 ---
-##`@Inject`, `@Injectable` (1/4):
+##`@Inject`, `@Injectable`
 
 - `@Inject` and `@Injectable` are [decorators](http://blog.wolksoftware.com/decorators-reflection-javascript-typescript).
 - `@Inject()` is a manual mechanism for letting Angular 2 know that a parameter must be injected.
 - `@Injectable()` lets Angular 2 know that a class can be used with the dependency injector.
-- `@Injectable()` is not _strictly_ required if the class has other Angular 2 decorators on it or does not have any dependencies.
+- `@Injectable()` is not _strictly_ required if the class does not have any dependencies.
 
 ---
-##`@Inject`, `@Injectable` (2/4):
-`@Inject` [example](https://plnkr.co/edit/lbRrkR03ecXecvulcsV8?p=preview):
+##How `@Inject` Works
+`@Inject` example:
 ```ts
 ...
 @Component({
@@ -227,13 +227,11 @@ export class App {
 -  `ChatWidget` here is only used for typings not instantiating, Angular does that for us behind the scenes.
 
 ---
-##`@Inject`, `@Injectable` (3/4):
+##How `@Inject` Works
 
 In TypeScript, `@Inject` is only needed for injecting primitives. TypeScript's types let Angular 2 know what to do in most cases.
 ```ts
-import { Component } from '@angular/core';
-import { ChatWidget } from '../components/chat-widget';
-
+...
 @Component({
   selector: 'app',
   template: `Encryption: {{ encryption }}`
@@ -245,11 +243,12 @@ export class App {
   }
 }
 ```
+So `@Inject(ChatWidget) chatWidget` can actually be replaced by `chatWidget: ChatWidget`.
 
 ---
-##`@Inject`, `@Injectable` (4/4):
+##How `@Injectable` Works
 
-`@Injectable()` [example](https://plnkr.co/edit/lbRrkR03ecXecvulcsV8?p=preview)
+`@Injectable()` example:
 ```ts
 import {Injectable} from '@angular/core';
 import {AuthService} from './auth-service';
@@ -274,9 +273,9 @@ How about primitives dependencies? and how does injection help testing?
 
 ```ts
 @NgModule({
-  providers: [ { provide: ChatWidget, useClass: ChatWidget } ],
+  providers: [ { provide: AuthService, useClass: AuthService } ],
 })
-export class DiExample {};
+export class AppModule {};
 ```
 - Besides `useClass`, Angular also provides `useValue`, `useFactory`.
 
@@ -285,22 +284,21 @@ export class DiExample {};
 `useClass` example:
 ```ts
 import { NgModule } from '@angular/core';
-import { App } from './containers/app'; // hypothetical app component
-import { ChatWidget } from './components/chat-widget';
-import { MockChatWidget } from './components/mock-chat-widget';
+import { AuthService } from './services/auth-service';
+import { MockAuthService } from './services/mock-auth-service';
 
 @NgModule({
-  providers: [ { provide: ChatWidget, useClass: MockChatWidget } ],
+  providers: [ { provide: AuthService, useClass: MockAuthService } ],
 })
-export class DiExample {};
+export class AppModule {};
 ```
-- In `DiExample` module, declarations of type `ChatWidget` will actually use `MockChatWidget`'s definition.
-- Best part: the injection system knows how to build `MockChatWidget`, and will not get developers bogged down.
+- In `AppModule`, declarations of type `AuthService` will actually use `MockAuthService`'s definition.
+- Best part: the injection system knows how to build `MockAuthService`, and will not get developers bogged down.
 - Also enables easy and neat testing process.
 
 ---
 ##Injection Beyond Classes (3/4)
-`useFactory` [example](http://plnkr.co/edit/Dkm0cJF80EdmPcWZx45W?p=preview):
+`useFactory` example:
 ```ts
 import { NgModule } from '@angular/core';
 import { App } from './containers/app'; // hypothetical app component
@@ -310,14 +308,14 @@ const randomFactory = () => { return Math.random(); };
 @NgModule({
   providers: [ { provide: 'Random', useFactory: randomFactory } ],
 })
-export class DiExample {};
+export class AppModule {};
 ```
 - With `useFactory`, Angular 2 expects the provided value to be a function.
-- In this example, Angular 2 use `randomFactory` to produce `Random` during injection process.
+- In this example, Angular 2 use `randomFactory` to produce `Random` during injection process which means `Random` is the return value of `randomFactory` not `randomFactory` itself.
 
 ---
 ##Injection Beyond Classes (4/4)
-`useValue` [example](http://plnkr.co/edit/63GsCDOElY7J8LNAbTjL?p=preview)
+`useValue` example:
 ```ts
 import { NgModule } from '@angular/core';
 import { App } from './containers/app'; // hypothetical app component
@@ -325,7 +323,7 @@ import { App } from './containers/app'; // hypothetical app component
 @NgModule({
   providers: [ { provide: 'Random', useValue: Math.random() } ],
 })
-export class DiExample {};
+export class AppModule {};
 ```
 - `useValue` is used to provide static value.
 - In this example, the product of `Math.random` is assigned to `Random`.
@@ -339,4 +337,4 @@ How injector gets handled then?
 
 ---
 ##The Injector Tree (2/2)
-- _Warning_: If a child component is decorated with a providers array that contains dependencies that were also requested in the parent component(s), the dependencies the child receives will shadow the parent dependencies. This can have all sorts of unintended consequences. There is one [example](http://plnkr.co/edit/5jHB4TP3IpnkWJq2wzeX?p=preview).
+- _Warning_: If a child component is decorated with a providers array that contains dependencies that were also requested in the parent component(s), the dependencies the child receives will shadow the parent dependencies. This can have all sorts of unintended consequences. There is one example.
