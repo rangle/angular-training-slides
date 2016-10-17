@@ -186,11 +186,18 @@ Result:
 
 ## Structural Directives
 
-A way of handling how a component or element renders through the use of the template tag  
-Angular 2 built-in structural directives (ngIf, ngFor and ngSwitch)   
-
+Handles how a component or element renders using the `<template>` tag   
 - No square bracket, still an expression binding
 - Have their own special syntax in the template
+
+Angular 2 built-in structural directives:
+* ngIf
+* ngFor
+* ngSwitch;    
+
+---
+
+## Structural Directives (Example)
 
 ```ts
 @Component({
@@ -203,7 +210,7 @@ Angular 2 built-in structural directives (ngIf, ngFor and ngSwitch)
 })
 ```
 
-Equivalent to:
+Is equivalent to 
 
 ```ts
 @Component({
@@ -218,8 +225,8 @@ Equivalent to:
 })
 ```
 
-
 ---
+
 
 ## NgIf Directive
 
@@ -312,18 +319,15 @@ You might want to talk about trackBy
 ```ts
 @Component({
   selector: 'app',
-  template: `
-    <div class="tabs-selection">
-      <tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</tab>
-      <tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</tab>
-    </div>
-
-    <div [ngSwitch]="tab">
-      <tab-content *ngSwitchCase="1">Tab content 1</tab-content>
-      <tab-content *ngSwitchCase="2">Tab content 2</tab-content>
-      <tab-content *ngSwitchDefault>Select a tab</tab-content>
-    </div>
-  `,
+  template: `   <div class="tabs-selection">
+                  <tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</tab>
+                  <tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</tab>
+                </div>
+                <div [ngSwitch]="tab">
+                  <tab-content *ngSwitchCase="1">Tab content 1</tab-content>
+                  <tab-content *ngSwitchCase="2">Tab content 2</tab-content>
+                  <tab-content *ngSwitchDefault>Select a tab</tab-content>
+                </div> `,
   styles: [...]
 })
 export class AppComponent {
@@ -337,8 +341,8 @@ export class AppComponent {
 
 ## Using Multiple Structural Directives
 
-When we want to combine multiple structural directives together
-- Can lead to unexpected results, so a template can only be bound to one directive at a time
+When we want to combine multiple structural directives together   
+- A template can only be bound to one directive at a time. 
 
 ```ts
 @Component({
