@@ -5,7 +5,8 @@
 ## Testing Components
 
 - `@angular/core/testing` module uses Jasmine with Chai for syntax sugar
-- Some Angular-specific additions
+- Angular Testing Utilities provide functions that let you control your testing environment, e.g. `TestBed`
+- `karma` is used to run the unit tests
 
 ---
 
