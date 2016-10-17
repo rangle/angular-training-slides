@@ -1,94 +1,67 @@
-# Components In Angular 2
-
-- The core concept of any Angular 2 application is the component.
-- In effect, the whole application can be modeled as a tree of these components.
-- A component controls a patch of screen real estate that we could call a view, and declares reusable UI building blocks for an application.
+# Components In Depth
 
 ---
 
-## Creating Components
+## Passing Data to a Component (1/2)
 
-Components in Angular 2 build upon this idea. We define a component's application logic inside a class. To this we then attach a selector and a template.
-- selector is the element property that we use to tell Angular to create and insert an instance of this component.
-- template is a form of HTML that tells Angular how to render this component.
+The decorator `@Input` can be used to capture data passed from the a component
 
 ```ts
-import {Component} from '@angular/core';
-
 @Component({
-    selector: 'hello',
-    template: '<p>Hello, {{name}}</p>'
+  selector: 'rio-app',
+  template: '<rio-greeter [name]="name"></rio-greeter>'
 })
-export class Hello {
-  name: string;
-
-  constructor() {
-    this.name = 'World';
-  }
+export class AppComponent {
+  name = 'John';
 }
 ```
 
-To use this component we simply add <hello></hello> to our HTML: [View Example](http://plnkr.co/edit/LmsR4psbJZwXH0c4lpMa?p=preview)
-
----
-
-## Application Structure with Components
-
-A useful way of conceptualizing Angular application design is to look at it as a tree of nested components, each having an isolated scope.
-
-```html
-<TodoApp>
-  <TodoList>
-    <TodoItem></TodoItem>
-    <TodoItem></TodoItem>
-    <TodoItem></TodoItem>
-  </TodoList>
-  <TodoForm></TodoForm>
-</TodoApp>
-```
-
----
-
-## Passing Data into a Component
-
-- The inputs attribute defines a set of parameters that can be passed down from the component's parent
-- For example, we can modify the Hello component so that name can be configured by the parent
-
 ```ts
 @Component({
-  selector: 'hello',
+  selector: 'rio-greeter',
   template: '<p>Hello, {{name}}</p>'
 })
-export class Hello {
+export class GreeterComponent {
   @Input() name: string;
 }
 ```
 
 ---
 
-#### Passing Data into a Component con't...
+## Passing Data to a Component (2/2) - Tips
 
-- The point of making components is encapsulation and reusability
-- Inputs allow us to configure a particular component instance
+We can bind an input to an expression or to a string:
 
 ```html
-<!-- To bind to a raw string -->
-<hello name="World"></hello>
 <!-- To bind to a variable in the parent scope -->
-<hello [name]="name"></hello>
+<rio-greeter [name]="name"></rio-greeter>
+<!-- To bind to a raw string -->
+<rio-greeter name="Mike"></rio-greeter>
 ```
 
-[View Example](http://plnkr.co/edit/GbpCKy?p=preview)
-
----
-
-## Responding to Component Events
-
-- Events in Angular 2 work similar to how they worked in Angular 1.x. The big change is template syntax.
+We can change the name of the input property:
 
 ```ts
 @Component({
-  selector: 'counter',
+  selector: 'rio-greeter',
+  template: '<p>Hello, {{ firstName }}</p>'
+})
+export class GreeterComponent {
+  @Input('name') firstName: string;
+}
+```
+
+[View Example](https://plnkr.co/edit/2cOXJj?p=preview)
+
+---
+
+## Responding to DOM Events
+
+We can bind a expressions to any DOM event using the `(event)` syntax:
+
+```ts
+@Component({
+  selector: 'rio-counter',
   template: `
     <div>
       <p>Count: {{ num }}</p>
@@ -96,8 +69,8 @@ export class Hello {
     </div>
     `
 })
-export class Counter {
-  num: number = 0;
+export class CounterComponent {
+  num = 0;
 
   increment() {
     this.num++;
@@ -105,175 +78,257 @@ export class Counter {
 }
 ```
 
-[View Example](http://plnkr.co/edit/15wHrpea6GY7yLr7hl61?p=preview)
+[View Example](https://plnkr.co/edit/ZDBPDJuPjpZq077HAQhu?p=preview)
 
 ---
 
-#### Component Events con't...
+## Creating Custom Events (1/2)
 
-- To send data out start by defining the outputs attribute. 
-- Outputs ccepts a list of output parameters exposed to its parent.
+Using the `@Output` decorator we can create custom events to communicate with a parent component
 
 ```ts
 @Component({
-  selector: 'counter',
+  selector: 'rio-counter',
   template: `
     <div>
-      <p>Count: {{ count }}</p>
+      <p>Child Count: {{ count }}</p>
       <button (click)="increment()">Increment</button>
-    </div>
-  `
+    </div>`
 })
-export class Counter {
-  @Input() count: number = 0;
-  @Output() result: EventEmitter = new EventEmitter();
-
-  increment() {
-    this.count++;
-    this.result.emit(this.count);
-  }
-}
-```
-
-[View Example](http://plnkr.co/edit/iwQePN?p=preview)
-
----
-
-## Using Two-Way Data Binding
-
-- Two-way data binding combines the input and output binding into a single notation using the ngModel directive.
-
-
-```ts
-<input [(ngModel)]="name" >
-
-<!--Behind the scenes, the code above is equivalent to: -->
-
-<input [ngModel]="name" (ngModelChange)="name=$event">
-```
-
----
-
-- To create your own component that supports two-way binding, you must define an @Output property to match an @Input, but suffix it with the Change, for example:
-
-```ts
-@Component({/*....*/})
-export default class Counter {
-  @Input() count: number = 0;
-  @Output() countChange: EventEmitter<number> = new EventEmitter<number>();
+export class CounterComponent {
+  @Input() count = 0;
+  @Output() countChange = new EventEmitter<number>();
 
   increment() {
     this.count++;
     this.countChange.emit(this.count);
   }
 }
-
-@Component({
-  template:'<counter [(count)]="myNumber"></counter>'
-  directives:[Counter]
-})
-class SomeComponent {/*....*/}
 ```
-
-[View Example](http://plnkr.co/edit/Mo8Bti5kDUmMcwSdPr58?p=preview)
 
 ---
 
-## Access Child Components From the template
+## Creating Custom Events (2/2)
 
-- In our templates, we may find ourselves needing to access values provided by the child components which we use to build our own component.
-
-- The most straightforward examples of this may be seen dealing with forms or inputs: app/my-example.component.html
+The parent component can listen to a child custom event with the same syntax as DOM events:
 
 ```ts
-<section >
-  <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" ngModel>
-    <button type="submit">Submit</button>
-  </form>
-</section>
-```
+import {Component} from '@angular/core';
 
-```ts
 @Component({
-  selector: 'my-example',
-  templateUrl: 'app/my-example.component.html'
+  selector: 'rio-app',
+  template: `
+    <p>Parent Count: {{ parentCount }}</p>
+    <rio-counter (countChange)="onCountChange($event)"></rio-counter>`
 })
-export class MyExampleComponent {
-  submitForm (form: NgForm) {
-    console.log(form.value);
+export class AppComponent {
+  parentCount: number;
+  onCountChange(count: number) {
+    this.parentCount = count;
   }
 }
 ```
 
-[View Example](https://plnkr.co/edit/TH2x5b?p=preview)
+`$event` is a special argument with the value emitted by the event (custom or DOM)
+
+[View Example](http://plnkr.co/edit/2NwExD?p=preview)
 
 ---
 
-## Projection
+## Two-Way Data Binding (1/2)
 
-- Components by default support projection. You can use the ngContent directive to place the projected content in your template.
+Two-way data binding combines an `@Input` with an `@Output` using the _banana in a box_ syntax `[(event)]` and having the name of the event to be equal to the name of the input plus the suffix "Change".
+
+```html
+<rio-counter [count]="count" (countChange)="count=$event"></rio-counter>
+```
+
+Is equivalent to:
+
+```html
+<rio-counter [(count)]="count"></rio-counter>
+```
+
+The built-in directive `NgModel` uses this trick to behave similar to Angular 1:
+
+```html
+<input [(ngModel)]="name" />
+```
+
+Which is equivalent to:
+
+```html
+<input [ngModel]="name" (ngModelChange)="name=$event" />
+```
+
+---
+
+## Two-Way Data Binding (2/2)
+
+Example of implementing a custom event with two-way data binding
+
+```ts
+@Component({ ... })
+export class CounterComponent {
+  @Input() count: number;
+  @Output() countChange = new EventEmitter<number>();
+
+  increment() {
+    this.count++;
+    this.countChange.emit(this.count);
+  }
+}
+```
+
+The parent component can use now the _banana in a box_ syntax
 
 ```ts
 @Component({
-  selector: 'child',
+  template:'<counter [(count)]="myNumber"></counter>'
+})
+class AppComponent {
+  myNumber = 0;
+}
+```
+
+[View Example](http://plnkr.co/edit/nJZQYSV23sCcbb37FzLN?p=preview)
+
+---
+
+## Template Variables (1/3) - Native DOM
+
+We can create references to native DOM elements in our template using the special syntax `#myReference`
+
+```ts
+@Component({
+  selector: 'rio-app',
+  template: `
+    <label>Name: </label>
+    <input #nameInput />
+    <button (click)="getInputValue(nameInput.value)">Print Name</button>
+    <span>Value: {{ name }}</span>`
+})
+export class AppComponent {
+  name: string = 'N/D';
+  
+  getInputValue(value: string) {
+    this.name = value;
+  }
+}
+```
+
+[View Example](https://plnkr.co/edit/uQJZH2?p=preview)
+
+---
+
+## Template Variables (2/3) - Component
+
+We can create references to components and access public properties/methods
+
+```ts
+@Component({
+  selector: 'rio-child',
+  template: '<span>{{ message }}</span>'
+})
+export class ChildComponent {
+  message = 'Child Component';
+}
+```
+
+```ts
+@Component({
+  selector: 'rio-app',
+  template: `
+    <rio-child #child></rio-child>
+    <button (click)="getPublicProperty(child)">Get Component</button>
+    <p>Value: {{ publicProperty }}</p>`
+})
+export class AppComponent {
+  publicProperty = '';
+  getPublicProperty(child: ChildComponent) {
+    this.publicProperty = child.message;
+  }
+}
+```
+
+[View Example](https://plnkr.co/edit/GZb6Tr?p=preview)
+
+---
+
+## Template Variables (3/3) - Directive
+
+- Because directives enhance components (or DOM elements), we can create a template variable for the original component or the enhanced one (component + directive)
+- To create a reference of the enhanced component, we need to know the value of the property `exportedAs` of the directive
+
+```ts
+@Component({
+  selector: 'rio-app',
+  template: `
+    <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
+      <label for="name">Name</label>
+      <input name="name" id="name" ngModel>
+      <button type="submit">Submit</button>
+    </form>
+    <pre>{{ values | json }}</pre>`
+})
+export class AppComponent {
+  values: any;
+  submitForm (form: NgForm) {
+    this.values = form.value;
+  }
+}
+```    
+
+[View Example](https://plnkr.co/edit/ttVaCf?p=preview)
+
+Notes:
+
+- The value of the property `exportedAs` of the directive `NgForm` is `ngForm`
+- The enhanced component instance has validation, the native `form` component doesn't
+
+---
+
+## Template Projection
+
+- Ability to pass HTML to a child component and have it rendered there
+- This was called _transclusion_ in Angular 1
+- We need to use the built-in component `<ng-content>` to inform the component where to render the projected content
+
+```ts
+@Component({
+  selector: 'rio-app',
+  template: `
+    <rio-child>
+      <p>Projected content</p>
+    </rio-child>`
+})
+class AppComponent {}
+```
+
+```ts
+@Component({
+  selector: 'rio-child',
   template: `
     <h4>Child Component</h4>
-    <ng-content></ng-content>
-  `
+    <ng-content></ng-content>`
 })
-class Child {}
+class ChildComponent {}
 ```
 
-[View Example](http://plnkr.co/edit/9mRBZneEfIEuq4PPdllY?p=preview)
+[View Example](http://plnkr.co/edit/oqkyldgOxykReRsffVxZ?p=preview)
 
 ---
 
-## Structuring Applications with Components
+## Smart vs Dumb Components
 
-As the complexity and size of our application grows, we want to divide responsibilities among our components further.
+Components can be classified as "smart" or "dumb" depending on how coupled are they to the application
 
-- Smart / Container components are application-specific, higher-level, container components, with access to the application's domain model.
 
-- Dumb / Presentational components are components responsible for UI rendering and/or behavior of specific entities passed in via components API (i.e component properties and events). Those components are more in-line with the upcoming Web Component standards.
-
----
-
-## Using Other Components
-
-- Components depend on other components, directives and pipes. For example, TodoList relies on TodoItem. To let a component know about these dependencies we group them into a module.
-
-- The property declarations expects an array of components, directives and pipes that are part of the module.
-
-```ts
-import {NgModule} from '@angular/core';
-import {TodoInput} from './components/todo-input';
-import {TodoItem} from './components/todo-item';
-import {TodoList} from './components/todo-list';
-
-@NgModule({
-  imports: [ ... ],
-  declarations: [ TodoList, TodoItem, TodoInput ],
-  bootstrap: [ ... ]
-})
-export class ToDoAppModule { }
-```
-
----
-
-### Basic Component Exercise
-
-- Create two custom child components of this one
-- Use at least one *ngIf
-- Use at least one *ngFor
-- Respond to a user action
-- Ensure there is no state on the component
-
-See next slide for solution example
-
----
-
-```ts
-const hw: string = 'hello world';
-```
+| Characteristic          | Smart Component      | Dumb Component            |
+| ----------------------- | -------------------- | ------------------------- |
+| Coupled to the app?     | Yes                  | No                        |
+| Reusable?               | No                   | Yes                       |
+| Aware of the state?     | Yes                  | No                        |
+| Component tree location | Top                  | Bottom                    |
+| Easy to test?           | No                   | Yes                       |
+| A.K.A                   | Container Components | Presentational Components |

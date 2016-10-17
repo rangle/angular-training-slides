@@ -516,3 +516,60 @@ export class ChildComponent {
 ```
 
 [View Example](http://localhost:4200/examples/10.0-two-way-binding/index.html)
+
+---
+
+
+
+#Components
+
+---
+
+## Components In Angular 2
+
+- The core concept of any Angular 2 application is the component.
+- In effect, the whole application can be modeled as a tree of these components.
+- A component controls a patch of screen real estate that we could call a view, and declares reusable UI building blocks for an application.
+
+---
+
+## Creating Components
+
+Components in Angular 2 build upon this idea. We define a component's application logic inside a class. To this we then attach a selector and a template.
+- selector is the element property that we use to tell Angular to create and insert an instance of this component.
+- template is a form of HTML that tells Angular how to render this component.
+
+```ts
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'hello',
+    template: '<p>Hello, {{name}}</p>'
+})
+export class Hello {
+  name: string;
+
+  constructor() {
+    this.name = 'World';
+  }
+}
+```
+
+To use this component we simply add <hello></hello> to our HTML: [View Example](http://plnkr.co/edit/LmsR4psbJZwXH0c4lpMa?p=preview)
+
+---
+
+## Application Structure with Components
+
+A useful way of conceptualizing Angular application design is to look at it as a tree of nested components, each having an isolated scope.
+
+```html
+<TodoApp>
+  <TodoList>
+    <TodoItem></TodoItem>
+    <TodoItem></TodoItem>
+    <TodoItem></TodoItem>
+  </TodoList>
+  <TodoForm></TodoForm>
+</TodoApp>
+```
