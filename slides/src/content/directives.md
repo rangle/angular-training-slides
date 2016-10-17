@@ -252,6 +252,8 @@ export class AppComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/MTyYN0ntm1BNKE20HT7a?p=preview)
+
 ---
 
 ## NgFor Directive
@@ -279,6 +281,8 @@ export class AppComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/vtYGE5LosH5Rs4L7PMmM?p=preview)
+
 ---
 
 ## NgFor Directive (exported values)
@@ -304,6 +308,8 @@ export class AppComponent {
   ];
 }
 ```
+
+[View Example](https://plnkr.co/edit/8PcjEr5aOwoVSNe2Gowb?p=preview)
 
 Notes: 
 You might want to talk about trackBy 
@@ -337,6 +343,8 @@ export class AppComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/MEG6RBlrF82kWNYxwFlk?p=preview)
+
 ---
 
 ## Using Multiple Structural Directives
@@ -357,6 +365,8 @@ When we want to combine multiple structural directives together
 })
 export class AppComponent {}
 ```
+
+[View Example](https://plnkr.co/edit/gmIbP6s7S1pN7vDk9YHG?p=preview)
 
 ---
 
