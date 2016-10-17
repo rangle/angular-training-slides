@@ -22,3 +22,7 @@
 .reveal table {
   margin: 20px 0;
 }
+
+.reveal p code, .revel li code {
+  color: #eee8d5
+}

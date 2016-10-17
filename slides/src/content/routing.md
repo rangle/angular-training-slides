@@ -4,18 +4,18 @@
 
 ## Why Routing?
 
-- Routing allows the user to go straight into certain aspects of the application.
-- This is very convenient as it can keep your application linkable and bookmarkable and allow users to share links with others.
+- Routing allows the user to navigate to different parts of the application.
+- It keeps your application linkable and bookmarkable and allow users to share links with others.
 
 Routing allows you to:
 
-- Maintain the state of the application
-- Implement modular applications
-- Implement the application based on the roles (certain roles have access to certain URLs)
+- Maintain the state of the application.
+- Create modular applications (every module define its own routes).
+- Implement authorization (certain roles have access to certain URLs).
 
-Notes:
+Note:
 
-Unlike with server-side front-end solutions, this is optional - we can build the full application without ever changing the URL.
+- Routing is optional, we can build an application that never changes the URL.
 
 ---
 
@@ -25,7 +25,6 @@ The Base URL tag must be set within the `<head>` tag of index.html:
 
 ```html
  <base href="/">
-
 ```
 
 This tells the router how to compose navigation URLs.
@@ -47,7 +46,8 @@ const routes: Routes = [
 ];
 ```
 
-Each route can have different attributes; some of the common attributes are:
+Each route can have different attributes. Some common attributes are:
+
 * _path_ - URL to be shown in the browser when application is on the specific route
 * _component_ - component displayed when the application is on the specific route
 * _redirectTo_ - redirect route if needed;
@@ -141,6 +141,8 @@ Angular 2 dynamically adds the component corresponding to the active route into 
 export class AppComponent {}
 ```
 
+[View Example](https://plnkr.co/edit/3EH52DtjS1Z5fUbycMX9?p=preview)
+
 ---
 
 ## Route Parameters (1/2)
@@ -183,6 +185,8 @@ export class ProductDetails {
 }
 ```
 
+[View Example](https://plnkr.co/edit/lxQRQVqKU7VOqfZYWPuf?p=preview)
+
 Notes:
 
 The reason that the `params` property on `ActivatedRoute` is an Observable is that the router may not recreate the component when navigating to the same component. In this case the parameter may change without the component being recreated.
@@ -205,7 +209,10 @@ export const routes: Routes = [
 ];
 ```
 
-For example: `localhost:3000/product-details/3/specs`
+This will create the following API structure:
+
+- `product-details/3/overview`
+- `product-details/3/specs`
 
 ---
 
@@ -223,6 +230,8 @@ Using child routes requires an additional `<router-outlet></router-outlet>` just
   `
 })
 ```
+
+[View Example](https://plnkr.co/edit/FOeNsspRfjg3PVLiUsip?p=preview)
 
 ---
 
@@ -284,3 +293,5 @@ nextPage() {
     { queryParams: { page: this.page + 1 } });
 }
 ```
+
+[View Example](http://plnkr.co/edit/Ko6VFRGRmu5jJ9ArwxvC?p=preview)
