@@ -74,7 +74,7 @@ describe('Testing message state in message.component', () => {
 
 ---
 
-## Injecting Dependencies and DOM Changes (1/4)
+## Injecting Dependencies and DOM Changes (1/5)
 Angular2 components often have services that deliver asynchronous data as dependencies. 
 
 We can use Angular2's `TestBed` utility to provide mock dependencies before each test.
@@ -83,7 +83,7 @@ We can then create a `fixture` to use in our tests, which will let us query the 
 
 ---
 
-## Injecting Dependencies and DOM Changes (2/4)
+## Injecting Dependencies and DOM Changes (2/5)
 
 How would we test this component?
 
@@ -103,7 +103,26 @@ export class QuoteComponent {
 
 ---
 
-## Injecting Dependencies and DOM Changes (3/4)
+## Injecting Dependencies and DOM Changes (3/5)
+
+Using `TestBed` lets us create a test module to test this component. 
+
+This is what a normal module might look like:
+```ts
+@NgModule({
+  imports: [ BrowserModule ],
+  declarations: [ QuoteComponent ],
+  providers: [ QuoteService ],
+})
+export class QuoteModule {}
+```
+
+---
+
+## Injecting Dependencies and DOM Changes (4/5)
+The following creates and configures a `TestBed` module.
+
+It also defines `fixture` as a test component.
 
 ```ts
 let fixture;
@@ -124,7 +143,7 @@ beforeEach(() => {
 
 ---
 
-## Injecting Dependencies and DOM Changes (4/4)
+## Injecting Dependencies and DOM Changes (5/5)
 - `fixture` provides us with a new instance of our component
 - Can also change component properties and detect changes
 
@@ -254,7 +273,51 @@ it('Should get quote', fakeAsync(() => {
 
 ---
 
-## Refactoring Hard-to-Test Code
+## Refactoring Hard-to-Test Code (1/3)
 
-- If your code is hard to test, refactor it
-- Consider moving component code into services and focusing on service tests
+Some code is hard to test, and that usually means it's a good opportunity to refactor.
+
+- Keep components from knowing or doing too much
+- Minimize reliance on private component methods
+- Move dependencies into services so they can be mocked
+
+---
+
+## Refactoring Hard-to-Test Code (2/3)
+
+```ts
+export class QuoteComponent implements OnInit {
+  quote: string;
+
+  constructor(private _http: Http) {}
+
+  private transformQuote(quote) { ... }
+
+  ngOnInit() {
+    this._http.get('/api/quotes').toPromise()
+    .then((quote) => {
+      this.quote = quote;
+      this.transformQuote(quote);
+    })
+  }
+}
+```
+
+---
+
+## Refactoring Hard-to-Test Code (3/3)
+Moving our API call into a service will allow us to mock `getQuote()` and avoid having to mock `Http`
+
+```ts
+@Injectable()
+export class QuoteService() {
+  constructor(private _http: Http) {}
+
+  public getQuote() {
+    return this._http.get('/api/quotes').toPromise();
+  }
+
+  public transformQuote() { ... }
+}
+```
+
