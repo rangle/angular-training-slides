@@ -211,7 +211,7 @@ export class AppModule {};
 
 ---
 ##How `@Inject` Works
-`@Inject` example:
+`@Inject` [example](https://plnkr.co/edit/lbRrkR03ecXecvulcsV8?p=preview):
 ```ts
 ...
 @Component({
@@ -250,7 +250,7 @@ So `@Inject(ChatWidget) chatWidget` can actually be replaced by `chatWidget: Cha
 ---
 ##How `@Injectable` Works
 
-`@Injectable()` example:
+`@Injectable()` [example](https://plnkr.co/edit/lbRrkR03ecXecvulcsV8?p=preview):
 ```ts
 @Injectable()
 export class ChatWidget {
@@ -301,7 +301,7 @@ export class AppModule {};
 
 ---
 ##Injection Beyond Classes (3/4)
-`useFactory` example:
+`useFactory` [example](http://plnkr.co/edit/Dkm0cJF80EdmPcWZx45W?p=preview):
 ```ts
 import { NgModule } from '@angular/core';
 import { App } from './containers/app'; // hypothetical app component
@@ -318,7 +318,7 @@ export class AppModule {};
 
 ---
 ##Injection Beyond Classes (4/4)
-`useValue` example:
+`useValue` [example](http://plnkr.co/edit/63GsCDOElY7J8LNAbTjL?p=preview):
 ```ts
 import { NgModule } from '@angular/core';
 import { App } from './containers/app'; // hypothetical app component
