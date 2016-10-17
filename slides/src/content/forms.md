@@ -27,14 +27,13 @@ Notes:
 
 ---
 
-## Template Driven Forms (1/2)
+## Template Driven Forms
 
 ```html
 <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
-  <label for="email">
+  <label>
     Email <input type="text" name="email" ngModel>
   </label>
-
   <label>
     Password <input type="password" name="password" ngModel>
   </label>
@@ -43,29 +42,22 @@ Notes:
 </form>
 ```
 
-- `#signupForm="ngForm"` declares `signupForm` as a form instance
-- Clicking button type `"submit"` calls `"registerUser()"`
-- `ngModel` populates values in `signupForm`
-
-Notes:
-
-- Unlike popular convention, nesting the input inside the label removes need for <label for="id"> and <input id="id"> syntax. Both styles work.
-
----
-
-## Template Driven Forms (2/2)
-
-Access Form Data like this
-
 ```ts
 @Component({/* ... */})
 export class SignupForm {
   registerUser (form: NgForm) {
-    console.log(form.value.username);
-    console.log(form.value.email);
-  }
-}
+    console.log(form.value); // => { username: '', email: '' }
+  // ...
 ```
+
+[View Example](https://plnkr.co/edit/soaluWqvfugacpCicq91?p=preview)
+
+Notes:
+
+- `#signupForm="ngForm"` declares `signupForm` as a form instance
+- Clicking button type `"submit"` calls `"registerUser()"`
+- `ngModel` populates values in `signupForm`
+- Unlike popular convention, nesting the input inside the label removes need for `<label for="id">` and `<input id="id">` syntax. Both styles work.
 
 ---
 
@@ -170,7 +162,7 @@ Notes:
 import {FormBuilder, FormControl} from '@angular/forms';
 
 @Component({/* ... */})
-export class LoginForm {
+export class SignupForm {
   constructor (builder: FormBuilder) {
     const username = new FormControl('initialValue', []);
     this.signupForm = builder.group({ username });
@@ -179,6 +171,8 @@ export class LoginForm {
   register() {
   // ...
 ```
+
+[View Example](https://plnkr.co/edit/IxmqTgoM44FK0yc5beSW?p=preview)
 
 - Contrast with template-driven forms, which are declared in the template
 
