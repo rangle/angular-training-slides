@@ -376,9 +376,9 @@ export class AppComponent {}
 
 ---
 
-## Built-in Directives
+<!--## Built-in Directives--> 
 
----
+<!------->
 
 ## Custom Directives
 
