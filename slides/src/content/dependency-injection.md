@@ -152,7 +152,8 @@ const chatApp = injector.get(ChatWidget);
 
 How about Angular 2's DI?
 - Compared to the `Injector` example, Angular 2 simplifies DI even further.
-- Angular 2's DI system is (mostly) controlled through `@NgModule`. Specifically the `providers` and `declarations` array.
+- Angular 2's DI system is (mostly) controlled through `@NgModule`.
+- Specifically the `declarations` and `providers` array: `declarations` is where we put components, pipes and directives; `providers` is where we put services.
 
 ---
 ## What is a DI _exactly_ ? (10/11)
@@ -160,6 +161,7 @@ How about Angular 2's DI?
 For example:
 
 ```ts
+@Component({...})
 class ChatWidget {
   constructor(
     private authService: AuthService,
@@ -167,7 +169,6 @@ class ChatWidget {
     private chatSocket: ChatSocket
   ) {}
 }
-
 @NgModule({
   declarations: [ ChatWidget ],
 })
@@ -182,22 +183,23 @@ export class AppModule {};
 
 Revised version:
 ```ts
+@Component({...})
 class ChatWidget {
   constructor(private authService: AuthService, private authWidget:
     AuthWidget, private chatSocket: ChatSocket) {}
 }
+@Component({...})
+class AuthWidget {}
 @Injectable()
 class AuthService {}
 @Injectable()
 class ChatSocket {}
-
 @NgModule({
   declarations: [ ChatWidget, AuthWidget ]
   providers: [ AuthService, ChatSocket ],
 })
 export class AppModule {};
 ```
-And, in Angular's injection system, how `ChatWidget` gets its dependencies?
 
 ---
 ##`@Inject`, `@Injectable`
@@ -250,20 +252,21 @@ So `@Inject(ChatWidget) chatWidget` can actually be replaced by `chatWidget: Cha
 
 `@Injectable()` example:
 ```ts
-import {Injectable} from '@angular/core';
-import {AuthService} from './auth-service';
-import {AuthWidget} from './auth-widget';
-import {ChatSocket} from './chat-socket';
-
 @Injectable()
 export class ChatWidget {
   constructor(public authService: AuthService, public authWidget:
-    AuthWidget, public chatSocket: ChatSocket) {
-  }
+    AuthWidget, public chatSocket: ChatSocket) {}
 }
 ```
 - `@Injectable()` lets Angular 2 know that class `ChatWidget` can be used with the dependency injector.
-- Here, Angular 2 uses types again to decide what to do regarding to `ChatWidget`'s dependencies.
+- But, for components, if we have used `@Component` decorator, we can ignore `@Injectable`:
+```ts
+@Component({...})
+export class ChatWidget {
+  constructor(public authService: AuthService, public authWidget:
+    AuthWidget, public chatSocket: ChatSocket) {}
+}
+```
 
 ---
 ##Injection Beyond Classes (1/4)
@@ -383,5 +386,5 @@ Why? Let's check the injector tree in this case:
 <p align="center">
   <img src="content/images/injector-tree-diagram.png"/>
 </p>
-- `App` gets `Unique` from `Root Injector`.
-- `ChildInheritor` gets `Unique` from `ChildInheritor Injector`.
+- `App` gets `Unique` from root injector.
+- `ChildInheritor` gets `Unique` from ChildInheritor injector.
