@@ -28,7 +28,7 @@ export class Hello {
 }
 ```
 
-To use this component we simply add <hello></hello> to our HTML
+To use this component we simply add <hello></hello> to our HTML: [View Example](http://plnkr.co/edit/LmsR4psbJZwXH0c4lpMa?p=preview)
 
 ---
 
@@ -78,6 +78,8 @@ export class Hello {
 <hello [name]="name"></hello>
 ```
 
+[View Example](http://plnkr.co/edit/GbpCKy?p=preview)
+
 ---
 
 ## Responding to Component Events
@@ -102,6 +104,8 @@ export class Counter {
   }
 }
 ```
+
+[View Example](http://plnkr.co/edit/15wHrpea6GY7yLr7hl61?p=preview)
 
 ---
 
@@ -130,6 +134,8 @@ export class Counter {
   }
 }
 ```
+
+[View Example](http://plnkr.co/edit/iwQePN?p=preview)
 
 ---
 
@@ -169,6 +175,8 @@ export default class Counter {
 class SomeComponent {/*....*/}
 ```
 
+[View Example](http://plnkr.co/edit/Mo8Bti5kDUmMcwSdPr58?p=preview)
+
 ---
 
 ## Access Child Components From the template
@@ -199,6 +207,8 @@ export class MyExampleComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/TH2x5b?p=preview)
+
 ---
 
 ## Projection
@@ -215,6 +225,8 @@ export class MyExampleComponent {
 })
 class Child {}
 ```
+
+[View Example](http://plnkr.co/edit/9mRBZneEfIEuq4PPdllY?p=preview)
 
 ---
 
