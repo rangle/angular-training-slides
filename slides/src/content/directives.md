@@ -38,6 +38,8 @@ export class StyleExampleComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/Vcpt1vDWryaiYcmoQEyC?p=preview)
+
 ---
 
 ## NgStyle Directive
@@ -122,6 +124,8 @@ export class ClassAsStringComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
+
 ---
 
 ## NgClass Directive (Array)
@@ -152,6 +156,8 @@ export class ClassAsStringComponent {
 }
 ```
 
+[View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
+
 ---
 
 ## NgClass Directive (Object)
@@ -159,15 +165,13 @@ export class ClassAsStringComponent {
 ```ts
 @Component({
   selector: 'class-as-string',
-  template: `
-    <p 
-      [ngClass]="{
-        'centered-text': isCentered, 
-        underlined: isUnderlined
-      }" 
-      class="orange">
-    </p>
-  `,
+  template: ` <p 
+                [ngClass]="{
+                  'centered-text': isCentered, 
+                  underlined: isUnderlined
+                }" 
+                class="orange">
+              </p>  `,
   styles: [ ... ]
 })
 export class ClassAsStringComponent {
@@ -181,6 +185,8 @@ Result:
 ```html
 <p class="orange centered-text"></p>
 ```
+
+[View Example](https://plnkr.co/edit/0xrwGT?p=preview)   
 
 ---
 
