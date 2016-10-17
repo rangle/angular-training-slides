@@ -329,12 +329,59 @@ export class AppModule {};
 - In this example, the product of `Math.random` is assigned to `Random`.
 
 ---
-##The Injector Tree (1/2)
+##The Injector Tree (1/4)
 How injector gets handled then?
 - In Angular 1.x, there is only one injector per application, but in Angular 2, there is a [tree of injectors](content/images/di.png).
 - The injector tree does not make a new injector for every component, but does make a new injector for every component with a `providers` array in its decorator.
 - Components that have no `providers` array look to their parent component for an injector. If the parent does not have an injector, it looks up until it reaches the root injector.
 
 ---
-##The Injector Tree (2/2)
-- _Warning_: If a child component is decorated with a providers array that contains dependencies that were also requested in the parent component(s), the dependencies the child receives will shadow the parent dependencies. This can have all sorts of unintended consequences. There is one example.
+##The Injector Tree (2/4)
+_Warning_: If a child component is decorated with a providers array that contains dependencies that were also requested in the parent component(s), the dependencies the child receives will shadow the parent dependencies. This can have all sorts of unintended consequences.
+
+To illustrate this, assume we have a service that should be kept as a singleton:
+```ts
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class Unique {
+  value: string;
+
+  constructor() {
+    this.value = (+Date.now()).toString(16) + '.' +
+      Math.floor(Math.random() * 500);
+  }
+}
+```
+
+---
+##The Injector Tree (3/4)
+```ts
+@Component({
+  selector: "app",
+  template: `
+    <p>App's Unique dependency has a value of {{ u.value }}</p>
+    <p>which should match <child-inheritor></child-inheritor></p>
+  `
+})
+export class App { constructor(public u: Unique) {} }
+```
+```ts
+@Component({
+  selector: "child-inheritor",
+  template: `{{u.value}}`,
+  providers: [Unique]
+})
+export class ChildInheritor { constructor(u: Unique) {} }
+```
+The expectation is that `ChildInheritor` should have same `Unique` instance as `App`,
+but it turns out that in this case, _different_ `Unique` instances would be assigned to these two components.
+
+---
+##The Injector Tree (4/4)
+Why? Let's check the injector tree in this case:
+<p align="center">
+  <img src="content/images/injector-tree-diagram.png"/>
+</p>
+- `App` gets `Unique` from `Root Injector`.
+- `ChildInheritor` gets `Unique` from `ChildInheritor Injector`.
