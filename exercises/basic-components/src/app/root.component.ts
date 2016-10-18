@@ -19,7 +19,7 @@ import { Component, Input } from "@angular/core";
     </ul>
     <p>Below is a potential solution:</p>
     <div>
-      <my-parent></my-parent>
+      <my-container></my-container>
     </div>
   `,
   styles: [`
@@ -41,7 +41,7 @@ export class RootComponent {
  * @class Parent
  */
 @Component({
-  selector: 'my-parent',
+  selector: 'my-container',
   template: `
     <h2>I am a parent component</h2>
       <div>
@@ -50,7 +50,7 @@ export class RootComponent {
           [colors]    = "colors"
         ></child-one>
         <button
-          (click) = "isVisible()"
+          (click) = "toggle()"
         >
           Show the hidden second child component
         </button>
@@ -60,13 +60,12 @@ export class RootComponent {
 })
 
 export class Parent {
-  public helloChildOne:   string = 'Hello to my first child';
-  public showChildTwo:    boolean = true;
-  public colors:          string[] = ['red', 'green', 'blue'];
+  private helloChildOne:   string = 'Hello to my first child';
+  private showChildTwo:    boolean = true;
+  private colors:          string[] = ['red', 'green', 'blue'];
 
-  public isVisible(): boolean {
-    this.showChildTwo = (this.showChildTwo == true) ? false : true;
-    return this.showChildTwo;
+  private toggle() {
+    this.showChildTwo = !this.showChildTwo;
   }
 }
 
@@ -91,8 +90,8 @@ export class Parent {
 })
 
 export class ChildOne {
-  @Input() helloToMe:   string;
-  @Input() colors:      string[];
+  @Input() private helloToMe:   string;
+  @Input() private colors:      string[];
 }
 
 /**
@@ -112,5 +111,5 @@ export class ChildOne {
 })
 
 export class ChildTwo {
-  @Input() isVisible: boolean;
+  @Input() private isVisible: boolean;
 }
