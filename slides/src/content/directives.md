@@ -165,13 +165,11 @@ export class ClassAsStringComponent {
 ```ts
 @Component({
   selector: 'class-as-string',
-  template: ` <p 
-                [ngClass]="{
-                  'centered-text': isCentered, 
-                  underlined: isUnderlined
-                }" 
-                class="orange">
-              </p>  `,
+  template: `
+    <p 
+      [ngClass]="{'centered-text': isCentered, underlined: isUnderlined}" 
+      class="orange">
+    </p>`,
   styles: [ ... ]
 })
 export class ClassAsStringComponent {
@@ -192,66 +190,49 @@ Result:
 
 ## Structural Directives
 
-Handles how a component or element renders using the `<template>` tag   
+- Handles how a component or native element renders using the `<template>` tag
+- Have their own special syntax in the template `*myDirective`
+
+```html
+<p *ngIf="isVisible">I'm sometimes visible</p>
+```
+
 - No square bracket, still an expression binding
-- Have their own special syntax in the template
+- Uses the special tag `<template>` to delay rendering
 
-Angular 2 built-in structural directives:
-* ngIf
-* ngFor
-* ngSwitch;    
-
----
-
-## Structural Directives (Example)
-
-```ts
-@Component({
-  selector: 'directive-example',
-    template: `
-      <p *structuralDirective="expression">
-        Under a structural directive.
-      </p>
-    `
-})
+```html
+<p *myDirective="expression">Hello</p>
 ```
 
-Is equivalent to 
+Is equivalent to:
 
-```ts
-@Component({
-  selector: 'directive-example',
-  template: `
-    <template [structuralDirective]="expression">
-      <p>
-        Under a structural directive.
-      </p>
-    </template>
-    `
-})
+```html
+<template [myDirective]="expression">
+  <p>Hello</p>
+</template>
 ```
+
+- Angular 2 built-in structural directives: `ngIf`, `ngFor`, `ngSwitch`
 
 ---
 
 
 ## NgIf Directive
 
-Conditionally renders components or elements based on an expression
-- Removes or recreates a portion of the DOM tree 
-- If the component has expensive create/destroy action, be aware of the costs in using it
+- Conditionally renders components or elements based on an expression
+- Removes or recreates a portion of the DOM tree
+- Be aware of the cost of creating/destroying DOM elements
+
+```html
+<button type="button" (click)="toggleExists()">Toggle Component</button>
+<if-example *ngIf="exists">Hello</if-example>
+```
 
 ```ts
-@Component({
-  selector: 'app',
-  template: `
-    <button type="button" (click)="toggleExists()">Toggle Component</button>
-    <if-example *ngIf="exists">
-      Hello
-    </if-example>  
-  `
-})
+@Component({ ... })
 export class AppComponent {
-  exists: boolean = true;
+  exists = true;
+
   toggleExists() { 
     this.exists = !this.exists;
   }
@@ -264,21 +245,21 @@ export class AppComponent {
 
 ## NgFor Directive
 
-A way of repeating a template
-- Lets you specify an iterable object to iterate over and the name to refer to each item by inside the scope
-- Similar syntax to for...of statement
+- Mechanism to define multiple chunks of UI at once based on an iterable
+- The internal variable of the iteration (`item`) is scoped in the template
+- Similar syntax of a `for...of` statement
+
+```html
+<ol>
+  <li *ngFor="let item of list">
+    <span>({{ item.id }})</span>
+    <span>{{ item.value }}</span>
+  </li>
+</ol>
+```
 
 ```ts
-@Component({
-  selector: 'app-root',
-  template: `<ol>
-    <li *ngFor="let item of list">
-      <span>({{ item.id }})</span>
-      <span>{{ item.value }}</span>
-    </li>
-  </ol>`,
-  styles: [``]
-})
+@Component({ ... })
 export class AppComponent {
   list = [
     { id: 0, value: 'zero the hero' },
@@ -293,20 +274,19 @@ export class AppComponent {
 
 ## NgFor Directive (exported values)
 
-Provides some other values that can be bound to: [index, first, last, even, odd]
+Provides some other values that can be bound to: `index`, `first`, `last`, `even`, `odd`
+
+```html
+<for-example 
+  *ngFor="let episode of episodes; let i = index; let isOdd = odd"
+  [episode]="episode"
+  [ngClass]="{ odd: isOdd }">
+  {{i+1}}. {{episode.title}}
+</for-example>
+```
 
 ```ts
-@Component({
-  selector: 'app',
-  template: `
-    <for-example 
-      *ngFor="let episode of episodes; let i = index; let isOdd = odd"
-      [episode]="episode"
-      [ngClass]="{ odd: isOdd }">
-      {{i+1}}. {{episode.title}}
-    </for-example>
-  `
-})
+@Component({ ... })
 export class AppComponent {
   episodes: any[] = [
     { title: 'Winter Is Coming', director: 'Tim Van Patten' },
@@ -317,8 +297,9 @@ export class AppComponent {
 
 [View Example](https://plnkr.co/edit/8PcjEr5aOwoVSNe2Gowb?p=preview)
 
-Notes: 
-You might want to talk about trackBy 
+Notes:
+
+- You might want to talk about trackBy 
 
 ---
 
@@ -328,22 +309,22 @@ You might want to talk about trackBy
 - Multiple components can be matched using ngSwitchCase
 - Since components are created or destroyed be aware of the costs in doing so.
 
+```html
+<div class="tabs-selection">
+  <tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</tab>
+  <tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</tab>
+</div>
+<div [ngSwitch]="tab">
+  <tab-content *ngSwitchCase="1">Tab content 1</tab-content>
+  <tab-content *ngSwitchCase="2">Tab content 2</tab-content>
+  <tab-content *ngSwitchDefault>Select a tab</tab-content>
+</div>
+```
+
 ```ts
-@Component({
-  selector: 'app',
-  template: `   <div class="tabs-selection">
-                  <tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</tab>
-                  <tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</tab>
-                </div>
-                <div [ngSwitch]="tab">
-                  <tab-content *ngSwitchCase="1">Tab content 1</tab-content>
-                  <tab-content *ngSwitchCase="2">Tab content 2</tab-content>
-                  <tab-content *ngSwitchDefault>Select a tab</tab-content>
-                </div> `,
-  styles: [...]
-})
+@Component({ ... })
 export class AppComponent {
-  tab: number = 0;
+  tab = 0;
   setTab(num: number) { this.tab = num; }
   isSelected(num: number) { return this.tab === num; }
 }
@@ -354,51 +335,25 @@ export class AppComponent {
 ---
 
 ## Using Multiple Structural Directives
+   
+A component or native element can only be bound to one directive at a time
 
-When we want to combine multiple structural directives together   
-- A template can only be bound to one directive at a time. 
+```html
+<!-- Not allowed -->
+<div *ngFor="[1,2,3,4,5,6]" *ngIf="item > 3">
+  {{item}}
+</div>
+```
 
-```ts
-@Component({
-  selector: 'app',
-  template: `
-    <template ngFor [ngForOf]="[1,2,3,4,5,6]" let-item>
-      <div *ngIf="item > 3">
-        {{item}}
-      </div>
-    </template>
-  `
-})
-export class AppComponent {}
+We need to use the alternative syntax using the `<template>` tag
+
+```html
+<!-- Allowed -->
+<template ngFor [ngForOf]="[1,2,3,4,5,6]" let-item>
+  <div *ngIf="item > 3">
+    {{item}}
+  </div>
+</template>
 ```
 
 [View Example](https://plnkr.co/edit/gmIbP6s7S1pN7vDk9YHG?p=preview)
-
----
-
-## Built-in Directives
-
----
-
-## Custom Directives
-
-_highlight.directive.ts_
-
-```ts
-import { Directive } from '@angular/core';
-
-@Directive({
-  selector: '[rio-highlight]',
-  export class HighlightDirective {
-    constructor(el: ElementRef, renderer: Renderer) {
-       renderer.setElementStyle(el.nativeElement, 'backgroundColor', 'yellow');
-    }
-  }
-})
-```
-
-```html
-<rio-message [rio-highlight]></rio-message>
-```
-
-
