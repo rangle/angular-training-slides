@@ -61,6 +61,7 @@ But what if we need a smaller auth widget? or we want to turn off encryption?
 ---
 
 ## What's DI? (3/11)
+<div style="font-size: 88%">
 
 So, maybe something more generic like:
 
@@ -68,7 +69,7 @@ So, maybe something more generic like:
 class ChatWidget {
   ...
   constructor(
-    authServiceType: string[], 
+    authServiceType: string[],
     authWidgetSize: string,
     chatSocketEncryption: boolean
   ) {
@@ -92,7 +93,7 @@ Further optimize the code:
 class ChatWidget {
   ...
   constructor(
-    authService: AuthService, 
+    authService: AuthService,
     authWidget: AuthWidget,
     chatSocket: ChatSocket
   ) {
@@ -195,6 +196,7 @@ How about Angular 2's DI?
 ---
 
 ## What's DI? (10/11)
+<div style="font-size: 88%">
 
 For example:
 
@@ -224,6 +226,7 @@ export class AppModule {};
 ---
 
 ## What's DI? (11/11)
+<div style="font-size: 80%">
 
 Revised version:
 
@@ -231,8 +234,8 @@ Revised version:
 @Component({ ... })
 class ChatWidget {
   constructor(
-    private authService: AuthService, 
-    private authWidget: AuthWidget, 
+    private authService: AuthService,
+    private authWidget: AuthWidget,
     private chatSocket: ChatSocket) {}
 }
 ```
