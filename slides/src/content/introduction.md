@@ -4,6 +4,16 @@
 
 ---
 
+## Structure of this Training
+
+- 8 hours training in 2 days
+- 5 min break around 2:00 pm
+- 10 min break around 3:00 pm
+- 5 min break around 4:00 pm
+- Q&A sessions
+
+---
+
 ## About Me: David Barreto
 
 - Software developer at Rangle.io
@@ -16,17 +26,7 @@
 - Been working with Angular 2 since December 2015
 - Core contributor to the Angular 2 Gitbook
   - Second most popular Angular 2 book on the web
-  - https://angular-2-training-book.rangle.ios (it's free!)
-
----
-
-## Structure of this Training
-
-- 8 hours training (2 sessions of 4 hours each)
-- Small units of increment
-- Working code for each section
-- Discussion of best practices
-- Q&A sessions
+  - https://angular-2-training-book.rangle.io (it's free!)
 
 ---
 
