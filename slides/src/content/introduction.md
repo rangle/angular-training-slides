@@ -1,10 +1,13 @@
 # Angular 2 Training
 
+# Rangle.io
+
 ---
 
 ## About Me: David Barreto
 
-- Web Developer for 8 years (aprox.)
+- Software developer at Rangle.io
+- 8+ years of experience
 - Worked with different tech stacks:
   - PHP/Symfony2/MySQL
   - Python/Django/PostgreSQL
@@ -13,17 +16,34 @@
 - Been working with Angular 2 since December 2015
 - Core contributor to the Angular 2 Gitbook
   - Second most popular Angular 2 book on the web
+  - https://angular-2-training-book.rangle.ios (it's free!)
 
 ---
 
 ## Structure of this Training
 
-- 3 days training
+- 8 hours training (2 sessions of 4 hours each)
 - Small units of increment
 - Working code for each section
-- Multiple exercises to code along
 - Discussion of best practices
 - Q&A sessions
+
+---
+
+## Table of Contents
+
+1. Introduction
+2. Creating a hello world application
+3. Components In Depth
+4. Directives
+5. Dependency Injection
+6. Forms
+7. Routing
+8. Testing
+
+---
+
+# Introduction
 
 ---
 
