@@ -11,7 +11,7 @@ Notes:
 - An app is a collection of Modules
 - An app has only one root module
 - An app can have multiple feature modules
-- An app uses built-in modules to have access to 
+- An app uses built-in modules to have access to
 - A module defines a collection of Components, Directives, Pipes and Services
 - There's different types of modules: root, feature, built-in and third party modules.
 
@@ -189,7 +189,7 @@ styles: [`
 │   │   └── root.component.ts
 │   ├── index.html
 │   └── main.ts
-└── ... 
+└── ...
 ```
 
 - Leave the root folder for configuration files
@@ -218,9 +218,9 @@ styles: [`
 
 - Config files needed for:
   - NPM => _package.json_
-  - Webpack => _webpack.config.json_ 
+  - Webpack => _webpack.config.json_
   - Typescript => _tsconfig.json_
-  - Type Definitions => _typings.json_
+  - Type Definitions => _typings.json_ (_Deprecated_ in Typescript 2.0)
 
 ---
 
