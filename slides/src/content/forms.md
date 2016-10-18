@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-```js
+```ts
 @NgModule({
   imports: [
     BrowserModule, 
@@ -37,17 +37,18 @@ Notes:
   <label>
     Password <input type="password" name="password" ngModel>
   </label>
-
   <button type="submit">Sign Up</button>
 </form>
 ```
 
 ```ts
-@Component({/* ... */})
+@Component({ ... })
 export class SignupForm {
+  ...
   registerUser (form: NgForm) {
     console.log(form.value); // => { username: '', email: '' }
-  // ...
+  }
+}
 ```
 
 [View Example](https://plnkr.co/edit/soaluWqvfugacpCicq91?p=preview)
@@ -125,7 +126,7 @@ Track changes "Banana-Box" syntax
 In your components
 
 ```ts
-@Component({ /* ... */ })
+@Component({ ... })
 export class SignUpForm {
   username: string = generateUniqueUserID();
 }
@@ -161,27 +162,28 @@ Notes:
 ```ts
 import {FormBuilder, FormControl} from '@angular/forms';
 
-@Component({/* ... */})
+@Component({ ... })
 export class SignupForm {
   constructor (builder: FormBuilder) {
     const username = new FormControl('initialValue', []);
     this.signupForm = builder.group({ username });
   }
 
-  register() {
-  // ...
+  register() { ... }
+}
+  
 ```
 
-[View Example](https://plnkr.co/edit/IxmqTgoM44FK0yc5beSW?p=preview)
-
 - Contrast with template-driven forms, which are declared in the template
+
+[View Example](https://plnkr.co/edit/IxmqTgoM44FK0yc5beSW?p=preview)
 
 ---
 
 ## Template-Drive vs FormBuilder
 
-|                  | Template-Driven                          | FormBuilder                                 |
-|------------------|------------------------------------------|---------------------------------------------|
+|   | Template-Driven | FormBuilder |
+| - | --------------- | ----------- |
 | Form instance    | Declare in template #signupForm="ngForm" | Declare in class [formControl]="signupForm" |
 | (ngSubmit)       | registerUser(signupForm)                 | registerUser()                              |
 | Control instance | Declare in template ngModel              | Declare in class [formControl]="username"   |
