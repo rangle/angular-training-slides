@@ -103,12 +103,12 @@ _app.module.ts_
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { RootComponent } from './root.component';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [BrowserModule],
-  declarations: [RootComponent],
-  bootstrap: [RootComponent]
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```
@@ -126,8 +126,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'rio-widget',
-  template: '<p>I\'m a widget!</p>',
   styles: ['p { color: red }'],
+  template: '<p>I\'m a widget!</p>'
 })
 export class WidgetComponent { ... }
 ```
@@ -142,6 +142,8 @@ export class WidgetComponent { ... }
   - Usually HTML but it can be other language depending on the platform
 - **Styles:** An array of styles to apply to the template
   - By default styles only apply to the component (~shadow root)
+
+[View Example](https://plnkr.co/edit/oQt4n7r6droc2aczAFbO?p=preview)
 
 ---
 
@@ -261,37 +263,43 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading the App in the Browser
+## Loading the App in the Browser (1/2) - Webpack
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Angular 2 Exercise</title>
+  <title>Angular 2 App</title>
 </head>
 <body>
-  <rio-root></rio-root>
+  <rio-app>Loading...</rio-app>
 </body>
 </html>
 ```
 
 ---
 
-## Exercise 1
-
-Create a hello world application with just one component with the template:
+## Loading the App in the Browser (2/2) - SystemJS
 
 ```html
-<h1>My First Angular 2 App</h1>
-<ul>
-  <li>Item 1</li>
-  <li>Item 2</li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular 2 App</title>
+  <script src="https://unpkg.com/systemjs@0.19.38/dist/system.src.js"></script>
+  <script src="https://code.angularjs.org/tools/typescript.js"></script>
+  <script src="system.config.js"></script>
+</head>
+<body>
+  <rio-app>Loading...</rio-app>
+  <script>
+    System.import('main.ts');
+  </script>
+</body>
+</html>
 ```
-
-- The title should be green
-- The items of the list should be gray
 
 ---
 
@@ -300,30 +308,31 @@ Create a hello world application with just one component with the template:
 ```ts
 // Inline style
 @Component({
-  selector: 'rio-root',
-  template: '<p>Hello</p>',
-  styles: ['p { color: red }']
+  selector: 'rio-app',
+  styles: ['p { color: red }'],
+  template: '<p>Hello</p>'
 })
 ```
 
 ```ts
 // Webpack style (recommended)
 @Component({
-  selector: 'rio-root',
-  template: require('./root.component.html'),
-  styles: [require('./root.component.css')]
+  selector: 'rio-app',
+  styles: [require('./app.component.css')],
+  template: require('./app.component.html')
 })
 ```
 
 ```ts
 // SystemJS style
 @Component({
-  moduleId: module.id,
-  selector: 'rio-root',
-  templateUrl: 'root.component.html',
-  styleUrls: ['root.component.css']
+  selector: 'rio-app',
+  styleUrls: ['app.component.css'],
+  templateUrl: 'app.component.html'
 })
 ```
+
+[View Example](https://plnkr.co/edit/s1jcJH9YuODcMEDWPLYU?p=preview)
 
 Notes:
 
@@ -350,12 +359,6 @@ src
 ```
 
 - If using external files for a component, create a folder with an import barrel
-
----
-
-## Exercise 2
-
-Continue with exercise 1 and create independent files for the HTML and CSS using the webpack approach.
 
 ---
 
@@ -419,11 +422,3 @@ export class AppModule {}
 ```
 
 - All the components used have to be defined in the module
-
----
-
-## Exercise 3
-
-Create an application with the tree of components shown before
-
-![Component Tree](content/images/component-tree.jpg)
