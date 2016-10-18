@@ -1,7 +1,3 @@
-# Intro to Test Driven Development
-
----
-
 ## Testing Components
 
 - `@angular/core/testing` module uses Jasmine with Chai for syntax sugar
@@ -320,4 +316,3 @@ export class QuoteService() {
   public transformQuote() { ... }
 }
 ```
-

@@ -1,4 +1,4 @@
-# TDD Testing
+# Unit Tests
 
 ---
 
@@ -12,10 +12,6 @@ Our testing toolchain will consist of the following tools:
 - Istanbul - generates coverage reports
 - Sinon - provides spies, stubs and mocks
 - Chai - assertion library with syntactic sugar
-
----
-
-## Test Setup
 
 ---
 
@@ -42,7 +38,9 @@ You can put test scripts anywhere you like, but keeping them close to your sourc
 
 In order to use write tests in TypeScript, we need TypeScript type definitions for Chai and Jasmine. We can include these type definitions from `@types` with npm.
 
-```npm install @types/jasmine @types/assertion-error```
+```sh
+npm install @types/jasmine @types/assertion-error
+```
 
 ---
 
@@ -59,7 +57,7 @@ This will set up the testing environment and run through each unit test, as well
 
 A good practice is to amalgamate all the project's task/build commands through npm. In `package.json`:
 
-```
+```json
 ...
 "scripts": {
     "test": "karma start",
