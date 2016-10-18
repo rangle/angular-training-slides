@@ -15,7 +15,8 @@ There are two types of directives:
 
 ---
 
-## NgStyle Directive
+## NgStyle Directive (1/2)
+<div style="font-size: 88%">
 
 Directive that modifies the "style" attribute of a component
 
@@ -42,7 +43,8 @@ export class StyleExampleComponent {
 
 ---
 
-## NgStyle Directive
+## NgStyle Directive (2/2)
+<div style="font-size: 88%">
 
 NgStyle is a directive with a property selector "[ngStyle]"
 
@@ -99,6 +101,7 @@ Resulting class attribute:
 ---
 
 ## NgClass Directive (String)
+<div style="font-size: 90%">
 
 Used with a string:
 
@@ -129,6 +132,7 @@ export class ClassAsStringComponent {
 ---
 
 ## NgClass Directive (Array)
+<div style="font-size: 80%">
 
 Used with an array:
 
@@ -166,8 +170,8 @@ export class ClassAsStringComponent {
 @Component({
   selector: 'class-as-string',
   template: `
-    <p 
-      [ngClass]="{'centered-text': isCentered, underlined: isUnderlined}" 
+    <p
+      [ngClass]="{'centered-text': isCentered, underlined: isUnderlined}"
       class="orange">
     </p>`,
   styles: [ ... ]
@@ -233,7 +237,7 @@ Is equivalent to:
 export class AppComponent {
   exists = true;
 
-  toggleExists() { 
+  toggleExists() {
     this.exists = !this.exists;
   }
 }
@@ -244,6 +248,7 @@ export class AppComponent {
 ---
 
 ## NgFor Directive
+<div style="font-size: 88%">
 
 - Mechanism to define multiple chunks of UI at once based on an iterable
 - The internal variable of the iteration (`item`) is scoped in the template
@@ -277,7 +282,7 @@ export class AppComponent {
 Provides some other values that can be bound to: `index`, `first`, `last`, `even`, `odd`
 
 ```html
-<for-example 
+<for-example
   *ngFor="let episode of episodes; let i = index; let isOdd = odd"
   [episode]="episode"
   [ngClass]="{ odd: isOdd }">
@@ -299,11 +304,12 @@ export class AppComponent {
 
 Notes:
 
-- You might want to talk about trackBy 
+- You might want to talk about trackBy
 
 ---
 
 ## NgSwitch Directive
+<div style="font-size: 80%">
 
 - Very similar to a switch statement
 - Multiple components can be matched using ngSwitchCase
@@ -335,7 +341,7 @@ export class AppComponent {
 ---
 
 ## Using Multiple Structural Directives
-   
+
 A component or native element can only be bound to one directive at a time
 
 ```html
