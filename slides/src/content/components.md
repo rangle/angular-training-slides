@@ -71,7 +71,6 @@ We can bind a expressions to any DOM event using the `(event)` syntax:
 })
 export class CounterComponent {
   num = 0;
-
   increment() {
     this.num++;
   }
@@ -98,7 +97,6 @@ Using the `@Output` decorator we can create custom events to communicate with a 
 export class CounterComponent {
   @Input() count = 0;
   @Output() countChange = new EventEmitter<number>();
-
   increment() {
     this.count++;
     this.countChange.emit(this.count);
@@ -110,7 +108,7 @@ export class CounterComponent {
 
 ## Creating Custom Events (2/2)
 
-The parent component can listen to a child custom event with the same syntax as DOM events:
+The parent component can listen to a child custom event with the same syntax as DOM events, for [example](http://plnkr.co/edit/2NwExD?p=preview):
 
 ```ts
 import {Component} from '@angular/core';
@@ -131,7 +129,6 @@ export class AppComponent {
 
 `$event` is a special argument with the value emitted by the event (custom or DOM)
 
-[View Example](http://plnkr.co/edit/2NwExD?p=preview)
 
 ---
 
@@ -165,14 +162,13 @@ Which is equivalent to:
 
 ## Two-Way Data Binding (2/2)
 
-Example of implementing a custom event with two-way data binding
+[Example](http://plnkr.co/edit/nJZQYSV23sCcbb37FzLN?p=preview) of implementing a custom event with two-way data binding:
 
 ```ts
 @Component({ ... })
 export class CounterComponent {
   @Input() count: number;
   @Output() countChange = new EventEmitter<number>();
-
   increment() {
     this.count++;
     this.countChange.emit(this.count);
@@ -180,18 +176,15 @@ export class CounterComponent {
 }
 ```
 
-The parent component can use now the _banana in a box_ syntax
+The parent component can use the _banana in a box_ syntax now:
 
 ```ts
 @Component({
   template:'<counter [(count)]="myNumber"></counter>'
 })
-class AppComponent {
-  myNumber = 0;
-}
+class AppComponent { myNumber = 0; }
 ```
 
-[View Example](http://plnkr.co/edit/nJZQYSV23sCcbb37FzLN?p=preview)
 
 ---
 
@@ -210,7 +203,6 @@ We can create references to native DOM elements in our template using the specia
 })
 export class AppComponent {
   name: string = 'N/D';
-  
   getInputValue(value: string) {
     this.name = value;
   }
@@ -223,17 +215,16 @@ export class AppComponent {
 
 ## Template Variables (2/3) - Component
 
-We can create references to components and access public properties/methods
-
+<div style="font-size: 88%">
+We can create references to components and access their public properties/methods, for [example](https://plnkr.co/edit/GZb6Tr?p=preview):
 ```ts
 @Component({
   selector: 'rio-child',
   template: '<span>{{ message }}</span>'
 })
-export class ChildComponent {
-  message = 'Child Component';
-}
+export class ChildComponent { message = 'Child Component'; }
 ```
+
 
 ```ts
 @Component({
@@ -251,12 +242,11 @@ export class AppComponent {
 }
 ```
 
-[View Example](https://plnkr.co/edit/GZb6Tr?p=preview)
 
 ---
 
 ## Template Variables (3/3) - Directive
-
+<div style="font-size: 75%">
 - Because directives enhance components (or DOM elements), we can create a template variable for the original component or the enhanced one (component + directive)
 - To create a reference of the enhanced component, we need to know the value of the property `exportedAs` of the directive
 
@@ -270,26 +260,25 @@ export class AppComponent {
       <button type="submit">Submit</button>
     </form>
     <pre>{{ values | json }}</pre>`
-})
+    })
 export class AppComponent {
   values: any;
-  submitForm (form: NgForm) {
-    this.values = form.value;
-  }
+  submitForm (form: NgForm) { this.values = form.value; }
 }
 ```    
+- The value of the property `exportedAs` of the directive `NgForm` is `ngForm`
+- The enhanced component instance has validation, the native `form` component doesn't
 
 [View Example](https://plnkr.co/edit/ttVaCf?p=preview)
 
 Notes:
 
-- The value of the property `exportedAs` of the directive `NgForm` is `ngForm`
-- The enhanced component instance has validation, the native `form` component doesn't
+</div>
 
 ---
 
 ## Template Projection
-
+<div style="font-size: 80%">
 - Ability to pass HTML to a child component and have it rendered there
 - This was called _transclusion_ in Angular 1
 - We need to use the built-in component `<ng-content>` to inform the component where to render the projected content
@@ -316,6 +305,8 @@ class ChildComponent {}
 ```
 
 [View Example](http://plnkr.co/edit/oqkyldgOxykReRsffVxZ?p=preview)
+
+
 
 ---
 
