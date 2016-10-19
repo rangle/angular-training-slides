@@ -14,7 +14,7 @@ const basePlugins = [
   new webpack.DefinePlugin({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   }),
-  new webpack.optimize.CommonsChunkPlugin("globals"),
+  new webpack.optimize.CommonsChunkPlugin("vendor"),
   new HtmlWebpackPlugin({
     template: "./index.html"
   }),
@@ -30,7 +30,12 @@ const basePlugins = [
 
 const prodPlugins = [
   new webpack.optimize.UglifyJsPlugin({
-    compress: { warnings: false }
+    mangle: {
+      keep_fnames: true,
+    },
+    compress: {
+      warnings: false,
+    },
   })
 ];
 
@@ -39,11 +44,17 @@ const plugins = basePlugins
 
 module.exports = {
   entry: {
-    globals: [
+    app: "./main.ts",
+    vendor: [
+      '@angular/core',
+      '@angular/compiler',
+      '@angular/common',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
+      'core-js',
       "zone.js",
       "reflect-metadata"
-    ],
-    app: "./main.ts"
+    ]
   },
   output: {
     path: __dirname + "/dist",

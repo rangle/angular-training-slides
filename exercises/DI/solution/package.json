@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --content-base dist",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
     "start": "npm run build && http-server ./dist"
   },
   "keywords": [],
@@ -18,6 +18,8 @@
     "@types/node": "6.0.39",
     "awesome-typescript-loader": "2.2.1",
     "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
     "core-js": "2.4.1",
     "cross-env": "2.0.1",
     "css-loader": "0.24.0",

@@ -9,8 +9,7 @@
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": false,
-    "inlineSourceMap": true,
-    "noEmitHelpers": true
+    "inlineSourceMap": true
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
@@ -21,5 +20,5 @@
     "node_modules",
     "dist"
   ],
-  "types":["node", "core-js"]
+  "types":["node", "jasmine"]
 }
