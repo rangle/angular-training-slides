@@ -172,10 +172,11 @@ When using template driven forms we are constrained to only use the 4 built-in v
 ## Model Driven Forms with FormBuilder
 
 ```ts
-import {FormBuilder, FormControl} from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({ ... })
-export class SignupForm {
+export class SignupComponent {
+
   constructor (builder: FormBuilder) {
     const username = new FormControl('initialValue', []);
     this.signupForm = builder.group({ username });
@@ -188,7 +189,7 @@ export class SignupForm {
 
 - Contrast with template-driven forms, which are declared in the template
 
-[View Example](https://plnkr.co/edit/IxmqTgoM44FK0yc5beSW?p=preview)
+[View Example](https://plnkr.co/edit/BykFlj885JG1NkIq2nLr?p=preview)
 
 ---
 
