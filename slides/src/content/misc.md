@@ -1,4 +1,4 @@
-# Misc
+# Miscellaneous Topics
 
 ---
 
@@ -12,6 +12,8 @@ Angular manages creation, rendering, data-bound properties etc. It also offers h
 - `ngAfterViewInit` - After component's view is initialized.
 
 These are the most-used lifecycle hooks. See the [Angular Guide](https://angular.io/docs/ts/latest/guide/lifecycle-hooks.html) for more.
+
+[View Example](http://plnkr.co/edit/SUxXHr0SV4Fvx2zCiRlE?p=preview)
 
 ---
 
@@ -75,31 +77,3 @@ Usage:
 <p>Hello {{ 'Smith' | greet: 'Mr.' }}</p>
 <!-- <p>Hello, Mr. Smith</p> -->
 ```
-
----
-
-## Feature Modules
-
-When the root module gets too big, start grouping similar parts into **feature modules**.
-
----
-
-## Creating a Feature Module
-
-```ts
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-// import files that belong to feature module
-
-@NgModule({
-  imports: [ CommonModule ],
-  declarations: [ components, directives, pipes ],
-  providers: [ services ],
-  exports: [ MainFeatureComponent, publicDeclarations ]
-})
-export class FeatureModule {}
-```
-
-- Note we're importing `CommonModule` this time (not `BrowserModule`)
-- No need to bootstrap
-- The `export` makes declarations public (not needed in root)
