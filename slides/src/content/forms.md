@@ -2,7 +2,9 @@
 
 ---
 
-## Getting Started
+## Enabling Forms
+
+To have access to the directives and services that handle forms, we need to import the `FormsModule` or the `ReactiveFormsModule` into the root module.
 
 ```ts
 @NgModule({
@@ -11,19 +13,15 @@
     FormsModule, // template driven forms
     ReactiveFormsModule // model driven forms
   ],
-  // ...
+  ...
 })
-export class MyAppModule {}
-
+export class AppModule {}
 ```
 
 There are two ways to handle forms:
-- **Template Driven:** Minimal code, using built-in directives
+
+- **Template Driven:** For simple forms and rapid prototyping
 - **Model driven:** For complex validation and subforms
-
-Notes:
-
-- Template driven is good for rapid prototyping or simple forms
 
 ---
 
@@ -43,7 +41,7 @@ Notes:
 
 ```ts
 @Component({ ... })
-export class SignupForm {
+export class SignupFormComponent {
   ...
   registerUser (form: NgForm) {
     console.log(form.value); // => { username: '', email: '' }
@@ -51,7 +49,7 @@ export class SignupForm {
 }
 ```
 
-[View Example](https://plnkr.co/edit/soaluWqvfugacpCicq91?p=preview)
+[View Example](https://plnkr.co/edit/SmX18R1BhjJz9E33yROT?p=preview)
 
 Notes:
 
@@ -64,7 +62,16 @@ Notes:
 
 ## Nesting Form Data (1/2)
 
-What if you want the form value to produce this data structure?
+Right now the property `form.value` is returning a plain object:
+
+```json
+{
+  "username": "",
+  "password": ""
+}
+```
+
+What if we have a more complex form and we want to group related fields?
 
 ```json
   {
@@ -83,62 +90,69 @@ What if you want the form value to produce this data structure?
 
 ## Nesting Form Data (2/2)
 
-Use `ngModelGroup` to nest data
+Use the `NgModelGroup` directive to create nested structures
 
 ```html
 <form #myForm="ngForm">
   <fieldset ngModelGroup="contact">
     <label>
-      First Name <input type="text" name="firstName" ngModel>
+      First Name: <input type="text" name="firstName" ngModel>
     </label>
     <label>
-      Last Name <input type="text" name="lastName" ngModel>
+      Last Name: <input type="text" name="lastName" ngModel>
     </label>
   </fieldset>
 
   <fieldset ngModelGroup="address">
-    <!-- ... -->
+    ...
   </fieldset>
 </form>
 ```
 
-Notes:
+`ngModelGroup` does not necessarily have to be used on a `<fieldset>`
 
-- `ngModelGroup` does not have to be used on `<fieldset>`
-- This structure avoids name collision between fields of different groups
+```html
+<div ngModelGroup="contact">...</div>
+```
+
+[View Example](https://plnkr.co/edit/HfKItkR8i4O2SysXoW2f?p=preview)
 
 ---
 
-## Using Template Model Binding
+## Binding Variables to the Form
 
-Add a default value
+Add a default value with one way data binding
 
 ```html
-  <input type="text" name="username" [ngModel]="username">
+<input type="text" name="username" [ngModel]="username">
 ```
 
-Track changes "Banana-Box" syntax
+Implement two way data binding with the "banana in a box" syntax
 
 ```html
-  <input type="text" name="username" [(ngModel)]="username">
+<input type="text" name="username" [(ngModel)]="username">
 ```
 
 In your components
 
 ```ts
 @Component({ ... })
-export class SignUpForm {
+export class SignupComponent {
   username: string = generateUniqueUserID();
 }
 ```
 
+[View Example](https://plnkr.co/edit/yxLe7Bccx46a0qw9lYHs?p=preview)
+
 ---
 
-## Validating Template-Driven Forms
+## Validating Template Driven Forms
+
+When using template driven forms we are constrained to only use the 4 built-in validations: `required`, `pattern`, `minlength` and `maxlength`.
 
 ```html
 <!-- a required field -->
-<input type="text" ... required>
+<input type="text" required>
 
 <!-- alphanumeric field of specific length -->
 <input type="text" pattern="[A-Za-z0-9]{0,5}">
@@ -150,10 +164,8 @@ export class SignUpForm {
 <input type="text" maxlength="5">
 ```
 
-Notes:
-
-- pattern is a less-powerful version of JavaScript's RegExp syntax
-- maxlength is special in that it prevents additional characters from being entered. Others only produce a warning.
+- `pattern` is a less-powerful version of JavaScript's RegExp syntax
+- `maxlength` is special in that it prevents additional characters from being entered. Others only produce a warning.
 
 ---
 
@@ -209,24 +221,27 @@ Notes:
 Built-in: `required`, `maxLength`, `minLength`, and `pattern` validators.
 
 ```ts
-  import { Validators } from '@angular/forms';
-  // ...
-  this.username = new FormControl('', [
-    Validators.minLength(5)
-  ]);
+import { Validators, FormControl } from '@angular/forms';
+...
+@Component({ ... })
+export class AppComponent {
+  username = new FormControl('', [Validators.minLength(5)]);
+}
 ```
 
 Validators produce errors which can be checked calling `hasError`.
 
 ```html
-  <label> Username
-    <input type="text" name="username" [formControl]="username">
-  </label>
-  <div [hidden]="username.valid || username.untouched">
-    <div [hidden]="!username.hasError('minlength')">
-      Username can not be shorter than 5 characters.</div>
-  </div>
+<label> Username
+  <input type="text" name="username" [formControl]="username">
+</label>
+<div [hidden]="username.valid || username.untouched">
+  <div [hidden]="!username.hasError('minlength')">
+    Username can not be shorter than 5 characters.</div>
+</div>
 ```
+
+[View Example](https://plnkr.co/edit/kr8Q41?p=preview)
 
 ---
 
@@ -252,6 +267,8 @@ this.email = new FormControl('', [CustomValidators.emailFormat]);
 ```
 
 - Access using `email.hasError('emailFormat')`
+
+[View Example](https://plnkr.co/edit/UqQtxj?p=preview)
 
 ---
 
