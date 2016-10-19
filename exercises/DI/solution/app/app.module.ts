@@ -6,7 +6,8 @@ import {
   CarComponent,
   CarBodyComponent,
   CarTireComponent,
-  CarEngineComponent } from "../car";
+  CarEngineComponent,
+  CarPricingService } from "../car";
 
 @NgModule({
   imports: [BrowserModule],
@@ -17,6 +18,7 @@ import {
     CarTireComponent,
     CarEngineComponent
   ],
+  providers: [ CarPricingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

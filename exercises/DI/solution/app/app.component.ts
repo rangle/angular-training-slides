@@ -4,7 +4,7 @@ import {Component} from "@angular/core";
 @Component({
   selector: "app",
   template: `
-  <h1>Car Component Dependencies</h1>
+  <h1>Car Component Store</h1>
   <car></car>`
 })
 export class AppComponent {
