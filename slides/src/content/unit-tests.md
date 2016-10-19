@@ -392,7 +392,7 @@ export class QuoteService() {
     return this.http.get('/api/quotes')
       .map(this.transformQuote.bind(this)).first();
   }
-  public transformQuote() { ... }
+  private transformQuote() { ... }
 }
 ```
 

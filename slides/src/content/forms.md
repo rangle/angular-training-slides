@@ -44,7 +44,7 @@ There are two ways to handle forms:
 export class SignupFormComponent {
   ...
   registerUser (form: NgForm) {
-    console.log(form.value); // => { username: '', email: '' }
+    console.log(form.value); // => { email: '', password: '' }
   }
 }
 ```
@@ -197,7 +197,7 @@ export class SignupComponent {
 
 |   | Template-Driven | FormBuilder |
 | - | --------------- | ----------- |
-| Form instance    | Declare in template #signupForm="ngForm" | Declare in class [formControl]="signupForm" |
+| Form instance    | Declare in template #signupForm="ngForm" | Declare in class [formGroup]="signupForm" |
 | (ngSubmit)       | registerUser(signupForm)                 | registerUser()                              |
 | Control instance | Declare in template ngModel              | Declare in class [formControl]="username"   |
 

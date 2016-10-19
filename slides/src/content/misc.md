@@ -33,7 +33,7 @@ These are the most-used lifecycle hooks:
 In Angular 1, these were called filters
 
 ```html
-<p>{{ Hello, World! | lowercase }}</p>
+<p>{{ 'Hello, World!' | lowercase }}</p>
 <!-- <p>hello, world!</p> -->
 ```
 
