@@ -13,7 +13,7 @@ import 'zone.js/dist/jasmine-patch';
 const testContext = (<{ context?: Function }>require)
   .context('./', true, /^(.(?!tests\.entry))*\.ts$/);
 
-testContext('./index.ts');
+testContext('./main.ts');
 
 testContext.keys().forEach(
   key => {
