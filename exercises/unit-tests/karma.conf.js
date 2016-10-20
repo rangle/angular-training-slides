@@ -40,7 +40,7 @@ module.exports = (config) => {
     port: 9999,
     browsers: ['Chrome'], // Alternatively: 'PhantomJS'
     colors: true,
-    logLevel: config.LOG_DEBUG,
+    // logLevel: config.LOG_DEBUG,
     autoWatch: true,
     captureTimeout: 6000,
   });
