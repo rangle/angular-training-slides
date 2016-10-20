@@ -13,15 +13,13 @@ export default class UsersListContainer {
   public users: any;
   private subscription: any;
 
-  constructor(private usersService: Users, private route: ActivatedRoute) {}
+  constructor(private usersService: Users /*, load route service */) {}
 
   ngOnInit() {
-    this.subscription = this.route.params.subscribe(params => {
-      this.users = this.usersService.getUsersByCompany(params['companyName']);
-    });
+
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+
   }
 }

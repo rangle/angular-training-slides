@@ -31,7 +31,6 @@ export class Companies {
   constructor(private usersService: Users) {}
 
   ngOnInit() {
-    this.companies = this.usersService.getCompanyNames();
   }
 }
 

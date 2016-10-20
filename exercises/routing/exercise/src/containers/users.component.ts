@@ -29,6 +29,5 @@ export class UsersContainer {
   constructor(private usersService: Users) {}
 
   ngOnInit() {
-   this.users = this.usersService.getUserNames();
   }
 }

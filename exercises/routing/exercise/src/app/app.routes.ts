@@ -6,12 +6,6 @@ import UserList from '../components/user-list.component';
 
 
 export const routes: Routes = [
-  // step 1
-  { path: '', component: Home },
-  { path: 'users', component: UserList },
-  { path: 'companies', component: CompanyList },
-  // step 2
-  { path: 'users/:id', component: UserDetail }
   /*
     Complete the Route Config Definition for:
       * /users - Route to the UsersList component

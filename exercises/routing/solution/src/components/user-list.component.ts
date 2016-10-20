@@ -3,11 +3,6 @@ import Users from '../services/users.service';
 
 @Component({
   selector: 'user-list',
-  styles:[`
-  .router-link-active:after {
-    content: '-->'
-  }
-  `],
   template: `
   <ul>
     <li *ngFor="let user of users">

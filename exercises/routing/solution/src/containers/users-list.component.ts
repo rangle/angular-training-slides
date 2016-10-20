@@ -9,18 +9,17 @@ import Users from '../services/users.service';
 })
 export default class UsersList {
   public users: any;
-  private sub: any;
+  private subscription: any;
 
-  constructor(private usersService: Users, private route: ActivatedRoute) {
-  }
+  constructor(private usersService: Users, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+    this.subscription = this.route.params.subscribe(params => {
       this.users = this.usersService.getUsersByCompany(params['companyName']);
     });
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

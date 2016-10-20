@@ -64,7 +64,6 @@ const mockData = [{
   'email': 'alex.willson@hyplex.me',
   'phone': '+1 (990) 560-3959',
   'greeting': 'Hello, Willson! You have 8 unread messages.',
-
 }];
 
 @Injectable()

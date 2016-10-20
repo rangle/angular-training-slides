@@ -6,6 +6,8 @@ This series of exercises will walk you through configuring basic routing for an 
 * Use correct `routerLink` to provide links to Home, Users List and Company List
 * Setup a default route for the `Home` component 
 
+![](routing.gif)
+
 # Exercise 2 - Basic Routing with Paramaters
 
 * Add a route that takes an `:id` paramater to load the `UserDetails` component in _*src/app/app.routes.ts*_
@@ -17,6 +19,8 @@ This series of exercises will walk you through configuring basic routing for an 
 * When on the Users header, you should see a list of users
 * When clicking a user in the list, you should navigate to a user details page
 * When on the Company header, you should see a list of companies
+
+![](routing-parameters.gif)
 
 # Exercise 3 - Child Routes
 
@@ -33,3 +37,5 @@ Complete, and or fix implementation of:
 * When in the Users list, clicking on a user should display the user details next to the list (insead of navigating to a new page)
 * When clicking on a Company Name, the list of users for the company should be displayed
 * When clicking on a user name, you should be navigated to the user list with the user details loaded of the selected user
+
+![](routing-child-routes.gif)
