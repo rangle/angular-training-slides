@@ -4,12 +4,15 @@ import { CarPricingService } from "./car-pricing.service";
 @Component({
   selector: "car-engine",
   template: `
-  <b>Engine</b> <button (click)="getQuote()">Quote</button>
-  <ul>
-    <li>Horsepower = {{ horsePower }}</li>
-    <li>Has a V8 = {{ isV8 }}</li>
-  </ul>
-  <p *ngIf="quoted">Price: {{price}}</p>`
+  <div class="border p2 bg-blue rounded white">
+    <b>Engine</b>
+    <ul>
+      <li>Horsepower = {{ horsePower }}</li>
+      <li>Has a V8 = {{ isV8 }}</li>
+    </ul>
+    <p *ngIf="quoted">Price: {{price}}</p>
+    <button class="btn btn-small btn-primary mb1 bg-navy" (click)="getQuote()">Quote</button>
+  </div>`
 })
 export class CarEngineComponent {
   isV8: Boolean = true;

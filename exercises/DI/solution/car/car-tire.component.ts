@@ -4,12 +4,15 @@ import { CarPricingService } from "./car-pricing.service";
 @Component({
   selector: "car-tire",
   template: `
-  <b>Tires</b> <button (click)="getQuote()">Quote</button>
-  <ul>
-    <li>Size = {{size}}</li>
-    <li>Does spin = {{spinning}}</li>
-  </ul>
-  <p *ngIf="quoted">Price: {{price}}</p>`
+  <div class="border p2 bg-blue rounded white">
+    <b>Tires</b>
+    <ul>
+      <li>Size = {{size}}</li>
+      <li>Does spin = {{spinning}}</li>
+    </ul>
+    <p *ngIf="quoted">Price: {{price}}</p>
+    <button class="btn btn-small btn-primary mb1 bg-navy" (click)="getQuote()">Quote</button>
+  <div>`
 })
 export class CarTireComponent {
   size: Number = 200;

@@ -65,6 +65,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: /angular/,
+        exclude: /node_modules/,
+        query: {
+          compact: false,
+        },
+      },
       { test: /.ts$/, loader: "awesome-typescript-loader" },
       { test: /.json$/, loader: "json-loader" },
       { test: /.html$/, loader: "raw" },
