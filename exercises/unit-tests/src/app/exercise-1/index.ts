@@ -5,8 +5,11 @@ import { Component } from "@angular/core";
   template: `
     <h1>My First TDD Exercise</h1>
     <div [ngClass]="{'hide' : !visible}">
-      <ng-content></ng-content>
+      <rio-exercise-two></rio-exercise-two>
     </div>
+    <button (click)="toggleVisibility()" type="button">
+      {{ buttonText }}
+    </button>
   `,
   styles: [`
     .hide {
@@ -16,8 +19,10 @@ import { Component } from "@angular/core";
 })
 export class ExerciseOneComponent {
   private visible: boolean = true;
+  private buttonText: string = 'Hide Message';
 
   toggleVisibility() {
     this.visible = !this.visible;
+    this.buttonText = this.visible ? 'Hide Message' : 'Show Message';
   }
 }

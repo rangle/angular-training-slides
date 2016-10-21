@@ -2,15 +2,16 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
+    "module": "es2015",
+    "noImplicitAny": false,
+    "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "removeComments": false,
-    "sourceMap": false,
-    "inlineSourceMap": true,
-    "noEmitHelpers": true
+    "moduleResolution": "node",
+    "typeRoots": [
+        "./typings/index.d.ts"
+    ]
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
@@ -20,6 +21,5 @@
   "exclude": [
     "node_modules",
     "dist"
-  ],
-  "types":["node", "jasmine"]
+  ]
 }

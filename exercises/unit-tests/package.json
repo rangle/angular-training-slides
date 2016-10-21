@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc",
-    "test": "karma start --singleRun true",
-    "start": "webpack-dev-server"
+    "postinstall": "rimraf typings & typings install",
+    "typings": "typings",
+    "clean": "rimraf dist",
+    "test": "cross-env NODE_ENV=test karma start --singleRun true",
+    "build": "npm run clean && cross-env NODE_ENV=development webpack",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --content-base dist"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +23,7 @@
     "babel-polyfill": "^6.16.0",
     "chai": "^3.5.0",
     "cross-env": "2.0.1",
+    "css-loader": "0.24.0",
     "css-to-string-loader": "0.1.1",
     "html-webpack-plugin": "2.22.0",
     "istanbul": "^1.0.0-alpha.2",
@@ -51,6 +55,7 @@
     "@angular/core": "2.0.1",
     "@angular/platform-browser": "2.0.1",
     "@angular/platform-browser-dynamic": "2.0.1",
+    "reflect-metadata": "0.1.8",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.21"
   }

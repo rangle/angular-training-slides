@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ExerciseOneComponent } from './exercise-1';
 import { ExerciseTwoComponent } from './exercise-2';
+import { MessageService } from './services/message';
 
 @NgModule({
   imports: [BrowserModule],
@@ -10,9 +11,11 @@ import { ExerciseTwoComponent } from './exercise-2';
     ExerciseOneComponent,
     ExerciseTwoComponent,
   ],
+  providers: [
+    MessageService,
+  ],
   bootstrap: [
-    ExerciseOneComponent,
-    ExerciseTwoComponent,
+    ExerciseOneComponent
   ]
 })
 export class AppModule {}
