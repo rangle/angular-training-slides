@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { OnInit } from 
 import { MessageService } from '../services/message';
 
 @Component({
@@ -12,6 +11,6 @@ export class ExerciseTwoComponent implements OnInit {
   constructor(private messageService: MessageService) {}
 
   ngOnInit() {
-    this.message = messageService.getMessage();
+    this.message = this.messageService.getMessage();
   }
 }
