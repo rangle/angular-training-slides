@@ -18,7 +18,7 @@ import { Component } from "@angular/core";
   `]
 })
 export class ExerciseOneComponent {
-  private visible: boolean = true;
+  public visible: boolean = true;
   private buttonText: string = 'Hide Message';
 
   toggleVisibility() {

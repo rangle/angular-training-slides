@@ -1,3 +1,5 @@
+process.env.TEST = true;
+
 const webpack = require('./webpack.config');
 
 module.exports = (config) => {
