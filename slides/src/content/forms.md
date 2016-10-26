@@ -9,7 +9,7 @@ To have access to the directives and services that handle forms, we need to impo
 ```ts
 @NgModule({
   imports: [
-    BrowserModule, 
+    BrowserModule,
     FormsModule, // template driven forms
     ReactiveFormsModule // model driven forms
   ],
@@ -184,7 +184,7 @@ export class SignupComponent {
 
   register() { ... }
 }
-  
+
 ```
 
 - Contrast with template-driven forms, which are declared in the template
@@ -267,7 +267,7 @@ import {CustomValidators} from './custom-validators';
 this.email = new FormControl('', [CustomValidators.emailFormat]);
 ```
 
-- Access using `email.hasError('emailFormat')`
+- Access using `email.hasError('emailFormat')` in the template
 
 [View Example](https://plnkr.co/edit/UqQtxj?p=preview)
 
