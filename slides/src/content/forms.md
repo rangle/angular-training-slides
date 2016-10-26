@@ -267,7 +267,7 @@ import {CustomValidators} from './custom-validators';
 this.email = new FormControl('', [CustomValidators.emailFormat]);
 ```
 
-- Access using `email.hasError('emailFormat')`
+- Access using `email.hasError('emailFormat')` in the template
 
 [View Example](https://plnkr.co/edit/UqQtxj?p=preview)
 

@@ -15,7 +15,7 @@ There are two types of directives:
 
 ---
 
-## NgStyle Directive
+## NgStyle Directive (1/2)
 
 Directive that modifies the "style" attribute of a component
 
@@ -42,7 +42,7 @@ export class StyleExampleComponent {
 
 ---
 
-## NgStyle Directive
+## NgStyle Directive (2/2)
 
 NgStyle is a directive with a property selector "[ngStyle]"
 
@@ -76,7 +76,7 @@ The final style it's going to be a combination of the style attribute and [ngSty
 
 ---
 
-## NgClass Directive
+## NgClass Directive (1/4)
 
 - Changes the "class" attribute of the host component
 - The NgClass directive can be used with strings, arrays or objects
@@ -98,7 +98,7 @@ Resulting class attribute:
 
 ---
 
-## NgClass Directive (String)
+## NgClass Directive (2/4) - String
 
 Used with a string:
 
@@ -128,7 +128,7 @@ export class ClassAsStringComponent {
 
 ---
 
-## NgClass Directive (Array)
+## NgClass Directive (3/4) - Array
 
 Used with an array:
 
@@ -160,7 +160,7 @@ export class ClassAsStringComponent {
 
 ---
 
-## NgClass Directive (Object)
+## NgClass Directive (4/4) - Object
 
 ```ts
 @Component({
