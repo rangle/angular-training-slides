@@ -10,7 +10,7 @@ export class MessageComponent implements OnInit {
 
   constructor(private messageService: MessageService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.message = this.messageService.getMessage();
   }
 }

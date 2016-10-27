@@ -6,11 +6,11 @@ import { MessageService } from '../services/message';
   template: `<h2>{{ message }}</h2>`
 })
 export class MessageComponent implements OnInit {
-  private message: string = '';
+  private message = '';
 
   constructor(private messageService: MessageService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.message = this.messageService.getMessage();
   }
 }

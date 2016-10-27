@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MessageService {
-  public message: string = 'Hello World';
+  public message = 'Hello World';
 
-  public getMessage() {
+  public getMessage(): string {
     return this.message;
   }
 }
