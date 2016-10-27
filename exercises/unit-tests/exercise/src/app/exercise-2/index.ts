@@ -6,7 +6,7 @@ import { MessageService } from '../services/message';
   template: `<h2>{{ message }}</h2>`
 })
 export class MessageComponent implements OnInit {
-  private message = '';
+  message = '';
 
   constructor(private messageService: MessageService) {}
 

@@ -18,8 +18,8 @@ import { Component } from "@angular/core";
   `]
 })
 export class AppComponent {
-  public visible = true;
-  private buttonText = 'Hide Message';
+  visible = true;
+  buttonText = 'Hide Message';
 
   toggleVisibility(): void {
     this.visible = !this.visible;
