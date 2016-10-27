@@ -12,7 +12,7 @@ module.exports = (config) => {
       'karma-jasmine',
       'karma-webpack',
       'karma-spec-reporter',
-      'karma-chrome-launcher',
+      'karma-phantomjs-launcher'
     ],
 
     files: [
@@ -40,7 +40,7 @@ module.exports = (config) => {
     reporters: ['spec'],
 
     port: 9999,
-    browsers: ['Chrome'], // Alternatively: 'PhantomJS'
+    browsers: ['PhantomJS'], 
     colors: true,
     // logLevel: config.LOG_DEBUG,
     autoWatch: true,

@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: 'rio-exercise-one',
+  selector: 'rio-app',
   template: `
     <h1>My First TDD Exercise</h1>
     <div [ngClass]="{'hide' : !visible}">
-      <rio-exercise-two></rio-exercise-two>
+      <rio-message></rio-message>
     </div>
     <button (click)="toggleVisibility()" type="button">
       {{ buttonText }}
@@ -17,7 +17,7 @@ import { Component } from "@angular/core";
     }
   `]
 })
-export class ExerciseOneComponent {
+export class AppComponent {
   public visible: boolean = true;
   private buttonText: string = 'Hide Message';
 

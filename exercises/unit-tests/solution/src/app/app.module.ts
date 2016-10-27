@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ExerciseOneComponent } from './exercise-1';
-import { ExerciseTwoComponent } from './exercise-2';
+import { AppComponent } from './exercise-1';
+import { MessageComponent } from './exercise-2';
 import { MessageService } from './services/message';
 
 @NgModule({
   imports: [BrowserModule],
   declarations: [
-    ExerciseOneComponent,
-    ExerciseTwoComponent,
+    AppComponent,
+    MessageComponent,
   ],
   providers: [
     MessageService,
   ],
   bootstrap: [
-    ExerciseOneComponent
+    AppComponent
   ]
 })
 export class AppModule {}

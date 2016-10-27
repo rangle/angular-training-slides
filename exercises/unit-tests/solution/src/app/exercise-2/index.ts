@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { MessageService } from '../services/message';
 
 @Component({
-  selector: 'rio-exercise-two',
+  selector: 'rio-message',
   template: `<h2>{{ message }}</h2>`
 })
-export class ExerciseTwoComponent implements OnInit {
+export class MessageComponent implements OnInit {
   private message: string = '';
 
   constructor(private messageService: MessageService) {}

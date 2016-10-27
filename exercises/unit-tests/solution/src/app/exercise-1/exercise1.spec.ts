@@ -1,18 +1,18 @@
-import {ExerciseOneComponent} from './index';
+import {AppComponent} from './index';
 
-describe('Exercise One Component', () => {
-  let exOne: ExerciseOneComponent;
+describe('App Component', () => {
+  let app: AppComponent;
 
   beforeEach(() => {
-    exOne = new ExerciseOneComponent();
+    app = new AppComponent();
   });
 
   it('should be visible by default', () => {
-    expect(exOne.visible).toBe(true);
+    expect(app.visible).toBe(true);
   });
 
   it('should toggle to false', () => {
-    exOne.toggleVisibility();
-    expect(exOne.visible).toBe(false);
+    app.toggleVisibility();
+    expect(app.visible).toBe(false);
   });
 });

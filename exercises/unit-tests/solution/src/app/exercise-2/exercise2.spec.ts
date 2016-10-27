@@ -7,10 +7,10 @@ import {
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
-import { ExerciseTwoComponent } from './index';
+import { MessageComponent } from './index';
 import { MessageService } from '../services/message';
 
-describe('Exercise Two Component', () => {
+describe('Message Component', () => {
   let fixture;
 
   beforeEach(() => destroyPlatform());
@@ -24,7 +24,7 @@ describe('Exercise Two Component', () => {
     
     TestBed.configureTestingModule({
       declarations: [
-        ExerciseTwoComponent
+        MessageComponent
       ],
       providers: [
         MessageService
@@ -33,7 +33,7 @@ describe('Exercise Two Component', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExerciseTwoComponent);
+    fixture = TestBed.createComponent(MessageComponent);
     fixture.detectChanges();
   });
 
