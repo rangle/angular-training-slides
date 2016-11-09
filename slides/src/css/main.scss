@@ -71,7 +71,7 @@ $selectionColor: #fff;
 // Theme template ------------------------------
 @import '~reveal.js/css/theme/template/theme.scss';
 // ---------------------------------------------
-
+ 
 // Overrides -----------------------------------
 .reveal {
   font-weight: lighter;
@@ -130,19 +130,4 @@ $selectionColor: #fff;
   width: auto;
   font-size: 0.9em;
   max-height: none;
-}
-
-// Print Overrides
-@media print {
-  .reveal pre,
-  .reveal code,
-  .reveal pre code,
-  .reveal .hljs {
-    font-size: 0.7em;
-    color: black;
-  }
-
-  #rangle-io {
-    text-indent: 0;
-  }
 }
