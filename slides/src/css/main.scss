@@ -1,0 +1,126 @@
+@import url('~reveal.js/css/reveal.css');
+@import url('~highlight.js/styles/atom-one-dark.css');
+
+// Default mixins and settings -----------------
+@import "template/mixins";
+@import "template/settings";
+// ---------------------------------------------
+
+// Fonts
+@font-face {
+  font-family: 'Calibre';
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot");
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix") format("embedded-opentype"), 
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2") format("woff2"), 
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff") format("woff")
+}
+@font-face {
+  font-family: 'Calibre';
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot");
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix") format("embedded-opentype"), 
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2") format("woff2"), 
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff") format("woff")
+}
+
+// Rangle colours
+$purpleDark: #230E2D;
+$ranglePurple: #422D51;
+$rangleRed: #ee302f;
+$lightRed: #F27173;
+
+// Background of the presentation
+$backgroundColor: $ranglePurple;
+
+// Primary/body text
+$mainFont: 'Calibre', sans-serif;
+$mainFontSize: 32px;
+$mainColor: #fff;
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Calibre', sans-serif;
+$headingColor: #fff;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 3em;
+$heading2Size: 1.8em;
+$heading3Size: 1.55em;
+$heading4Size: 1.00em;
+
+// Links and actions
+$linkColor: $lightRed;
+$linkColorHover: lighten( $linkColor, 20% );
+$progressColor: $rangleRed;
+
+// Text selection
+$selectionBackgroundColor: $rangleRed;
+$selectionColor: #fff;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+@mixin bodyBackground() {
+  background: $backgroundColor;
+}
+
+// Theme template ------------------------------
+@import "template/theme";
+// ---------------------------------------------
+
+// Overrides -----------------------------------
+.reveal {
+  font-weight: lighter;
+}
+
+// Rangle logos + slide alignment
+.reveal .slides {
+  background: url('../content/images/logo-rangleio.svg') top right no-repeat;
+  background-size: 125px auto;
+  text-align: left;
+}
+
+#rangle-io {
+  background: url('../content/images/logo-rangleio.svg') no-repeat;
+  background-size: contain;
+  height: 0.5em;
+  text-indent: -9999em;
+  margin-top: 0.5em;
+}
+
+// Headers
+.reveal h1:after,
+.reveal h2:after {
+  content: '';
+  background-color: $rangleRed;
+  display: block;
+  height: 4px;
+  width: 2em;
+  margin: 0.25em 0;
+}
+
+#rangle-io:after {
+  display: none;
+}
+
+// Code block styling
+.reveal .hljs {
+  background: $purpleDark;
+  color: rgba(255,255,255,0.7);
+  padding: 1em;
+  margin: 20px auto;
+  line-height: 1.2em;
+}
+
+.reveal pre,
+.reveal code {
+  width: auto;
+  font-size: 0.7em;
+  max-height: none;
+}
