@@ -79,11 +79,19 @@ $selectionColor: #fff;
   font-weight: lighter;
 }
 
-// Rangle logos + slide alignment
+//Alignment
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal table {
+  margin: 20px 0;
+}
+
+// Rangle logos
 .reveal .slides {
   background: url('../content/images/logo-rangleio.svg') top right no-repeat;
   background-size: 125px auto;
-  text-align: left;
 }
 
 #rangle-io {
@@ -121,6 +129,6 @@ $selectionColor: #fff;
 .reveal pre,
 .reveal code {
   width: auto;
-  font-size: 0.7em;
+  font-size: 0.9em;
   max-height: none;
 }
