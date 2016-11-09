@@ -1,9 +1,9 @@
-@import url('~reveal.js/css/reveal.css');
-@import url('~highlight.js/styles/atom-one-dark.css');
+@import '~reveal.js/css/reveal.css';
+@import '~highlight.js/styles/atom-one-dark.css';
 
 // Default mixins and settings -----------------
-@import "template/mixins";
-@import "template/settings";
+@import '~reveal.js/css/theme/template/mixins.scss';
+@import '~reveal.js/css/theme/template/settings.scss';
 // ---------------------------------------------
 
 // Fonts
@@ -26,7 +26,6 @@
 $purpleDark: #230E2D;
 $ranglePurple: #422D51;
 $rangleRed: #ee302f;
-$lightRed: #F27173;
 
 // Background of the presentation
 $backgroundColor: $ranglePurple;
@@ -56,9 +55,8 @@ $heading3Size: 1.55em;
 $heading4Size: 1.00em;
 
 // Links and actions
-$linkColor: $lightRed;
+$linkColor: $rangleRed;
 $linkColorHover: lighten( $linkColor, 20% );
-$progressColor: $rangleRed;
 
 // Text selection
 $selectionBackgroundColor: $rangleRed;
@@ -71,7 +69,7 @@ $selectionColor: #fff;
 }
 
 // Theme template ------------------------------
-@import "template/theme";
+@import '~reveal.js/css/theme/template/theme.scss';
 // ---------------------------------------------
 
 // Overrides -----------------------------------
@@ -127,7 +125,8 @@ $selectionColor: #fff;
 }
 
 .reveal pre,
-.reveal code {
+.reveal code,
+.reveal pre code {
   width: auto;
   font-size: 0.9em;
   max-height: none;
