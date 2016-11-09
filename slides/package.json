@@ -7,7 +7,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "pdf": "phantomjs node_modules/reveal.js/plugin/print-pdf/print-pdf.js 'http://localhost:8081/index.html?print-pdf' rangle-angular-training.pdf"
   },
   "keywords": [],
   "author": "",

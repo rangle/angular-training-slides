@@ -2,10 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Angular 2 Training</title>
-</head>
+  <meta charset="UTF-8">
+  <title>Angular 2 Training</title>
 
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'node_modules/reveal.js/css/print/pdf.css' : 'node_modules/reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
 <body>
 
   <div class="reveal">
@@ -86,6 +94,5 @@
 
   <script src="../node_modules/reveal.js/lib/js/head.min.js"></script>
   <script src="../node_modules/reveal.js/js/reveal.js"></script>
-
 </body>
 </html>
