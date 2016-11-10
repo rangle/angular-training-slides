@@ -19,8 +19,9 @@ First, install PhantomJS globally:
 $ npm install phantomjs -g
 ```
 
-Then, in the slides directory, run the `pdf` command:
+Then, in the slides directory, start the server and run the `pdf` command:
 
 ```
+$ npm start
 $ npm run pdf
 ```
