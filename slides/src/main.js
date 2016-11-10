@@ -5,8 +5,5 @@ import './css/main.scss';
 import './js/config.js';
 
 // Conditionally add print stylesheets
-var link = document.createElement( 'link' );
-link.rel = 'stylesheet';
-link.type = 'text/css';
-link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : './css/print/paper.css';
-document.getElementsByTagName( 'head' )[0].appendChild( link );
+var printStylesheet = window.location.search.match( /print-pdf/gi ) ? 'pdf.scss' : 'paper.scss';
+require('./css/print/' + printStylesheet);
