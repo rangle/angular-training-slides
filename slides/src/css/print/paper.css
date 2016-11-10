@@ -8,6 +8,8 @@
 
 @media print {
 
+  @import url('~highlight.js/styles/atom-one-light.css');
+
   /* SECTION 1: Set default width, margin, float, and
      background. This prevents elements from extending
      beyond the edge of the printed page, and prevents
@@ -46,7 +48,6 @@
      Consider using a serif font for readability. */
   body, p, td, li, div {
     font-size: 20pt!important;
-    font-family: Georgia, "Times New Roman", Times, serif !important;
     color: #000;
   }
 
@@ -57,7 +58,6 @@
     color: #000!important;
     height: auto;
     line-height: normal;
-    font-family: Georgia, "Times New Roman", Times, serif !important;
     text-shadow: 0 0 0 #000 !important;
     text-align: left;
     letter-spacing: normal;
@@ -198,16 +198,17 @@
   .reveal section small {
     font-size: 0.8em;
   }
-  
+
   .reveal pre,
   .reveal code,
   .reveal pre code,
   .reveal .hljs {
+    /*background: #eee;*/
     font-size: 0.7em;
-    color: black;
   }
 
   #rangle-io {
     text-indent: 0;
+    background-image: none;
   }
 } 
