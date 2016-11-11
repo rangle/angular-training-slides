@@ -5,5 +5,9 @@ import './css/main.scss';
 import './js/config.js';
 
 // Conditionally add print stylesheets
-var printStylesheet = window.location.search.match( /print-pdf/gi ) ? 'pdf.scss' : 'paper.scss';
-require('./css/print/' + printStylesheet);
+if (window.location.search.match( /print-pdf/gi )) {
+  require('style!css!../node_modules/reveal.js/css/print/pdf.css');
+} else {
+  require('style!css!../node_modules/reveal.js/css/print/paper.css');
+  require('./css/print.scss');
+}

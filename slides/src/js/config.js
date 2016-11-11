@@ -42,9 +42,6 @@ Reveal.initialize({
       } 
     },
 
-    // Print + PDF support
-    { src: libPath + 'plugin/print-pdf/print-pdf.js', async: true },
-
     // Zoom in and out with Alt+click
     { src: libPath + 'plugin/zoom-js/zoom.js', async: true },
 
