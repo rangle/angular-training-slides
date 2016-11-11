@@ -1,0 +1,23 @@
+/* Additions to the print stylesheet */
+
+@media print {
+
+  body, p, td, li, div,
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Calibre', sans-serif !important;
+  }
+
+  .reveal pre,
+  .reveal code,
+  .reveal pre code,
+  .reveal .hljs {
+    background: #efefef;
+    color: #333;
+    font-size: 0.7em;
+  }
+
+  #rangle-io {
+    text-indent: 0;
+    background-image: none;
+  }
+}

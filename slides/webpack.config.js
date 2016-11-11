@@ -21,6 +21,7 @@ module.exports = {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"]
       },
+      { test: /\.css$/, loaders: ["style", "css"] },
       { test: /\.(eot|svg|ttf|woff|woff2)$/, loaders: ['file'] }
     ]
   },
@@ -30,7 +31,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([ 
       { from: { glob: 'content/*.md' } },
-      { from: { glob: 'content/images/*' } } 
+      { from: { glob: 'content/images/*' } }
     ])
   ],
   devServer: {
