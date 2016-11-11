@@ -73,6 +73,10 @@ $selectionColor: #fff;
 // ---------------------------------------------
  
 // Overrides -----------------------------------
+.reveal .slides > section, .reveal .slides > section > section {
+  padding: 10px 0;
+}
+
 .reveal {
   font-weight: lighter;
 }
@@ -128,6 +132,6 @@ $selectionColor: #fff;
 .reveal code,
 .reveal pre code {
   width: auto;
-  font-size: 0.9em;
+  font-size: 0.85em;
   max-height: none;
 }
