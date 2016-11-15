@@ -4,25 +4,33 @@
 
 ## Angular 2 Services
 
-- Not all logic belongs in a component - some things, like requests for data or authentication, should be refactored into a service
-- Services are like subsystems in your application that can operate independantly and be used by many different components (See: [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture))
-- In Angular 2, a service is a class that parts of the app will use as a dependency
+- A service is a re-usable piece of functionality shared across the app
+- Services are consumed by other Angular2 elements (components, directives, pipes or other services)
+- They are provided to these elements through Dependency Injection
+- Services are singletons
+
+---
+
+## When to Use Services
+
+- Keep components simple and let services do the heavy lifting
+- IO operations belong in services (server communication, localstorage)
+- Can be used to handle application state (though Redux is more robust)
 
 ---
 
 ## Angular 2 Dependency Injection
 
-- Dependency injection (DI) is a programming concept that predates Angular.
-- It is used to simplify dependency management in Angular by reducing the amount of information a component needs to know about its dependencies.
-- DI enables more flexible codes and much easier testing process during development cycle.
-- In the real world, DI will mainly be seen when we provide a service to a component.
+- Dependency injection (DI) is a programming pattern that simplifies dependency management
+- Dependencies are provided to dependent elements which use them
+- In Angular, DI is used to provide services to components and other elements
 
 ---
 
 ## Creating a Service
 
-- Services are classes that are decorated with the `@Injectable()` decorator
-- The `@Injectable()` decorator lets Angular 2 know that the class we're making can be used with Dependency Injection
+- Services are regular classes with the `@Injectable()` decorator
+- Allows us to use the class with Dependency Injection
 
 ```ts
 import { Injectable } from '@angular/core';
@@ -37,54 +45,34 @@ export class AuthService {
 
 ---
 
-## Using a Service (1/4)
+## Registering a Service
 
-- Now that the service has been created, it needs to be provided to parts of the app that rely on it
-- Using the app module approach, services can be provided to the whole app
+Once created, the service must be provided to the app
 
 ```ts
 import ...
 import { AuthService } from '../services/analytics';
 
 @NgModule({
-  bootstrap: [
-    AppComponent 
-  ],
   declarations: [
     AppComponent,
     LoginComponent
   ],
   providers: [
     AuthService
-  ]
+  ],
+  bootstrap: [
+    AppComponent 
+  ],
 }) 
 ```
 
 ---
 
-## Using a Service (2/4)
+## Consuming a Service in a Component (1/2)
 
-- Components that consume services need to have the service listed as a provider
-- If providing a service directly to a component, you must import the service and list it in the `providers` array
-
-```ts
-import { Component } from '@angular/core';
-import { AuthService } from '../services/analytics';
-
-@Component({
-  selector: 'rio-login',
-  providers: [AuthService],
-  template: `<button type="button">Login</button>`
-})
-```
-
----
-
-## Using a Service (3/4)
-
-Whatever method is used to provide the service to the component, the component must then add a constructor that defines a private property, the value of which will be our service.
-
-This tells Angular to provide an instance of `AuthService` when it sets up this component.
+- Components that rely on a service should define a private property in the constructor with the service assigned as the value
+- This tells Angular to provide an instance of `AuthService` when it sets up this component.
 
 ```ts
 @Component({
@@ -98,7 +86,7 @@ export class LoginComponent {
 
 ---
 
-## Using a Service (4/4)
+## Consuming a Service in a Component (2/2)
 
 Once the service has been made available to the component, we can use its methods.
 
@@ -106,12 +94,14 @@ Once the service has been made available to the component, we can use its method
 @Component({
   selector: 'rio-login',
   template: `
-    <button type="button"
-      (click)="authService.login()">
-      Login</button>
+    <button type="button" (click)="onLogin()">Login</button>
   `
 })
 export class LoginComponent {
   constructor(private authService: AuthService) {}
+  
+  onLogin(): void {
+    this.authService.login();
+  }
 }
 ```
