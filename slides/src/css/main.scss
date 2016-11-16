@@ -44,7 +44,7 @@ $headingFont: 'Calibre', sans-serif;
 $headingColor: #fff;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
-$headingTextTransform: uppercase;
+$headingTextTransform: none;
 $headingTextShadow: none;
 $headingFontWeight: normal;
 $heading1TextShadow: $headingTextShadow;
@@ -90,10 +90,6 @@ $selectionColor: #fff;
 
   table {
     margin: 20px 0;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    text-transform: none;
   }
 
   h1:after, h2:after {
