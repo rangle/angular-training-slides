@@ -4,22 +4,24 @@
 
 ## Forms in Angular 2
 
-- Angular 2 has multiple approaches to forms:
--- **Template Driven Forms:** For simple forms and rapid prototyping
--- **Model Driven Forms:** For complex validation and subforms
+Angular 2 has two approaches to forms:
+- **Template Driven Forms:** For simple forms and rapid prototyping
+- **Model Driven Forms:** For complex validation and subforms
 
 ---
 
 ## Enabling Forms 
 
 To enable Angular 2 form directives and services you need to import the right form modules.
+- `FormModules` should be used for template driven forms
+- `ReactiveFormsModule` should be used for model-driven forms
 
 ```ts
 @NgModule({
   imports: [
     BrowserModule, 
-    FormsModule, // template + model driven forms
-    ReactiveFormsModule // only model driven forms
+    FormsModule, // template driven forms
+    ReactiveFormsModule // model driven forms
   ],
   ...
 })
@@ -31,7 +33,8 @@ export class AppModule {}
 ## Template Driven Forms (1/2)
 
 - Uses Angular 2 directives for a markup-oriented approach
-- `#signupForm="ngForm"` tells Angular to supply the ngForm directive and store the form in `signupForm`
+- `#signupForm="ngForm"` enhances the form through the use of the `ngForm` directive.
+- `signupForm` will become a variable with access to NgForm directive properties and methods
 - `ngSubmit` handles form submission by calling the supplied method
 - `ngModel` turns form fields to `FormControl`s using the element name
 
