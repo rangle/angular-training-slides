@@ -44,7 +44,7 @@ $headingFont: 'Calibre', sans-serif;
 $headingColor: #fff;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
-$headingTextTransform: uppercase;
+$headingTextTransform: none;
 $headingTextShadow: none;
 $headingFontWeight: normal;
 $heading1TextShadow: $headingTextShadow;
@@ -73,65 +73,68 @@ $selectionColor: #fff;
 // ---------------------------------------------
  
 // Overrides -----------------------------------
-.reveal .slides > section, .reveal .slides > section > section {
-  padding: 10px 0;
-}
-
-.reveal {
-  font-weight: lighter;
-}
-
-//Alignment
-.reveal .slides {
-  text-align: left;
-}
-
-.reveal table {
-  margin: 20px 0;
-}
-
-// Rangle logos
-.reveal .slides {
-  background: url('../content/images/logo-rangleio.svg') top right no-repeat;
-  background-size: 125px auto;
-}
-
 #rangle-io {
   background: url('../content/images/logo-rangleio.svg') no-repeat;
   background-size: contain;
   height: 0.5em;
   text-indent: -9999em;
   margin-top: 0.5em;
+
+  &:after {
+    display: none;
+  }
 }
 
-// Headers
-.reveal h1:after,
-.reveal h2:after {
-  content: '';
-  background-color: $rangleRed;
-  display: block;
-  height: 4px;
-  width: 2em;
-  margin: 0.25em 0;
-}
+.reveal {
+  font-weight: lighter;
 
-#rangle-io:after {
-  display: none;
-}
+  table {
+    margin: 20px 0;
+  }
 
-// Code block styling
-.reveal .hljs {
-  background: $purpleDark;
-  color: rgba(255,255,255,0.7);
-  padding: 1em;
-  margin: 20px auto;
-  line-height: 1.2em;
-}
+  h1:after, h2:after {
+    content: '';
+    background-color: $rangleRed;
+    display: block;
+    height: 4px;
+    width: 2em;
+    margin: 0.25em 0;
+  }
 
-.reveal pre,
-.reveal code,
-.reveal pre code {
-  width: auto;
-  font-size: 0.85em;
-  max-height: none;
+  .slides {
+    text-align: left;
+    background: url('../content/images/logo-rangleio.svg') top right no-repeat;
+    background-size: 125px auto;
+
+    > section,
+    > section > section {
+      padding: 10px 0;
+    }
+  }
+
+  // Code block styling
+  .hljs {
+    background: $purpleDark;
+    color: rgba(255,255,255,0.7);
+    padding: 0.8em;
+    margin: 20px auto;
+    line-height: 1.2em;
+  }
+
+  pre {
+    width: auto;
+    font-size: 0.75em;
+
+    code {
+      max-height: none;
+    }
+  }
+
+  h2 code,
+  p code,
+  li code {
+    background-color: $purpleDark;
+    padding: 0 5px;
+    font-size: 0.8em;
+  }
 }

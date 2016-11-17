@@ -15,7 +15,7 @@ There are two types of directives:
 
 ---
 
-## NgStyle Directive (1/2)
+## `NgStyle` Directive (1/2)
 
 Directive that modifies the "style" attribute of a component
 
