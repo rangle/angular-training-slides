@@ -188,7 +188,7 @@ When using template driven forms we are constrained to only use the 4 built-in v
 
 - Declared programmatically rather than through the template
 - Much more validation control and flexibility
-- Unit testable
+- Ability to use custom validators
 
 ---
 
