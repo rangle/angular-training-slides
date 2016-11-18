@@ -121,7 +121,7 @@ to:
 
 ## Binding Variables to the Form 
 
-Add a default value from your model with model-view data binding:
+Add a default value from your model with one way data binding:
 
 ```ts
 @Component({ ... })
@@ -143,16 +143,21 @@ Two way data binding (banana-in-a-box - `[()]`) will keep the model up to date a
 
 [View Example](https://plnkr.co/edit/yxLe7Bccx46a0qw9lYHs?p=preview)
 
+---
+
 ## FormControl Properties and Methods
 
-- `FormControl`.value returns the value
-- `FormControl`.valid returns field validity
-- `FormControl`.pristine indicates if it had changed from default view
-- `FormControl`.touched indicates if the field was clicked, tabbed or tapped
-- `FormControl`.setValue() allows setting the control value
-- `FormControl`.reset() allows resetting the control value
+Properties: 
 
----
+- `value`: Returns the value
+- `valid`: Returns field validity (boolean)
+- `pristine`: Indicates if it had changed from default view (boolean)
+- `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
+
+Methods: 
+
+- `setValue()`: Allows setting the control value
+- `reset()`: Allows resetting the control value
 
 ---
 
@@ -189,7 +194,8 @@ When using template driven forms we are constrained to only use the 4 built-in v
 
 ## Creating a Model Driven Form (1/2)
 
-- `FormControl` tracks the value and validity of a form control. It requires two properties: an initial value and a list of validators
+- `FormControl` tracks the value, state and validity of a form control. 
+- New `FormControl`s require two arguments: an initial value and a list of validators
 - `FormGroup` tracks the group and validity state of a group of FormControls
 - `FormBuilder` can be used to create `FormGroup`s and `FormControl`s for us
 
