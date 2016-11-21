@@ -1,7 +1,8 @@
 /* Additions to the print stylesheet */
 
-@media print {
+@import url('~highlight.js/styles/github.css') only print;
 
+@media print {
   .reveal .slides > section, .reveal .slides > section > section {
     padding: 0;
   }
@@ -15,7 +16,7 @@
   .reveal code,
   .reveal pre code,
   .reveal .hljs {
-    background: #efefef;
+    background: #fafafa;
     color: #333;
     font-size: 0.7em;
   }
