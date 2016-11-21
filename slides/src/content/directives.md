@@ -10,14 +10,14 @@
 
 There are two types of directives:
 
-- **Attribute directives:** Changes the behavior of a component whitout affecting its template (NgClass, NgStyle)
-- **Structural directives:** Changes the behavior of a component by modifying its template (NgIf, NgFor)
+- **Attribute directives:** Changes the behavior of a component whitout affecting its template (`NgClass`, `NgStyle`)
+- **Structural directives:** Changes the behavior of a component by modifying its template (`NgIf`, `NgFor`)
 
 ---
 
 ## `NgStyle` Directive (1/2)
 
-Directive that modifies the "style" attribute of a component
+Directive that modifies the `style` attribute of a component
 
 ```ts
 @Component({
@@ -34,7 +34,7 @@ Directive that modifies the "style" attribute of a component
   `
 })
 export class StyleExampleComponent {
-  borderStyle: string = '1px solid black';
+  borderStyle = '1px solid black';
 }
 ```
 
@@ -42,9 +42,9 @@ export class StyleExampleComponent {
 
 ---
 
-## NgStyle Directive (2/2)
+## `NgStyle` Directive (2/2)
 
-NgStyle is a directive with a property selector "[ngStyle]"
+NgStyle is a directive with a property selector `[ngStyle]`
 
 ```ts
 @Directive({
@@ -52,7 +52,7 @@ NgStyle is a directive with a property selector "[ngStyle]"
 })
 ```
 
-It has an input property called "ngStyle" which expects an object
+It has an input property called `ngStyle` which expects an object
 
 ```ts
 class NgStyleDirective {
@@ -67,7 +67,7 @@ The object accepts CSS properties in kebab case or camel case
 borderBottom: ... // camel case
 ```
 
-The final style it's going to be a combination of the style attribute and [ngStyle]
+The final style it's going to be a combination of the `style` attribute and `[ngStyle]`
 
 ```html
 <p style="padding:1rem; color:red; font-weight:bold; border:1px solid black">
@@ -76,10 +76,10 @@ The final style it's going to be a combination of the style attribute and [ngSty
 
 ---
 
-## NgClass Directive (1/4)
+## `NgClass` Directive (1/4)
 
-- Changes the "class" attribute of the host component
-- The NgClass directive can be used with strings, arrays or objects
+- Changes the `class` attribute of the host component
+- The `NgClass` directive can be used with strings, arrays or objects
 
 ```ts
 @Component({
@@ -98,7 +98,7 @@ Resulting class attribute:
 
 ---
 
-## NgClass Directive (2/4) - String
+## `NgClass` Directive (2/4) - String
 
 Used with a string:
 
@@ -128,7 +128,7 @@ export class ClassAsStringComponent {
 
 ---
 
-## NgClass Directive (3/4) - Array
+## `NgClass` Directive (3/4) - Array
 
 Used with an array:
 
@@ -160,7 +160,7 @@ export class ClassAsStringComponent {
 
 ---
 
-## NgClass Directive (4/4) - Object
+## `NgClass` Directive (4/4) - Object
 
 ```ts
 @Component({
@@ -217,7 +217,7 @@ Is equivalent to:
 ---
 
 
-## NgIf Directive
+## `NgIf` Directive
 
 - Conditionally renders components or elements based on an expression
 - Removes or recreates a portion of the DOM tree
@@ -243,7 +243,7 @@ export class AppComponent {
 
 ---
 
-## NgFor Directive
+## `NgFor` Directive
 
 - Mechanism to define multiple chunks of UI at once based on an iterable
 - The internal variable of the iteration (`item`) is scoped in the template
@@ -272,7 +272,7 @@ export class AppComponent {
 
 ---
 
-## NgFor Directive (exported values)
+## `NgFor` Directive (exported values)
 
 Provides some other values that can be bound to: `index`, `first`, `last`, `even`, `odd`
 
@@ -303,10 +303,10 @@ Notes:
 
 ---
 
-## NgSwitch Directive
+## `NgSwitch` Directive
 
 - Very similar to a switch statement
-- Multiple components can be matched using ngSwitchCase
+- Multiple components can be matched using `ngSwitchCase`
 - Since components are created or destroyed be aware of the costs in doing so.
 
 ```html
@@ -325,8 +325,8 @@ Notes:
 @Component({ ... })
 export class AppComponent {
   tab = 0;
-  setTab(num: number) { this.tab = num; }
-  isSelected(num: number) { return this.tab === num; }
+  setTab(num: number): void { this.tab = num; }
+  isSelected(num: number): boolean { return this.tab === num; }
 }
 ```
 

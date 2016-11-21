@@ -69,7 +69,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe({ name: 'greet' })
 export class GreetPipe implements PipeTransform {
 
-  transform(name: string, title = '') {
+  transform(name: string, title = ''): string {
     return `Hello, ${title} ${name}`;
   }
 }

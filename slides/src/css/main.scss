@@ -115,7 +115,7 @@ $selectionColor: #fff;
   // Code block styling
   .hljs {
     background: $purpleDark;
-    color: rgba(255,255,255,0.7);
+    color: #EEE;
     padding: 0.8em;
     margin: 20px auto;
     line-height: 1.2em;
@@ -132,7 +132,8 @@ $selectionColor: #fff;
 
   h2 code,
   p code,
-  li code {
+  li code,
+  table code {
     background-color: $purpleDark;
     padding: 0 5px;
     font-size: 0.8em;

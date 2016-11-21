@@ -145,7 +145,7 @@ Two way data binding (banana-in-a-box - `[()]`) will keep the model up to date a
 
 ---
 
-## FormControl Properties and Methods
+## `FormControl` Properties and Methods
 
 Properties: 
 
@@ -232,7 +232,7 @@ export class SignupComponent {
 
 ---
 
-## Validating FormBuilder Forms
+## Validating `FormBuilder` Forms
 
 - Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
 - Validators produce errors which can be checked calling `hasError` on the `FormControl` and providing the name of the validator
@@ -327,11 +327,11 @@ You can also access equivalent properties on `FormControl`s
 
 ---
 
-## Template-Driven vs FormBuilder
+## Template-Driven vs `FormBuilder`
 
 |   | Template-Driven | FormBuilder |
 | - | --------------- | ----------- |
-| Form instance    | Declare in template #signupForm="ngForm" | Declare in class [formGroup]="signupForm" |
-| (ngSubmit)       | registerUser(signupForm)                 | registerUser()                              |
-| Control instance | Declare in template ngModel              | Declare in class [formControl]="firstName"   |
+| Form instance    | Declare in template `#signupForm="ngForm"` | Declare in class `[formGroup]="signupForm"` |
+| `(ngSubmit)`       | `registerUser(signupForm)`                 | `registerUser()`                              |
+| Control instance | Declare in template `ngModel`              | Declare in class `[formControl]="firstName"`   |
 
