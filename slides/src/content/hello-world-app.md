@@ -46,11 +46,11 @@ import { NgModule } from '@angular/core';
 export class MyModule {}
 ```
 
-- **Imports:** Other modules required by our module (built-in, feature or third party)
-- **Declarations:** Components, directives and pipes defined in our module
-- **Providers:** Services defined in our module
-- **Exports:** Components, directives or pipes available for other modules
-- **Bootstrap:** The root component of the application
+- `imports`: Other modules required by our module (built-in, feature or third party)
+- `declarations`: Components, directives and pipes defined in our module
+- `providers`: Services defined in our module
+- `exports`: Components, directives or pipes available for other modules
+- `bootstrap`: The root component of the application
 
 ---
 
@@ -66,12 +66,12 @@ export class MyModule {}
 export class AppModule {}
 ```
 
-- The root module is always called "AppModule"
-- The root module doesn't use the property "exports"
+- The root module is always called `AppModule`
+- The root module doesn't use the property `exports`
 - There's only one root module in an application
-- Only the root module defines the property "bootstrap"
-- The root module always imports the "BrowserModule"
-- The "BrowserModule" exports common elements of the framework (NgIf, NgFor, etc.)
+- Only the root module defines the property `bootstrap`
+- The root module always imports the `BrowserModule`
+- The `BrowserModule` exports common elements of the framework (`NgIf`, `NgFor`, etc.)
 
 ---
 
@@ -88,7 +88,7 @@ export class MyFeatureModule {}
 ```
 
 - All declared elements are private by default
-- To make an element public we need to add it to the "exports" array
+- To make an element public we need to add it to the `exports` array
 - There's no root component in a feature module
 - Services are public by default
 - Beware of how the dependency injection works!
@@ -114,8 +114,8 @@ export class AppModule {}
 ```
 
 - Always follow the filename convention:
-  - AppModule => app.module.ts
-  - SharedModule => shared.module.ts
+  - `AppModule` => _app.module.ts_
+  - `SharedModule` => _shared.module.ts_
 
 ---
 
@@ -132,15 +132,15 @@ import { Component } from '@angular/core';
 export class WidgetComponent { ... }
 ```
 
-- **Selector:** The HTML tag associated with the component
+- `selector`: The HTML tag associated with the component
 
 ```html
 <rio-widget></rio-widget>
 ```
 
-- **Template:** The user facing side of the component
+- `template`: The user facing side of the component
   - Usually HTML but it can be other language depending on the platform
-- **Styles:** An array of styles to apply to the template
+- `styles`: An array of styles to apply to the template
   - By default styles only apply to the component (~shadow root)
 
 [View Example](https://plnkr.co/edit/oQt4n7r6droc2aczAFbO?p=preview)
@@ -244,7 +244,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 - There are two types of bootstrapping:
   - Just in time compilation (JIT)
   - Ahead of time compilation (AOT)
-- The call to "enableProdMode" modifies how the change detection works
+- Calling `enableProdMode` modifies how the change detection works
 
 ---
 
@@ -263,7 +263,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading the App in the Browser (1/2) - Webpack
+## Loading the App in the Browser - Webpack
 
 ```html
 <!DOCTYPE html>
@@ -280,7 +280,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading the App in the Browser (2/2) - SystemJS
+## Loading the App in the Browser - SystemJS
 
 ```html
 <!DOCTYPE html>
@@ -315,7 +315,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 ```ts
-// Webpack style (recommended)
+// Webpack style
 @Component({
   selector: 'rio-app',
   styles: [require('./app.component.css')],
@@ -324,7 +324,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 ```ts
-// SystemJS style
+// SystemJS & Angular CLI & AoT style
 @Component({
   selector: 'rio-app',
   styleUrls: ['app.component.css'],

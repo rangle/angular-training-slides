@@ -1,4 +1,4 @@
-# Services and Dependency Injection
+# Services and Dependency Injection (DI)
 
 ---
 

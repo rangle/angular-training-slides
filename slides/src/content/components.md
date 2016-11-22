@@ -99,7 +99,7 @@ export class CounterComponent {
   @Input() count = 0;
   @Output() countChange = new EventEmitter<number>();
 
-  increment() {
+  increment(): void {
     this.count++;
     this.countChange.emit(this.count);
   }
@@ -123,7 +123,8 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   parentCount: number;
-  onCountChange(count: number) {
+
+  onCountChange(count: number): void {
     this.parentCount = count;
   }
 }
@@ -173,7 +174,7 @@ export class CounterComponent {
   @Input() count: number;
   @Output() countChange = new EventEmitter<number>();
 
-  increment() {
+  increment(): void {
     this.count++;
     this.countChange.emit(this.count);
   }
@@ -209,9 +210,9 @@ We can create references to native DOM elements in our template using the specia
     <span>Value: {{ name }}</span>`
 })
 export class AppComponent {
-  name: string = 'N/D';
+  name = 'N/D';
   
-  getInputValue(value: string) {
+  getInputValue(value: string): void {
     this.name = value;
   }
 }
@@ -245,7 +246,7 @@ export class ChildComponent {
 })
 export class AppComponent {
   publicProperty = '';
-  getPublicProperty(child: ChildComponent) {
+  getPublicProperty(child: ChildComponent): void {
     this.publicProperty = child.message;
   }
 }
@@ -273,7 +274,7 @@ export class AppComponent {
 })
 export class AppComponent {
   values: any;
-  submitForm (form: NgForm) {
+  submitForm (form: NgForm): void {
     this.values = form.value;
   }
 }

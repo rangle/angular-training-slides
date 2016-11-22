@@ -4,6 +4,10 @@
 
 ---
 
+## About Me
+
+---
+
 ## Structure of this Training
 
 - 8 hours training in 2 days
@@ -14,32 +18,20 @@
 
 ---
 
-## About Me: David Barreto
-
-- Software developer at Rangle.io
-- 8+ years of experience
-- Worked with different tech stacks:
-  - PHP/Symfony2/MySQL
-  - Python/Django/PostgreSQL
-  - Angular1/Typescript/Gulp
-  - Angular2/Typescript/Webpack
-- Been working with Angular 2 since December 2015
-- Core contributor to the Angular 2 Gitbook
-  - Second most popular Angular 2 book on the web
-  - https://angular-2-training-book.rangle.io (it's free!)
-
----
-
 ## Table of Contents
 
 1. Introduction
-2. Creating a hello world application
-3. Components In Depth
-4. Directives
-5. Dependency Injection
-6. Forms
-7. Routing
-8. Testing
+1. Creating a hello world application
+1. Components In Depth
+1. Directives
+1. Services and Dependency Injection
+1. Miscellaneous Topics
+ - Component Lifecycle
+ - Change Detection
+ - Pipes
+1. Forms
+1. Routing
+1. Unit Testing
 
 ---
 

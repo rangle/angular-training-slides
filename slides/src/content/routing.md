@@ -48,11 +48,11 @@ const routes: Routes = [
 
 Each route can have different attributes. Some common attributes are:
 
-* _path_ - URL to be shown in the browser when application is on the specific route
-* _component_ - component displayed when the application is on the specific route
-* _redirectTo_ - redirect route if needed;
-* _pathMatch_ - optional propety to match full URLs or just the beginning
-* _children_ - array of route definitions objects representing the child routes
+* `path`: URL to be shown in the browser when application is on the specific route
+* `component`: Component displayed when the application is on the specific route
+* `redirectTo`: Redirect route if needed;
+* `pathMatch`: Optional propety to match full URLs or just the beginning
+* `children`: Array of route definitions objects representing the child routes
 
 Notes:
 
