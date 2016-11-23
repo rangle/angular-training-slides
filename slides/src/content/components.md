@@ -57,7 +57,7 @@ export class GreeterComponent {
 
 ## Responding to DOM Events
 
-We can bind a expressions to any DOM event using the `(event)` syntax:
+We can bind an expressions to any DOM event using the `(event)` syntax:
 
 ```ts
 @Component({
@@ -82,9 +82,9 @@ export class CounterComponent {
 
 ---
 
-## Creating Custom Events (1/2)
+## Creating Custom Events
 
-Using the `@Output` decorator we can create custom events to communicate with a parent component
+Use the `@Output` decorator to create custom events to communicate with a parent component
 
 ```ts
 @Component({
@@ -108,9 +108,9 @@ export class CounterComponent {
 
 ---
 
-## Creating Custom Events (2/2)
+## Listening to Custom Events
 
-The parent component can listen to a child custom event with the same syntax as DOM events:
+The parent component can listen to a child custom event with the same syntax as DOM events
 
 ```ts
 import {Component} from '@angular/core';
@@ -136,9 +136,10 @@ export class AppComponent {
 
 ---
 
-## Two-Way Data Binding (1/2)
+## Two-Way Data Binding
 
-Two-way data binding combines an `@Input` with an `@Output` using the _banana in a box_ syntax `[(event)]` and having the name of the event to be equal to the name of the input plus the suffix "Change".
+- Combination of an `@Input` with an `@Output` using the _banana in a box_ syntax `[(event)]`
+- The name of the event has to be equal to the name of the input plus the suffix "Change".
 
 ```html
 <rio-counter [count]="count" (countChange)="count=$event"></rio-counter>
@@ -164,9 +165,7 @@ Which is equivalent to:
 
 ---
 
-## Two-Way Data Binding (2/2)
-
-Example of implementing a custom event with two-way data binding
+## Two-Way Data Binding Example
 
 ```ts
 @Component({ ... })

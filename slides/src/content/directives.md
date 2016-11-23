@@ -44,7 +44,7 @@ export class StyleExampleComponent {
 
 ## `NgStyle` Directive (2/2)
 
-NgStyle is a directive with a property selector `[ngStyle]`
+Directive with a property selector `[ngStyle]`
 
 ```ts
 @Directive({
@@ -197,7 +197,7 @@ Result:
 <p *ngIf="isVisible">I'm sometimes visible</p>
 ```
 
-- No square bracket, still an expression binding
+- No square bracket but still an expression binding
 - Uses the special tag `<template>` to delay rendering
 
 ```html
@@ -221,7 +221,6 @@ Is equivalent to:
 
 - Conditionally renders components or elements based on an expression
 - Removes or recreates a portion of the DOM tree
-- Be aware of the cost of creating/destroying DOM elements
 
 ```html
 <button type="button" (click)="toggleExists()">Toggle Component</button>
@@ -238,6 +237,8 @@ export class AppComponent {
   }
 }
 ```
+
+**Note:** Be aware of the cost of creating/destroying DOM elements
 
 [View Example](https://plnkr.co/edit/MTyYN0ntm1BNKE20HT7a?p=preview)
 
