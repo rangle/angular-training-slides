@@ -57,7 +57,7 @@ export class GreeterComponent {
 
 ## Responding to DOM Events
 
-We can bind an expressions to any DOM event using the `(event)` syntax:
+We can bind an expression to any DOM event using the `(event)` syntax:
 
 ```ts
 @Component({
