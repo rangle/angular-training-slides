@@ -19,14 +19,14 @@ Notes:
 
 ## Angular 2 Modules
 
-- Are a collection of components, directives, pipes and services (aka elements)
+- Collection of components, directives, pipes and services (aka elements)
 - Provide a mechanism to group related pieces of functionality within our application
 - There are 4 types of modules:
   - The root module (there's only one in an app)
   - Feature modules (optional)
-  - Built-in modules (BrowserModule, FormsModule, etc.)
-  - Third party modules (AngularMaterial)
-- An Angular 2 application is a collection of modules, starting from the RootModule
+  - Built-in modules (`BrowserModule`, `FormsModule`, etc.)
+  - Third party modules (`AngularMaterial`)
+- An Angular 2 application is a collection of modules, starting from the root module
 - Modules can import other modules to extend functionality
 
 ---
@@ -204,15 +204,12 @@ styles: [`
 
 ```sh
 .
-├── node_modules/
-├── package.json
 ├── src
 │   ├── app
 │   │   └── ...
 │   └── ...
+├── package.json
 ├── tsconfig.json
-├── typings/
-├── typings.json
 └── webpack.config.js
 ```
 
@@ -220,7 +217,6 @@ styles: [`
   - NPM => _package.json_
   - Webpack => _webpack.config.json_ 
   - Typescript => _tsconfig.json_
-  - Type Definitions => _typings.json_
 
 ---
 
@@ -263,7 +259,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading the App in the Browser - Webpack
+## Loading an App Using Webpack
 
 ```html
 <!DOCTYPE html>
@@ -280,7 +276,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading the App in the Browser - SystemJS
+## Loading an App Using SystemJS
 
 ```html
 <!DOCTYPE html>
@@ -344,21 +340,20 @@ Notes:
 
 ## Components With External Files
 
+Create folders to group related files of a component
+
 ```sh
 src
 ├── app
 │   ├── app.module.ts
 │   ├── index.ts
 │   └── root
-│       ├── index.ts
 │       ├── root.component.css
 │       ├── root.component.html
 │       └── root.component.ts
 ├── index.html
 └── main.ts
 ```
-
-- If using external files for a component, create a folder with an import barrel
 
 ---
 
