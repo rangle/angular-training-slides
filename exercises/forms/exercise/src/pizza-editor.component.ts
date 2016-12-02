@@ -13,10 +13,10 @@ import Pizza from './pizza';
   inputs: ['pizza'],
   outputs: ['pizzaChange']
 })
-export class PizzaEditor {
+export class PizzaEditorComponent {
   pizzaForm: FormGroup;
   pizza: Pizza;
-  pizzaChange: EventEmitter<any> = new EventEmitter();
+  pizzaChange = new EventEmitter();
 
   constructor(
   ) {
