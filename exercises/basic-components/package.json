@@ -4,9 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "postinstall": "rimraf typings & typings install",
         "tsc": "tsc",
-        "typings": "typings",
         "clean": "rimraf dist",
         "build": "npm run clean && cross-env NODE_ENV=development webpack",
         "start": "cross-env NODE_ENV=development webpack-dev-server --content-base dist"

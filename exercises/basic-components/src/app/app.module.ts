@@ -2,20 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import {
-  RootComponent,
-  Parent,
-  ChildOne,
-  ChildTwo
-} from './root.component';
+  AppComponent,
+  ParentComponent,
+  ChildOneComponent,
+  ChildTwoComponent
+} from './app.component';
 
 @NgModule({
   imports: [BrowserModule],
   declarations: [
-    RootComponent,
-    Parent,
-    ChildOne,
-    ChildTwo,
+    AppComponent,
+    ParentComponent,
+    ChildOneComponent,
+    ChildTwoComponent,
   ],
-  bootstrap: [RootComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
