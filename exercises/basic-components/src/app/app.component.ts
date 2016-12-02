@@ -1,13 +1,7 @@
 import { Component, Input } from "@angular/core";
 
-/**
- * 
- * 
- * @export
- * @class RootComponent
- */
 @Component({
-  selector: 'rio-root',
+  selector: 'rio-app',
   template: `
     <h2>The goal of this exercise:</h2>
     <ul>
@@ -19,7 +13,7 @@ import { Component, Input } from "@angular/core";
     </ul>
     <p>Below is a potential solution:</p>
     <div>
-      <my-container></my-container>
+      <rio-parent></rio-parent>
     </div>
   `,
   styles: [`
@@ -28,55 +22,36 @@ import { Component, Input } from "@angular/core";
     }
   `]
 })
-export class RootComponent {
-  public greeting: string = "Hello, world!";
-
-  constructor () {}
+export class AppComponent {
+  greeting = 'Hello, world!';
 }
 
-/**
- * 
- * 
- * @export
- * @class Parent
- */
 @Component({
-  selector: 'my-container',
+  selector: 'rio-parent',
   template: `
     <h2>I am a parent component</h2>
       <div>
-        <child-one
-          [helloToMe] = "helloChildOne"
-          [colors]    = "colors"
-        ></child-one>
-        <button
-          (click) = "toggle()"
-        >
+        <rio-child-one [helloToMe]="helloChildOne" [colors]="colors"></rio-child-one>
+        <button (click)="toggle()">
           Show the hidden second child component
         </button>
-        <child-two [isVisible]="showChildTwo"></child-two>
+        <rio-child-two [isVisible]="showChildTwo"></rio-child-two>
       </div>
   `
 })
 
-export class Parent {
-  private helloChildOne:   string = 'Hello to my first child';
-  private showChildTwo:    boolean = true;
-  private colors:          string[] = ['red', 'green', 'blue'];
+export class ParentComponent {
+  helloChildOne = 'Hello to my first child';
+  showChildTwo = true;
+  colors = ['red', 'green', 'blue'];
 
-  private toggle() {
+  toggle(): void {
     this.showChildTwo = !this.showChildTwo;
   }
 }
 
-/**
- * 
- * 
- * @export
- * @class ChildOne
- */
 @Component({
-  selector: 'child-one',
+  selector: 'rio-child-one',
   template: `
     <h2>I am Child One</h2>
     <div>
@@ -89,19 +64,13 @@ export class Parent {
   `
 })
 
-export class ChildOne {
-  @Input() private helloToMe:   string;
-  @Input() private colors:      string[];
+export class ChildOneComponent {
+  @Input() helloToMe:   string;
+  @Input() colors:      string[];
 }
 
-/**
- * 
- * 
- * @export
- * @class ChildTwo
- */
 @Component({
-  selector: 'child-two',
+  selector: 'rio-child-two',
   template: `
     <h2>I am Child Two</h2>
     <div *ngIf="isVisible">
@@ -110,6 +79,6 @@ export class ChildOne {
   `
 })
 
-export class ChildTwo {
-  @Input() private isVisible: boolean;
+export class ChildTwoComponent {
+  @Input() isVisible: boolean;
 }
