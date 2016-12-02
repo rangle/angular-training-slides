@@ -1,18 +1,17 @@
 import { BrowserModule }  from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { PizzaEditor } from './pizza-editor.component'
-import { App } from './app.component';
+import { PizzaEditorComponent } from './pizza-editor.component'
+import { AppComponent } from './app.component';
 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    FormsModule
+    ReactiveFormsModule
   ],
-  declarations: [App, PizzaEditor],
-  bootstrap: [App]
+  declarations: [AppComponent, PizzaEditorComponent],
+  bootstrap: [AppComponent]
 })
 export class MyAppModule {
 
