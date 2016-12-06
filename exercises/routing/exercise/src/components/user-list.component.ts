@@ -1,10 +1,8 @@
-// Don't look at this until Exercise 2
-
 import {Component, Input} from '@angular/core';
-import Users from '../services/users.service';
+import UsersService from '../services/users.service';
 
 @Component({
-  selector: 'user-list',
+  selector: 'rio-user-list',
   template: `
   <ul>
     <li *ngFor="let user of users">
@@ -15,10 +13,10 @@ import Users from '../services/users.service';
   </ul>
   `
 })
-export default class UserList {
-  public users: any;
+export default class UserListComponent {
+  @Input() users: any;
 
-  constructor(private usersService: Users) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit() {
     this.users = this.usersService.getUserNames();

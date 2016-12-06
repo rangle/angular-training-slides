@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'home',
+  selector: 'rio-home',
   template: `
   Child Routes
   `
 })
-export default class Home {
+export default class HomeComponent {
 
 }

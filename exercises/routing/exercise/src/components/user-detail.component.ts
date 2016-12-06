@@ -1,22 +1,20 @@
-// Don't look at this file until Exercise 2
-
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import Users from '../services/users.service';
+import UsersService from '../services/users.service';
 
 @Component({
-  selector: 'user-detail',
+  selector: 'rio-user-detail',
   template: `
   <label>First Name: </label> {{user?.name?.first}} <br/>
   <label>Last Name: </label> {{user?.name?.last}} <br/>
-  <label>Email: </label> {{user.email}}
+  <label>Email: </label> {{user?.email}}
   `
 })
-export default class UserDetail {
+export default class UserDetailComponent {
   public user: any;
   private subscription: any;
 
-  constructor(private usersService: Users /*, load route service */) {}
+  constructor(private usersService: UsersService /*, load route service */) {}
 
   ngOnInit() {
     // Set correct user id from the router params

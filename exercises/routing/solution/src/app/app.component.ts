@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import Users from '../services/users.service';
+import UsersService from '../services/users.service';
 
 @Component({
-  selector: 'rio-root',
+  selector: 'rio-app',
   styles: [ require('./app.css') ],
   template: `
   <ul>
@@ -21,10 +21,10 @@ import Users from '../services/users.service';
   </div>
   `
 })
-export class App {
+export class AppComponent {
   public userNames: any;
 
-  constructor(private users: Users) {}
+  constructor(private users: UsersService) {}
 
   ngOnInit() {
     this.userNames = this.users.getUserNames();

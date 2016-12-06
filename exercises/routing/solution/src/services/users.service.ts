@@ -67,7 +67,7 @@ const mockData = [{
 }];
 
 @Injectable()
-export default class Users {
+export default class UsersService {
   constructor() {}
 
   mapUserNames = (n) => {

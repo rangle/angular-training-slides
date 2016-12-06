@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'company-list',
+  selector: 'rio-company-list',
   template: `
   <ul>
     <li *ngFor="let company of companies">
@@ -12,7 +12,7 @@ import {Component, Input} from '@angular/core';
   </ul>
   `
 })
-export default class CompanyList {
+export default class CompanyListComponent {
   @Input() companies:any;
 
   constructor() {}
