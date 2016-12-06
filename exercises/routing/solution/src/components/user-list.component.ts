@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
-import Users from '../services/users.service';
 
 @Component({
-  selector: 'user-list',
+  selector: 'rio-user-list',
   template: `
   <ul>
     <li *ngFor="let user of users">
@@ -13,6 +12,6 @@ import Users from '../services/users.service';
   </ul>
   `
 })
-export default class UserList {
+export default class UserListComponent {
   @Input() users: any;
 }

@@ -6,11 +6,16 @@
     "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "types": [
+      "core-js",
+      "node"
+    ]
   },
   "exclude": [
-    "typings/browser.d.ts",
-    "typings/browser",
     "node_modules"
   ]
 }

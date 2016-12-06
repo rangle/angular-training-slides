@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import Users from '../services/users.service';
+import UsersService from '../services/users.service';
 
 @Component({
-  selector: 'rio-root',
+  selector: 'rio-app',
   styles: [ require('./app.css') ],
   template: `
   Basic Routing
@@ -27,10 +27,10 @@ import Users from '../services/users.service';
   </div>
   `
 })
-export class App {
+export class AppComponent {
   public userNames: any;
 
-  constructor(private usersService: Users) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit() {
     this.userNames = this.usersService.getUserNames();

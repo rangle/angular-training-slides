@@ -1,19 +1,17 @@
-// Don't look at this file until Exercise 3
-
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import Users from '../services/users.service';
+import UsersService from '../services/users.service';
 
 @Component({
-  selector: 'users-users-container',
+  selector: 'rio-users-list',
   template: `
-    <user-list [users]="users"></user-list>`
+    <rio-user-list [users]="users"></rio-user-list>`
 })
-export default class UsersListContainer {
+export default class UsersListComponent {
   public users: any;
   private subscription: any;
 
-  constructor(private usersService: Users /*, load route service */) {}
+  constructor(private usersService: UsersService /*, load route service */) {}
 
   ngOnInit() {
 

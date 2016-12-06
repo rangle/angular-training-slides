@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
-import CompanyList from '../components/company-list.component';
-import Home from '../components/home.component';
-import UserDetail from '../components/user-detail.component';
-import UserList from '../components/user-list.component';
+import CompanyListComponent from '../components/company-list.component';
+import HomeComponent from '../components/home.component';
+import UserDetailComponent from '../components/user-detail.component';
+import UserListComponent from '../components/user-list.component';
 
 
 export const routes: Routes = [
