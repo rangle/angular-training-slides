@@ -14,7 +14,7 @@ const basePlugins = [
   new webpack.DefinePlugin({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   }),
-  new webpack.optimize.CommonsChunkPlugin("vendor"),
+  new webpack.optimize.CommonsChunkPlugin("globals"),
   new HtmlWebpackPlugin({
     template: "./index.html"
   }),
@@ -30,9 +30,6 @@ const basePlugins = [
 
 const prodPlugins = [
   new webpack.optimize.UglifyJsPlugin({
-    mangle: {
-      keep_fnames: true,
-    },
     compress: {
       warnings: false,
     },
@@ -44,17 +41,11 @@ const plugins = basePlugins
 
 module.exports = {
   entry: {
-    app: "./main.ts",
-    vendor: [
-      '@angular/core',
-      '@angular/compiler',
-      '@angular/common',
-      '@angular/platform-browser',
-      '@angular/platform-browser-dynamic',
-      'core-js',
-      "zone.js",
-      "reflect-metadata"
-    ]
+    globals: [
+      'zone.js',
+      'reflect-metadata'
+    ],
+    app: "./main.ts"
   },
   output: {
     path: __dirname + "/dist",
@@ -64,16 +55,7 @@ module.exports = {
     extensions: [".js", ".ts"]
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: /angular/,
-        exclude: /node_modules/,
-        query: {
-          compact: false,
-        },
-      },
+    loaders: [     
       { test: /.ts$/, loader: "awesome-typescript-loader" },
       { test: /.json$/, loader: "json-loader" },
       { test: /.html$/, loader: "raw" },

@@ -1,8 +1,8 @@
-import { /* Imports */ } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'filesize'})
-export class FilesizePipe implements /* an interface */ {
-  transform(/*arguments*/) : any {
+@Pipe({name: 'formatFileSize'})
+export class FilesizePipe implements PipeTransform {
+  transform() : any {
     return `formatted file size`;
   }
 }

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { CarPricingService } from "./car-pricing.service";
 
 @Component({
-  selector: "car-body",
+  selector: "rio-car-body",
   template: `
   <div class="border p2 bg-blue rounded white">
     <b>Body</b>
