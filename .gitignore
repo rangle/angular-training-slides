@@ -5,3 +5,6 @@
 **/.DS_Store
 .idea
 yarn.lock
+exercises/DI/exercise/app/*.js
+exercises/DI/solution/app/*.js
+exercises/DI/solution/car/*.js

@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node"]
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
