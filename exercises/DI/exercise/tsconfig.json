@@ -1,25 +1,16 @@
 {
-  "compileOnSave": false,
-  "buildOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
+    "module": "es2015",
+    "target": "es5",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "removeComments": false,
     "sourceMap": false,
-    "inlineSourceMap": true,
     "typeRoots": ["./node_modules/@types"],
-    "types": ["node"]
-  },
-  "awesomeTypescriptLoaderOptions": {
-    "useBabel": true,
-    "useCache": false
+    "types": ["core-js", "node"]
   },
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ]
 }

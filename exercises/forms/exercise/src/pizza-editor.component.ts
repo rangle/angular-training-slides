@@ -18,8 +18,7 @@ export class PizzaEditorComponent {
   pizza: Pizza;
   pizzaChange = new EventEmitter();
 
-  constructor(
-  ) {
+  constructor() {
   }
 
   onSubmit() {

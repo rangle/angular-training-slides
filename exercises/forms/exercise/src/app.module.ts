@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { PizzaEditorComponent } from './pizza-editor.component'
 import { AppComponent } from './app.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   declarations: [AppComponent, PizzaEditorComponent],

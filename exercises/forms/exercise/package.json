@@ -16,6 +16,7 @@
   "repository": {},
   "devDependencies": {
     "@types/core-js": "0.9.35",
+    "@types/node": "0.0.2",
     "awesome-typescript-loader": "2.2.1",
     "cross-env": "2.0.1",
     "css-loader": "0.24.0",

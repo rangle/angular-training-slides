@@ -2,10 +2,10 @@ import { Component } from "@angular/core";
 
 
 @Component({
-  selector: "app",
+  selector: "rio-app",
   template: `
   <h1>Components Store</h1>
-  <car></car>`
+  <rio-car></rio-car>`
 })
 export class AppComponent {
   constructor() {
