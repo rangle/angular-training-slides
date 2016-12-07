@@ -132,6 +132,10 @@ export class AppComponent {
 
 `$event` is a special argument with the value emitted by the event (custom or DOM)
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 [View Example](http://plnkr.co/edit/2NwExD?p=preview)
 
 ---
@@ -191,6 +195,10 @@ class AppComponent {
 }
 ```
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 [View Example](http://plnkr.co/edit/nJZQYSV23sCcbb37FzLN?p=preview)
 
 ---
@@ -234,6 +242,10 @@ export class ChildComponent {
   message = 'Child Component';
 }
 ```
+
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
 
 ```ts
 @Component({
@@ -279,6 +291,10 @@ export class AppComponent {
 }
 ```    
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 [View Example](https://plnkr.co/edit/ttVaCf?p=preview)
 
 Notes:
@@ -304,6 +320,10 @@ Notes:
 })
 class AppComponent {}
 ```
+
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
 
 ```ts
 @Component({

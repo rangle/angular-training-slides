@@ -60,6 +60,10 @@ class NgStyleDirective {
 }
 ```
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 The object accepts CSS properties in kebab case or camel case
 
 ```ts
@@ -124,6 +128,10 @@ export class ClassAsStringComponent {
 }
 ```
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 [View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
 
 ---
@@ -142,6 +150,10 @@ Used with an array:
 })
 export class ClassAsStringComponent {}
 ```
+
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
 
 Or using an array property
 
@@ -269,6 +281,10 @@ export class AppComponent {
 }
 ```
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 [View Example](https://plnkr.co/edit/vtYGE5LosH5Rs4L7PMmM?p=preview)
 
 ---
@@ -330,6 +346,9 @@ export class AppComponent {
   isSelected(num: number): boolean { return this.tab === num; }
 }
 ```
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 30px; width: 30px;"/>
+
++++
 
 [View Example](https://plnkr.co/edit/MEG6RBlrF82kWNYxwFlk?p=preview)
 

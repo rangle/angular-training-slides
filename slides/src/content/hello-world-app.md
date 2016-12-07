@@ -138,6 +138,10 @@ export class WidgetComponent { ... }
 <rio-widget></rio-widget>
 ```
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 - `template`: The user facing side of the component
   - Usually HTML but it can be other language depending on the platform
 - `styles`: An array of styles to apply to the template
@@ -156,6 +160,10 @@ export class WidgetComponent { ... }
 ```ts
 selector: 'rio-widget' // rio = Rangle.io
 ```
+
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
 
 - We can use backticks to define multiline templates and styles
 
@@ -319,6 +327,10 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 })
 ```
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 ```ts
 // SystemJS & Angular CLI & AoT style
 @Component({
@@ -374,6 +386,10 @@ src
   template: '<p>The header</p>'
 })
 ```
+
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
 
 ```ts
 @Component({

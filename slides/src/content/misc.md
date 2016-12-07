@@ -53,6 +53,10 @@ Chaining pipes:
 
 **Built-in pipes:** `async`, `decimal`, `json`, `slice`, `currency`, `i18nplural`, `lowercase`, `uppercase`, `date`, `i18nselect`, `percent`
 
+<img src="content/images/down_arrow_trans.png" alt="down-arrow" style="height: 50px; width: 50px;"/>
+
++++
+
 [View Example](https://plnkr.co/edit/p89vQtCkr51Turd3R2pM?p=preview)
 
 Notes: 
