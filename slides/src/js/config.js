@@ -9,6 +9,7 @@ Reveal.initialize({
   width: '100%',
   height: '100%',
   margin: 0.05,
+  maxScale: .9,
   dependencies: [
     // Cross-browser shim that fully implements classList
     { 
