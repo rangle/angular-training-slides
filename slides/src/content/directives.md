@@ -47,17 +47,13 @@ export class StyleExampleComponent {
 Directive with a property selector `[ngStyle]`
 
 ```ts
-@Directive({
-  selector: [ngStyle]
-})
+@Directive({ selector: [ngStyle] })
 ```
 
 It has an input property called `ngStyle` which expects an object
 
 ```ts
-class NgStyleDirective {
-  @Input() ngStyle: SomeShape;
-}
+class NgStyleDirective { @Input() ngStyle: SomeShape; }
 ```
 
 The object accepts CSS properties in kebab case or camel case
@@ -103,8 +99,7 @@ Resulting class attribute:
 Used with a string:
 
 ```ts
-@Component({
-  selector: 'class-as-string',
+@Component({ selector: 'class-as-string', 
   template: '<p ngClass="centered-text underlined" class="orange"></p>',
   styles: [ ... ]
 })
@@ -114,8 +109,7 @@ export class ClassAsStringComponent {}
 Or using a string property
 
 ```ts
-@Component({
-  selector: 'class-as-string',
+@Component({ selector: 'class-as-string',
   template: '<p [ngClass]="classes" class="orange"></p>',
   styles: [ ... ]
 })
@@ -133,11 +127,8 @@ export class ClassAsStringComponent {
 Used with an array:
 
 ```ts
-@Component({
-  selector: 'class-as-string',
-  template: `
-    <p [ngClass]="['centered-text', 'underlined']" class="orange"></p>
-  `,
+@Component({ selector: 'class-as-string', 
+  template: '<p [ngClass]="['centered-text', 'underlined']" class="orange"></p>',
   styles: [ ... ]
 })
 export class ClassAsStringComponent {}
@@ -146,8 +137,7 @@ export class ClassAsStringComponent {}
 Or using an array property
 
 ```ts
-@Component({
-  selector: 'class-as-string',
+@Component({ selector: 'class-as-string', 
   template: '<p [ngClass]="classes" class="orange"></p>',
   styles: [ ... ]
 })
@@ -246,9 +236,8 @@ export class AppComponent {
 
 ## `NgFor` Directive
 
-- Mechanism to define multiple chunks of UI at once based on an iterable
+- Mechanism to define multiple chunks of UI at once based on an iterable using a `for...of` statement
 - The internal variable of the iteration (`item`) is scoped in the template
-- Similar syntax of a `for...of` statement
 
 ```html
 <ol>
@@ -263,8 +252,7 @@ export class AppComponent {
 @Component({ ... })
 export class AppComponent {
   list = [
-    { id: 0, value: 'zero the hero' },
-    // ... more objects
+    { id: 0, value: 'zero the hero' }, // ... more objects
   ];
 }
 ```
@@ -306,7 +294,6 @@ Notes:
 
 ## `NgSwitch` Directive
 
-- Very similar to a switch statement
 - Multiple components can be matched using `ngSwitchCase`
 - Since components are created or destroyed be aware of the costs in doing so.
 
