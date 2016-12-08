@@ -183,9 +183,7 @@ export class CounterComponent {
 The parent component can use now the _banana in a box_ syntax
 
 ```ts
-@Component({
-  template:'<counter [(count)]="myNumber"></counter>'
-})
+@Component({ template:'<counter [(count)]="myNumber"></counter>' })
 class AppComponent {
   myNumber = 0;
 }
@@ -226,19 +224,14 @@ export class AppComponent {
 We can create references to components and access public properties/methods
 
 ```ts
-@Component({
-  selector: 'rio-child',
-  template: '<span>{{ message }}</span>'
-})
+@Component({ selector: 'rio-child', template: '<span>{{ message }}</span>' })
 export class ChildComponent {
   message = 'Child Component';
 }
 ```
 
 ```ts
-@Component({
-  selector: 'rio-app',
-  template: `
+@Component({ selector: 'rio-app', template: `
     <rio-child #child></rio-child>
     <button (click)="getPublicProperty(child)">Get Component</button>
     <p>Value: {{ publicProperty }}</p>`
@@ -261,9 +254,7 @@ export class AppComponent {
 - To create a reference of the enhanced component, we need to know the value of the property `exportedAs` of the directive
 
 ```ts
-@Component({
-  selector: 'rio-app',
-  template: `
+@Component({ selector: 'rio-app', template: `
     <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
       <label for="name">Name</label>
       <input name="name" id="name" ngModel>
@@ -295,9 +286,7 @@ Notes:
 - We need to use the built-in component `<ng-content>` to inform the component where to render the projected content
 
 ```ts
-@Component({
-  selector: 'rio-app',
-  template: `
+@Component({ selector: 'rio-app', template: `
     <rio-child>
       <p>Projected content</p>
     </rio-child>`
@@ -306,9 +295,7 @@ class AppComponent {}
 ```
 
 ```ts
-@Component({
-  selector: 'rio-child',
-  template: `
+@Component({ selector: 'rio-child', template: `
     <h4>Child Component</h4>
     <ng-content></ng-content>`
 })

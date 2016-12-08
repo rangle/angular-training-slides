@@ -118,7 +118,12 @@ $selectionColor: #fff;
     color: rgba(255,255,255,0.9);
     padding: 0.8em;
     margin: 20px auto;
-    line-height: 1.2em;
+    line-height: 1.1em;
+  }
+
+  // To help for large slides
+  .smaller-font {
+    font-size: 26px;
   }
 
   pre {

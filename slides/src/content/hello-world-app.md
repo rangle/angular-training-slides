@@ -302,8 +302,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ## Multiple Ways to Define a Component
 
 ```ts
-// Inline style
-@Component({
+@Component({ // Inline style
   selector: 'rio-app',
   styles: ['p { color: red }'],
   template: '<p>Hello</p>'
@@ -311,8 +310,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 ```ts
-// Webpack style
-@Component({
+@Component({ // Webpack style
   selector: 'rio-app',
   styles: [require('./app.component.css')],
   template: require('./app.component.html')
@@ -320,8 +318,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 ```ts
-// SystemJS & Angular CLI & AoT style
-@Component({
+@Component({ // SystemJS & Angular CLI & AoT style
   selector: 'rio-app',
   styleUrls: ['app.component.css'],
   templateUrl: 'app.component.html'
@@ -361,8 +358,7 @@ src
 
 ```ts
 @Component({
-  selector: 'rio-root',
-  template: `
+  selector: 'rio-root', template: `
     <rio-header></rio-header>
     <rio-body></rio-body>`
 })
@@ -370,22 +366,19 @@ src
 
 ```ts
 @Component({
-  selector: 'rio-header',
-  template: '<p>The header</p>'
+  selector: 'rio-header', template: '<p>The header</p>'
 })
 ```
 
 ```ts
 @Component({
-  selector: 'rio-body',
-  template: '<rio-message></rio-message>'
+  selector: 'rio-body', template: '<rio-message></rio-message>'
 })
 ```
 
 ```ts
 @Component({
-  selector: 'rio-message',
-  template: '<p>The Message</p>'
+  selector: 'rio-message', template: '<p>The Message</p>'
 })
 ```
 
