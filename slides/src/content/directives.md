@@ -236,9 +236,8 @@ export class AppComponent {
 
 ## `NgFor` Directive
 
-- Mechanism to define multiple chunks of UI at once based on an iterable <!-- .element: class="smaller-font" -->
-- The internal variable of the iteration <!-- .element: class="smaller-font" --> (`item`) is scoped in the template <!-- .element: class="smaller-font" -->
-- Similar syntax of a <!-- .element: class="smaller-font" --> `for...of` statement <!-- .element: class="smaller-font" -->
+- Mechanism to define multiple chunks of UI at once based on an iterable using a `for...of` statement
+- The internal variable of the iteration (`item`) is scoped in the template
 
 ```html
 <ol>
@@ -295,9 +294,8 @@ Notes:
 
 ## `NgSwitch` Directive
 
-- Very similar to a switch statement <!-- .element: class="smaller-font" -->
-- Multiple components can be matched using <!-- .element: class="smaller-font" --> `ngSwitchCase`
-- Since components are created or destroyed be aware of the costs in doing so. <!-- .element: class="smaller-font" -->
+- Multiple components can be matched using `ngSwitchCase`
+- Since components are created or destroyed be aware of the costs in doing so.
 
 ```html
 <div class="tabs-selection">
