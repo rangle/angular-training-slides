@@ -1,107 +1,115 @@
-# Services and Dependency Injection (DI)
+# Services
 
 ---
 
-## Angular 2 Services
+## What is a Service?
 
-- A service is a re-usable piece of functionality shared across the app
-- Services are consumed by other Angular2 elements (components, directives, pipes or other services)
-- They are provided to these elements through Dependency Injection
-- Services are singletons
-
----
-
-## When to Use Services
-
-- Keep components simple and let services do the heavy lifting
-- IO operations belong in services (server communication, localstorage)
-- Can be used to handle application state (though Redux is more robust)
-
----
-
-## Angular 2 Dependency Injection
-
-- Dependency injection (DI) is a programming pattern that simplifies dependency management
-- Dependencies are provided to dependent elements which use them
-- In Angular, DI is used to provide services to components and other elements
-
----
-
-## Creating a Service
-
-- Services are regular classes with the `@Injectable()` decorator
-- Allows us to use the class with Dependency Injection
+- A service is a re-usable piece of functionality that can be shared across an app
+- A service is just a class decorated with `@Injectable`
 
 ```ts
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AuthService {
-  login(): void {
-    // Request and return data from the server
-  }
-}
+export class MyService { /* ... */ }
+```
+
+- Services need to be register in a module
+
+```ts
+@NgModule({
+  providers: [ MyService ]
+})
+export class AppModule {}
 ```
 
 ---
 
-## Registering a Service
+## Consuming a Service
 
-Once created, the service must be provided to the app
+- A service can be used by components, directives, pipes or other services
 
 ```ts
-import ...
-import { AuthService } from '../services/analytics';
+@Component({ /* ... */ })
+export class MyComponent {
+  constructor(private myService: MyService) {}
+}
+```
+
+```ts
+@Injectable()
+export class OtherService {
+  constructor(private myService: MyService) {}
+}
+```
+
+- Services are provided as singletons by the Dependency Injection (DI) system
+
+---
+
+## When to Use a Service
+
+- To communicate with a REST server
+
+```ts
+@Injectable()
+export class PostService {
+  constructor(private http: Http) {}
+  getList() { /* ...some ajax call... */ }
+}
+```
+
+- To communicate with any browser specific API (localstorage, cookie, etc.)
+
+```ts
+@Injectable()
+export class LocalStorageService {
+  get(key) { window.localstorage.getItem(key) }
+  set(key, value) { window.localstorage.setItem(key, value) }
+}
+```
+
+- To handle the application state
+- To define business logic
+
+---
+
+## The Built-in `Http` Service
+
+Service provided by Angular to perform REST operations
+
+```ts
+@Injectable()
+export class PostService {
+  constructor(private http: Http){}
+
+  getList(): Observable<Post[]> {
+    return this.http
+      .get('https://jsonplaceholder.typicode.com/posts')
+      .map(posts => posts.json());
+  }
+}
+```
+
+- It has one method for every HTTP verb: `get`, `post`, `put`, etc.
+- Every mehod returns an observable that emit a single value
+- Connections are closed automatically after the value is emitted
+
+---
+
+## Importing the Http module
+
+To be able to use the `Http` service we need to import the `HttpModule`
+
+```ts
+import { HttpModule } from '@angular/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
+  imports: [
+    BrowserModule,
+    HttpModule
   ],
-  providers: [
-    AuthService
-  ],
-  bootstrap: [
-    AppComponent 
-  ],
-}) 
-```
-
----
-
-## Consuming a Service in a Component (1/2)
-
-- Components that rely on a service should define a private property in the constructor with the service assigned as the value
-- This tells Angular to provide an instance of `AuthService` when it sets up this component.
-
-```ts
-@Component({
-  selector: 'rio-login',
-  template: `<button type="button">Login</button>`
+  /* ... */
 })
-export class LoginComponent {
-  constructor(private authService: AuthService) {}
-}
-```
-
----
-
-## Consuming a Service in a Component (2/2)
-
-Once the service has been made available to the component, we can use its methods.
-
-```ts
-@Component({
-  selector: 'rio-login',
-  template: `
-    <button type="button" (click)="onLogin()">Login</button>
-  `
-})
-export class LoginComponent {
-  constructor(private authService: AuthService) {}
-  
-  onLogin(): void {
-    this.authService.login();
-  }
-}
+export class AppModule {}
 ```
