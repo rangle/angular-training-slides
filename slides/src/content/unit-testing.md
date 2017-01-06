@@ -155,10 +155,10 @@ We can then create a `fixture` to use in our tests, which will let us query the 
 How would we test this component?
 
 ```ts
-export class QuoteComponent {
+export class AppComponent {
   quote: string;
 
-  constructor(private quoteService: QuoteService){};
+  constructor(private quoteService: QuoteService) {};
 
   getQuote() {
     this.quoteService.getQuote().then((quote) => {
@@ -179,8 +179,9 @@ This is what a normal module might look like:
 ```ts
 @NgModule({
   imports: [ BrowserModule ],
-  declarations: [ QuoteComponent ],
+  declarations: [ AppComponent ],
   providers: [ QuoteService ],
+  bootstrap: [ AppComponent ]
 })
 export class QuoteModule {}
 ```
@@ -194,18 +195,17 @@ The following creates and configures a `TestBed` module.
 It also defines `fixture` as a test component.
 
 ```ts
-let fixture;
+let fixture: ComponentFixture<AppComponent>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    declarations: [
-      QuoteComponent
-    ],
+    declarations: [ AppComponent ],
     providers: [
       { provide: QuoteService, useClass: MockQuoteService }
     ]
   });
-  fixture = TestBed.createComponent(QuoteComponent);
+  
+  fixture = TestBed.createComponent(AppComponent);
   fixture.detectChanges();
 });
 ```
@@ -218,18 +218,17 @@ beforeEach(() => {
 - Can also change component properties and detect changes
 
 ```ts
-it('Should get quote', async(inject([], () => {
-    fixture.componentInstance.getQuote();
-    fixture.whenStable()
+it('Should render the mocked response in its template', async(() => {
+  fixture.componentInstance.getQuote();
+
+  fixture.whenStable()
     .then(() => {
       fixture.detectChanges();
-      return fixture.whenStable();
-    })
-    .then(() => {
-      const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('div').innerText).toEqual('Test quote');
+      let de = fixture.debugElement.query(By.css('div'));
+
+      expect(de.nativeElement.textContent).toBe('Test quote')
     });
-})));
+}));
 ```
 
 ---
@@ -242,8 +241,7 @@ it('Should get quote', async(inject([], () => {
 - `detectChanges` to run change detection
 - `debugElement` to access underlying DOM elements
 
-
-[View Example](http://plnkr.co/edit/7KZu1Yg6kBX7rksrpRHV?p=preview)
+[View Example](https://plnkr.co/edit/TrwmTD1Y3NTq3PZGFHx6?p=preview)
 
 ---
 
@@ -274,7 +272,7 @@ Suppose we want to override a component's template for testing:
   `
 })
 export class MessageComponent {
-  public message: string = '';
+  public message = '';
 
   setMessage(newMessage: string) {
       this.message = newMessage;
