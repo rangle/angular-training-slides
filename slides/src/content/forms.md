@@ -5,62 +5,58 @@
 ## Forms in Angular 2
 
 Angular 2 has two approaches to forms:
-- **Template Driven Forms:** For simple forms and rapid prototyping
-- **Model Driven Forms:** For complex validation and subforms
 
----
-
-## Enabling Forms 
-
-To enable Angular 2 form directives and services you need to import the right form modules.
-- `FormModules` should be used for template driven forms
-- `ReactiveFormsModule` should be used for model-driven forms
+- **Template Driven Forms:** Controls & validation rules are define in the template with directives
 
 ```ts
 @NgModule({
-  imports: [
-    BrowserModule, 
-    FormsModule, // template driven forms
-    ReactiveFormsModule // model driven forms
-  ],
-  ...
+  imports: [ FormsModule, ... ]
 })
-export class AppModule {}
 ```
+
+- **Model Driven Forms:** Controls & validation rules are define in the class with the `FormBuilder` service
+
+```ts
+@NgModule({
+  imports: [ ReactiveFormsModule, ... ]
+})
+```
+
+- Both modules are available in the package `@angular/forms`
+- Both modules can be imported if both approaches are used
 
 ---
 
-## Template Driven Forms (1/2)
+## Creating a Template Driven Form
 
-Uses Angular 2 directives to handle forms using a markup-oriented approach
+Uses Angular directives to handle forms using a markup-oriented approach
 
 ```html
 <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
   <label>
-    First Name: <input type="text" name="firstName" ngModel>
+    First Name: <input name="firstName" ngModel>
   </label>
   <label>
-    Last Name: <input type="text" name="lastName" ngModel>
+    Last Name: <input name="lastName" ngModel>
   </label>
   <button type="submit">Sign Up</button>
 </form>
 ```
 
 - Every `<form>` element is automatically enhanced by the `NgForm` directive
-- `signupForm` is a template variable that holds a reference to the enhanced `<form>` element
+- `signupForm` is a template variable that holds a reference to the `NgFor` directive instance
 - `ngSubmit` is a built-in event called whenever the form is submitted
 - `ngModel` turns a form field into a `FormControl` using the element `name` property
 
 ---
 
-## Template Driven Forms (2/2)
+## Inspecting a Form
 
-- In the component submission method we can access `signupForm.value` to get all values from the form
-- Can also use `signupForm.valid` which will always be `true` without validation rules
+`NgForm` provides properties to get information from the form like `value` and `valid`
 
 ```ts
 @Component({ ... })
-export class SignupFormComponent {
+export class SignupComponent {
   ...
   registerUser (signupForm: NgForm) {
     console.log(signupForm.value); // => { firstName: '', lastName: '' }
@@ -69,13 +65,16 @@ export class SignupFormComponent {
 }
 ```
 
+- A form with no validations rules is always valid by default
+- To see al the properties available visit the [docs](https://angular.io/docs/ts/latest/api/forms/index/AbstractControlDirective-class.html)
+
 [View Example](https://plnkr.co/edit/SmX18R1BhjJz9E33yROT?p=preview)
 
 ---
 
 ## Nesting Form Data (1/2)
 
-- `form.value` returns a flat object by default, which is not always what we want
+- `signupForm.value` returns a flat object by default, which is not always what we want
 - `NgModelGroup` lets you go from:
 
 ```json
@@ -106,10 +105,10 @@ to:
 <form #myForm="ngForm">
   <fieldset ngModelGroup="contact">
     <label>
-      First Name: <input type="text" name="firstName" ngModel>
+      First Name: <input name="firstName" ngModel>
     </label>
     <label>
-      Last Name: <input type="text" name="lastName" ngModel>
+      Last Name: <input name="lastName" ngModel>
     </label>
   </fieldset>
 </form>
@@ -131,13 +130,13 @@ export class SignupComponent {
 ```
 
 ```html
-<input type="text" name="firstName" [ngModel]="firstName"> <!-- "Farah" -->
+<input name="firstName" [ngModel]="firstName"> <!-- "Farah" -->
 ```
 
-Two way data binding (banana-in-a-box - `[()]`) will keep the model up to date as the user types.
+Two way data binding will keep the model up to date as the user types.
 
 ```html
-<input type="text" name="firstName" [(ngModel)]="firstName">
+<input name="firstName" [(ngModel)]="firstName">
 
 ```
 
@@ -167,16 +166,16 @@ When using template driven forms we are constrained to only use the 4 built-in v
 
 ```html
 <!-- a required field -->
-<input type="text" required>
+<input required>
 
 <!-- alphanumeric field of specific length -->
-<input type="text" pattern="[A-Za-z0-9]{0,5}">
+<input pattern="[A-Za-z0-9]{0,5}">
 
 <!-- more than 3 characters required -->
-<input type="text" minlength="3">
+<input minlength="3">
 
 <!-- prevents more than 5 characters -->
-<input type="text" maxlength="5">
+<input maxlength="5">
 ```
 
 - `pattern` is a less-powerful version of JavaScript's RegExp syntax
