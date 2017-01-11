@@ -146,17 +146,21 @@ Two way data binding will keep the model up to date as the user types.
 
 ## `FormControl` Properties and Methods
 
-Properties: 
+- Validation can be performed creating 
+- Form controls are instances of `FormControl`
+- We 
 
 - `value`: Returns the value
 - `valid`: Returns field validity (boolean)
 - `pristine`: Indicates if it had changed from default view (boolean)
 - `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
 
-Methods: 
-
-- `setValue()`: Allows setting the control value
-- `reset()`: Allows resetting the control value
+```html
+First Name: <input name="firstName" ngModel required #firstName>
+<p *ngIf="firstName.touched && !firstName.valid">
+  This field is required
+</p>
+```
 
 ---
 
