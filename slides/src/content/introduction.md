@@ -24,11 +24,9 @@
 1. Creating a hello world application
 1. Components In Depth
 1. Directives
-1. Services and Dependency Injection
+1. Pipes
+1. Services
 1. Miscellaneous Topics
- - Component Lifecycle
- - Change Detection
- - Pipes
 1. Forms
 1. Routing
 1. Unit Testing
