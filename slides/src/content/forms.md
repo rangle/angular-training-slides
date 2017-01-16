@@ -5,62 +5,62 @@
 ## Forms in Angular 2
 
 Angular 2 has two approaches to forms:
-- **Template Driven Forms:** For simple forms and rapid prototyping
-- **Model Driven Forms:** For complex validation and subforms
 
----
-
-## Enabling Forms 
-
-To enable Angular 2 form directives and services you need to import the right form modules.
-- `FormModules` should be used for template driven forms
-- `ReactiveFormsModule` should be used for model-driven forms
+- **Template Driven Forms:** Controls & validation rules are define in the template with directives
 
 ```ts
 @NgModule({
-  imports: [
-    BrowserModule, 
-    FormsModule, // template driven forms
-    ReactiveFormsModule // model driven forms
-  ],
-  ...
+  imports: [ FormsModule, ... ]
 })
-export class AppModule {}
 ```
+
+- **Model Driven Forms:** Controls & validation rules are define in the class with the `FormBuilder` service
+
+```ts
+@NgModule({
+  imports: [ ReactiveFormsModule, ... ]
+})
+```
+
+- Both modules are available in the package `@angular/forms`
+- Both modules can be imported if both approaches are used
 
 ---
 
-## Template Driven Forms (1/2)
+# Template Driven Forms
 
-Uses Angular 2 directives to handle forms using a markup-oriented approach
+---
+
+## Creating a Template Driven Form
+
+Uses Angular directives to handle forms using a markup-oriented approach
 
 ```html
 <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
   <label>
-    First Name: <input type="text" name="firstName" ngModel>
+    First Name: <input name="firstName" ngModel>
   </label>
   <label>
-    Last Name: <input type="text" name="lastName" ngModel>
+    Last Name: <input name="lastName" ngModel>
   </label>
   <button type="submit">Sign Up</button>
 </form>
 ```
 
 - Every `<form>` element is automatically enhanced by the `NgForm` directive
-- `signupForm` is a template variable that holds a reference to the enhanced `<form>` element
+- `signupForm` is a template variable that holds a reference to the `NgFor` directive instance
 - `ngSubmit` is a built-in event called whenever the form is submitted
 - `ngModel` turns a form field into a `FormControl` using the element `name` property
 
 ---
 
-## Template Driven Forms (2/2)
+## Inspecting a Form
 
-- In the component submission method we can access `signupForm.value` to get all values from the form
-- Can also use `signupForm.valid` which will always be `true` without validation rules
+`NgForm` provides properties to get information from the form like `value` and `valid`
 
 ```ts
 @Component({ ... })
-export class SignupFormComponent {
+export class SignupComponent {
   ...
   registerUser (signupForm: NgForm) {
     console.log(signupForm.value); // => { firstName: '', lastName: '' }
@@ -69,13 +69,16 @@ export class SignupFormComponent {
 }
 ```
 
+- A form with no validations rules is always valid by default
+- To see al the properties available visit the [docs](https://angular.io/docs/ts/latest/api/forms/index/AbstractControlDirective-class.html)
+
 [View Example](https://plnkr.co/edit/SmX18R1BhjJz9E33yROT?p=preview)
 
 ---
 
 ## Nesting Form Data (1/2)
 
-- `form.value` returns a flat object by default, which is not always what we want
+- `signupForm.value` returns a flat object by default, which is not always what we want
 - `NgModelGroup` lets you go from:
 
 ```json
@@ -106,10 +109,10 @@ to:
 <form #myForm="ngForm">
   <fieldset ngModelGroup="contact">
     <label>
-      First Name: <input type="text" name="firstName" ngModel>
+      First Name: <input name="firstName" ngModel>
     </label>
     <label>
-      Last Name: <input type="text" name="lastName" ngModel>
+      Last Name: <input name="lastName" ngModel>
     </label>
   </fieldset>
 </form>
@@ -131,13 +134,13 @@ export class SignupComponent {
 ```
 
 ```html
-<input type="text" name="firstName" [ngModel]="firstName"> <!-- "Farah" -->
+<input name="firstName" [ngModel]="firstName">
 ```
 
-Two way data binding (banana-in-a-box - `[()]`) will keep the model up to date as the user types.
+Two way data binding will keep the model up to date as the user types.
 
 ```html
-<input type="text" name="firstName" [(ngModel)]="firstName">
+<input name="firstName" [(ngModel)]="firstName">
 
 ```
 
@@ -145,38 +148,22 @@ Two way data binding (banana-in-a-box - `[()]`) will keep the model up to date a
 
 ---
 
-## `FormControl` Properties and Methods
+## Built-in Validators
 
-Properties: 
-
-- `value`: Returns the value
-- `valid`: Returns field validity (boolean)
-- `pristine`: Indicates if it had changed from default view (boolean)
-- `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
-
-Methods: 
-
-- `setValue()`: Allows setting the control value
-- `reset()`: Allows resetting the control value
-
----
-
-## Validating Template Driven Forms
-
-When using template driven forms we are constrained to only use the 4 built-in validations: `required`, `pattern`, `minlength` and `maxlength`.
+When using template driven forms we can use 4 built-in validators: `required`, `pattern`, `minlength` and `maxlength`.
 
 ```html
 <!-- a required field -->
-<input type="text" required>
+<input required>
 
 <!-- alphanumeric field of specific length -->
-<input type="text" pattern="[A-Za-z0-9]{0,5}">
+<input pattern="[A-Za-z0-9]{0,5}">
 
 <!-- more than 3 characters required -->
-<input type="text" minlength="3">
+<input minlength="3">
 
 <!-- prevents more than 5 characters -->
-<input type="text" maxlength="5">
+<input maxlength="5">
 ```
 
 - `pattern` is a less-powerful version of JavaScript's RegExp syntax
@@ -184,125 +171,37 @@ When using template driven forms we are constrained to only use the 4 built-in v
 
 ---
 
-## Model Driven Forms 
+## Validation Example
 
-- Declared programmatically rather than through the template
-- Much more validation control and flexibility
-- Ability to use custom validators
-
----
-
-## Creating a Model Driven Form (1/2)
-
-- `FormControl` tracks the value, state and validity of a form control. 
-- New `FormControl`s require two arguments: an initial value and a list of validators
-- `FormGroup` tracks the group and validity state of a group of FormControls
-- `FormBuilder` can be used to create `FormGroup`s and `FormControl`s for us
+To perform validation, we need to create template variables for every field `#field="ngModel"`
 
 ```ts
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-
-@Component({ ... })
-export class SignupComponent {
-
-  constructor (builder: FormBuilder) {
-    this.signupForm = builder.group({ 
-      firstName: new FormControl('initialValue', []);
-    });
-  }
-}
-  
-```
-
-[View Example](https://plnkr.co/edit/BykFlj885JG1NkIq2nLr?p=preview)
-
----
-
-## Creating a Model Driven Form (2/2)
-
-- Once declared in our component, we need to provide our form to the template
-- Use the `[formControl]` input to specify the correct `FormControl`
-
-```html
-  <form [formGroup]="signupForm" (ngSubmit)="registerUser()">
-    <input type="text"
-      name="firstName" [formControl]="firstName">
-  </form>
-```
-
----
-
-## Validating `FormBuilder` Forms
-
-- Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
-- Validators produce errors which can be checked calling `hasError` on the `FormControl` and providing the name of the validator
-
-```ts
-import { Validators, FormControl } from '@angular/forms';
-...
-@Component({ ... })
-export class AppComponent {
-  firstName = new FormControl('', [Validators.minLength(5)]);
-}
-```
-```html
-<label> First Name
-  <input type="text" name="firstName" [formControl]="firstName">
+<label>
+  Username:
+  <input name="username" ngModel #username="ngModel" required />
 </label>
-<div [hidden]="firstName.valid || firstName.untouched">
-  <div [hidden]="!firstName.hasError('minlength')">
-    First Name can not be shorter than 5 characters.</div>
-</div>
+<ul class="errors" [hidden]="username.valid || username.untouched">
+  <li [hidden]="!username.hasError('required')">
+    The username is required
+  </li>
+</ul>
 ```
 
-[View Example](https://plnkr.co/edit/kr8Q41?p=preview)
+Template variables are instances of `NgModel` but they share some properties from `FormControl`:
+
+- `value`: Returns the value
+- `valid`: Returns field validity (boolean)
+- `pristine`: Indicates if it had changed from default view (boolean)
+- `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
+
+[View Example](https://plnkr.co/edit/bWdmou8gdyqhqsu8jGtI?p=preview)
 
 ---
 
-## Custom Validators
+## Visual Cues
 
-- Custom validators can also be provided to `FormControl`s
-- Return `null` if the field is valid and `validatorName: true` when false
-
-```ts
-import {FormControl} from '@angular/form';
-
-export class CustomValidators {
-  static emailFormat(ctrl: FormControl): [[key: string]: boolean] {
-    let pattern: RegExp = /\S+@\S+\.\S+/;
-    return pattern.test(ctrl.value) ? null : { emailFormat: true };
-  }
-}
-```
-
----
-
-## Custom Validators (2/2)
-
-- Access using `email.hasError('emailFormat')` in the template
-
-```ts
-import {CustomValidators} from './custom-validators';
-// ...
-this.email = new FormControl('', [CustomValidators.emailFormat]);
-```
-```html
-<label> Email
-  <input type="text" name="email" [formControl]="email">
-</label>
-<div [hidden]="email.valid || email.untouched">
-  <div [hidden]="!email.hasError('emailFormat')">
-    Invalid email format.</div>
-</div>
-```
-
-[View Example](https://plnkr.co/edit/UqQtxj?p=preview)
-
----
-
-## Visual Validation Cues for Users
-
-Angular will automatically add classes to form controls based on their status
+- Angular will automatically add classes to form controls based on their status
+- We can use those classes to define visual cues for the user with CSS
 
 ```css
 .ng-valid {}
@@ -314,16 +213,161 @@ Angular will automatically add classes to form controls based on their status
 .ng-pristine {} /* unchanged from default value */
 .ng-dirty {} /* different from default value */
 
-/* typical pairings */
-.ng-pristine.ng-untouched {}
-.ng-touched.ng-invalid {}
+.ng-touched.ng-invalid {} /* typical pairings */
 ```
 
-You can also access equivalent properties on `FormControl`s
-```html
-<input name="myInput" [formControl]="myCustomInput">
-<div [hidden]="myCustomInput.pristine">I've been changed</div>
+[View Example](https://plnkr.co/edit/dA0RTZhUgLmDX47vJ3XQ?p=preview)
+
+---
+
+# Model Driven Forms 
+
+---
+
+## Creating Model Driven Forms 
+
+Form declared programmatically using the `FormBuilder` service
+
+```ts
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
+@Component({ ... })
+export class SignupComponent {
+  signupForm: FormGroup;
+  firstName: FormControl;
+
+  constructor (builder: FormBuilder) {
+    this.firstName = new FormControl('', []);
+
+    this.signupForm = builder.group({ 
+      firstName: this.firstName;
+    });
+  }
+}  
 ```
+
+- `FormControl` tracks the value, state and validity of a form control
+- `FormGroup` tracks the group and validity state of a group of FormControls
+- `FormBuilder` can be used to create `FormGroup`s and `FormControl`s for us
+
+---
+
+## Connecting the Model with the Template
+
+- Once declared in our component, we need to provide our form to the template
+- Use the `FormGroup` directive to assign the `formGroup` instance to the template
+- Use the `FormControl` directive to assign a `formControl` instance to the template
+
+```html
+  <form [formGroup]="signupForm" (ngSubmit)="registerUser()">
+    <label>
+      First Name:
+      <input name="firstName" [formControl]="firstName">
+    </label>
+  </form>
+```
+
+---
+
+## Validating `FormBuilder` Forms
+
+- Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
+- Validators produce errors which can be checked calling `hasError` on the `FormControl`
+
+```ts
+import { Validators, FormControl } from '@angular/forms';
+
+@Component({ ... })
+export class SignupComponent {
+  constructor( ... ) {
+    this.firstName = new FormControl('', [Validators.minLength(5)]);
+    ...
+  }  
+}
+```
+
+```html
+<li [hidden]="!firstName.hasError('minlength')">
+  First Name can not be shorter than 5 characters
+</li>
+```
+
+[View Example](https://plnkr.co/edit/m8cTaN?p=preview)
+
+---
+
+## Creating Custom Validators
+
+- Custom validators can also be provided to `FormControl`s
+- Return `null` if the field is valid or `{ validatorName: true }` when invalid
+
+```ts
+import { FormControl } from '@angular/form';
+
+export class CustomValidators {
+  static emailFormat(ctrl: FormControl) {
+    let pattern: RegExp = /\S+@\S+\.\S+/;
+    return pattern.test(ctrl.value) ? null : { emailFormat: true };
+  }
+}
+```
+
+Note: Validators can also be define as plain functions
+
+---
+
+## Checking a Custom Validator
+
+- Validate a field using `email.hasError('emailFormat')` in the template
+
+```ts
+import { CustomValidators } from './custom-validators';
+
+@Component({ ... })
+export class SignupComponent {
+  constructor( ... ) {
+    this.email = new FormControl('', [ CustomValidators.emailFormat ]);
+    ...
+  }  
+}
+```
+
+```html
+<li [hidden]="!email.hasError('emailFormat')">
+  Invalid email format
+</li>
+```
+
+[View Example](https://plnkr.co/edit/m6heM7?p=preview)
+
+---
+
+## Getting `FormControl`s from the `FormGroup`
+
+We can avoid creating individual properties for each `FormControl` instance
+
+```ts
+this.signupForm = builder.group({
+  username: new FormControl('', [ Validators.required ])
+});
+```
+
+```html
+<label>
+  Username:
+  <input type="text" name="username"
+    [formControl]="signupForm.get('username')"
+    #username="ngForm">
+</label>
+
+<ul [hidden]="username.valid || username.untouched">
+  <!-- Same as before -->
+</ul>
+```
+
+`ngForm` is the `exported as` property of the `FormControl` [directive](https://angular.io/docs/ts/latest/api/forms/index/FormControlDirective-directive.html)
+
+[View Example](https://plnkr.co/edit/TrVihF?p=preview)
 
 ---
 
