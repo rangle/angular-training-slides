@@ -30,7 +30,9 @@
 1. Forms
 1. Routing
 1. Unit Testing
-
+1. Redux
+ - ng2-redux
+ 
 ---
 
 # Introduction

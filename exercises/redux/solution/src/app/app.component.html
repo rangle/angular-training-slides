@@ -1,0 +1,9 @@
+<div>
+  <label>Passenger Name</label>
+  <input [formControl]="passengerControl"/>
+  <button (click)="addPassenger()">Add</button>
+</div>
+<child
+  [passengers]="passengers$ | async"
+  (onRemovePassenger)="removePassenger($event)">
+</child>
