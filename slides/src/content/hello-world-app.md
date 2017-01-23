@@ -358,7 +358,8 @@ src
 
 ```ts
 @Component({
-  selector: 'rio-root', template: `
+  selector: 'rio-root',
+  template: `
     <rio-header></rio-header>
     <rio-body></rio-body>`
 })

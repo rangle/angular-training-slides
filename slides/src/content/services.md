@@ -97,7 +97,7 @@ export class PostService {
 
 ---
 
-## Importing the Http module
+## Importing the `HttpModule`
 
 To be able to use the `Http` service we need to import the `HttpModule`
 

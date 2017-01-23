@@ -168,7 +168,7 @@ Which is equivalent to:
 ## Two-Way Data Binding Example
 
 ```ts
-@Component({ ... })
+@Component({ selector: 'rio-counter',  ... })
 export class CounterComponent {
   @Input() count: number;
   @Output() countChange = new EventEmitter<number>();
@@ -183,17 +183,18 @@ export class CounterComponent {
 The parent component can use now the _banana in a box_ syntax
 
 ```ts
-@Component({ template:'<counter [(count)]="myNumber"></counter>' })
-class AppComponent {
-  myNumber = 0;
-}
+@Component({ 
+  selector: 'rio-app', 
+  template:'<rio-counter [(count)]="myNumber"></rio-counter>'
+})
+class AppComponent { myNumber = 0 }
 ```
 
 [View Example](http://plnkr.co/edit/nJZQYSV23sCcbb37FzLN?p=preview)
 
 ---
 
-## Template Variables (1/3) - Native DOM
+## Creating a Template Variable from a Native Element
 
 We can create references to native DOM elements in our template using the special syntax `#myReference`
 
@@ -219,7 +220,7 @@ export class AppComponent {
 
 ---
 
-## Template Variables (2/3) - Component
+## Creating a Template Variable from a Component
 
 We can create references to components and access public properties/methods
 
@@ -231,10 +232,11 @@ export class ChildComponent {
 ```
 
 ```ts
-@Component({ selector: 'rio-app', template: `
-    <rio-child #child></rio-child>
-    <button (click)="getPublicProperty(child)">Get Component</button>
-    <p>Value: {{ publicProperty }}</p>`
+@Component({ 
+  selector: 'rio-app',
+  template: `<rio-child #child></rio-child>
+             <button (click)="getPublicProperty(child)">Get Component</button>
+             <p>Value: {{ publicProperty }}</p>`
 })
 export class AppComponent {
   publicProperty = '';
@@ -248,16 +250,18 @@ export class AppComponent {
 
 ---
 
-## Template Variables (3/3) - Directive
+## Creating a Template Variable from a Directive
 
-- Because directives enhance components (or DOM elements), we can create a template variable for the original component or the enhanced one (component + directive)
-- To create a reference of the enhanced component, we need to know the value of the property `exportedAs` of the directive
+- We can create template variables from directives using the `#myVariable="exportedAsValue"` syntax
+- `exportedAs` value is a property that every built-in directive has to create a reference
+- The value of the property `exportedAs` of the directive `NgForm` is `ngForm` ([docs](https://angular.io/docs/ts/latest/api/forms/index/NgForm-directive.html))
 
 ```ts
-@Component({ selector: 'rio-app', template: `
+@Component({ 
+  selector: 'rio-app',
+  template: `
     <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
-      <label for="name">Name</label>
-      <input name="name" id="name" ngModel>
+      <label>Name: <input name="name" ngModel></label>
       <button type="submit">Submit</button>
     </form>
     <pre>{{ values | json }}</pre>`
@@ -283,21 +287,23 @@ Notes:
 
 - Ability to pass HTML to a child component and have it rendered there
 - This was called _transclusion_ in Angular 1
-- We need to use the built-in component `<ng-content>` to inform the component where to render the projected content
+- Use the built-in component `<ng-content>` to define where to render the projected content
 
 ```ts
-@Component({ selector: 'rio-app', template: `
-    <rio-child>
-      <p>Projected content</p>
-    </rio-child>`
+@Component({ 
+  selector: 'rio-app',
+  template: `<rio-child>
+               <p>Projected content</p>
+             </rio-child>`
 })
 class AppComponent {}
 ```
 
 ```ts
-@Component({ selector: 'rio-child', template: `
-    <h4>Child Component</h4>
-    <ng-content></ng-content>`
+@Component({
+  selector: 'rio-child',
+  template: `<h4>Child Component</h4>
+             <ng-content></ng-content>`
 })
 class ChildComponent {}
 ```

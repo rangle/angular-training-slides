@@ -10,8 +10,8 @@
 
 There are two types of directives:
 
-- **Attribute directives:** Changes the behavior of a component whitout affecting its template (`NgClass`, `NgStyle`)
-- **Structural directives:** Changes the behavior of a component by modifying its template (`NgIf`, `NgFor`)
+- **Attribute directives:** Changes behavior without modifying the template (`NgClass`, `NgStyle`)
+- **Structural directives:** Changes behavior by modifying the template (`NgIf`, `NgFor`)
 
 ---
 
@@ -38,7 +38,7 @@ export class StyleExampleComponent {
 }
 ```
 
-[View Example](https://plnkr.co/edit/Vcpt1vDWryaiYcmoQEyC?p=preview)
+[View Example](https://plnkr.co/edit/raYS8ou6AZru8UDc6hJs?p=preview)
 
 ---
 
@@ -257,7 +257,7 @@ export class AppComponent {
 }
 ```
 
-[View Example](https://plnkr.co/edit/vtYGE5LosH5Rs4L7PMmM?p=preview)
+[View Example](https://plnkr.co/edit/KZjbl5CvUvD69aFwNuia?p=preview)
 
 ---
 
@@ -284,7 +284,7 @@ export class AppComponent {
 }
 ```
 
-[View Example](https://plnkr.co/edit/8PcjEr5aOwoVSNe2Gowb?p=preview)
+[View Example](https://plnkr.co/edit/gBIXRypytj7YKnhvN2TS?p=preview)
 
 Notes:
 
