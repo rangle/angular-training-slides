@@ -183,8 +183,8 @@ export class CounterComponent {
 The parent component can use now the _banana in a box_ syntax
 
 ```ts
-@Component({ 
-  selector: 'rio-app', 
+@Component({
+  selector: 'rio-app',
   template:'<rio-counter [(count)]="myNumber"></rio-counter>'
 })
 class AppComponent { myNumber = 0 }
@@ -209,7 +209,7 @@ We can create references to native DOM elements in our template using the specia
 })
 export class AppComponent {
   name = 'N/D';
-  
+
   getInputValue(value: string): void {
     this.name = value;
   }
@@ -232,7 +232,7 @@ export class ChildComponent {
 ```
 
 ```ts
-@Component({ 
+@Component({
   selector: 'rio-app',
   template: `<rio-child #child></rio-child>
              <button (click)="getPublicProperty(child)">Get Component</button>
@@ -257,7 +257,7 @@ export class AppComponent {
 - The value of the property `exportedAs` of the directive `NgForm` is `ngForm` ([docs](https://angular.io/docs/ts/latest/api/forms/index/NgForm-directive.html))
 
 ```ts
-@Component({ 
+@Component({
   selector: 'rio-app',
   template: `
     <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
@@ -283,14 +283,14 @@ Notes:
 
 ---
 
-## Template Projection
+## Template Projection (1/2)
 
 - Ability to pass HTML to a child component and have it rendered there
 - This was called _transclusion_ in Angular 1
 - Use the built-in component `<ng-content>` to define where to render the projected content
 
 ```ts
-@Component({ 
+@Component({
   selector: 'rio-app',
   template: `<rio-child>
                <p>Projected content</p>
@@ -304,6 +304,40 @@ class AppComponent {}
   selector: 'rio-child',
   template: `<h4>Child Component</h4>
              <ng-content></ng-content>`
+})
+class ChildComponent {}
+```
+
+[View Example](http://plnkr.co/edit/oqkyldgOxykReRsffVxZ?p=preview)
+
+---
+
+## Template Projection (2/2)
+
+- Multiple `<ng-content>` components can be used in a template by using the `select` attribute
+- In the template, we can use directives, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
+
+```ts
+@Component({
+  selector: 'rio-app',
+  template: `<rio-child>
+              <header>
+               <p>This is my header content</p>
+              </header>
+              <footer>
+                <p>This is my footer content</p>
+              </footer>
+             </rio-child>`
+})
+class AppComponent {}
+```
+
+```ts
+@Component({
+  selector: 'rio-child',
+  template: `<h4>Child Component</h4>
+             <ng-content select="header"></ng-content>
+             <ng-content select="footer"></ng-content>`
 })
 class ChildComponent {}
 ```
