@@ -38,8 +38,8 @@ In the auto-generated `app.component.spec.ts` remove the existing code
 
 ## Step 4 
 
-Create a first test with `describe()`, `it()`, and `expect()` for the first step (test the return of `getMessage()`).  Note: since this is just testing a method of a class it doesn't require any Angular specific test set-Update
+Create a first test with `describe()`, `it()`, and `expect()` for the first step (test the return of `getMessage()`).  Note: since this is just testing a method of a class it doesn't require any Angular specific test set
 
 ## Step 5
 
-Create a second test with `describe()`, `beforeEach()`, `it()`, `TestBed`, and `expect()` to test the second step (template rendering).  This portion will require some test set-up to work with the Angular component/template, and will require working with the text fixture to test generated html.
+Create a second test with `describe()`, `beforeEach()`, `it()`, `TestBed`, and `expect()` to test the second step (template rendering).  This portion will require some test set-up to work with the Angular component/template, and will require working with the text fixture to find and verify the generated html content.
