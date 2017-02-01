@@ -283,7 +283,7 @@ Notes:
 
 ---
 
-## Template Projection (1/2)
+## Template Projection (1/3)
 
 - Ability to pass HTML to a child component and have it rendered there
 - This was called _transclusion_ in Angular 1
@@ -312,10 +312,10 @@ class ChildComponent {}
 
 ---
 
-## Template Projection (2/2)
+## Template Projection (2/3)
 
-- Multiple `<ng-content>` components can be used in a template by using the `select` attribute
-- In the template, we can use directives, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
+- Multiple `<ng-content>` tags can be used in a template by using the `select` attribute
+- In the template, we can use an HTML tag, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
 
 ```ts
 @Component({
@@ -343,6 +343,41 @@ class ChildComponent {}
 ```
 
 [View Example](https://plnkr.co/edit/kwD3iKLU8mELAoHj2fBv?p=preview)
+
+---
+
+## Template Projection (3/3)
+
+- Besides tags, another option for specifying which `ng-content` tag to use is CSS classes
+- This can be done by setting the value of the `select` attribute to a class selector such as `.header-content`
+- Wrap the desired content in a `<div>` with the matching CSS class to specify content position
+
+```ts
+@Component({
+  selector: 'rio-app',
+  template: `<rio-child>
+              <div class="header-content">
+               <p>This is my header content</p>
+              </div>
+              <div class="footer-content">
+                <p>This is my footer content</p>
+              </div>
+             </rio-child>`
+})
+class AppComponent {}
+```
+
+```ts
+@Component({
+  selector: 'rio-child',
+  template: `<h4>Child Component</h4>
+             <ng-content select=".header-content"></ng-content>
+             <ng-content select=".footer-content"></ng-content>`
+})
+class ChildComponent {}
+```
+
+[View Example](https://plnkr.co/edit/YQTUGbOxhxZ41iKKpTbV?p=preview)
 
 ---
 
