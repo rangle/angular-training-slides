@@ -33,29 +33,22 @@
   <div class="row">
     Gender:
 
-    <label>
-      Male:
-      <input type="radio" name="gender" value="Male" 
-        ngModel #gender="ngModel" required />
-    </label>
-    <label>
-      Female:
-      <input type="radio" name="gender" value="Female" 
-        ngModel #gender="ngModel" required />
-    </label>
+    <ng-container *ngFor="let genderOption of options.genders; let isLast = last">
+
+      <label>
+        {{ genderOption }}:
+        <input type="radio" name="gender" [value]="genderOption"
+          ngModel #gender="ngModel" required />
+      </label>
     
-    <!--<label *ngFor="let gender of options.genders">
-      {{ gender }} 
-      <input type="radio" name="gender" 
-        [value]="gender" [ngModel]="person.gender" #gender="ngModel" required />
-    </label>-->
-    
-    <ul class="errors"
-      [hidden]="gender.valid || gender.untouched">
-      <li class="error" [hidden]="!gender.hasError('required')">
-        The gender is required
-      </li>
-    </ul>
+      <ul *ngIf="isLast" class="errors"
+        [hidden]="gender.valid || gender.untouched">
+        <li class="error" [hidden]="!gender.hasError('required')">
+          The gender is required
+        </li>
+      </ul>
+
+    </ng-container>
 
   </div>
 
