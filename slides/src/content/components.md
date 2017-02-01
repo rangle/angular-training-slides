@@ -342,7 +342,7 @@ class AppComponent {}
 class ChildComponent {}
 ```
 
-[View Example](http://plnkr.co/edit/oqkyldgOxykReRsffVxZ?p=preview)
+[View Example](https://plnkr.co/edit/kwD3iKLU8mELAoHj2fBv?p=preview)
 
 ---
 
