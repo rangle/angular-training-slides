@@ -92,7 +92,7 @@ export class PostService {
 ```
 
 - It has one method for every HTTP verb: `get`, `post`, `put`, etc.
-- Every mehod returns an observable that emit a single value
+- Every method returns an observable that emit a single value
 - Connections are closed automatically after the value is emitted
 
 ---
