@@ -318,8 +318,7 @@ class ChildComponent {}
 - In the template, we can use an HTML tag, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
 
 ```ts
-@Component({
-  selector: 'rio-app',
+  // app.component.ts
   template: `<rio-child>
               <header>
                <p>This is my header content</p>
@@ -328,18 +327,13 @@ class ChildComponent {}
                 <p>This is my footer content</p>
               </footer>
              </rio-child>`
-})
-class AppComponent {}
 ```
 
 ```ts
-@Component({
-  selector: 'rio-child',
+  // child.component.ts
   template: `<h4>Child Component</h4>
              <ng-content select="header"></ng-content>
              <ng-content select="footer"></ng-content>`
-})
-class ChildComponent {}
 ```
 
 [View Example](https://plnkr.co/edit/kwD3iKLU8mELAoHj2fBv?p=preview)
@@ -353,8 +347,7 @@ class ChildComponent {}
 - Wrap the desired content in a `<div>` with the matching CSS class to specify content position
 
 ```ts
-@Component({
-  selector: 'rio-app',
+  // app.component.ts
   template: `<rio-child>
               <div class="header-content">
                <p>This is my header content</p>
@@ -363,18 +356,13 @@ class ChildComponent {}
                 <p>This is my footer content</p>
               </div>
              </rio-child>`
-})
-class AppComponent {}
 ```
 
 ```ts
-@Component({
-  selector: 'rio-child',
+  // child.component.ts
   template: `<h4>Child Component</h4>
              <ng-content select=".header-content"></ng-content>
              <ng-content select=".footer-content"></ng-content>`
-})
-class ChildComponent {}
 ```
 
 [View Example](https://plnkr.co/edit/YQTUGbOxhxZ41iKKpTbV?p=preview)
