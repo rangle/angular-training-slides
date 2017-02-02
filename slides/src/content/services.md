@@ -115,3 +115,61 @@ export class AppModule {}
 ```
 
 [View Example](https://plnkr.co/edit/E9xJ9nUGxOQ66AbOmGXL?p=preview)
+
+---
+
+## Handling `http` rejections
+
+To catch rejections we can use the `subscribe` operator's `error` and `complete` callbacks
+
+```ts
+  this.http.post(`${ BASE_URL }/auth/login`, payload)
+    .map(response => response.json())
+    .subscribe(
+      (authData) => this.storeToken(authData.id_token), // Next function
+      (err) => console.error(err),                      // Error function
+      () => console.log('Authentication Complete')      // Complete function
+    );
+```
+
+---
+
+## Using the `.catch` operator
+
+- The `.catch` operator allows us to catch errors on a stream, do something, then pass the exception onwards
+- This also means we can inspect the error and decide how to handle it
+
+```ts
+  ...
+  .catch(err => {
+    if (err.status >==  500) {
+      return cachedVersion();
+    } else {
+      return Observable.throw(
+        new Error(`${ err.status } ${ err.statusText }`)
+      );
+    }
+  });
+```
+
+---
+
+## Cancel a Request
+
+Cancelling an HTTP request is a common requirement. If you have a queue of requests and a new
+request supersedes the pending requests, you can call `unsubscribe` on the pending request's subscription.
+
+```ts
+  const request = this.searchService.search(this.searchField.value)
+    .subscribe(
+      result => { this.result = result.artists.items; },
+      err => { this.errorMessage = err.message; },
+      () => { console.log('Completed'); }
+    );
+
+  request.unsubscribe();
+```
+
+
+
+---
