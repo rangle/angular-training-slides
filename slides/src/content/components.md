@@ -312,7 +312,7 @@ class ChildComponent {}
 
 ---
 
-## Defining multiple projection areas
+## Defining Multiple Projection Areas
 
 - Multiple `<ng-content>` tags can be used in a template by using the `select` attribute
 - In the template, we can use an HTML tag, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
