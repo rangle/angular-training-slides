@@ -283,7 +283,7 @@ Notes:
 
 ---
 
-## Template Projection (1/3)
+## Template Projection
 
 - Ability to pass HTML to a child component and have it rendered there
 - This was called _transclusion_ in Angular 1
@@ -312,7 +312,7 @@ class ChildComponent {}
 
 ---
 
-## Template Projection (2/3)
+## Defining multiple projection areas
 
 - Multiple `<ng-content>` tags can be used in a template by using the `select` attribute
 - In the template, we can use an HTML tag, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
@@ -346,7 +346,7 @@ class ChildComponent {}
 
 ---
 
-## Template Projection (3/3)
+## Multiple Projections with Class Selectors
 
 - Besides tags, another option for specifying which `ng-content` tag to use is CSS classes
 - This can be done by setting the value of the `select` attribute to a class selector such as `.header-content`
