@@ -183,8 +183,8 @@ export class CounterComponent {
 The parent component can use now the _banana in a box_ syntax
 
 ```ts
-@Component({ 
-  selector: 'rio-app', 
+@Component({
+  selector: 'rio-app',
   template:'<rio-counter [(count)]="myNumber"></rio-counter>'
 })
 class AppComponent { myNumber = 0 }
@@ -209,7 +209,7 @@ We can create references to native DOM elements in our template using the specia
 })
 export class AppComponent {
   name = 'N/D';
-  
+
   getInputValue(value: string): void {
     this.name = value;
   }
@@ -232,7 +232,7 @@ export class ChildComponent {
 ```
 
 ```ts
-@Component({ 
+@Component({
   selector: 'rio-app',
   template: `<rio-child #child></rio-child>
              <button (click)="getPublicProperty(child)">Get Component</button>
@@ -257,7 +257,7 @@ export class AppComponent {
 - The value of the property `exportedAs` of the directive `NgForm` is `ngForm` ([docs](https://angular.io/docs/ts/latest/api/forms/index/NgForm-directive.html))
 
 ```ts
-@Component({ 
+@Component({
   selector: 'rio-app',
   template: `
     <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
@@ -290,7 +290,7 @@ Notes:
 - Use the built-in component `<ng-content>` to define where to render the projected content
 
 ```ts
-@Component({ 
+@Component({
   selector: 'rio-app',
   template: `<rio-child>
                <p>Projected content</p>
@@ -309,6 +309,59 @@ class ChildComponent {}
 ```
 
 [View Example](http://plnkr.co/edit/oqkyldgOxykReRsffVxZ?p=preview)
+
+---
+
+## Defining Multiple Projection Areas
+
+- Multiple `<ng-content>` tags can be used in a template by using the `select` attribute
+- In the template, we can use an HTML tag, say, `<header>` to specify the position of projected content to the `ng-content` with `select="header"`
+
+```
+  <!-- Parent Component -->
+  <rio-child>
+    <header><p>This is my header content</p></header>
+    <footer><p>This is my footer content</p></footer>
+  </rio-child>`
+```
+
+```
+  <!-- Child Component -->
+  <h4>Child Component</h4>
+  <ng-content select="header"></ng-content>
+  <ng-content select="footer"></ng-content>
+```
+
+[View Example](https://plnkr.co/edit/kwD3iKLU8mELAoHj2fBv?p=preview)
+
+---
+
+## Multiple Projections with Class Selectors
+
+- Besides tags, another option for specifying which `ng-content` tag to use is CSS classes
+- This can be done by setting the value of the `select` attribute to a class selector such as `.header-content`
+- Wrap the desired content in a `<div>` with the matching CSS class to specify content position
+
+```
+  <!-- Parent component -->
+  <rio-child>
+    <div class="header-content">
+      <p>This is my header content</p>
+    </div>
+    <div class="footer-content">
+      <p>This is my footer content</p>
+    </div>
+  </rio-child>
+```
+
+```
+  <!-- Child Component -->
+  <h4>Child Component</h4>
+  <ng-content select=".header-content"></ng-content>
+  <ng-content select=".footer-content"></ng-content>
+```
+
+[View Example](https://plnkr.co/edit/YQTUGbOxhxZ41iKKpTbV?p=preview)
 
 ---
 
