@@ -124,7 +124,7 @@ this.router.navigate(['/component-one']);
 ## Dynamically Adding Route Components
 
 Rather than define each route's component separately, use `RouterOutlet`.
-Angular 2 dynamically adds the component corresponding to the active route into the `<router-outlet></router-outlet>` element.
+Angular dynamically adds the component corresponding to the active route into the `<router-outlet></router-outlet>` element.
 
 ```javascript
 @Component({

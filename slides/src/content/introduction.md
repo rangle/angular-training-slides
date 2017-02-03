@@ -1,4 +1,4 @@
-# Angular 2 Training
+# Angular Training
 
 # Rangle.io
 
@@ -37,10 +37,10 @@
 
 ---
 
-## What Makes Angular 2 Good?
+## What Makes Angular Good?
 
 - Modular architecture
-- Much better performance than Angular 1:
+- Better performance than Angular 1:
   - Improved Change detection
   - Ahead of Time compiler
 - It's made to scale:

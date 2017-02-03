@@ -2,9 +2,9 @@
 
 ---
 
-## Forms in Angular 2
+## Forms in Angular
 
-Angular 2 has two approaches to forms:
+Angular has two approaches to forms:
 
 - **Template Driven Forms:** Controls & validation rules are define in the template with directives
 
