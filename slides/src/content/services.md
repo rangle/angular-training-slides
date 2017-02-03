@@ -186,8 +186,26 @@ request supersedes the pending requests, you can call `unsubscribe` on the pendi
       .retry(3);  // Will retry failed request 3 times
 }
 ```
-- Note: The `onError` callback will not execute during the retry phase. The stream will only throw an error after the retry phase is complete
+- **Note:** The `onError` callback will not execute during the retry phase. The stream will only throw an error after the retry phase is complete
 
 [View Example](http://plnkr.co/edit/zSAWwV?p=preview)
+
+---
+
+## Converting requests into promises
+
+Using `toPromise()`, we can convert observables returned from Angular's http into promises
+
+```ts
+  search(term: string) {
+    return this.http
+      .get(`https://api.spotify.com/v1/search?q=${term}&type=artist`)
+      .map((response) => response.json())
+      .toPromise();
+  }
+```
+It could then be consumed as a regular promise
+
+**Note:** Once converted into a promise you will lose the ability to cancel the request and chain RxJs operators
 
 ---
