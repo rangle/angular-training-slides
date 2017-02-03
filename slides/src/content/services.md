@@ -140,17 +140,19 @@ To catch rejections we can use the `subscribe` operator's `error` and `complete`
 - This also means we can inspect the error and decide how to handle it
 
 ```ts
-  ...
-  .catch(err => {
-    if (err.status >==  500) {
-      return cachedVersion();
-    } else {
-      return Observable.throw(
-        new Error(`${ err.status } ${ err.statusText }`)
-      );
-    }
-  });
+  return this.http.get('https://api.spotify.com/v1/dsds?q=' + term + '&type=artist')
+    .map((response) => response.json())
+    .catch(err => {
+      if (err.status >==  500) {
+        return cachedVersion();
+      } else {
+        return Observable.throw(
+          new Error(`${ err.status } ${ err.statusText }`)
+        );
+      }
+    });
 ```
+[View Example](http://plnkr.co/edit/3lCaeI?p=preview)
 
 ---
 
@@ -169,6 +171,7 @@ request supersedes the pending requests, you can call `unsubscribe` on the pendi
 
   request.unsubscribe();
 ```
+[View Example](http://plnkr.co/edit/XQL8v9?p=preview)
 
 ---
 
@@ -192,6 +195,22 @@ request supersedes the pending requests, you can call `unsubscribe` on the pendi
 
 ---
 
+## Search with `flatMap`
+
+<img src="content/images/flat-map.png" alt="flat-map-diagram" width="40%" />
+
+[View Example](http://plnkr.co/edit/L6CLXo?p=preview)
+
+---
+
+## Search with `switchMap`
+
+<img src="content/images/switch-map.png" alt="flat-map-diagram" width="40%" />
+
+[View Example](http://plnkr.co/edit/FYLTcx?p=preview)
+
+---
+
 ## Converting requests into promises
 
 Using `toPromise()`, we can convert observables returned from Angular's http into promises
@@ -205,6 +224,14 @@ Using `toPromise()`, we can convert observables returned from Angular's http int
   }
 ```
 It could then be consumed as a regular promise
+
+```ts
+  search(someSearchString)
+    .then((result) => {
+      this.result = result.artists.items;
+    })
+    .catch((error) => console.error(error));
+```
 
 **Note:** Once converted into a promise you will lose the ability to cancel the request and chain RxJs operators
 
