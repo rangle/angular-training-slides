@@ -170,6 +170,24 @@ request supersedes the pending requests, you can call `unsubscribe` on the pendi
   request.unsubscribe();
 ```
 
+---
 
+## Retry a request
+
+- It is possible to retry a failed request using the `.retry` operator when something goes wrong, for example, the user's connection may dropped.
+- `retry` takes a `retryCount` argument that specifies the number of times to retry a failed request.
+- If you do not specify `retryCount`, the request will be retried indefinitely.
+
+```ts
+  search(term: string) {
+    let tryCount = 0;
+    return this.http.get('https://api.spotify.com/v1/dsds?q=' + term + '&type=artist')
+      .map(response => response.json())
+      .retry(3);  // Will retry failed request 3 times
+}
+```
+- Note: The `onError` callback will not execute during the retry phase. The stream will only throw an error after the retry phase is complete
+
+[View Example](http://plnkr.co/edit/zSAWwV?p=preview)
 
 ---
