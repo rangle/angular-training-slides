@@ -2,9 +2,9 @@
 
 ---
 
-## Example Structure of an Angular 2 App
+## Example Structure of an Angular App
 
-![Angular 2 App Structure](content/images/angular2-generic-application-structure.png)
+![Angular App Structure](content/images/angular2-generic-application-structure.png)
 
 Notes:
 
@@ -17,7 +17,7 @@ Notes:
 
 ---
 
-## Angular 2 Modules
+## Angular Modules
 
 - Collection of components, directives, pipes and services (aka elements)
 - Provide a mechanism to group related pieces of functionality within our application
@@ -26,7 +26,7 @@ Notes:
   - Feature modules (optional)
   - Built-in modules (`BrowserModule`, `FormsModule`, etc.)
   - Third party modules (`AngularMaterial`)
-- An Angular 2 application is a collection of modules, starting from the root module
+- An Angular application is a collection of modules, starting from the root module
 - Modules can import other modules to extend functionality
 
 ---
@@ -176,7 +176,7 @@ styles: [`
 
 ---
 
-## A Simple Angular 2 Folder Structure
+## A Simple Angular Folder Structure
 
 ```sh
 .
@@ -266,7 +266,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Angular 2 App</title>
+  <title>Angular App</title>
 </head>
 <body>
   <rio-app>Loading...</rio-app>
@@ -283,7 +283,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Angular 2 App</title>
+  <title>Angular App</title>
   <script src="https://unpkg.com/systemjs@0.19.38/dist/system.src.js"></script>
   <script src="https://code.angularjs.org/tools/typescript.js"></script>
   <script src="system.config.js"></script>

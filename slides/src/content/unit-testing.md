@@ -412,7 +412,7 @@ export class QuoteComponent implements OnInit {
 
 ## Testing Services
 
-- When testing services in Angular 2, we employ many of the same techniques and strategies used for testing components.
+- When testing services in Angular, we employ many of the same techniques and strategies used for testing components.
 - Data is the main emphasis in testing services - are we _getting_, _storing_ and _propagating_ data correctly.
 
 ---
@@ -497,7 +497,7 @@ beforeEach(() => {
   });
 ```
 
-- Angular 2 provides us with a `MockBackend` class that can be configured to provide mock responses to our requests, without actually making a network request.
+- Angular provides us with a `MockBackend` class that can be configured to provide mock responses to our requests, without actually making a network request.
 - `useClass` recipe makes Angular inject `MockBackend` to `XHRBackend` declarations.
 
 ---
