@@ -8,7 +8,6 @@ import HomeComponent from '../components/home.component';
 import UserDetailComponent from '../components/user-detail.component';
 import UserListComponent from '../components/user-list.component';
 
-import UsersListComponent from '../containers/users-list.component';
 import {UsersHomeComponent, UsersContainerComponent} from '../containers/users.component';
 
 import UsersService from '../services/users.service';
@@ -20,7 +19,6 @@ import UsersService from '../services/users.service';
     HomeComponent,
     UserDetailComponent,
     UserListComponent,
-    UsersListComponent,
     UsersContainerComponent,
     UsersHomeComponent
   ],

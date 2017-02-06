@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'rio-home',
   template: `
-  Child Routes
+  Home Page
   `
 })
 export default class HomeComponent {
