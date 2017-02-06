@@ -120,15 +120,15 @@ export class AppModule {}
 
 ## Handling `http` rejections
 
-To catch rejections we can use the `subscribe` operator's `error` and `complete` callbacks
+To catch rejections we can use the `subscribe` operator's `onError` callback
 
 ```ts
   this.http.post(`${ BASE_URL }/auth/login`, payload)
     .map(response => response.json())
     .subscribe(
-      (authData) => this.storeToken(authData.id_token), // Next function
-      (err) => console.error(err),                      // Error function
-      () => console.log('Authentication Complete')      // Complete function
+      (authData) => this.storeToken(authData.id_token), // onNext function
+      (err) => console.error(err),                      // onError function
+      () => console.log('Authentication Complete')      // onComplete function
     );
 ```
 
@@ -137,7 +137,7 @@ To catch rejections we can use the `subscribe` operator's `error` and `complete`
 ## Using the `.catch` operator
 
 - The `.catch` operator allows us to catch errors on a stream, do something, then pass the exception onwards
-- This also means we can inspect the error and decide how to handle it
+- We can inspect the error and decide how to handle it
 
 ```ts
   return this.http.get('https://api.spotify.com/v1/dsds?q=' + term + '&type=artist')
@@ -158,8 +158,7 @@ To catch rejections we can use the `subscribe` operator's `error` and `complete`
 
 ## Cancel a Request
 
-Cancelling an HTTP request is a common requirement. If you have a queue of requests and a new
-request supersedes the pending requests, you can call `unsubscribe` on the pending request's subscription.
+One of the greatest benefits to using observables over promises is the ability to cancel `http` requests
 
 ```ts
   const request = this.searchService.search(this.searchField.value)
@@ -172,6 +171,10 @@ request supersedes the pending requests, you can call `unsubscribe` on the pendi
   request.unsubscribe();
 ```
 [View Example](http://plnkr.co/edit/XQL8v9?p=preview)
+
+---
+
+## Cancel a Request with `takeUntil`
 
 ---
 
