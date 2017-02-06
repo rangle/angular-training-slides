@@ -86,15 +86,4 @@ export default class UsersService {
     return R.find(R.propEq('_id', id))(mockData);
 
   };
-
-  getCompanyNames = () => {
-    return R.compose(R.uniq, R.pluck('company'))(mockData)
-  };
-
-  getUsersByCompany = (companyName) => {
-    return R.map(
-      this.mapUserNames,
-      R.filter(R.propEq('company', companyName))(mockData)
-    );
-  };
 }
