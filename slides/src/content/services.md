@@ -136,23 +136,9 @@ To catch rejections we can use the `subscribe` operator's `onError` callback
 
 ## Using the `.catch` operator
 
-- The `.catch` operator allows us to catch errors on a stream, do something, then pass the exception onwards
-- We can inspect the error and decide how to handle it
-
-```ts
-  return this.http.get('https://api.spotify.com/v1/dsds?q=' + term + '&type=artist')
-    .map((response) => response.json())
-    .catch(err => {
-      if (err.status >==  500) {
-        return cachedVersion();
-      } else {
-        return Observable.throw(
-          new Error(`${ err.status } ${ err.statusText }`)
-        );
-      }
-    });
-```
-[View Example](http://plnkr.co/edit/3lCaeI?p=preview)
+- Using `.catch` we can inspect the error and decide how to handle it
+- By not calling `subscribe` our code is more declarative
+- Can take advantage of the `async` pipe in your template
 
 ---
 
@@ -175,6 +161,10 @@ One of the greatest benefits to using observables over promises is the ability t
 ---
 
 ## Cancel a Request with `takeUntil`
+
+- Managing subscription cancellation via `unsubscribe` can get messy
+- The `takeUntil` operator allows us to compose your subscription management
+- `takeUntil` emits items from an observable until a second observable emits an item
 
 ---
 
