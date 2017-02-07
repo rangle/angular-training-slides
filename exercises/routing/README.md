@@ -1,0 +1,164 @@
+
+## Step 1
+
+Using the `angular-cli` create a new project called `routing-exercise` with the `--routing` flag:
+
+```
+ng new routing-exercise --routing
+```
+
+
+## Step 2
+
+Use the angular CLI to build the components and service we need by running the following commands:
+
+```
+ng generate component home
+ng generate component user-list
+ng generate component user-detail
+ng generate service users
+```
+
+> The components and service to our ng-module automatically, so they are ready to use.
+
+## Step 3
+
+Add the following snippet to `app.component.css`:
+
+```
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li  {
+ float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+```
+
+## Step 4
+
+Add the following snippet to the `app.component.html`
+
+```
+<ul>
+   <li>
+      <a>Dashboard</a>
+    </li>
+    <li>
+      <a>Users</a>
+    </li>
+  </ul>
+```
+
+
+## Step 5
+
+Modify the anchor tags we just added by using the `routerLink` directive so that they point to default route `"/"` and the users route `"/users"`. Then add the `router-outlet` directive in `app.component.html`.
+
+
+## Step 6
+
+Import the `HomeComponent` and `UserListComponent`in `app-routing.module.ts`. Update the routes so that the default route loads the `HomeComponent` and the `"/users"` route loads the `UserListComponent`.
+
+## Step 7
+
+Update `users.service.ts` with the following snippet:
+
+```
+export class UsersService {
+
+  users = [{
+    id: "2eifj0s",
+    name: 'Iva Gamble',
+    company: 'FLOTONIC',
+    email: 'iva@flotonic.com'
+  }, {
+    id: "sj0dfj",
+    name: 'Johns Pearson',
+    company: 'Hyplex',
+    email: 'johns@hyplex.me'
+  }, {
+    id: "vn0ekj",
+    name: 'Jane Simmons',
+    company: 'Geoform',
+    email: 'Jane@geoform.me'
+  }, {
+    id: "f02jfi",
+    name: 'John Doe',
+    company: 'Flotonic',
+    email: 'john@flotonic.com'
+  }]
+
+  getUsers() {
+    return this.users;
+  }
+
+  getUser(id) {
+    return this.users.find(user => user.id == id);
+  }
+}
+```
+
+## Step 8
+
+Import the `UsersService` into `user-list.component.ts`, then inject the service in the constructor. Set the value of `users` in the class by using the `UsersService.getUsers()` method when the component initializes.
+
+
+## Step 9
+
+Modify `user-list.component.html` with the following snippet so that each link points to a user ID.
+
+```
+<h1>Users</h1>
+
+<ul>
+  <li *ngFor="let user of users">
+    <a>
+      {{user.name}}
+    </a>
+    </li>
+</ul>
+```
+
+## Step 10
+
+Modify the `user-list.component.html` using the routerLink directive so that each link points to a specific user id.
+
+## Step 11
+
+Add the following snippet to the `user-detail.component.html` file:
+
+```
+<h2>{{user?.name}}</h2>
+<label>Company: </label> {{user?.company}} <br>
+<label>Email: </label> {{user?.email}}
+```
+
+## Step 12
+
+Create another route in `app-routing.module.ts` for the `UserDetailComponent` that takes an extra `:id` parameter.
+
+## Step 13
+
+Import the `ActivatedRoute` and `UsersService` into the `UserDetailComponent`.
+
+## Step 14
+
+Finally, update the `UserDetailComponent` to subscribe to the `ActivatedRoute`, then use the `id` parameter from the route to load the user data from the `UsersService`.
+
