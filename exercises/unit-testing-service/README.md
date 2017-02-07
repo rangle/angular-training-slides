@@ -1,4 +1,4 @@
-# Exercies: Unit Testing a Service
+# Unit Testing a Service
 
 _app.component.ts_
 
