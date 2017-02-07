@@ -166,7 +166,21 @@ One of the greatest benefits to using observables over promises is the ability t
 
 - Managing subscription cancellation via `unsubscribe` can get messy
 - The `takeUntil` operator allows us to compose your subscription management
-- `takeUntil` emits items from an observable until a second observable emits an item
+- `takeUntil` emits items from an observable until a given observable emits an item
+
+```ts
+search() {
+  const request = this.searchService.search(this.searchField.value)
+    .takeUntil(someOtherStream) // take until someOtherStream emits an item
+    .subscribe(
+      result => { this.result = result.artists.items; },
+      err => { this.errorMessage = err.message; },
+      () => { this.cancelMessage = 'Your request has been cancelled' }
+    );
+}
+```
+
+[View Example](https://plnkr.co/edit/v2aGkTCmi34jBr7an1i8?p=preview)
 
 ---
 
