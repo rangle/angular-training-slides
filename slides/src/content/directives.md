@@ -202,7 +202,7 @@ Is equivalent to:
 </template>
 ```
 
-- Angular 2 built-in structural directives: `ngIf`, `ngFor`, `ngSwitch`
+- Built-in structural directives: `ngIf`, `ngFor`, `ngSwitch`
 
 ---
 
