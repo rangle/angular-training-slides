@@ -147,14 +147,16 @@ To catch rejections we can use the `subscribe` operator's `onError` callback
 One of the greatest benefits to using observables over promises is the ability to cancel `http` requests
 
 ```ts
-  const request = this.searchService.search(this.searchField.value)
-    .subscribe(
-      result => { this.result = result.artists.items; },
-      err => { this.errorMessage = err.message; },
-      () => { console.log('Completed'); }
-    );
+  search() {
+    const request = this.searchService.search(this.searchField.value)
+      .subscribe(
+        result => { this.result = result.artists.items; },
+        err => { this.errorMessage = err.message; },
+        () => { console.log('Completed'); }
+      );
 
-  request.unsubscribe();
+    setTimeout(() => {request.unsubscribe()}, 0); // cancel request after 0 milliseconds
+  }
 ```
 [View Example](http://plnkr.co/edit/XQL8v9?p=preview)
 
