@@ -1,3 +1,8 @@
+# Routing Exercise
+
+Using the data provided in the file `users.json`, create an application with routing as shown below:
+
+![Routing App Preview](preview.gif)
 
 ## Step 1
 
@@ -10,7 +15,7 @@ ng new routing-exercise --routing
 
 ## Step 2
 
-Use the angular CLI to build the components and service we need by running the following commands:
+Use the `angular-cli` to build the components and service we need by running the following commands:
 
 ```
 ng generate component home
@@ -19,7 +24,7 @@ ng generate component user-detail
 ng generate service users
 ```
 
-> The components and service to our ng-module automatically, so they are ready to use.
+> The components and service are added to our ng-module automatically, so they are ready to use.
 
 ## Step 3
 
@@ -69,12 +74,12 @@ Add the following snippet to the `app.component.html`
 
 ## Step 5
 
-Modify the anchor tags we just added by using the `routerLink` directive so that they point to default route `"/"` and the users route `"/users"`. Then add the `router-outlet` directive in `app.component.html`.
+Modify the anchor tags we just added to `app.component.html` by using the `routerLink` directive so that they point to the root path `"/"` and the users path `"/users"`. Then add the `router-outlet` directive so that angular knows where to display the components.
 
 
 ## Step 6
 
-Import the `HomeComponent` and `UserListComponent`in `app-routing.module.ts`. Update the routes so that the default route loads the `HomeComponent` and the `"/users"` route loads the `UserListComponent`.
+Import the `HomeComponent` and `UserListComponent`in `app-routing.module.ts`. Update the routes so that the root path `"/"` loads the `HomeComponent` and the `"/users"` path loads the `UserListComponent`.
 
 ## Step 7
 
@@ -107,7 +112,7 @@ Import the `UsersService` into `user-list.component.ts`, then inject the service
 
 ## Step 9
 
-Modify `user-list.component.html` with the following snippet so that each link points to a user ID.
+Replace `user-list.component.html` with the following snippet:
 
 ```html
 <h1>Users</h1>
@@ -141,7 +146,7 @@ Create another route in `app-routing.module.ts` for the `UserDetailComponent` th
 
 ## Step 13
 
-Import the `ActivatedRoute` and `UsersService` into the `UserDetailComponent`.
+Import and inject the `ActivatedRoute` and `UsersService` into the `UserDetailComponent`.
 
 ## Step 14
 
