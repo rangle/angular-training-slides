@@ -1,7 +1,7 @@
 
 ## Step 1
 
-Using the `angular-cli` create a new project called `routing-exercise` with the `--routing` flag:
+Using the `angular-cli` create a new project in the training folder called `routing-exercise` with the `--routing` flag:
 
 ```
 ng new routing-exercise --routing
@@ -25,7 +25,7 @@ ng generate service users
 
 Add the following snippet to `app.component.css`:
 
-```
+```css
 ul {
   list-style-type: none;
   margin: 0;
@@ -55,7 +55,7 @@ li a:hover {
 
 Add the following snippet to the `app.component.html`
 
-```
+```html
 <ul>
    <li>
       <a>Dashboard</a>
@@ -80,7 +80,7 @@ Import the `HomeComponent` and `UserListComponent`in `app-routing.module.ts`. Up
 
 Update `users.service.ts` with the following snippet:
 
-```
+```ts
 export class UsersService {
 
   users = [{
@@ -124,7 +124,7 @@ Import the `UsersService` into `user-list.component.ts`, then inject the service
 
 Modify `user-list.component.html` with the following snippet so that each link points to a user ID.
 
-```
+```html
 <h1>Users</h1>
 
 <ul>
@@ -144,7 +144,7 @@ Modify the `user-list.component.html` using the routerLink directive so that eac
 
 Add the following snippet to the `user-detail.component.html` file:
 
-```
+```html
 <h2>{{user?.name}}</h2>
 <label>Company: </label> {{user?.company}} <br>
 <label>Email: </label> {{user?.email}}
