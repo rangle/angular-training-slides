@@ -244,5 +244,3 @@ It could then be consumed as a regular promise
 ```
 
 **Note:** Once converted into a promise you will lose the ability to cancel the request and chain RxJs operators
-
----
