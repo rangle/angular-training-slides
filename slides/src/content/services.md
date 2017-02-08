@@ -223,7 +223,7 @@ search() {
 
 ## Converting requests into promises
 
-Using `toPromise()`, we can convert observables returned from Angular's http into promises
+`toPromise()` converts observables returned from the http client into promises
 
 ```ts
   search(term: string) {
