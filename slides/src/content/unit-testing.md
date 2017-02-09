@@ -10,8 +10,6 @@ Our testing toolchain will consist of the following tools:
 - Karma - controls the execution of our tests
 - PhantomJS - a headless DOM instance
 - Istanbul - generates coverage reports
-- Sinon - provides spies, stubs and mocks
-- Chai - assertion library with syntactic sugar
 
 ---
 
@@ -39,7 +37,7 @@ You can put test scripts anywhere you like, but keeping them close to your sourc
 In order to use write tests in TypeScript, we need TypeScript type definitions for Chai and Jasmine. We can include these type definitions from `@types` with npm.
 
 ```sh
-npm install @types/jasmine @types/assertion-error
+npm install @types/jasmine
 ```
 
 ---
@@ -49,8 +47,7 @@ npm install @types/jasmine @types/assertion-error
 To run our tests we run Karma from the command line. Karma can be installed globally or locally (recommended)
 
 ```sh
-npm install karma -g
-karma start
+npm install karma --save-dev
 ```
 
 This will set up the testing environment and run through each unit test, as well as run any reporters we've configured.
@@ -64,6 +61,10 @@ A good practice is to amalgamate all the project's task/build commands through n
     ...
 }
 ...
+```
+
+```sh
+npm test
 ```
 
 ---
@@ -245,68 +246,6 @@ it('Should render the mocked response in its template', async(() => {
 
 ---
 
-## Overriding Dependencies for Testing (1/3)
-
-`TestBed` provides the ability to override dependences that are used in a test:
-
-- `overrideModule`
-- `overrideComponent`
-- `overrideDirective`
-- `overridePipe`
-
----
-
-## Overriding Dependencies for Testing (2/3)
-
-Suppose we want to override a component's template for testing:
-
-```ts
-@Component({
-  selector: 'display-message',
-  template: `
-    <div>
-      <div>
-        <h1>{{message}}</h1>
-      <div>
-    </div>
-  `
-})
-export class MessageComponent {
-  public message = '';
-
-  setMessage(newMessage: string) {
-      this.message = newMessage;
-  }
-}
-```
-
----
-
-## Overriding Dependencies for Testing (3/3)
-
-Here we simplify the template:
-
-```ts
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    declarations: [MessageComponent],
-    providers: []
-  });
-
-  fixture = TestBed.overrideComponent(MessageComponent, {
-    set: {
-      template: '<span>{{message}}</span>'
-    }})
-    .createComponent(MessageComponent);
-
-  fixture.detectChanges();
-});
-```
-
-[View Example](http://plnkr.co/edit/P4tkaUYBFcHGvoTZjKnB?p=preview)
-
----
-
 ## Testing Asynchronous Actions (1/2)
 
 - `fakeAsync` lets us simulate the passage of time using `tick`
@@ -478,56 +417,7 @@ So, how to properly mock this process?
 
 ---
 
-## Testing HTTP Requests Using MockBackend (2/3)
-
-First, we need to mock out our HTTP services (to avoid sending actual HTTP requests).
-
-```ts
-beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpModule],
-      providers: [
-        {
-          provide: XHRBackend,
-          useClass: MockBackend
-        },
-        SearchWiki
-      ]
-    });
-  });
-```
-
-- Angular provides us with a `MockBackend` class that can be configured to provide mock responses to our requests, without actually making a network request.
-- `useClass` recipe makes Angular inject `MockBackend` to `XHRBackend` declarations.
-
----
-
-## Testing HTTP Requests Using MockBackend (3/3)
-
-Real test case:
-
-```ts
-it('should get search results', fakeAsync(
-  inject([ XHRBackend, SearchWiki],
-    (mockBackend: XHRBackend, searchWiki: SearchWiki) => {
-    const expectedUrl = 'https://en.wikipedia.org/w/api.php?' +
-      'action=query&list=search&srsearch=Angular';
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-        expect(connection.request.method).toBe(RequestMethod.Get);
-        expect(connection.request.url).toBe(expectedUrl);
-        connection.mockRespond(new Response(
-          new ResponseOptions({ body: mockResponse })
-        ));
-      });
-    searchWiki.search('Angular')
-      .subscribe(res => { expect(res).toEqual(mockResponse);});
-  })
-));
-```
-
----
-
-## Alternative HTTP Mocking Strategy (1/2)
+## HTTP Mocking Strategy (1/2)
 
 An alternative to using `MockBackend` is to create our own light mocks and tell TypeScript to treat it as Http using type assertion.
 
@@ -551,7 +441,7 @@ We then create a spy for its get method and return an observable similar to what
 
 ---
 
-## Alternative HTTP Mocking Strategy (2/2)
+## HTTP Mocking Strategy (2/2)
 
 This method still allows us to check to see that the service has requested the right URL, and that it returns that expected data.
 
@@ -571,24 +461,3 @@ it('should get search results', fakeAsync(
 ```
 
 [View Example](http://plnkr.co/edit/eplM1SETfR51USVZLUlU?p=preview)
-
----
-
-## Executing Tests Asynchronously
-
-Since services operate in an asynchronous manner, it may be useful to execute a service's entire unit test asynchronously.
-
-- Performance improvement: a particular long unit test will not block other unit tests from executing.
-
-```ts
-describe('verify search', () => {
-  it('searches for the correct term',
-    fakeAsync(inject([SearchWiki, MockBackend], (searchWiki, mockBackend) => {
-        return new Promise((pass, fail) => {
-          ...
-        });
-    })));
-});
-```
-
-- `fakeAsync` fulfills dependencies and execute the test in an asynchronous process.

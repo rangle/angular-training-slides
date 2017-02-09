@@ -76,150 +76,6 @@ export class SignupComponent {
 
 ---
 
-## Nesting Form Data (1/2)
-
-- `signupForm.value` returns a flat object by default, which is not always what we want
-- `NgModelGroup` lets you go from:
-
-```json
-{
-  "firstName": "",
-  "lastName": ""
-}
-```
-to:
-
-```json
-  {
-    "contact": {
-      "firstName": "",
-      "lastName": ""
-    }
-  }
-```
-
----
-
-## Nesting Form Data (2/2)
-
-- Use the `NgModelGroup` directive to create nested structures
-- It can be used on any element, though `fieldset` is often the most semantic
-
-```html
-<form #myForm="ngForm">
-  <fieldset ngModelGroup="contact">
-    <label>
-      First Name: <input name="firstName" ngModel>
-    </label>
-    <label>
-      Last Name: <input name="lastName" ngModel>
-    </label>
-  </fieldset>
-</form>
-```
-
-[View Example](https://plnkr.co/edit/HfKItkR8i4O2SysXoW2f?p=preview)
-
----
-
-## Binding Variables to the Form 
-
-Add a default value from your model with one way data binding:
-
-```ts
-@Component({ ... })
-export class SignupComponent {
-  firstName = 'Farah';
-}
-```
-
-```html
-<input name="firstName" [ngModel]="firstName">
-```
-
-Two way data binding will keep the model up to date as the user types.
-
-```html
-<input name="firstName" [(ngModel)]="firstName">
-
-```
-
-[View Example](https://plnkr.co/edit/yxLe7Bccx46a0qw9lYHs?p=preview)
-
----
-
-## Built-in Validators
-
-When using template driven forms we can use 4 built-in validators: `required`, `pattern`, `minlength` and `maxlength`.
-
-```html
-<!-- a required field -->
-<input required>
-
-<!-- alphanumeric field of specific length -->
-<input pattern="[A-Za-z0-9]{0,5}">
-
-<!-- more than 3 characters required -->
-<input minlength="3">
-
-<!-- prevents more than 5 characters -->
-<input maxlength="5">
-```
-
-- `pattern` is a less-powerful version of JavaScript's RegExp syntax
-- `maxlength` is special in that it prevents additional characters from being entered. Others only produce a warning.
-
----
-
-## Validation Example
-
-To perform validation, we need to create template variables for every field `#field="ngModel"`
-
-```ts
-<label>
-  Username:
-  <input name="username" ngModel #username="ngModel" required />
-</label>
-<ul class="errors" [hidden]="username.valid || username.untouched">
-  <li [hidden]="!username.hasError('required')">
-    The username is required
-  </li>
-</ul>
-```
-
-Template variables are instances of `NgModel` but they share some properties from `FormControl`:
-
-- `value`: Returns the value
-- `valid`: Returns field validity (boolean)
-- `pristine`: Indicates if it had changed from default view (boolean)
-- `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
-
-[View Example](https://plnkr.co/edit/bWdmou8gdyqhqsu8jGtI?p=preview)
-
----
-
-## Visual Cues
-
-- Angular will automatically add classes to form controls based on their status
-- We can use those classes to define visual cues for the user with CSS
-
-```css
-.ng-valid {}
-.ng-invalid {}
-
-.ng-touched {} /* clicked, tapped, or tabbed over */
-.ng-untouched {} /* not clicked, tapped, or tabbed over */
-
-.ng-pristine {} /* unchanged from default value */
-.ng-dirty {} /* different from default value */
-
-.ng-touched.ng-invalid {} /* typical pairings */
-```
-
-[View Example](https://plnkr.co/edit/dA0RTZhUgLmDX47vJ3XQ?p=preview)
-
----
-
 # Model Driven Forms 
 
 ---
@@ -342,6 +198,28 @@ export class SignupComponent {
 
 ---
 
+## Visual Cues
+
+- Angular will automatically add classes to form controls based on their status
+- We can use those classes to define visual cues for the user with CSS
+
+```css
+.ng-valid {}
+.ng-invalid {}
+
+.ng-touched {} /* clicked, tapped, or tabbed over */
+.ng-untouched {} /* not clicked, tapped, or tabbed over */
+
+.ng-pristine {} /* unchanged from default value */
+.ng-dirty {} /* different from default value */
+
+.ng-touched.ng-invalid {} /* typical pairings */
+```
+
+[View Example](https://plnkr.co/edit/dA0RTZhUgLmDX47vJ3XQ?p=preview)
+
+---
+
 ## Getting `FormControl`s from the `FormGroup`
 
 We can avoid creating individual properties for each `FormControl` instance
@@ -368,14 +246,3 @@ this.signupForm = builder.group({
 `ngForm` is the `exported as` property of the `FormControl` [directive](https://angular.io/docs/ts/latest/api/forms/index/FormControlDirective-directive.html)
 
 [View Example](https://plnkr.co/edit/TrVihF?p=preview)
-
----
-
-## Template-Driven vs `FormBuilder`
-
-|   | Template-Driven | FormBuilder |
-| - | --------------- | ----------- |
-| Form instance    | Declare in template `#signupForm="ngForm"` | Declare in class `[formGroup]="signupForm"` |
-| `(ngSubmit)`       | `registerUser(signupForm)`                 | `registerUser()`                              |
-| Control instance | Declare in template `ngModel`              | Declare in class `[formControl]="firstName"`   |
-
