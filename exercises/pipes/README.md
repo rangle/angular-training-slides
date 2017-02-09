@@ -22,7 +22,7 @@ File size is: 1.00 TB
 
 Next, try adding an aditional boolean parameter where, if true, writes the unit in long form
 
-File size is: {{ 1024^4 | fileSize }}
+File size is: {{ 1024^4 | fileSize: true }}
 =
 File size is: 1.00 Terabytes
 
@@ -40,5 +40,19 @@ Modify the `app.component.html` file to create a template that uses `NgFor` (`*n
 
 ## Step 4
 
+Using the `angular-cli` create a new pipe called `format-file-size` (the file created by the CLI should be named `format-file-size.pipe.ts`.  Notice that `app.module.ts` is automatically updated to import `FormatFileSizePipe` from the appropriate auto-generated file and it is included in the module `declarations`.
+
+## Step 5
+
+Add some constants to `format-file-size.pipe.ts` as shown in the code below:
+
+```js
+const FILE_SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+const FILE_SIZE_UNITS_LONG = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'Pettabytes', 'Exabytes', 'Zettabytes', 'Yottabytes'];
+```
+
+## Step 6
+
+Modify the arguments and body of the `transform()` method of the `FormatFileSizePipe` class to perform the string manipulation to convert the file sizes appropriately.  Hint: you may find the functions `Math.round()`, `Math.min()`, `Math.power()`, and `Math.log()` useful.
 
 
