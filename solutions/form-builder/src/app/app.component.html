@@ -1,17 +1,45 @@
 <form [formGroup]="contactForm" (ngSubmit)="addPerson()">
-  <label for="firstName">First Name:</label>
-  <input type="text" name="firstName" id="firstName" [formControl]="firstName"/>
-  <br>
 
-  <label for="lastName">Last Name:</label>
-  <input type="lastName" name="lastName" id="lastName" [formControl]="lastName"/>
-  <br>
+  <div class="row">
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName" [formControl]="firstName"/>
+    <div class="errors" [hidden]="firstName.valid || firstName.untouched">
+      <h4 [hidden]="!firstName.hasError('required')">
+        First name is required
+      </h4>
+      <h4 [hidden]="!firstName.hasError('minlength')">
+        First name must be at least 2 characters long
+      </h4>
+    </div>
+  </div>
 
-  <label for="email">Email:</label>
-  <input type="email" name="email" id="email" [formControl]="email"/>
-  <br>
+  <div class="row">
+    <label for="lastName">Last Name:</label>
+    <input type="lastName" name="lastName" id="lastName" [formControl]="lastName"/>
+    <div class="errors" [hidden]="lastName.valid || lastName.untouched">
+      <h4 [hidden]="!lastName.hasError('required')">
+        Last name is required
+      </h4>
+      <h4 [hidden]="!lastName.hasError('minlength')">
+        Last name must be at least 2 characters long
+      </h4>
+    </div>
+  </div>
 
-  <button type="submit">Add Person</button>
+  <div class="row">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" [formControl]="email"/>
+    <div class="errors" [hidden]="email.valid || email.untouched">
+      <h4 [hidden]="!email.hasError('required')">
+        Email is required
+      </h4>
+      <h4 [hidden]="!email.hasError('invalidEmail')">
+        Must be a valid email
+      </h4>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!contactForm.valid">Add Person</button>
 </form>
 <hr>
 <ul>

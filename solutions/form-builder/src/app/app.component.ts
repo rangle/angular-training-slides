@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import {
+  Validators,
+  FormGroup,
+  FormControl,
+  FormBuilder
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +13,20 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 export class AppComponent {
 
-  people = []
+  people = [];
 
-  firstName = new FormControl('')
-  lastName = new FormControl('')
-  email = new FormControl('')
+  firstName = new FormControl('', [
+    Validators.required,
+    Validators.minLength(2)
+  ]);
+  lastName = new FormControl('', [
+    Validators.required,
+    Validators.minLength(2)
+  ]);
+  email = new FormControl('', [
+    Validators.required,
+    isValidEmail
+  ]);
 
   contactForm: FormGroup = this.builder.group({
     firstName: this.firstName,
@@ -26,4 +40,11 @@ export class AppComponent {
     this.people.push(this.contactForm.value);
     this.contactForm.reset();
   }
+}
+
+function isValidEmail(input: FormControl) {
+  const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const isValid = emailRegex.test(input.value);
+
+  return isValid ? null : {invalidEmail: true};
 }
