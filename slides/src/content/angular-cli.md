@@ -48,6 +48,17 @@ For example, to generate a component called `test`, use the following command
 
 ---
 
+## Running Your Application
+
+To run your application, use the following command
+```bash
+  ng serve    # Full command
+  ng s        # Short hand for command
+```
+`ng serve` also rebuilds your application when a change is detected
+
+---
+
 ## Testing
 
 You can use the `angular-cli` to run your project's tests
