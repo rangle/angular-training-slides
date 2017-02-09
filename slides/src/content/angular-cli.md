@@ -2,10 +2,10 @@
 
 ---
 
-## What is Angular-cli
+## What is `angular-cli`
 
-`Angular-cli` is a command line tool based on the `Ember-cli`
-to help scaffold and generate code for Angular applications
+- `angular-cli` is a command line tool based on the `ember-cli`
+- helps scaffold and generate code for Angular applications
 
 Install with the following command:
 ```bash
@@ -29,7 +29,7 @@ For example, the following command would initialize a project named `myAwesomePr
 
 ## Code Generation
 
-Angular-cli has blueprints to generate:
+`angular-cli` has blueprints to generate:
   - Components (c)
   - Directives (d)
   - Routes     (r)
@@ -50,7 +50,7 @@ For example, to generate a component called `test`, use the following command
 
 ## Testing
 
-You can use the Angular-cli to run your project's tests
+You can use the `angular-cli` to run your project's tests
 
 - `ng e2e` will run your end to end with `protractor`
 - `ng test` will run your unit tests with `karma`
