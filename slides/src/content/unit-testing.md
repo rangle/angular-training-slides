@@ -10,8 +10,6 @@ Our testing toolchain will consist of the following tools:
 - Karma - controls the execution of our tests
 - PhantomJS - a headless DOM instance
 - Istanbul - generates coverage reports
-- Sinon - provides spies, stubs and mocks
-- Chai - assertion library with syntactic sugar
 
 ---
 
@@ -454,7 +452,7 @@ export class SearchWiki {
 
 ---
 
-## Testing HTTP Requests Using MockBackend (1/3)
+## Defining a Mock Response
 
 Our testing strategy will be to check to see that `SearchWiki` has requested the right URL, and once we've responded with mock data like `mockResponse` we want to verify that it returns same data:
 
@@ -478,56 +476,7 @@ So, how to properly mock this process?
 
 ---
 
-## Testing HTTP Requests Using MockBackend (2/3)
-
-First, we need to mock out our HTTP services (to avoid sending actual HTTP requests).
-
-```ts
-beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpModule],
-      providers: [
-        {
-          provide: XHRBackend,
-          useClass: MockBackend
-        },
-        SearchWiki
-      ]
-    });
-  });
-```
-
-- Angular provides us with a `MockBackend` class that can be configured to provide mock responses to our requests, without actually making a network request.
-- `useClass` recipe makes Angular inject `MockBackend` to `XHRBackend` declarations.
-
----
-
-## Testing HTTP Requests Using MockBackend (3/3)
-
-Real test case:
-
-```ts
-it('should get search results', fakeAsync(
-  inject([ XHRBackend, SearchWiki],
-    (mockBackend: XHRBackend, searchWiki: SearchWiki) => {
-    const expectedUrl = 'https://en.wikipedia.org/w/api.php?' +
-      'action=query&list=search&srsearch=Angular';
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-        expect(connection.request.method).toBe(RequestMethod.Get);
-        expect(connection.request.url).toBe(expectedUrl);
-        connection.mockRespond(new Response(
-          new ResponseOptions({ body: mockResponse })
-        ));
-      });
-    searchWiki.search('Angular')
-      .subscribe(res => { expect(res).toEqual(mockResponse);});
-  })
-));
-```
-
----
-
-## Alternative HTTP Mocking Strategy (1/2)
+## HTTP Mocking Strategy (1/2)
 
 An alternative to using `MockBackend` is to create our own light mocks and tell TypeScript to treat it as Http using type assertion.
 
@@ -551,7 +500,7 @@ We then create a spy for its get method and return an observable similar to what
 
 ---
 
-## Alternative HTTP Mocking Strategy (2/2)
+## HTTP Mocking Strategy (2/2)
 
 This method still allows us to check to see that the service has requested the right URL, and that it returns that expected data.
 
@@ -571,24 +520,3 @@ it('should get search results', fakeAsync(
 ```
 
 [View Example](http://plnkr.co/edit/eplM1SETfR51USVZLUlU?p=preview)
-
----
-
-## Executing Tests Asynchronously
-
-Since services operate in an asynchronous manner, it may be useful to execute a service's entire unit test asynchronously.
-
-- Performance improvement: a particular long unit test will not block other unit tests from executing.
-
-```ts
-describe('verify search', () => {
-  it('searches for the correct term',
-    fakeAsync(inject([SearchWiki, MockBackend], (searchWiki, mockBackend) => {
-        return new Promise((pass, fail) => {
-          ...
-        });
-    })));
-});
-```
-
-- `fakeAsync` fulfills dependencies and execute the test in an asynchronous process.
