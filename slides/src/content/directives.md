@@ -319,29 +319,3 @@ export class AppComponent {
 ```
 
 [View Example](https://plnkr.co/edit/MEG6RBlrF82kWNYxwFlk?p=preview)
-
----
-
-## Using Multiple Structural Directives
-   
-A component or native element can only be bound to one directive at a time
-
-```html
-<!-- Not allowed -->
-<div *ngFor="[1,2,3,4,5,6]" *ngIf="item > 3">
-  {{item}}
-</div>
-```
-
-We need to use the alternative syntax using the `<template>` tag
-
-```html
-<!-- Allowed -->
-<template ngFor [ngForOf]="[1,2,3,4,5,6]" let-item>
-  <div *ngIf="item > 3">
-    {{item}}
-  </div>
-</template>
-```
-
-[View Example](https://plnkr.co/edit/gmIbP6s7S1pN7vDk9YHG?p=preview)

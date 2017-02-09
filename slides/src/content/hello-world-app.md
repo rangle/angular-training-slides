@@ -244,21 +244,6 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## JIT vs AOT
-
-| Characteristic        | JIT          | AOT               |
-| --------------------- | ------------ | ----------------- |
-| Compilation target    | Browser      | Server            |
-| Compilation context   | Runtime      | Build             |
-| Bundle size           | Huge (~3 MB) | Smaller (~400 KB) |
-| Execution Performance | -            | Better            |
-| Startup time          | -            | Shorter           |
-
-- AoT compiles component templates in the server
-- With AoT the compiler is not shipped to the browser
-
----
-
 ## Loading an App Using Webpack
 
 ```html
@@ -276,29 +261,6 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading an App Using SystemJS
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Angular App</title>
-  <script src="https://unpkg.com/systemjs@0.19.38/dist/system.src.js"></script>
-  <script src="https://code.angularjs.org/tools/typescript.js"></script>
-  <script src="system.config.js"></script>
-</head>
-<body>
-  <rio-app>Loading...</rio-app>
-  <script>
-    System.import('main.ts');
-  </script>
-</body>
-</html>
-```
-
----
-
 ## Multiple Ways to Define a Component
 
 ```ts
@@ -306,14 +268,6 @@ platformBrowserDynamic().bootstrapModule(AppModule);
   selector: 'rio-app',
   styles: ['p { color: red }'],
   template: '<p>Hello</p>'
-})
-```
-
-```ts
-@Component({ // Webpack style
-  selector: 'rio-app',
-  styles: [require('./app.component.css')],
-  template: require('./app.component.html')
 })
 ```
 
