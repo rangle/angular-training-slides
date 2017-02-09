@@ -43,7 +43,7 @@ export class AppComponent {
 }
 
 function isValidEmail(input: FormControl) {
-  const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const emailRegex = /\S+@\S+\.\S+/;
   const isValid = emailRegex.test(input.value);
 
   return isValid ? null : {invalidEmail: true};
