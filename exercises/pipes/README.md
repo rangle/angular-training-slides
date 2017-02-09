@@ -53,6 +53,6 @@ const FILE_SIZE_UNITS_LONG = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'P
 
 ## Step 6
 
-Modify the arguments and body of the `transform()` method of the `FormatFileSizePipe` class to perform the string manipulation to convert the file sizes appropriately.  Hint: you may find the functions `Math.round()`, `Math.min()`, `Math.power()`, and `Math.log()` useful.
+Modify the arguments and body of the `transform()` method of the `FormatFileSizePipe` class to perform the calculation and string manipulation to display the file sizes with units appropriately.  Hint: you may find the functions `Math.round()`, `Math.min()`, `Math.power()`, and `Math.log()` useful.
 
 
