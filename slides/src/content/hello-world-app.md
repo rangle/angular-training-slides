@@ -276,49 +276,22 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Loading an App Using SystemJS
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Angular App</title>
-  <script src="https://unpkg.com/systemjs@0.19.38/dist/system.src.js"></script>
-  <script src="https://code.angularjs.org/tools/typescript.js"></script>
-  <script src="system.config.js"></script>
-</head>
-<body>
-  <rio-app>Loading...</rio-app>
-  <script>
-    System.import('main.ts');
-  </script>
-</body>
-</html>
-```
-
----
-
 ## Multiple Ways to Define a Component
 
+Inline style:
+
 ```ts
-@Component({ // Inline style
+@Component({
   selector: 'rio-app',
   styles: ['p { color: red }'],
   template: '<p>Hello</p>'
 })
 ```
 
-```ts
-@Component({ // Webpack style
-  selector: 'rio-app',
-  styles: [require('./app.component.css')],
-  template: require('./app.component.html')
-})
-```
+External files style:
 
 ```ts
-@Component({ // SystemJS & Angular CLI & AoT style
+@Component({
   selector: 'rio-app',
   styleUrls: ['app.component.css'],
   templateUrl: 'app.component.html'
@@ -326,12 +299,6 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 [View Example](https://plnkr.co/edit/s1jcJH9YuODcMEDWPLYU?p=preview)
-
-Notes:
-
-- SystemJS style loads assets at runtime
-- Webpack style bundle assets together
-- Webpack style is similar to inline style
 
 ---
 
