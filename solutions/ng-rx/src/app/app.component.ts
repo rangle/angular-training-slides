@@ -1,4 +1,4 @@
-import { TodoActions } from './actions/todo.action';
+import { TodoActions } from './store/todo.action';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';

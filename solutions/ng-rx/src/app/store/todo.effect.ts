@@ -1,5 +1,5 @@
+import { TodoActions } from './todo.action';
 import { TodoService } from '../services/todo.service';
-import { TodoActions } from './../actions/todo.action';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import 'rxjs/add/operator/switchMap';

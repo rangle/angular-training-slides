@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,10 +9,10 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { TodoInputComponent } from './components/todo-input.component';
 import { TodoListComponent } from './components/todo-list.component';
-import { TodoActions } from './actions/todo.action';
-import { TodoEffects } from './effects/todo.effect';
+import { TodoReducer } from './store/Todo.reducer';
+import { TodoEffects } from './store/todo.effect';
+import { TodoActions } from './store/todo.action';
 import { TodoService } from './services/todo.service';
-import { TodoReducer } from './reducers/todo.reducer';
 
 @NgModule({
   declarations: [AppComponent, TodoInputComponent, TodoListComponent],
