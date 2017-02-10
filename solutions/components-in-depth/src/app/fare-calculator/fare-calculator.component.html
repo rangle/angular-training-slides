@@ -1,0 +1,7 @@
+<h4>Current Fare: ${{ getCurrentFare(rate, time) }}</h4>
+
+<app-timer [interval]="interval" (onInterval)="time=$event" (onReset)="time=0">
+  <span start>Start Ride</span>
+  <span stop>Stop Ride</span>
+  <span reset>Reset Fare</span>
+</app-timer>
