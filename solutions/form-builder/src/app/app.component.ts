@@ -13,7 +13,7 @@ import {
 })
 export class AppComponent {
 
-  people = [];
+  contacts = [];
 
   firstName = new FormControl('', [
     Validators.required,
@@ -37,7 +37,7 @@ export class AppComponent {
   constructor(private builder: FormBuilder) {}
 
   addPerson() {
-    this.people.push(this.contactForm.value);
+    this.contacts.push(this.contactForm.value);
     this.contactForm.reset();
   }
 }
