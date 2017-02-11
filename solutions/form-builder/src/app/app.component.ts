@@ -37,7 +37,7 @@ export class AppComponent {
   constructor(private builder: FormBuilder) {}
 
   addPerson() {
-    this.contacts = [... this.contacts, this.contactForm.value];
+    this.contacts = [...this.contacts, this.contactForm.value];
     this.contactForm.reset();
   }
 }

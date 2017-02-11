@@ -25,8 +25,8 @@ Pass `builder` of type `FormBuilder` to the constructor.
 
 ## Step 5
 
-Declare a `contacts` property initialized as an empty array inside the
-`appComponent`.
+Declare a `contacts` property initialized as an empty array in the
+`AppComponent`.
 
 ## Step 6
 
