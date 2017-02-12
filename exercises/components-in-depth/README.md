@@ -37,7 +37,7 @@ Add 4 `@Output` `EventEmitter`s
 
 ## Step 5
 
-Implement a `start` method to start a timer using `setInterval` and store the returned id in the `currentTimer` property.
+Implement a `start` method to start a timer using `window.setInterval` and store the returned id in the `currentTimer` property.
 
 The timer should use the `interval` input value as its interval and should update the `currentTime` property with the latest time.
 The timer should also emit the latest time at every interval using the `onInterval` output.
@@ -48,7 +48,7 @@ Optional: The method should also emit `currentTime` if a timer hasn't yet been s
 
 ## Step 6
 
-Using `clearInterval` implement a `stop` method that will stop the current running timer using the stored `currentTimer` id.
+Using `window.clearInterval` implement a `stop` method that will stop the current running timer using the stored `currentTimer` id.
 
 Optional: Emit the current time using the `onStop` output.
 

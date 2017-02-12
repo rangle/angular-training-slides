@@ -13,28 +13,28 @@ export class TimerComponent {
   @Output() onReset = new EventEmitter();
   @Output() onStop = new EventEmitter();
   private time: number = 0;
-  private timerId: NodeJS.Timer;
+  private timerId: number;
 
   start(): void {
     if (this.timerId) {
       return;
     }
 
-    this.timerId = setInterval(() => {
+    this.timerId = window.setInterval(() => {
       this.time = this.computeTime(this.time, this.interval);
-      this.onInterval.next(this.time);
+      this.onInterval.emit(this.time);
     }, this.interval);
   }
 
   stop(): void {
-    clearInterval(this.timerId);
+    window.clearInterval(this.timerId);
     this.timerId = null;
-    this.onStop.next(this.time);
+    this.onStop.emit(this.time);
   }
 
   reset(): void {
     this.time = 0;
-    this.onReset.next(this.time);
+    this.onReset.emit(this.time);
   }
 
   private computeTime(time: number, interval: number): number {
