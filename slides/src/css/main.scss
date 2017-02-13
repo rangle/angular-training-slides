@@ -92,6 +92,10 @@ $selectionColor: #fff;
     margin: 20px 0;
   }
 
+  strong {
+    color: $rangleRed;
+  }
+
   h1:after, h2:after {
     content: '';
     background-color: $rangleRed;
@@ -141,5 +145,26 @@ $selectionColor: #fff;
 
   .progress span {
     background: $rangleRed;
+  }
+
+  .large {
+    width: 900px;
+  }
+
+  .small {
+    width: 350px;
+  }
+
+  .x-small {
+    width: 200px;
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .float-left {
+    float: left;
+    margin-right: 20px;
   }
 }
