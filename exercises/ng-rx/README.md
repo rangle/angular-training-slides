@@ -22,13 +22,13 @@ Create a `dumb` child component called `<todo-input>` with a single button to pe
 
 - **Add Task** Add the new todo item. 
 
-*(hint: Make sure that the `insert` event is emitted to the parent and handeled there.)*
+*(hint: Make sure that the `insert` event is emitted to the parent and handeled/dispatched from there.)*
 
 ## Step 5
 
 Create another `dumb` child component called `<todo-list>` to delegate the rendering of every individual `todo` item in the array.
 
-*(hint: Pass the list of `todo` items from the parent into this child component.)*
+*(hint: Pass the list of `todo` items from the parent into this child component. You should also listen to the store from the same parent component.)*
 
 ## Step 6 
 
@@ -40,4 +40,4 @@ For each item in the `<todo-list>` add the following button.
 
 - **Delete**  Delete the todo item. 
 
-*(hint: Make sure that the `delete` event is emitted to the parent and handeled there.)*
+*(hint: Make sure that the `delete` event is emitted to the parent and handeled/dispatched from there.)*
