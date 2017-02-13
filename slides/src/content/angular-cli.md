@@ -30,11 +30,13 @@ For example, the following command would initialize a project named `myAwesomePr
 ## Code Generation
 
 `angular-cli` has blueprints to generate:
-  - Components (c)
-  - Directives (d)
-  - Routes     (r)
-  - Pipes      (p)
-  - Modules    (m)
+
+|blueprint (shorthand)|                     |
+|---------------------|---------------------|
+| Component (c)       | Module    (m)       |
+| Directive (d)       | Interface (i)       |
+| Route     (r)       | Enum      (e)       |
+| Pipe      (p)       | Class     (cl)      |
 
 ```bash
   ng generate <blueprint> <path/to/file>
