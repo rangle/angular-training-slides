@@ -18,9 +18,26 @@ Inside the `app` folder create a sub folder called `store`. In that folder creat
 
 ## Step 4
 
-Create a child component called `<todo-input>` to insert any new to-do items. 
+Create a `dumb` child component called `<todo-input>` with a single button to perform the following action:
+
+- **Add Task** Add the new todo item. 
+
+*(hint: Make sure that the `insert` event is emitted to the parent and handeled there.)*
 
 ## Step 5
 
-Create a child component called `<todo-list>` to delegate the rendering of every individual `todo` item in the array. 
-Add a `checkbox` for each item in the to-do list that allows us to complete the todo items. Add a `delete` button that allows us to delete any items. 
+Create another `dumb` child component called `<todo-list>` to delegate the rendering of every individual `todo` item in the array.
+
+*(hint: Pass the list of `todo` items from the parent into this child component.)*
+
+## Step 6 
+
+For each item in the `<todo-list>` add a checkbox to toggle the `complete` property of the `todo` item. 
+
+## Step 7
+
+For each item in the `<todo-list>` add the following button.
+
+- **Delete**  Delete the todo item. 
+
+*(hint: Make sure that the `delete` event is emitted to the parent and handeled there.)*
