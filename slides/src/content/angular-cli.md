@@ -37,6 +37,7 @@ For example, the following command would initialize a project named `myAwesomePr
 | Directive (d)       | Interface (i)       |
 | Route     (r)       | Enum      (e)       |
 | Pipe      (p)       | Class     (cl)      |
+| Service   (s)       |                     |
 
 ```bash
   ng generate <blueprint> <path/to/file>
