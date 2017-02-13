@@ -17,6 +17,30 @@ Notes:
 
 ---
 
+## Bootstrapping an Application
+
+```ts
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+
+import { AppModule } from './app/app.module';
+
+if (process.env.NODE_ENV === 'production') {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
+
+- The function used to bootstrap an application depends on the target platform
+- Other platforms can be the server (Angular Universal) or a smartphone (Nativescript)
+- There are two types of bootstrapping:
+  - Just in time compilation (JIT)
+  - Ahead of time compilation (AOT)
+- Calling `enableProdMode` modifies how the change detection works
+
+---
+
 ## Angular Modules
 
 - Collection of components, directives, pipes and services (aka elements)
@@ -217,47 +241,6 @@ styles: [`
   - NPM => _package.json_
   - Webpack => _webpack.config.json_ 
   - Typescript => _tsconfig.json_
-
----
-
-## Bootstrapping an Application
-
-```ts
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { enableProdMode } from '@angular/core';
-
-import { AppModule } from './app/app.module';
-
-if (process.env.NODE_ENV === 'production') {
-  enableProdMode();
-}
-
-platformBrowserDynamic().bootstrapModule(AppModule);
-```
-
-- The function used to bootstrap an application depends on the target platform
-- Other platforms can be the server (Angular Universal) or a smartphone (Nativescript)
-- There are two types of bootstrapping:
-  - Just in time compilation (JIT)
-  - Ahead of time compilation (AOT)
-- Calling `enableProdMode` modifies how the change detection works
-
----
-
-## Loading an App Using Webpack
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Angular App</title>
-</head>
-<body>
-  <rio-app>Loading...</rio-app>
-</body>
-</html>
-```
 
 ---
 

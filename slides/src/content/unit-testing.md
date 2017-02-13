@@ -393,7 +393,7 @@ export class SearchWiki {
 
 ---
 
-## Testing HTTP Requests Using MockBackend (1/3)
+## Testing HTTP Requests
 
 Our testing strategy will be to check to see that `SearchWiki` has requested the right URL, and once we've responded with mock data like `mockResponse` we want to verify that it returns same data:
 
@@ -419,7 +419,7 @@ So, how to properly mock this process?
 
 ## HTTP Mocking Strategy (1/2)
 
-An alternative to using `MockBackend` is to create our own light mocks and tell TypeScript to treat it as Http using type assertion.
+One approach is to create our own light mocks and tell TypeScript to treat it as Http using type assertion.
 
 ```ts
 beforeEach(() => {
