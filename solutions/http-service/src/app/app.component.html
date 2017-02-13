@@ -1,3 +1,5 @@
-<h1>
-  {{title}}
-</h1>
+<div>
+  <input type="text" [(ngModel)]="inputUrl" />
+  <button (click)="onGetClick()">Get</button>
+  <p *ngIf="show">{{output}}</p>
+</div>
