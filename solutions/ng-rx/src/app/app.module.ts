@@ -16,7 +16,7 @@ import { TodoService } from './services/todo.service';
 
 @NgModule({
   declarations: [AppComponent, TodoInputComponent, TodoListComponent],
-  imports: [BrowserModule, FormsModule, HttpModule, StoreModule.provideStore({ TodoReducer }), EffectsModule.run(TodoEffects)],
+  imports: [BrowserModule, FormsModule, HttpModule, StoreModule.provideStore({ todoList: TodoReducer }), EffectsModule.run(TodoEffects)],
   providers: [TodoActions, TodoService],
   bootstrap: [AppComponent]
 })

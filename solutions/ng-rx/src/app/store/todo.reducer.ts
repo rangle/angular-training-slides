@@ -6,18 +6,15 @@ export const TodoReducer = (state = [], action) => {
       return action.payload;
     }
     case TodoActions.ADD_TODO_ITEM:
-      var length = state.length;
-      action.payload.id = length;
-
       return [
         ...state,
         action.payload
       ];
     case TodoActions.DELETE_TODO_ITEM:
-      return state.filter(todoItem => todoItem.id !== action.payload);
+      return [...state.slice(0, action.payload), ...state.slice(action.payload + 1)];
     case TodoActions.TOGGLE_COMPLETE:
-      return state.map(todoItem => {
-        if (todoItem.id === action.payload) {
+      return state.map((todoItem, index) => {
+        if (index === action.payload) {
           return Object.assign({}, todoItem, {
             complete: !todoItem.complete
           })

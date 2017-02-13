@@ -13,7 +13,7 @@ export class AppComponent {
   todoItems$: Observable<any>;
 
   constructor(private store: Store<any>, private todoActions: TodoActions) {
-    this.todoItems$ = store.select('TodoReducer');
+    this.todoItems$ = store.select('todoList');
   }
 
   insertTodo(title) {
