@@ -15,3 +15,11 @@ http://plnkr.co/edit/zpGmNNvXawfi5YpsyCYR?p=preview
 ## Solution 4
 
 http://plnkr.co/edit/09rodT?p=preview
+
+## Solution 5
+
+http://plnkr.co/edit/UnAwkyW0oB43HLEgXnOs?p=preview
+
+## Solution 6
+
+http://plnkr.co/edit/mkUWXsLkIcDpHvVZr1q4?p=preview

@@ -2,11 +2,11 @@
 
 ## Exercise 1
 
-Create an RxJS `Observable` to display 3 different integers using `setInterval` and `next`.
+Create an RxJS `Observable` to display 2 different integers using `setInterval` and `next`.
 
 ## Exercise 2
 
-Using the `map` operator create an RxJS `Observable` that will take an array of numbers and multiply it by 2. 
+Using the `map` operator create an RxJS `Observable` that will take an array of numbers and multiply each item by 2. 
 
 ## Exercise 3
 
@@ -15,3 +15,20 @@ Using the `filter` operaor create an RxJS `Observable` that will take an array o
 ## Exercise 4
 
 Create an RxJS `Observable` that will output a number and then throw an error. 
+
+## Exercise 5
+
+Create an Observable with the string `hello` and another one with the word `world`. 
+Merge the second observable's and print out `hello world`.
+
+## Exercise 6
+
+Create a chainable Observable with atleast total 4 methods, that takes the following array as an argument:
+
+`[1,2,3,4,5]`
+
+And outputs: 
+
+- 6
+- 8
+- 10
