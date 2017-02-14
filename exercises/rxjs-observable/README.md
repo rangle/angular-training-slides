@@ -2,15 +2,15 @@
 
 ## Exercise 1
 
-Create an RxJS `Observable` to display 2 different integers using `setInterval` and `next`.
+Create an RxJS `Observable` to display 2 different integers using `setTimeout` and `next`.
 
 ## Exercise 2
 
-Using the `map` operator create an RxJS `Observable` that will take an array of numbers and multiply each item by 2. 
+Create an `Observable` from an array of numbers and using `map`, multiply each item by 2.
 
 ## Exercise 3
 
-Using the `filter` operaor create an RxJS `Observable` that will take an array of numbers from 1 to 10 and filters it to return any number greater than 5. 
+Using the `filter` operator create an RxJS `Observable` that will take an array of numbers from 1 to 10 and filters it to return any number greater than 5. 
 
 ## Exercise 4
 
@@ -18,8 +18,9 @@ Create an RxJS `Observable` that will output a number and then throw an error.
 
 ## Exercise 5
 
-Create an Observable with the string `hello` and another one with the word `world`. 
-Merge the second observable's and print out `hello world`.
+Create an `Observable` from the string `hello`. 
+Then create another `Observable` from the string `world`. 
+Use `mergeMap` to print out `hello world`.
 
 ## Exercise 6
 
