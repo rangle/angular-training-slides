@@ -20,8 +20,8 @@ var Hedgehog = (function () {
 exports.Hedgehog = Hedgehog;
 var Sonic = (function (_super) {
     __extends(Sonic, _super);
-    function Sonic(numberOfRings) {
-        var _this = _super.call(this, "blue", 10) || this;
+    function Sonic(color, weight, numberOfRings) {
+        var _this = _super.call(this, color, weight) || this;
         _this.rings = numberOfRings;
         return _this;
     }

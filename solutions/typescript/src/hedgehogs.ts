@@ -19,8 +19,8 @@ export class Hedgehog {
 export class Sonic extends Hedgehog {
   rings: number;
 
-  constructor (numberOfRings: number) {
-    super("blue", 10);
+  constructor (color: string, weight: number, numberOfRings: number) {
+    super(color, weight);
     this.rings = numberOfRings;
   }
 
