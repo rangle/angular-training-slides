@@ -13,20 +13,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Bird = exports.Bird = function () {
-  function Bird(weight, height) {
+  function Bird(height) {
     _classCallCheck(this, Bird);
 
-    this.weight = weight;
     this.height = height;
   }
 
   _createClass(Bird, [{
     key: "walk",
     value: function walk() {
+      var _this = this;
+
       return new Promise(function (resolve, reject) {
         setTimeout(function () {
           return resolve("Bird finished walking!");
-        }, 2000);
+        }, _this.height * 500);
       });
     }
   }]);
@@ -37,31 +38,35 @@ var Bird = exports.Bird = function () {
 var Penguin = exports.Penguin = function (_Bird) {
   _inherits(Penguin, _Bird);
 
-  function Penguin(weight, height, type) {
+  function Penguin(height, type) {
     _classCallCheck(this, Penguin);
 
-    var _this = _possibleConstructorReturn(this, (Penguin.__proto__ || Object.getPrototypeOf(Penguin)).call(this, weight, height));
+    var _this2 = _possibleConstructorReturn(this, (Penguin.__proto__ || Object.getPrototypeOf(Penguin)).call(this, height));
 
-    _this.type = type;
-    return _this;
+    _this2.type = type;
+    return _this2;
   }
 
   _createClass(Penguin, [{
     key: "walk",
     value: function walk() {
+      var _this3 = this;
+
       return new Promise(function (resolve, reject) {
         setTimeout(function () {
-          return resolve("Penguing finished walking!");
-        }, 5000);
+          return resolve(_this3.type + " penguin finished walking!");
+        }, _this3.height * 1000);
       });
     }
   }, {
     key: "swim",
     value: function swim() {
+      var _this4 = this;
+
       return new Promise(function (resolve, reject) {
         setTimeout(function () {
-          return resolve("Penguing finished swimming!");
-        }, 2000);
+          return resolve(_this4.type + " penguin finished swimming!");
+        }, _this4.height * 100);
       });
     }
   }]);

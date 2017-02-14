@@ -1,18 +1,20 @@
-import * as birds from './birds.js';
+import {Bird, Penguin} from './birds.js';
 
-(function main(){
-  let birdDetails = [[3,3], [6,6,'Emperor'], [5,5, 'King'], [2,2]];
+(() => {
+  let birdDetails = [[3], [6,'Emperor'], [4,'King']];
 
   let birdList = birdDetails.map((args) => {
-    if(args.length > 2){
-      return new birds.Penguin(...args);
+    if(args.length > 1){
+      return new Penguin(...args);
     } else {
-      return new birds.Bird(...args);
+      return new Bird(...args);
     }
   })
 
-  let [ bird, penguin, penguin2, bird2] = birdList;
+  let [ bird, emperorPenguin, kingPenguin ] = birdList;
 
-  let race = Promise.race([bird.walk(),penguin.walk()]).then((value)=>console.log(value)).then(()=>console.log("race over! relay time!"));
-  let wait = Promise.all([bird.walk(),penguin.walk()]).then((value)=>console.log(value));
+  console.log(`bird track meet starts ${(new Date()).toTimeString()}`);
+  Promise.race([bird.walk(),emperorPenguin.walk()]).then( (value) => console.log(`${value}, race1 over! ${(new Date()).toTimeString()}`))
+    .then(() => Promise.race([kingPenguin.walk(),emperorPenguin.walk()]).then((value)=>console.log(`${value}, race2 over! ${(new Date()).toTimeString()}`)))
+    .then(() => Promise.race([kingPenguin.swim(),emperorPenguin.swim()]).then((value)=>console.log(`${value}, race3 over! ${(new Date()).toTimeString()}`)));
 })();

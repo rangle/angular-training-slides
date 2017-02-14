@@ -1,31 +1,30 @@
 export class Bird {
-  constructor(weight, height) {
-    this.weight = weight;
+  constructor(height) {
     this.height = height;
   }
 
   walk() {
     return new Promise((resolve,reject) => {
-      setTimeout(() => resolve("Bird finished walking!"), 2000);
+      setTimeout(() => resolve("Bird finished walking!"), this.height * 500);
     });
   }
 }
 
 export class Penguin extends Bird {
-  constructor(weight, height, type) {
-    super(weight, height);
+  constructor(height, type) {
+    super(height);
     this.type = type;
   }
 
   walk() {
     return new Promise((resolve,reject) => {
-      setTimeout(() => resolve("Penguing finished walking!"), 5000);
+      setTimeout(() => resolve(`${this.type} penguin finished walking!`), this.height * 1000);
     });
   }
 
   swim() {
     return new Promise((resolve,reject) => {
-      setTimeout(() => resolve("Penguing finished swimming!"), 2000);
+      setTimeout(() => resolve(`${this.type} penguin finished swimming!`), this.height * 100);
     });
   }
 }
