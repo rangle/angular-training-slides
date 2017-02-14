@@ -2,6 +2,8 @@
 
 An exercise to create a small node app written in typescript and compiled into javascript
 
+![](./typescript-exercise.gif)
+
 ## Step 1
 
 Create a new folder called `typescript` inside of the `training` folder. Run `npm init` in the `typescript` folder to initialize a new npm package.
