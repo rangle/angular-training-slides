@@ -24,11 +24,8 @@ Use `mergeMap` to print out `hello world`.
 
 ## Exercise 6
 
-Create a chainable Observable with atleast total 4 methods, that takes the following array as an argument:
-
-`[1,2,3,4,5]`
-
-And outputs: 
+Create a chainable Observable from the array `[1,2,3,4,5]`.
+Then use `filter`, `map` and `subscribe` to print out the below:
 
 - 6
 - 8
