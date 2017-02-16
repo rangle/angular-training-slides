@@ -1,8 +1,0 @@
-<h1>
-  {{title}}
-</h1>
-
-<todo-input (onInsert)="insertTodo($event)">
-</todo-input>
-<todo-list [todoItems]="todoItems$ | async" (onDelete)="deleteTodo($event)" (onToggle)="toggleTodo($event)">
-</todo-list>

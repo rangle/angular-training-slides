@@ -4,16 +4,24 @@
 
 ---
 
-## About Me
+# About Us
+
+### Mark Pevec
+
+Solutions architect at Rangle.io.  Many years of experience in many different languages and platforms.  Recent full-stack Javascript convert and evangelist.
+
+### Philip Da Silva
+
+Software developer at Rangle.io specializing in front-end technologies and UI. self-proclaimed single div CSS artist. When not getting in over his head in code, he's getting in over his head scuba diving in the murky depths of Canada
 
 ---
 
 ## Structure of this Training
 
 - 8 hours training in 2 days
-- 5 min break around 2:00 pm
-- 10 min break around 3:00 pm
-- 5 min break around 4:00 pm
+- 15 min break around 10:45 pm
+- 1 hr lunch break around 12:00 pm
+- 15 min break around 3:30 pm
 - Q&A sessions
 
 ---
