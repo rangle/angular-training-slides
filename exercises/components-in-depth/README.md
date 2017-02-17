@@ -20,11 +20,11 @@ Using `<ng-content>` with `select`, allow each button to receive its own custom 
 
 ## Step 3
 
-Add an `@Input` interval property, and a currentTime property both of type `number`
+Add an `@Input` interval property, and a time property both of type `number`
 
 - **interval** Acts as the step interval for the timer
-- **currentTime:** Will store the current callculated time
-- **currentTimer:** Will store the current timer id
+- **time:** Will store the current callculated time
+- **timerId:** Will store the current timer id
 
 ## Step 4
 
@@ -37,24 +37,24 @@ Add 4 `@Output` `EventEmitter`s
 
 ## Step 5
 
-Implement a `start` method to start a timer using `window.setInterval` and store the returned id in the `currentTimer` property.
+Implement a `start` method to start a timer using `window.setInterval` and store the returned id in the `timerId` property.
 
-The timer should use the `interval` input value as its interval and should update the `currentTime` property with the latest time.
+The timer should use the `interval` input value as its interval and should update the `time` property with the latest time.
 The timer should also emit the latest time at every interval using the `onInterval` output.
 
-Current time can be computed as `currentTime += interval / 1000`
+Current time can be computed as `time += interval / 1000`
 
-Optional: The method should also emit `currentTime` if a timer hasn't yet been started using the `onStart` output.
+Optional: The method should also emit `time` if a timer hasn't yet been started using the `onStart` output.
 
 ## Step 6
 
-Using `window.clearInterval` implement a `stop` method that will stop the current running timer using the stored `currentTimer` id.
+Using `window.clearInterval` implement a `stop` method that will stop the current running timer using the stored `timerId` id.
 
 Optional: Emit the current time using the `onStop` output.
 
 ## Step 7
 
-Implement a `reset` that will reset the `currentTime` to `0` and emit the current time using the `onReset` output
+Implement a `reset` that will reset the `time` to `0` and emit the current time using the `onReset` output
 
 ## Step 8
 
