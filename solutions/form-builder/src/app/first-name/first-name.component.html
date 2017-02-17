@@ -1,0 +1,14 @@
+<form [formGroup]="firstNameForm">
+  <div class="row">
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName" [formControl]="firstName" />
+    <ul class="errors" [hidden]="firstName.valid || firstName.untouched">
+      <li class="error" [hidden]="!firstName.hasError('required')">
+        The first name is required
+      </li>
+      <li class="error" [hidden]="!firstName.hasError('minlength')">
+        The first name must be at least 2 character long
+      </li>
+    </ul>
+  </div>
+</form>
