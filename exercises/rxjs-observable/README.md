@@ -30,3 +30,20 @@ Then use `filter`, `map` and `subscribe` to print out the below:
 - 6
 - 8
 - 10
+
+## Exercise 7
+
+Create an Observable from the array `[0,1,2,3,4]`.
+Then use `scan` to print out the below.
+Use 10 as the initial value for `scan`. 
+
+- 10
+- 11
+- 13
+- 16
+- 20
+
+## Exercise 8
+
+Create an Observable from the array `[0,1,2,3,4]`.
+Then use `reduce` to sum all values to print 10.
