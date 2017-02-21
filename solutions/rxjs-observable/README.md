@@ -23,3 +23,11 @@ http://plnkr.co/edit/UnAwkyW0oB43HLEgXnOs?p=preview
 ## Solution 6
 
 http://plnkr.co/edit/mkUWXsLkIcDpHvVZr1q4?p=preview
+
+## Solution 7
+
+http://plnkr.co/edit/PGctkHkH7tzEwDeNTLhV?p=preview
+
+## Solution 8
+
+http://plnkr.co/edit/ZhjfyXxef9eWaTZC6Pck?p=preview
