@@ -6,11 +6,11 @@ An exercise to create a little node ES6 app, compiled with Babel
 
 ## Step 1
 
-Create a new folder called `es6` inside of the `training` folder.  Run `npm init` in the `es6` folder to initialize a new npm package.
+Create a new folder called `es6` inside of the `training` folder.  Run `npm init -y` in the `es6` folder to initialize a new npm package.
 
 ## Step 2
 
-Install the Babel CLI in the `es6` folder with the command `npm i -D babel-cli`.  Then install the `babel-present-env` Babel preset (it will set the plugins/presets necessary for desired target) with the command `npm i -D babel-preset-env`.
+Install the Babel CLI in the `es6` folder with the command `npm i -D babel-cli`.  Then install the `babel-preset-env` Babel preset (it will set the plugins/presets necessary for desired target) with the command `npm i -D babel-preset-env`.
 
 ## Step 3
 

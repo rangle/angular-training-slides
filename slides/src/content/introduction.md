@@ -21,6 +21,8 @@
 ## Table of Contents
 
 1. Introduction
+1. Introduction to ES6/ES2015
+1. Introduction to TypeScript
 1. Creating a hello world application
 1. Components In Depth
 1. Directives
