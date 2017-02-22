@@ -1,50 +1,42 @@
-import { Component } from '@angular/core';
-import {
-  Validators,
-  FormGroup,
-  FormControl,
-  FormBuilder
-} from '@angular/forms';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
+
+// Custom components 
+import { EmailComponent } from './email/email.component';
+import { LastNameComponent } from './last-name/last-name.component';
+import { FirstNameComponent } from './first-name/first-name.component';
 
 @Component({
   selector: 'app-root',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(FirstNameComponent) firstNameComponent: FirstNameComponent;
+  @ViewChild(LastNameComponent) lastNameComponent: LastNameComponent;
+  @ViewChild(EmailComponent) emailComponent: EmailComponent;
 
+  formData;
   contacts = [];
 
-  firstName = new FormControl('', [
-    Validators.required,
-    Validators.minLength(2)
-  ]);
-  lastName = new FormControl('', [
-    Validators.required,
-    Validators.minLength(2)
-  ]);
-  email = new FormControl('', [
-    Validators.required,
-    isValidEmail
-  ]);
+  constructor(private builder: FormBuilder) {
+    this.formData = {};
+  }
 
-  contactForm: FormGroup = this.builder.group({
-    firstName: this.firstName,
-    lastName: this.lastName,
-    email: this.email
-  });
-
-  constructor(private builder: FormBuilder) {}
+  handleFormData(key, value): void {
+    this.formData[key] = value;
+  }
 
   addPerson() {
-    this.contacts = [...this.contacts, this.contactForm.value];
-    this.contactForm.reset();
+    this.contacts = [...this.contacts, this.formData];
+    this.reset();
   }
-}
 
-function isValidEmail(input: FormControl) {
-  const emailRegex = /\S+@\S+\.\S+/;
-  const isValid = emailRegex.test(input.value);
-
-  return isValid ? null : {invalidEmail: true};
+  reset(): void {
+    this.formData = {};
+    this.firstNameComponent.firstNameForm.reset();
+    this.lastNameComponent.lastNameForm.reset();
+    this.emailComponent.emailForm.reset();
+  }
 }
