@@ -4,8 +4,8 @@
 
 ## What are Observables?
 
-* The `Observable` is a proposed standard for managing async data for ES7 and beyond.
-* Available for use 
+* The `Observable` is a proposed standard for managing asynchronous data for ES7 and beyond.
+* Available for use via [RxJS library](https://github.com/ReactiveX/rxjs).
 * Allows for effective handling of a *stream* of asynchronous events with operations similar to 
 array methods like `map` and `filter`.
 * Similar in purpose to Promises but also more powerful with added features like disposability.
@@ -17,10 +17,10 @@ array methods like `map` and `filter`.
 
 * Both `Promises` and `Observables` are used for dealing with asynchronous code. However, 
 Observables are considered more powerful because:
-  * `Observables` are more expressive
-  * `Observables` are cancellable
+  * `Observables` are more expressive.
+  * `Observables` are cancellable.
   * `Observables` have rich API that make operations like retrying much easier (*i.e.*, with `retry` and 
-  `retryWhen` operators)
+  `retryWhen` operators).
 
 ---
 
@@ -117,11 +117,11 @@ http.get('http://jsonplaceholder.typicode.com/users/')
     this.doctors.push(data);
   });
 ```
-* `mergeMap`: also known as `flatMap`, it is used tp "flatten" result of an Observable
-execution back into the Observable stream, allowing chaning operations like `filter` and 
+* `mergeMap`: also known as `flatMap`, it is used to "flatten" result of an Observable
+execution back into the Observable stream, allowing chaining operations like `filter` and 
 `map`, which expects an `Observable`, to work.
-* `filter`: for each emitted result of an Observable execution, test it with provided "test" 
-function and return a new `Observable` that emit only the *passed* results.
+* `filter`: for each emitted result of an Observable execution, test it with "test" 
+function and return a new `Observable` that emits only the results that *passed* the test.
 * `map`: for each emitted result of an Observable execution, apply the provided function and 
-return a new `Observable` stream that emit the results.
+return a new `Observable` stream that emits the results.
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
