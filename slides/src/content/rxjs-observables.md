@@ -1,27 +1,127 @@
-## Search with `flatMap`
-
-Let's say we wanted to add a search feature that makes an http request and updates search results with every keypress event in a text field.
-By creating an `Observable` subscribed to events from the input field, and on every change to the input value we perform the HTTP request, which
-is also an `Observable`, we create an `Observable` of an `Observable`.
-
-By using `flatMap` we can convert the emissions of these `Observables` then flatten the emissions into a single stream
-
-<img src="content/images/flat-map.png" alt="flat-map-diagram" width="40%" />
-
-[View Example](http://plnkr.co/edit/L6CLXo?p=preview)
+# Introduction to Observables
 
 ---
 
-## Search with `switchMap`
+## What are Observables?
 
-The one downside to using `flatMap` for our search feature is that we will get results for all events in the stream and not necessarily in order.
-This would be a huge problem for our search feature as we may not get the latest results back.
-
-`switchMap` solves this problem by only subscribing to the latest event. Any time a new event comes in, `switchMap` will automatically
-unsubscribe from the older event to make sure you get the latest results.
-
-<img src="content/images/switch-map.png" alt="flat-map-diagram" width="40%" />
-
-[View Example](http://plnkr.co/edit/FYLTcx?p=preview)
+* The `Observable` is a proposed standard for managing async data for ES7 and beyond.
+* Available for use 
+* Allows for effective handling of a *stream* of asynchronous events with operations similar to 
+array methods like `map` and `filter`.
+* Similar in purpose to Promises but also more powerful with added features like disposability.
+* Angular uses it, a lot!
 
 ---
+
+## Why Not Just Use Promises?
+
+* Both `Promises` and `Observables` are used for dealing with asynchronous code. However, 
+Observables are considered more powerful because:
+  * `Observables` are more expressive
+  * `Observables` are cancellable
+  * `Observables` have rich API that make operations like retrying much easier (*i.e.*, with `retry` and 
+  `retryWhen` operators)
+
+---
+
+## Creating an Observable
+
+```js
+import {Observable} from 'rxjs/Observable';
+
+const observable = new Observable(observer => {
+  observer.next(1);
+  observer.next(2);
+  observer.complete();
+})
+```
+Creating the Observable alone does not trigger anything.
+Creating an Observable is like defining a function: 
+- A function does not do anything until it is *called*. 
+- Likewise, an Observable does not start streaming data until it's been *subscribed*.
+
+---
+
+## Subscribing to an Observable
+
+```js
+const subscription = observable.subscribe(
+  value => console.log(value),    // handles next
+  error => console.log(error),    // handles error 
+  () => console.log('complete'),  // handles complete
+);
+```
+
+Subscribing to the Observable we created earlier would print:
+
+```
+1
+2
+complete
+```
+
+Also calling `subscribe` returns a *Subscription* object which is used to *dispose* or *cancel*
+execution of an Observable.
+
+---
+
+## Disposing (Cancelling) Execution
+
+Sometimes we want to cancel an `Observable`'s execution (*i.e.*, for an infinite sequence). We can
+achieve this by *unsubscribing* from the executing Observable.
+
+```js
+const subscription = observable.subscribe(
+  value => console.log(value),   
+  error => console.log(error),    
+  () => console.log('complete'),  
+); 
+
+subscription.unsubscribe(); // disposing observable execution
+```
+
+---
+
+## Observables from Other (Angular) Sources
+
+### Observable HTTP Events
+
+```js 
+http.get('http://jsonplaceholder.typicode.com/users/')
+  .mergeMap((data) => data.json())
+  .subscribe((data) => {
+    this.doctors.push(data);
+  });
+```
+
+### Observable Form Events 
+
+```js
+this.email = new FormControl();
+
+this.email.valueChanges
+  .map(n => n.split('').reverse().join(''))
+  .subscribe(value => this.data = value);
+```
+
+---
+
+## Observable Operations
+
+```js
+http.get('http://jsonplaceholder.typicode.com/users/')
+  .mergeMap((response) => response.json())
+  .filter((person) => person.id > 5)
+  .map((person) => "Dr. " + person.name)
+  .subscribe((data) => {
+    this.doctors.push(data);
+  });
+```
+* `mergeMap`: also known as `flatMap`, it is used tp "flatten" result of an Observable
+execution back into the Observable stream, allowing chaning operations like `filter` and 
+`map`, which expects an `Observable`, to work.
+* `filter`: for each emitted result of an Observable execution, test it with provided "test" 
+function and return a new `Observable` that emit only the *passed* results.
+* `map`: for each emitted result of an Observable execution, apply the provided function and 
+return a new `Observable` stream that emit the results.
+* [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
