@@ -148,5 +148,5 @@ Observable.forkJoin([users, posts])
   .subscribe((data) => {
     console.log(data[0]); // response for users
     console.log(data[1]); // response for posts
-  });
+});
 ``` 
