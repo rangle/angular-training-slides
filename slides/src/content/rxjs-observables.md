@@ -125,3 +125,28 @@ function and return a new `Observable` that emits only the results that *passed*
 * `map`: for each emitted result of an Observable execution, apply the provided function and 
 return a new `Observable` stream that emits the results.
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
+
+---
+
+### Promise vs Observable: `Promise.all` 
+
+One common scenario when working with Promises is resolving multiple promises together. 
+This is commonly achieved using `Promise.all`.
+
+The same can be achieved with Observables using `forkJoin` operator.
+
+```js 
+const users = http.get(
+  'https://jsonplaceholder.typicode.com/users/'
+).map((data) => data.json());
+  
+const posts = http.get(
+  'https://jsonplaceholder.typicode.com/posts/'  
+).map((data) => data.json());
+  
+Observable.forkJoin([users, posts])
+  .subscribe((data) => {
+    console.log(data[0]); // response for users
+    console.log(data[1]); // response for posts
+  });
+``` 
