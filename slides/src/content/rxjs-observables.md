@@ -128,7 +128,7 @@ return a new `Observable` stream that emits the results.
 
 ---
 
-### Promise vs Observable: `Promise.all` 
+### Promise vs Observable: `Promise.all` vs `forkJoin`
 
 One common scenario when working with Promises is resolving multiple promises together. 
 This is commonly achieved using `Promise.all`.
