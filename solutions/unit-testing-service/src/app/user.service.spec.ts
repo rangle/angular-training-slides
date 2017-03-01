@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, fakeAsync } from '@angular/core/testing';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -53,7 +53,7 @@ describe('When testing the UserService', () => {
       expect(http.get).toHaveBeenCalledWith(expectedUrl);
     });
 
-    it('Should get back an Observable of Users', async(() => {
+    it('Should get back an Observable of Users', fakeAsync(() => {
       const http = TestBed.get(Http);
       const service: UserService = TestBed.get(UserService);
       service.getUserList().subscribe(users => {

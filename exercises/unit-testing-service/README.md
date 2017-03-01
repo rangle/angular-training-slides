@@ -31,6 +31,19 @@ export class AppComponent implements OnInit {
 }
 ```
 
+_user.model.ts_
+
+```ts
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+}
+```
+
 _user.service.ts_
 
 ```ts
@@ -54,19 +67,6 @@ export class UserService {
   getUser(id: number): Observable<User> {
     return this.http.get(`${this.baseUrl}/${id}`).map(user => user.json());
   }
-}
-```
-
-_user.model.ts_
-
-```ts
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
-  website: string;
 }
 ```
 
