@@ -16,7 +16,7 @@
 
   <div class="row">
     <label for="lastName">Last Name:</label>
-    <input type="lastName" name="lastName" id="lastName" [formControl]="lastName"/>
+    <input type="text" name="lastName" id="lastName" [formControl]="lastName"/>
     <ul class="errors"
       [hidden]="lastName.valid || lastName.untouched">
       <li class="error" [hidden]="!lastName.hasError('required')">
@@ -28,25 +28,11 @@
     </ul>
   </div>
 
-  <div class="row">
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" [formControl]="email"/>
-    <ul class="errors"
-      [hidden]="email.valid || email.untouched">
-      <li class="error" [hidden]="!email.hasError('required')">
-        The email is required
-      </li>
-      <li class="error" [hidden]="!email.hasError('invalidEmail')">
-        Must be a valid email
-      </li>
-    </ul>
-  </div>
-
   <button type="submit" [disabled]="!contactForm.valid">Add Person</button>
 </form>
 <hr>
 <ul>
   <li *ngFor="let contact of contacts" class="contact-item">
-    {{contact.firstName}} {{contact.lastName}}: {{contact.email}}
+    {{contact.firstName}} {{contact.lastName}}
   </li>
 </ul>

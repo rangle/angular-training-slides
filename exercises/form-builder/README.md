@@ -30,11 +30,11 @@ Declare a `contacts` property initialized as an empty array in the
 
 ## Step 6
 
-Declare three properties: `firstName`, `lastName`, and `email` as new `FormControl`s.
+Declare two properties: `firstName`, and `lastName` as new `FormControl`s.
 
 ## Step 7
 
-group the properties together you declared in step 6 using our `builder`s `group`
+Group the properties together you declared in step 6 using our `builder`s `group`
 function and pass it to a new property called `contactForm` of type `formGroup`.
 
 ## Step 8
@@ -47,7 +47,7 @@ pushes the object into the contacts array then clears the form.
 Modify the `app.component.html` template file to contain the markup content for
 the form with a container `<form>` element and specify that it's a `formGroup` named
 `contactForm` like so,  `<form [formGroup]="contactForm">`. Also, bind the
-`addContact()` method to the form's `ngSubmit` event.
+`addContact()` method to the form's `ngSubmit` event. 
 
 ## Step 10
 
@@ -61,36 +61,63 @@ from our component. For example, the `firstName` input should have
 
 Below the form element, add a `<ul>` element to display our contacts then add a `<li>` element with an
 `ngFor` directive to loop through all contacts in the `contacts` array we made in step
-5\. Each `<li>` element should display the first name, last name, and email of a
-contact.
+5\. Each `<li>` element should display the first name and last name of a
+contact. You can use the below html as a starting point.
+
+```html
+<form>
+  <div class="row">
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName" />
+    <ul class="errors">
+      <li class="error">
+        ...
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" id="lastName"/>
+    <ul class="errors">
+      <li class="error" >
+        ...
+      </li>
+    </ul>
+  </div>
+
+  <button type="submit">Add Person</button>
+</form>
+<hr>
+<ul>
+  <li>
+    ...
+  </li>
+</ul>
+
+```
+
 
 ## Step 12
 
-Create a custom validator outside of the `AppComponent` class named `isEmailValid`.
-It should take one `FormControl` input as an argument and use a regular expression to
-determine whether the value of the input is a valid email.
+In `app.component.ts`, add `required` and `minlength(2)` validators to the
+`firstName` and `lastName` `FormControl`s.
 
 ## Step 13
-
-In `app.component.ts`, add `required` and `minlength(2)` validators to the
-`firstName` and `lastName` `FormControl`s and `required` and you custom
-`isEmailValid` validators to the `email` `FormControl`.
-
-## Step 14
 
 For each of the `input` elements add an element to display an error list `<ul>`
 underneath that is hidden using the `[hidden]` attribute if the control above is
 `valid` or `untouched`.
 
-## Step 15
+## Step 14
 
 Add an error list item `<li>` in the error list for each control for each possible error. This error should be hidden (via a the hidden attribute) unless the given control has the error present.
 
-## Step 16
+## Step 15
 
 Set the submit button to be disabled unless the form is valid.
 
-## Step 17
+## Step 16
 
 Let's add some styling to our application by adding the following css to the
 `app.component.css` file.

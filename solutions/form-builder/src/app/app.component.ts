@@ -23,28 +23,16 @@ export class AppComponent {
     Validators.required,
     Validators.minLength(2)
   ]);
-  email = new FormControl('', [
-    Validators.required,
-    isValidEmail
-  ]);
 
   contactForm: FormGroup = this.builder.group({
     firstName: this.firstName,
-    lastName: this.lastName,
-    email: this.email
+    lastName: this.lastName
   });
 
-  constructor(private builder: FormBuilder) {}
+  constructor(private builder: FormBuilder) { }
 
   addPerson() {
     this.contacts = [...this.contacts, this.contactForm.value];
     this.contactForm.reset();
   }
-}
-
-function isValidEmail(input: FormControl) {
-  const emailRegex = /\S+@\S+\.\S+/;
-  const isValid = emailRegex.test(input.value);
-
-  return isValid ? null : {invalidEmail: true};
 }
