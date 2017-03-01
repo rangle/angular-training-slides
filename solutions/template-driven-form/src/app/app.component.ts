@@ -14,11 +14,9 @@ export class AppComponent {
     countries: ['Canada', 'US']
   };
   person: Person;
-  isVisible = false;
 
   getForm(myForm: NgForm): void {
     this.person = myForm.value;
-    this.isVisible = true;
   }
 
   hideValues() {
