@@ -65,61 +65,87 @@ execution of an Observable.
 
 ---
 
-## Disposing (Cancelling) Execution
+## Constructing Observables from Other Sources
 
-Sometimes we want to cancel an `Observable`'s execution (*i.e.*, for an infinite sequence). We can
-achieve this by *unsubscribing* from the executing Observable.
+You can construct an Observable by converting existing JavaScript constructs like event listeners.  
 
-```js
-const subscription = observable.subscribe(
-  value => console.log(value),   
-  error => console.log(error),    
-  () => console.log('complete'),  
-); 
+For instance, say we have a button defined in our DOM as such:
 
-subscription.unsubscribe(); // disposing observable execution
+```html
+<button>Click Me!</button>
 ```
+
+And we want `Clicked!` to be printed to console whenever the button is clicked. 
+We can use `fromEvent` creation operator to create an Observable from the click event listener:
+
+```js 
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+
+const clickStream = Observable.fromEvent(document.querySelector('button'), 'click');
+
+const clickStreamSubscription = clickStream.subscribe(
+  () => console.log('Clicked!')
+);
+```
+
+Similarly to `fromEvent`, RxJS library provides [a number of different ways to create Observables](http://reactivex.io/rxjs/manual/overview.html#creation-operators) such as `fromPromise`.
 
 ---
 
-## Observables from Other (Angular) Sources
+## Disposing (Cancelling) Observable Execution
 
-### Observable HTTP Events
+Say, for some reason, we want to the button to stop printing `Clicked!` to console after 3 seconds. 
+
+We can achieve this by *disposing* or *cancelling* the Observable execution. This is done by *unsubscribing* from the executing Observable.
+
+```js
+const clickStreamSubscription = clickStream.subscribe(
+  () => console.log('Click me!')
+);
+
+setTimeout(() => {
+  clickStreamSubscription.unsubscribe(); 
+}, 3000);
+```
+
+Notice that subscribing to the Observable returns a *Subscription* object. We can then use this Subscription object's 
+`unsubscribe` method to dispose the Observable stream.
+
+---
+
+## Observable HTTP Events in Angular
+
+One of the most common uses for Observables in Angular is to handle HTTP events:
 
 ```js 
 http.get('http://jsonplaceholder.typicode.com/users/')
-  .mergeMap((data) => data.json())
+  .map((response) => Observable.from(response.json()))
   .subscribe((data) => {
-    this.doctors.push(data);
+    data.forEach(user => console.log(user.name));
   });
 ```
 
-### Observable Form Events 
-
-```js
-this.email = new FormControl();
-
-this.email.valueChanges
-  .map(n => n.split('').reverse().join(''))
-  .subscribe(value => this.data = value);
-```
+* `.map((data) => new Observable(data.json()))` transforms the `response` (response data) into a new Observable stream that emits `response` in a JSON object form.
+* We can then work with to response data as a JSON object by subscribing to the newly transformed Observable stream.
 
 ---
 
 ## Observable Operations
 
+Using *Observable operators* we can perform Array-like operations to filter and transform values as they are emitted by the Observable execution: 
+
 ```js
-http.get('http://jsonplaceholder.typicode.com/users/')
-  .mergeMap((response) => response.json())
-  .filter((person) => person.id > 5)
-  .map((person) => "Dr. " + person.name)
+http.get('https://jsonplaceholder.typicode.com/users')
+  .map((response) => Observable.from(response.json()))
   .subscribe((data) => {
-    this.doctors.push(data);
+    Observable.from(data)
+      .filter((person) => person.id > 5)
+      .map((person) => "Dr. " + person.name)
+      .subscribe((doctor) => console.log(doctor)); 
   });
 ```
-* `mergeMap`: also known as `flatMap`, it is used to "flatten" result of an Observable
-execution back into the Observable stream, allowing chaining operations like `filter` and 
-`map`, which expects an `Observable`, to work.
+
 * `filter`: for each emitted result of an Observable execution, test it with "test" 
 function and return a new `Observable` that emits only the results that *passed* the test.
 * `map`: for each emitted result of an Observable execution, apply the provided function and 
@@ -128,10 +154,29 @@ return a new `Observable` stream that emits the results.
 
 ---
 
+## Promise vs Observable: Chaining Promises vs `mergeMap`
+
+Just as we can have nested Promises, we can have *nested Observables*. The previous slide contained an example of nested Observables. 
+
+Promises can be *chained* to avoid nested Promises. Similarly, Observables can utilize `mergeMap` (also known as `flatMap`) to achieve something similar:
+
+```js 
+http.get('https://jsonplaceholder.typicode.com/users')
+  .map((response) => Observable.from(response.json()))
+  .mergeMap((data) => data)
+  .filter((person) => person.id > 5)
+  .map((person) => "Dr. " + person.name)
+  .subscribe((doctor) => console.log(doctor));
+```
+
+`mergeMap` works by subscribing to and pulling values out of the inner Observable stream, which is `Observable.from(data)` in this example, and passing or *merging* them 
+back to the outer Observable stream.
+
+---
+
 ## Promise vs Observable: `Promise.all` vs `forkJoin`
 
-One common scenario when working with Promises is resolving multiple promises together. 
-This is commonly achieved using `Promise.all`.
+One common scenario when working with Promises is resolving multiple promises together. This is commonly achieved using `Promise.all`.
 
 The same can be achieved with Observables using `forkJoin` operator.
 
