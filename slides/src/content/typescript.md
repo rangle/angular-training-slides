@@ -148,7 +148,7 @@ class Baz {
 let baz = new Baz(new Foo(), new Bar()); // valid
 baz = new Baz(new Bar(), new Foo());     // tsc errors
 
-lass Person {
+class Person {
   name: string;
   nickName?: string;  // optional property
 }
@@ -156,9 +156,9 @@ lass Person {
 
 ---
 
-## Interfaces
+## Interfaces (1/2)
 
-- Interfaces define a contract or shape for a function, or objext (no implementation, just signatures)
+- Interfaces define a contract or shape for a function, or object (no implementation, just signatures)
 - No transpiled JS artifact.  It is only used for type-checking by the `tsc` transpiler
 - Interfaces can also provide multiple function signatures
 
@@ -189,9 +189,9 @@ printOut(['hi', 'bye']); // 'hi, bye'
 
 ---
 
-## Interfaces
+## Interfaces (2/2)
 
-- The shape of Interfaces is what is important, so Class instances can be fed to Interface types if they have same shape (same attributes and/or methods)
+- The shape of Interfaces is what is important, so Class instances can be fed to Interface types if they have the same shape (same attributes and/or methods)
 - Classes can implement interfaces with the keyword `implements` (though it isn't absolutely necessary as long as the class shape matches)
 
 ```ts
@@ -200,7 +200,7 @@ interface Action {
 }
 
 let a: Action = {
-    type: 'literal'
+  type: 'literal'
 }
 
 class NotAnAction {
@@ -224,10 +224,13 @@ a = new NotAnAction(); // valid TypeScript!
 ```ts
 let numbers = [2, 3, 5, 7, 11];
 numbers = ['this will generate a type error'];
+```
+```bash
 tsc ./type-inference-finds-error.ts 
 type-inference-finds-error.ts(2,1): error TS2322: Type 'string[]' is not assignable to type 'number[]'.
   Type 'string' is not assignable to type 'number'.
-
+```
+```ts
 interface FakeEvent {
   type: string;
 }
@@ -242,6 +245,8 @@ const fakeWindow = new FakeWindow();
 fakeWindow.onMouseDown = (a: number) => {
   // this will fail
 };
+```
+```bash
 tsc ./type-inference-finds-error-2.ts 
 type-inference-finds-error-2.ts(14,1): error TS2322: Type '(a: number) => void' is not assignable to type 'FakeEventHandler'.
   Types of parameters 'a' and 'e' are incompatible.

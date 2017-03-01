@@ -4,16 +4,45 @@
 
 ## Classes
 
+- Makes ES5 prototypical inheritance model function more like a traditional class-based language
+- Supports inheritance using the keyword `extend`
+- Supports constructors using the keyword `constructor`
+
 ```js
 class Hamburger {
-  constructor() {} // constructor
-  listToppings() {} // method
+  constructor() { }   // constructor 
+  listToppings() { }  // method
 }
+```
+
+- Methods of the class can be accessed using a class object. 
+
+```js
 let burger = new Hamburger();
 burger.listToppings();
 ```
 
-- Makes ES5 prototypical inheritance model function more like a traditional class-based language
+- getter and setter are supported using `get` / `set`
+
+```js
+class Hamburger {
+  ...
+  get toppings() {
+    return this.toppings;
+  }
+  set toppings(toppingsList) {
+    this.toppings = toppingsList;
+  }
+}
+
+let burger = new Hamburger();
+burger.toppings = ['onion', 'tomatoes'];  // calls the setter
+console.log(burger.toppings);             // calls the getter
+```
+
+---
+## `this`
+
 - When called using dot notation an object's method's `this` will be the object, in other cases `this` won't be the object (unless bound)
 
 ```js
@@ -24,7 +53,7 @@ class Toppings {
   }
   fetch(){
     getFromServer(function callback(){ 
-      this.formatToppings(); // not gonna work
+      this.formatToppings(); // not gonna work, because this will be undefined
     });
   }
 }
@@ -32,13 +61,49 @@ class Toppings {
 var toppings = new Toppings();
 var lostThis = toppings.list;
 lostThis() // not gonna work
+```
+- You can use call, bind or supply to pass `this` to change the context.
+
+```js
 var foundThis = toppings.list.bind(toppings);
 foundThis() // this will work
 ```
 
 ---
 
-## Arrow Functions
+## Arrow Functions (1/2)
+
+- Arrow functions do not set a local copy of `this`, `arguments`, `super`, or `new.target`. When any of those are used inside an arrow function JavaScript uses them from the outer scope.
+
+```js
+class Toppings {
+  formatToppings() { /* implementation details */ }
+  list() {
+    return this.formatToppings(this.toppings);
+  }
+  fetch(){
+    getFromServer(function callback(){ 
+      this.formatToppings(); // not gonna work, because this will be undefined
+    });
+  }
+}
+
+class Toppings {
+  formatToppings() { /* implementation details */ }
+  list() {
+    return this.formatToppings(this.toppings);
+  }
+  fetch(){
+    getFromServer(() => { 
+      this.formatToppings(); // this will work
+    });
+  }
+}
+```
+
+---
+
+## Arrow Functions (2/2)
 
 ```js
 items.forEach(function(x) {
@@ -58,36 +123,6 @@ incrementedItems = items.map(x => x+1);   // when a single param can remove para
 
 ---
 
-## Arrow Functions
-
-```js
-class Toppings {
-  constructor(toppings) {
-    this.toppings = Array.isArray(toppings) ? toppings : [];
-  }
-  outputList() {
-    this.toppings.forEach(function(topping, i) {
-      console.log(topping, i + '/' + this.toppings.length);  // `this` will be undefined
-    });
-  }
-}
-
-class Toppings {
-  constructor(toppings) {
-    this.toppings = Array.isArray(toppings) ? toppings : [];
-  }
-  outputList() {
-    this.toppings.forEach((topping, i) => {
-      console.log(topping, i + '/' + this.toppings.length)  // `this` works!
-    });
-  }
-}
-```
-
-- Arrow functions do not set a local copy of `this`, `arguments`, `super`, or `new.target`. When any of those are used inside an arrow function JavaScript uses them from the outer scope.
-
----
-
 ## Template Strings
 
 ```js
@@ -102,7 +137,7 @@ console.log(`hello my name is ${name}, and I am ${age} years old`); // Template 
 
 ---
 
-## Inheritance
+## Inheritance (1/2)
 
 - The class constructor is called when an object is created using the new operator, it will be called before the object is fully created. A consturctor is used to pass in arguments to initialize the newly created object.
 - The order of object creation starts from its base class and then moves down to any subclass(es).
@@ -135,7 +170,7 @@ penguin.swim(); //swim!
 
 ---
 
-## Inheritance
+## Inheritance (2/2)
 
 - Prototypal inheritance was done before class was introduced to JavaScript.  Below is the previous example in prototypal format
 
