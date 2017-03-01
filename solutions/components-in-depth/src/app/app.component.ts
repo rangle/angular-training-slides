@@ -5,7 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  rate: number = 2.17;
-  interval: number = 1000;
-}
+export class AppComponent { }
