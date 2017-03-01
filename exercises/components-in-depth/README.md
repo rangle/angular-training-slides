@@ -54,7 +54,7 @@ const defaultCounterValue = 10;
 })
 export class CounterDisplayComponent {
   counterValue: number;
-  defaultCounterValue: number = defaultCounterValue;
+  defaultCounterValue: number;
 
   ngOnInit() {
     this.setDefaultValue();
