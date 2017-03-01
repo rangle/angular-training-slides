@@ -1,93 +1,92 @@
 # Components in Depth Exercise
 
-Create a component with the following behaviour
-
-![](./preview.gif)
-
 ## Step 1
 
-Using the `angular-cli` create a new project called `components-in-depth` inside of the `training` folder.
+Using the `angular-cli` create a new project called `components-in-depth` inside 
+of the `training` folder.
 
 ## Step 2
 
-Create a child component called `<app-timer>` with three buttons.
+Use the `angular-cli` to create the components by running the following 
+commands:
 
-- **Start timer:** Starts the timer
-- **Stop timer:** Stops the timer
-- **Reset timer:** Resets the timer
-
-Using `<ng-content>` with `select`, allow each button to receive its own custom label
+```
+ng generate component button-grouping
+ng generate component counter-display
+```
 
 ## Step 3
 
-Add an `@Input` interval property, and a time property both of type `number`
+In `button-grouping.component.ts`, add the following `@Input` property
+- counterValue
 
-- **interval** Acts as the step interval for the timer
-- **time:** Will store the current callculated time
-- **timerId:** Will store the current timer id
+and the following `@Output` EventEmitters
+- onIncrement
+- onDecrement
 
 ## Step 4
 
-Add 4 `@Output` `EventEmitter`s
+Implement the `increment` method to emit the `onIncrement` event containing the 
+`counterValue` incremented by 1.
 
-- **onStart:** Emits when the timer starts
-- **onStop:** Emits when the timer stops
-- **onInterval:** Emits on every timer interval
-- **onReset:** Emits when the timer is reset
+Implement the `decrement` method to emit the `onDecrement` event containing the 
+`counterValue` decremented by 1.
 
 ## Step 5
 
-Implement a `start` method to start a timer using `window.setInterval` and store the returned id in the `timerId` property.
+Create two buttons in `button-grouping.component.html` that will call our 
+`increment` and `decrement` methods when pressed.
 
-The timer should use the `interval` input value as its interval and should update the `time` property with the latest time.
-The timer should also emit the latest time at every interval using the `onInterval` output.
-
-Current time can be computed as `time += interval / 1000`
-
-Optional: The method should also emit `time` if a timer hasn't yet been started using the `onStart` output.
+Use `ng-content` inside the buttons such that we can use projection to pass in
+custom button text.
 
 ## Step 6
 
-Using `window.clearInterval` implement a `stop` method that will stop the current running timer using the stored `timerId` id.
+Place the following snippet into `counter-display.component.ts`
+```ts
+import { Component } from '@angular/core';
 
-Optional: Emit the current time using the `onStop` output.
+const defaultCounterValue = 10;
+
+@Component({
+  selector: 'app-counter-display',
+  templateUrl: 'counter-display.component.html'
+})
+export class CounterDisplayComponent {
+  counterValue: number;
+  defaultCounterValue: number = defaultCounterValue;
+
+  ngOnInit() {
+    this.setDefaultValue();
+  }
+
+  setDefaultValue() {
+    this.counterValue = this.defaultCounterValue =
+      Number.isInteger(this.defaultCounterValue) ?
+      this.defaultCounterValue : defaultCounterValue;
+  }
+}
+```
 
 ## Step 7
 
-Implement a `reset` that will reset the `time` to `0` and emit the current time using the `onReset` output
+Place the following snippet into `counter-display.component.html`.
+```html
+<input type="number" [(ngModel)]="defaultCounterValue">
+<button (click)="setDefaultValue()">
+  Set default value
+</button>
+
+<h4>{{ counterValue }}</h4>
+```
+
+Add `<app-button-grouping>` to the bottom of the file and do the following:
+- pass in the `counterValue`
+- handle the `output` events by setting the `counterValue` to the emitted 
+value
+- use projection to pass in some text to label our buttons
 
 ## Step 8
 
-Create a `<app-fare-calculator>` component which will use `<app-timer>` in order to calculate fare based on a given rate.
-
-## Step 9
-
-Add 2 `@Input`s `rate`, and `interval`, and one property `time`
-
-- **rate:** Will be used to calculate the current fare based on time
-- **interval:** Will be used to configure `<app-timer>` to use the interval we're interested in
-- **time:** Will be used to store the latest time outputted from `<app-timer>`
-
-## Step 10
-
-Implement a `getCurrentFare` method to calculate the current fare based on rate and time.
-
-Fare can be calculated as `(rate * time).toFixed(2)`
-
-And add markup to display the output of `getCurrentFare` in the template
-
-## Step 11
-
-Add `<app-timer>` to the template and pass in the `interval` value.
-
-## Step 12
-
-Add listeners to the `(onInterval)` and `(onReset)` custom events, `(onInterval)` should be an expression or method which updates the `time` property value, and `(onReset)` should be an expression or method which resets the `time` property
-
-## Step 13
-
-Declare properties (of the appropriate types, or appropriately initialized) in `AppComponent` to store the possible options of `<app-fare-calculator>`
-
-## Step 14
-
-Modify the `app.component.html` template file to contain the HTML content of the `<app-fare-calculator>` component and pass in the appropriate values
+Add `<app-counter-display></app-counter-display>` to the `app.component.html` 
+template.
