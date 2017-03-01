@@ -16,7 +16,7 @@
 
   <div class="row">
     <label for="lastName">Last Name:</label>
-    <input type="lastName" name="lastName" id="lastName" [formControl]="lastName"/>
+    <input type="text" name="lastName" id="lastName" [formControl]="lastName"/>
     <ul class="errors"
       [hidden]="lastName.valid || lastName.untouched">
       <li class="error" [hidden]="!lastName.hasError('required')">

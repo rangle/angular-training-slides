@@ -78,7 +78,7 @@ contact. You can use the below html as a starting point.
 
   <div class="row">
     <label for="lastName">Last Name:</label>
-    <input type="lastName" name="lastName" id="lastName"/>
+    <input type="text" name="lastName" id="lastName"/>
     <ul class="errors">
       <li class="error" >
         ...
