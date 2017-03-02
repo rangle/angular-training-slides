@@ -58,14 +58,14 @@ class Toppings {
   }
 }
 
-var toppings = new Toppings();
-var lostThis = toppings.list;
+const toppings = new Toppings();
+let lostThis = toppings.list;
 lostThis() // not gonna work
 ```
 - You can use call, bind or supply to pass `this` to change the context.
 
 ```js
-var foundThis = toppings.list.bind(toppings);
+let foundThis = toppings.list.bind(toppings);
 foundThis() // this will work
 ```
 
@@ -126,8 +126,8 @@ incrementedItems = items.map(x => x+1);   // when a single param can remove para
 ## Template Strings
 
 ```js
-var name = 'Sam';
-var age = 42;
+let name = 'Sam';
+let age = 42;
 
 console.log('hello my name is ' + name + ' I am ' + age + ' years old');
 console.log(`hello my name is ${name}, and I am ${age} years old`); // Template String
@@ -311,7 +311,7 @@ sayName(john) // -> Helo John Smith Doe
 ```js
 //  lib/math.js
 export function sum (x, y) { return x + y }
-export var pi = 3.141593
+export const pi = 3.141593
 
 //  someApp.js
 import * as math from "lib/math"
@@ -323,7 +323,7 @@ console.log("2π = " + sum(pi, pi))
 
 //  lib/mathplusplus.js
 export * from "lib/math"
-export var e = 2.71828182846
+export const e = 2.71828182846
 export default (x) => Math.exp(x)
 
 //  someApp.js
