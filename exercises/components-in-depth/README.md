@@ -7,13 +7,8 @@ of the `training` folder.
 
 ## Step 2
 
-Use the `angular-cli` to create the components by running the following 
-commands:
-
-```
-ng generate component button-grouping
-ng generate component counter-display
-```
+Use the `angular-cli` to `generate` a `button-grouping` and a `counter-display` 
+component.
 
 ## Step 3
 
@@ -42,31 +37,13 @@ custom button text.
 
 ## Step 6
 
-Place the following snippet into `counter-display.component.ts`
-```ts
-import { Component } from '@angular/core';
-
-const defaultCounterValue = 10;
-
-@Component({
-  selector: 'app-counter-display',
-  templateUrl: 'counter-display.component.html'
-})
-export class CounterDisplayComponent {
-  counterValue: number;
-  defaultCounterValue: number;
-
-  ngOnInit() {
-    this.setDefaultValue();
-  }
-
-  setDefaultValue() {
-    this.counterValue = this.defaultCounterValue =
-      Number.isInteger(this.defaultCounterValue) ?
-      this.defaultCounterValue : defaultCounterValue;
-  }
-}
-```
+In `counter-display.component.ts`:
+- create a `defaultCounterValue` variable with a value of 10
+- create a `counterValue` variable which will keep track of the current value
+- implement a `setDefaultValue` method which will update `counterValue` to the 
+default value
+- call the `setDefaultValue` in the `OnInit` hook to instantiate the value of 
+`counterValue`
 
 ## Step 7
 
