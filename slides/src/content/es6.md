@@ -28,7 +28,7 @@ burger.listToppings();
 class Hamburger {
   ...
   get toppings() {
-    return this.toppings;
+    return 'topings are ' + this.toppings;
   }
   set toppings(toppingsList) {
     this.toppings = toppingsList;
@@ -37,7 +37,7 @@ class Hamburger {
 
 let burger = new Hamburger();
 burger.toppings = ['onion', 'tomatoes'];  // calls the setter
-console.log(burger.toppings);             // calls the getter
+console.log(burger.toppings);             // calls the getter and returns topings are ['onions', 'tomatoes']
 ```
 
 ---
