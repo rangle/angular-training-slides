@@ -53,7 +53,7 @@ const FILE_SIZE_UNITS_LONG = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'P
 
 ## Step 6
 
-Add a private function called convertBytesToFormat to `format-file-size.pipe.ts` with the snippet below:
+Add a private function `convertBytesToFormat` to `format-file-size.pipe.ts` with the snippet below:
 
 ```ts
 private convertBytesToFormat(sizeInBytes: number, units: Array<string>){
@@ -66,6 +66,6 @@ private convertBytesToFormat(sizeInBytes: number, units: Array<string>){
 }
 ```
 
-The function takes the bytes as the first argument and a units array as the second argument and performs the calculation to the correct file size and string manipulation with the correct unit from the array provided.
+`convertBytesToFormat` takes a number as the first argument and a units array as the second argument and performs the calculation to the correct file size and returns a string with the correct unit from the array provided.
 
 Modify the arguments and body of the `transform()` method of the `FormatFileSizePipe` class to use `convertBytesToFormat` passing in the bytes argument and the correct units array.
