@@ -1,5 +1,7 @@
 # Components in Depth Exercise
 
+![](./preview.gif)
+
 ## Step 1
 
 Using the `angular-cli` create a new project called `components-in-depth` inside 
