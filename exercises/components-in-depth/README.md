@@ -51,19 +51,23 @@ default value
 
 Place the following snippet into `counter-display.component.html`.
 ```html
-<input type="number" [(ngModel)]="defaultCounterValue">
-<button (click)="setDefaultValue()">
+<input type="number" >
+<button >
   Set default value
 </button>
 
 <h4>{{ counterValue }}</h4>
+<app-button-grouping >
+</app-button-grouping>
 ```
 
-Add `<app-button-grouping>` to the bottom of the file and do the following:
-- pass in the `counterValue`
-- handle the `output` events by setting the `counterValue` to the emitted 
-value
-- use projection to pass in some text to label our buttons
+- Use `[(ngModel)]` to two-way bind `defaultCounterValue` to the input
+- Add a `click` event handler to call the `setDefaultValue` method
+- For `<app-button-grouping>`:
+    - pass in the `counterValue`
+    - handle the `output` events by setting the `counterValue` to the emitted 
+      value
+    - use projection to pass in some text to label our buttons
 
 ## Step 8
 
