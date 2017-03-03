@@ -83,6 +83,7 @@ Import the `HomeComponent` and `UserListComponent` in `app-routing.module.ts`. U
 ## Step 7
 
 In `user-list.component.ts`, retrieve the user data in `users.json` by using the `require` keyword.
+Normally this data should be served from a service, but we are doing this for simplicity sake.
 ```
 const data = require('../users.json');
 ```
