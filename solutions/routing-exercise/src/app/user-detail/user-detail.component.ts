@@ -25,6 +25,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   getUser(id: string) {
-    return data.users.filter(user => user.id === id).reduce(user => user);
+    return data.users.find(user => user.id === id);
   }
 }
