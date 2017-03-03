@@ -53,6 +53,19 @@ const FILE_SIZE_UNITS_LONG = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'P
 
 ## Step 6
 
-Modify the arguments and body of the `transform()` method of the `FormatFileSizePipe` class to perform the calculation and string manipulation to display the file sizes with units appropriately.  Hint: you may find the functions `Math.round()`, `Math.min()`, `Math.power()`, and `Math.log()` useful.
+Add a private function `convertBytesToFormat` to `format-file-size.pipe.ts` with the snippet below:
 
+```ts
+private convertBytesToFormat(sizeInBytes: number, units: Array<string>){
+  let power = Math.round(Math.log(sizeInBytes) / Math.log(1024));
+  power = Math.min(power, units.length - 1);
+  const size = sizeInBytes / Math.pow(1024, power);
+  const formattedSize = Math.round(size * 100) / 100;
+  const unit = units[power];
+  return `${formattedSize} ${unit}`;
+}
+```
 
+`convertBytesToFormat` takes a number as the first argument and a units array as the second argument and performs the calculation to the correct file size and returns a string with the correct unit from the array provided.
+
+Modify the arguments and body of the `transform()` method of the `FormatFileSizePipe` class to use `convertBytesToFormat` passing in the bytes argument and the correct units array.
