@@ -10,21 +10,30 @@ Using the `angular-cli` create a new project called `structural-directives` insi
 
 ## Step 2
 
-Copy the file `data.json` into the project and import its content into the root component of your application. Make sure your able to read its content using `console.log`.
+Create a new folder inside of `src/app` named `shared` and copy the file `data.json` into it. Import its content into the root component of your application. Make sure your able to read its content using `console.log`.
 
 > To import a JSON file you have to use `require` instead of `import` because it's not a valid Javascript module (ES6) but a file that Webpack can load and transform into a Javascript object.
 
 ## Step 3
 
-Create a Typescript `interface` called `Laptop` that describes the structure of the items found in the file `data.json`
+Create a Typescript `interface` called `Laptop` in the `shared` folder that describes the structure of the items found in the file `data.json`
+
 
 ## Step 4
 
-Use the structural directive `NgFor` to display the properties `description`, `price` and `inStock` of the laptops in the root component.
+Create a component called `<app-laptop>` to display information about a laptop and use the following markup and CSS to give it some style:
 
-## Step 5
-
-Create a child component called `<app-laptop>` to delegate the rendering of every individual `laptop` in the array and use the following CSS to give it some style:
+```html
+<p class="title">{{ laptop.description }}</p>
+<span class="price">
+  <label>Price:</label>
+  {{ laptop.price }}
+</span>
+<span class="in-stock">
+  <label>In Stock:</label>
+  {{ laptop.inStock }}
+</span>
+```
 
 ```css
 :host {
@@ -52,24 +61,39 @@ label {
 }
 ```
 
-## Step 6
+## Step 5
 
-Create a `<app-filter>` component with three buttons that perform the following filtering:
+Create a `<app-filter>` component with five buttons split into two groups (wrap each group in a `div` tag) that perform the following filtering:
 
+**Stock:**
 - **In Stock:** Show all the laptops that are in stock
 - **Out Stock:** Show only the laptops that are out of stock
 - **All:** Show all the laptops
 
+**Price:**
+- **Ascending:** Put the cheapest laptops at the top
+- **Descending:** Put the cheapest laptops at the bottom
+
+## Step 6
+
+Create an input for the `<app-filter>` component named `laptop` to store an array of `Laptop`s. Also, create an output named `filter` as a new `EventEmitter` that emits an array of `Laptop`s.
+
 ## Step 7
 
-Add two more buttons to the `<app-filter>` component to order the laptops array:
-
-- **Ascending:** Put the cheapest laptops at the top
-- **Descending:** Put the cheapes laptops at the bottom
+For each button created in step 5, create a method that creates a new array of laptops by filtering or sorting through the objects stored in the `laptop` property and emits that new array using the `filter` output. Call each method when a click event is fired from the corresponding button.
 
 ## Step 8
 
-Create a component called `<app-laptop-list>` to delegate the filtering and listing of laptops. At the end, the root component's template should only be:
+Create a component called `<app-laptop-list>` that has two properties named `laptops` and `filteredLaptops` that both store an array of `Laptop`s. Also, create a method that takes the array emitted by the `<app-filter>` and stores it in the `filteredLaptops` property.
+
+## Step 9
+
+In the `<app-laptop-list>` template, Include the `<app-filter>`
+and use the `ngFor` directive to loop through all laptops in the `filteredLaptops` property and display them in `<app-laptop>` components.
+
+## Step 10
+
+Use the template of the root component to display the `<app-laptop-list>` component.
 
 ```html
 <app-laptop-list></app-laptop-list>
