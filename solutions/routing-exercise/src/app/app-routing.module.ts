@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserListComponent } from './user-list/user-list.component';
+import { PageListComponent } from './page-list/page-list.component';
 import { HomeComponent } from './home/home.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import { PageDetailComponent } from './page-detail/page-detail.component';
 
 const routes: Routes = [
   {
@@ -10,12 +10,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'users',
-    component: UserListComponent
+    path: 'pages',
+    component: PageListComponent
   },
   {
-    path: 'users/:id',
-    component: UserDetailComponent
+    path: 'pages/:id',
+    component: PageDetailComponent
   }
 ];
 

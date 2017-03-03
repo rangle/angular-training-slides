@@ -1,0 +1,9 @@
+<h1>Pages</h1>
+
+<ul>
+  <li *ngFor="let pageId of [1,2,3]">
+    <a [routerLink]="[pageId]">
+      Page {{pageId}}
+    </a>
+  </li>
+</ul>
