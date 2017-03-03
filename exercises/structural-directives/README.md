@@ -24,14 +24,14 @@ Create a Typescript `interface` called `Laptop` in the `shared` folder that desc
 Create a component called `<app-laptop>` to display information about a laptop and use the following markup and CSS to give it some style:
 
 ```html
-<p class="title">{{ laptop.description }}</p>
+<p class="title"><!-- Laptop description goes here --></p>
 <span class="price">
   <label>Price:</label>
-  {{ laptop.price }}
+  <!-- Laptop price goes here -->
 </span>
 <span class="in-stock">
   <label>In Stock:</label>
-  {{ laptop.inStock }}
+  <!-- Laptop stock goes here -->
 </span>
 ```
 
