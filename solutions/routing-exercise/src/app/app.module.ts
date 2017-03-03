@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { UsersService } from './users.service';
 import { HomeComponent } from './home/home.component';
 import { UserDetailComponent } from './user-detail/user-detail.component'
 
@@ -23,7 +22,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component'
     HttpModule,
     AppRoutingModule
   ],
-  providers: [UsersService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

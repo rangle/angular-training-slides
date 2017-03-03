@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { UsersService } from '../users.service';
+
+const data = require('../users.json');
 
 @Component({
   selector: 'app-user-detail',
@@ -11,17 +12,19 @@ export class UserDetailComponent implements OnInit {
   public user: any;
   private subscription: any;
 
-  constructor(
-    private usersService: UsersService,
-    private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(params => {
-      this.user = this.usersService.getUser(params['id']);
+      this.user = this.getUser(params['id']);
     });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getUser(id: string) {
+    return data.users.filter(user => user.id === id).reduce(user => user);
   }
 }
