@@ -122,7 +122,12 @@ Add the following snippet to the `user-detail.component.html` file:
 
 ## Step 11
 
-Add the following method into `UserDetailComponent`:
+Retrieve the data from the `users.json` file
+```
+const data = require('../users.json');
+```
+
+Also add the following method into `UserDetailComponent`:
 ```
 getUser(id: string) {
   return data.users.filter(user => user.id === id).reduce(user => user);
