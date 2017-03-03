@@ -15,8 +15,8 @@ export class CounterDisplayComponent {
   }
 
   setDefaultValue() {
-    this.counterValue = this.defaultCounterValue =
-      Number.isInteger(this.defaultCounterValue) ?
+    this.defaultCounterValue = Number.isInteger(this.defaultCounterValue) ?
       this.defaultCounterValue : defaultCounterValue;
+    this.counterValue = this.defaultCounterValue;
   }
 }
