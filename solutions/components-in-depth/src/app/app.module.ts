@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { TimerComponent } from './timer';
-import { FareCalculatorComponent } from './fare-calculator';
+import { ButtonGroupingComponent } from './button-grouping';
+import { CounterDisplayComponent } from './counter-display';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { FareCalculatorComponent } from './fare-calculator';
   providers: [],
   declarations: [
     AppComponent,
-    TimerComponent,
-    FareCalculatorComponent,
+    ButtonGroupingComponent,
+    CounterDisplayComponent,
   ],
   bootstrap: [AppComponent]
 })
