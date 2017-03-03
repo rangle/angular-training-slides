@@ -21,10 +21,9 @@ Use the `angular-cli` to build the components and service we need by running the
 ng generate component home
 ng generate component user-list
 ng generate component user-detail
-ng generate service users
 ```
 
-> The components and service are added to our ng-module automatically, so they are ready to use.
+> The components are added to our ng-module automatically, so they are ready to use.
 
 ## Step 3
 
@@ -68,7 +67,7 @@ Add the following snippet to the `app.component.html`
     <li>
       <a>Users</a>
     </li>
-  </ul>
+</ul>
 ```
 
 
@@ -79,38 +78,19 @@ Modify the anchor tags we just added to `app.component.html` by using the `route
 
 ## Step 6
 
-Import the `HomeComponent` and `UserListComponent`in `app-routing.module.ts`. Update the routes so that the root path `"/"` loads the `HomeComponent` and the `"/users"` path loads the `UserListComponent`.
+Import the `HomeComponent` and `UserListComponent` in `app-routing.module.ts`. Update the routes so that the root path `"/"` loads the `HomeComponent` and the `"/users"` path loads the `UserListComponent`.
 
 ## Step 7
 
-Update `users.service.ts` with the following snippet:
-
-```ts
-import { Injectable } from '@angular/core';
-
-const data = require('./users.json');
-
-@Injectable()
-export class UsersService {
-
-  getUsers() {
-    return data.users;
-  }
-
-  getUser(id) {
-    return data.users.find(user => user.id == id);
-  }
-}
+In `user-list.component.ts`, retrieve the user data in `users.json` by using the `require` keyword.
 ```
+const data = require('../users.json');
+```
+On the `OnInit` hook, store the user data in the `users` property.
 
 > Make sure the path to the provided `users.json` file is correct. We must use the `require` syntax because JSON is not a valid Javascript module but Webpack can transform it into a Javascript object.
 
 ## Step 8
-
-Import the `UsersService` into `user-list.component.ts`, then inject the service in the constructor. Set the value of `users` in the class by using the `UsersService.getUsers()` method when the component initializes.
-
-
-## Step 9
 
 Replace `user-list.component.html` with the following snippet:
 
@@ -126,11 +106,11 @@ Replace `user-list.component.html` with the following snippet:
 </ul>
 ```
 
-## Step 10
+## Step 9
 
 Modify the `user-list.component.html` using the routerLink directive so that each link points to a specific user id.
 
-## Step 11
+## Step 10
 
 Add the following snippet to the `user-detail.component.html` file:
 
@@ -140,15 +120,24 @@ Add the following snippet to the `user-detail.component.html` file:
 <label>Email: </label> {{user?.email}}
 ```
 
+## Step 11
+
+Add the following method into `UserDetailComponent`:
+```
+getUser(id: string) {
+  return data.users.filter(user => user.id === id).reduce(user => user);
+}
+```
+
 ## Step 12
 
 Create another route in `app-routing.module.ts` for the `UserDetailComponent` that takes an extra `:id` parameter.
 
 ## Step 13
 
-Import and inject the `ActivatedRoute` and `UsersService` into the `UserDetailComponent`.
+Import and inject the `ActivatedRoute` into the `UserDetailComponent`.
 
 ## Step 14
 
-Finally, update the `UserDetailComponent` to subscribe to the `ActivatedRoute`, then use the `id` parameter from the route to load the user data from the `UsersService`.
+Finally, update the `UserDetailComponent` to subscribe to the `ActivatedRoute`, then use the `id` parameter from the route to load the user data using the `getUser` method.
 
