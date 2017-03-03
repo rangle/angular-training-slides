@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Laptop } from '../laptop.model';
+import { Laptop } from '../shared';
 
 @Component({
   selector: 'app-filter',
