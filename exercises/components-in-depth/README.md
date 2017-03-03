@@ -51,13 +51,13 @@ default value
 
 Place the following snippet into `counter-display.component.html`.
 ```html
-<input type="number" >
-<button >
+<input type="number">
+<button>
   Set default value
 </button>
 
 <h4>{{ counterValue }}</h4>
-<app-button-grouping >
+<app-button-grouping>
 </app-button-grouping>
 ```
 
