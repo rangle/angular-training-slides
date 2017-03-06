@@ -46,8 +46,8 @@ Creating an Observable is like defining a function:
 
 ```js
 const subscription = observable.subscribe(
-  value => console.log(value),    // handles next
-  error => console.log(error),    // handles error 
+  value => console.log('value', value),    // handles next
+  error => console.log('error', error),    // handles error 
   () => console.log('complete'),  // handles complete
 );
 ```
@@ -55,8 +55,8 @@ const subscription = observable.subscribe(
 Subscribing to the Observable we created earlier would print:
 
 ```
-1
-2
+value 1
+value 2
 complete
 ```
 
