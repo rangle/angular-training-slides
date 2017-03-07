@@ -68,12 +68,8 @@ Console log a template string of the form `bird track meet starts + (new Date())
 
 ## Step 15
 
-Use a Promises to have the `bird` and `emperorPenguin` have a `walk` race. When the race ends, console log a template sting to `resolve-value + ", race1 over! " + (new Date()).toTimeString()`
+Use a Promises to have the `bird` and `emperorPenguin` have a `walk` race. When the race ends, console log a template sting to `resolve-value + ", race is over! " + (new Date()).toTimeString()`
 
 ## Step 16
 
-When the race above is over start another `walk` race between the `kingPenguin` and the `emperorPenguin`, log a similar template string as above.
-
-## Step 17
-
-When the race above is over start another `swim` race between the `kingPenguin` and the `emperorPenguin`, log a similar template string as above.
+When the race above is over, do another `walk` "race" between the `kingPenguin` and the `emperorPenguin`, but this time, whoever arrives at the finish line first will wait for the other to catch up and finish *together*. Console log a template string for each bird `value + " race2 over " + (new Date()).toTimeString())`
