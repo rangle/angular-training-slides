@@ -72,4 +72,4 @@ Use a Promises to have the `bird` and `emperorPenguin` have a `walk` race. When 
 
 ## Step 16
 
-When the race above is over, do another `walk` "race" between the `kingPenguin` and the `emperorPenguin`, but this time, whoever arrives at the finish line first will wait for the other to catch up and finish *together*. Console log a template string for each bird `value + " race2 over! " + (new Date()).toTimeString())`
+When the race above is over, do another `walk` "race" between the `kingPenguin` and the `emperorPenguin`, but this time, whoever arrives at the finish line first will wait for the other to catch up and finish *together*. Console log a template string for each bird to `value + " race2 over! " + (new Date()).toTimeString())`
