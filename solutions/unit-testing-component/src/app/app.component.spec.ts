@@ -7,7 +7,7 @@ describe('When testing the AppComponent', () => {
   describe('When calling the "getMessage" method', () => {
 
     it('Should return the correct string', () => {
-      const component = new AppComponent();` `
+      const component = new AppComponent();
       const message = component.getMessage();
       expect(message).toBe('Insert a dummy message');
     });
