@@ -24,14 +24,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   console.log('bird track meet starts ' + new Date().toTimeString());
   Promise.race([bird.walk(), emperorPenguin.walk()]).then(function (value) {
-    return console.log(value + ', race1 over! ' + new Date().toTimeString());
-  }).then(function () {
-    return Promise.race([kingPenguin.walk(), emperorPenguin.walk()]).then(function (value) {
-      return console.log(value + ', race2 over! ' + new Date().toTimeString());
-    });
-  }).then(function () {
-    return Promise.race([kingPenguin.swim(), emperorPenguin.swim()]).then(function (value) {
-      return console.log(value + ', race3 over! ' + new Date().toTimeString());
+    console.log(value + ', race1 over! ' + new Date().toTimeString());
+    return Promise.all([kingPenguin.walk(), emperorPenguin.walk()]);
+  }).then(function (values) {
+    return values.forEach(function (value) {
+      return console.log(value + " race2 over! " + new Date().toTimeString());
     });
   });
 })();
