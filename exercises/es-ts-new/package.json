@@ -1,0 +1,19 @@
+{
+  "name": "es-ts-new",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --opts mocha.opts && rm -rf test",
+    "test:json": "mocha --opts mocha.opts --reporter json && rm -rf test",
+    "start": "ts-node exercise.ts"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "typescript": "^2.2.1"
+  },
+  "devDependencies": {
+    "ts-node": "^2.1.0"
+  }
+}
