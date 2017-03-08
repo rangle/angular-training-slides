@@ -24,7 +24,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should contain an app-counter-display child component', async(() => {
+  it('Add the app-counter-display child component', async(() => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('app-counter-display')).toBeTruthy();
   }));

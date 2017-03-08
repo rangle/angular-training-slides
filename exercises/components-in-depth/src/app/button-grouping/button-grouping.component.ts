@@ -11,10 +11,10 @@ export class ButtonGroupingComponent {
   @Output() onDecrement = new EventEmitter();
 
   increment(): void {
-    this.onIncrement.emit(this.counterValue + 1);
+
   }
 
   decrement(): void {
-    this.onDecrement.emit(this.counterValue - 1);
+
   }
 }

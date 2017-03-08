@@ -22,20 +22,13 @@ describe('CounterDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should contain an app-button-grouping child component', async(() => {
+  it('Add the app-button-grouping child component', async(() => {
     const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelector('app-button-grouping')).not.toBeNull('app-button-grouping doesn\'t exist');
   }));
 
-  it('should be equal when defaulted', async(() => {
-    const component = fixture.componentInstance;
-    component.setDefaultValue();
-
-    expect(component.counterValue).toEqual(component.defaultCounterValue);
-  }));
-
-  it('should properly project the decrement button text', async(() => {
+  it('Use projection to project the decrement button text with the value "Decrement"', async(() => {
     const compiled = fixture.debugElement.nativeElement;
     const decrementButton = compiled.querySelector('app-button-grouping button.decrementButton span');
 
@@ -43,7 +36,7 @@ describe('CounterDisplayComponent', () => {
     expect(decrementButton.textContent).toBe('Decrement');
   }));
 
-  it('should properly project the increment button text', async(() => {
+  it('Use projection to project the increment button text with the value "Increment"', async(() => {
     const compiled = fixture.debugElement.nativeElement;
     const incrementButton = compiled.querySelector('app-button-grouping button.incrementButton span');
 
