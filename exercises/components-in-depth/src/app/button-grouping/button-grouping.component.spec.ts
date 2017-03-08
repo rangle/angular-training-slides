@@ -20,8 +20,7 @@ describe('ButtonGroupingComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Implement the increment method that emits the onIncrement event with ' +
-    'the value incremented by one', async(() => {
+  it('should emit the value decremented by one when the button is clicked', async(() => {
     const component = fixture.componentInstance;
     spyOn(component.onDecrement, 'emit');
     component.counterValue = 10;
@@ -34,8 +33,7 @@ describe('ButtonGroupingComponent', () => {
     });
   }));
 
-  it('Implement the decrement method that emits the onDecrement event with ' +
-    'the value decremented by one', async(() => {
+  it('should emit the value incremented by one when the button is clicked', async(() => {
     const component = fixture.componentInstance;
     spyOn(component.onIncrement, 'emit');
     component.counterValue = 10;
