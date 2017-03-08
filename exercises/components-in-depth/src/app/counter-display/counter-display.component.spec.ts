@@ -28,7 +28,7 @@ describe('CounterDisplayComponent', () => {
     expect(compiled.querySelector('app-button-grouping')).not.toBeNull('app-button-grouping doesn\'t exist');
   }));
 
-  it('Use projection to project the decrement button text with the value "Decrement"', async(() => {
+  it('Use projection to project a span with the value "Decrement" into the decrement button', async(() => {
     const compiled = fixture.debugElement.nativeElement;
     const decrementButton = compiled.querySelector('app-button-grouping button.decrementButton span');
 
@@ -36,7 +36,7 @@ describe('CounterDisplayComponent', () => {
     expect(decrementButton.textContent).toBe('Decrement');
   }));
 
-  it('Use projection to project the increment button text with the value "Increment"', async(() => {
+  it('Use projection to project a span with the value "Increment" into the increment button', async(() => {
     const compiled = fixture.debugElement.nativeElement;
     const incrementButton = compiled.querySelector('app-button-grouping button.incrementButton span');
 
