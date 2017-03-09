@@ -28,5 +28,4 @@ describe('AppComponent', () => {
   it('should contain the app-counter-display child component', () => {
     expect(support.querySelector('app-counter-display')).toBeTruthy();
   });
-
 });
