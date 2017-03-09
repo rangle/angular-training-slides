@@ -1,31 +1,32 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
+import { configureTestModule } from '../test/configure-test-module.function';
+import { TestComponentSupport } from '../test/test-component-support.class';
 import { AppComponent } from './app.component';
 import { CounterDisplayComponent } from './counter-display/counter-display.component';
 import { ButtonGroupingComponent } from './button-grouping/button-grouping.component';
-import { FormsModule } from '@angular/forms';
-
-let fixture: ComponentFixture<AppComponent>;
 
 describe('AppComponent', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-      ],
-      declarations: [
-        AppComponent,
-        CounterDisplayComponent,
-        ButtonGroupingComponent
-      ],
-    });
+  let support: TestComponentSupport<AppComponent>;
 
-    fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
+  beforeEach(configureTestModule({
+    imports: [
+      FormsModule,
+    ],
+    declarations: [
+      AppComponent,
+      CounterDisplayComponent,
+      ButtonGroupingComponent
+    ],
+  }));
+
+  beforeEach(() => {
+    support = new TestComponentSupport<AppComponent>(AppComponent);
+    support.update();
   });
 
-  it('should contain the app-counter-display child component', async(() => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('app-counter-display')).toBeTruthy();
-  }));
+  it('should contain the app-counter-display child component', () => {
+    expect(support.querySelector('app-counter-display')).toBeTruthy();
+  });
+
 });

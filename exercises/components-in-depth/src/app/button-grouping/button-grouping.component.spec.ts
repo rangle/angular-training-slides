@@ -1,54 +1,49 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-
-import { ButtonGroupingComponent } from './';
 import { FormsModule } from '@angular/forms';
 
-let fixture: ComponentFixture<ButtonGroupingComponent>;
+import { TestComponentSupport } from '../../test/test-component-support.class';
+import { configureTestModule } from '../../test/configure-test-module.function';
+import { ButtonGroupingComponent } from './button-grouping.component';
 
 describe('ButtonGroupingComponent', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-      ],
-      declarations: [
-        ButtonGroupingComponent
-      ],
-    });
+  let support: TestComponentSupport<ButtonGroupingComponent>;
 
-    fixture = TestBed.createComponent(ButtonGroupingComponent);
-    fixture.detectChanges();
+  beforeEach(configureTestModule({
+    imports: [
+      FormsModule,
+    ],
+    declarations: [
+      ButtonGroupingComponent
+    ],
+  }));
+
+  beforeEach(() => {
+    support = new TestComponentSupport<ButtonGroupingComponent>(ButtonGroupingComponent);
+    support.update();
   });
 
-  it('should emit the value decremented by one when the button is clicked', async(() => {
-    const component = fixture.componentInstance;
-    spyOn(component.onDecrement, 'emit');
-    component.counterValue = 10;
-
-    const nativeElement = fixture.debugElement.nativeElement;
-    nativeElement.querySelector('button').click();
-
-    fixture.whenStable().then(() => {
-      expect(component.onDecrement.emit).toHaveBeenCalledWith(9);
+  describe('when pressing the decrement button', () => {
+    beforeEach(() => {
+      spyOn(support.component.onDecrement, 'emit');
+      support.component.counterValue = 10;
     });
 
-    // Also want to check that the `counterValue` in the parent is updated
-    // properly by handling the event
-  }));
+    it('should emit a decremented counter value', () => {
+      support.querySelector('button.decrementButton').click();
 
-  it('should emit the value incremented by one when the button is clicked', async(() => {
-    const component = fixture.componentInstance;
-    spyOn(component.onIncrement, 'emit');
-    component.counterValue = 10;
+      expect(support.component.onDecrement.emit).toHaveBeenCalledWith(9);
+    });
+  });
 
-    const nativeElement = fixture.debugElement.nativeElement;
-    nativeElement.querySelectorAll('button')[1].click();
-
-    fixture.whenStable().then(() => {
-      expect(component.onIncrement.emit).toHaveBeenCalledWith(11);
+  describe('when pressing the increment button', () => {
+    beforeEach(() => {
+      spyOn(support.component.onIncrement, 'emit');
+      support.component.counterValue = 10;
     });
 
-    // Also want to check that the `counterValue` in the parent is updated
-    // properly by handling the event
-  }));
+    it('should emit an incremented counter value', () => {
+      support.querySelector('button.incrementButton').click();
+
+      expect(support.component.onIncrement.emit).toHaveBeenCalledWith(11);
+    });
+  });
 });
