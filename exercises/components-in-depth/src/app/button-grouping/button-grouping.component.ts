@@ -12,9 +12,11 @@ export class ButtonGroupingComponent {
 
   increment(): void {
     // Implement this method
+    this.onIncrement.emit(this.counterValue + 1);
   }
 
   decrement(): void {
     // Implement this method
+    this.onDecrement.emit(this.counterValue - 1);
   }
 }

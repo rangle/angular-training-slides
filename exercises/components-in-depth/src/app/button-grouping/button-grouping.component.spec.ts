@@ -31,6 +31,9 @@ describe('ButtonGroupingComponent', () => {
     fixture.whenStable().then(() => {
       expect(component.onDecrement.emit).toHaveBeenCalledWith(9);
     });
+
+    // Also want to check that the `counterValue` in the parent is updated
+    // properly by handling the event
   }));
 
   it('should emit the value incremented by one when the button is clicked', async(() => {
@@ -44,5 +47,8 @@ describe('ButtonGroupingComponent', () => {
     fixture.whenStable().then(() => {
       expect(component.onIncrement.emit).toHaveBeenCalledWith(11);
     });
+
+    // Also want to check that the `counterValue` in the parent is updated
+    // properly by handling the event
   }));
 });
