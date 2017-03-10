@@ -31,4 +31,10 @@ describe('TypeScript Classes', () => {
   it('should have sonic say its name', () => {
     expect(sonic.sayHi()).to.equal('Hi, my name is Sonic');
   });
+
+  it('add a new item "invincibility" at the end of the owned items list', () => {
+    expect(sonic.getItems()).to.deep.equal(['speed shoes', 'fire shield']);
+    expect(sonic.addItem('invincibility')).to.be.undefined;
+    expect(sonic.getItems()).to.deep.equal(['speed shoes', 'fire shield', 'invincibility']);
+  })
 })

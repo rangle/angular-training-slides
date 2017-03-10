@@ -49,11 +49,13 @@ interface SonicInterface {
 export class Sonic extends Hedgehog implements SonicInterface {
   private numberOfRings: number;
   private name: string;
+  private itemsOwned: string[];
 
   constructor (color: string, weight: number, numberOfRings: number) {
     super(color, weight);
     this.numberOfRings = numberOfRings;
     this.name = 'Sonic';
+    this.itemsOwned = ['speed shoes', 'fire shield']; // items owned by default
   }
 
   getColor(): string {
@@ -70,6 +72,27 @@ export class Sonic extends Hedgehog implements SonicInterface {
 
   setColor(newColor: string): void {
     this.color = newColor;
+  }
+
+  /*
+   * EXERCISE: remove setName() definition so that compiler will fails
+   * since Interface expects implementation of setName()
+   */
+  setName(newName: string): void {
+    this.name = newName;
+  }
+
+  addItem(newItem: string): void {
+    /*
+     * EXERCISE: swap ...this.itemsOwned with newItem so that when 
+     * addItem is called, newItem will be added to the front of the array
+     * whereas unit test will test whether the newItem was added at the end
+     */
+    this.itemsOwned = [ ...this.itemsOwned, newItem ];
+  }
+
+  getItems(): string[] {
+    return this.itemsOwned;
   }
 
   sayHi(): string {
