@@ -31,7 +31,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([ 
       { from: { glob: 'content/*.md' } },
-      { from: { glob: 'content/images/*' } }
+      { from: { glob: 'content/images/*' } },
+      { from: { glob: 'content/images/trainers/*' } }
     ])
   ],
   devServer: {
