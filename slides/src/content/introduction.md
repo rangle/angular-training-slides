@@ -4,24 +4,25 @@
 
 ---
 
-## About Me
+## About Us
 
-![Tsung-Ting (John) Chen](content/images/trainers/john_chen.jpg)
+<img src="content/images/trainers/john_chen.jpg" height="200px"></img>
+
 Tsung-Ting (John) Chen
 
 Solutions Architect @ Rangle.io
 
 Github: [github.com/tsungting](https://github.com/tsungting)
 
+---
 
-![Miguel Vesco](content/images/miguel_vesco.jpg)
+<img src="content/images/trainers/miguel_vesco.jpg" height="200px"></img>
+
 Miguel Vesco
 
 Senior Developer @ Rangle.io
 
-Github: [github.com/barretodavid](https://github.com/images/trainers/barretodavid)
-
-Blog: [david-barreto.com](http://david-barreto.com)
+Github: [github.com/vescogma](https://github.com/vescogma)
 
 ---
 
