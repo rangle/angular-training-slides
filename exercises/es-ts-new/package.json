@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --opts mocha.opts && rm -rf test || true",
     "test:json": "mocha --opts mocha.opts --reporter json && rm -rf test || true",
-    "compile": "tsc exercise.ts && rm -rf exercise.js && echo \"Compilation was successful\" || true",
+    "compile": "rm -rf exercise.js && tsc --target ES5 exercise.ts && echo \"Compilation was successful\" || true",
+    "clean": "rm -rf exercise.js || true",
     "start": "ts-node exercise.ts || true"
   },
   "dependencies": {

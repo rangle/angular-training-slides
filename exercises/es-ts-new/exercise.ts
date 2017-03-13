@@ -1,9 +1,5 @@
 interface HedgehogInterface {
   color: string;
-  /*
-   * EXERCISE: compilation fails because 'weight' is of wrong type
-   * with `number` replaced with `string`
-   */
   weight: number;
 }
 
@@ -13,7 +9,7 @@ export class Hedgehog implements HedgehogInterface {
 
   constructor (color: string, weight: number) {
     this._color = color;
-    this._weight = weight;
+    this._weight = weight - 5;
   }
 
   get color(): string {
@@ -22,14 +18,6 @@ export class Hedgehog implements HedgehogInterface {
 
   get weight(): number {
     return this._weight;
-  }
-
-  /* 
-   * EXERCISE: compilation fails because `color` is a read-only property
-   * with `set color` removed.
-   */
-  set color(newColor: string) {
-    this._color = newColor;
   }
 
   set weight(newWeight: number) {
@@ -87,49 +75,24 @@ export class Sonic extends Hedgehog implements SonicInterface {
     this.color = newColor;
   }
 
-  /*
-   * EXERCISE: remove setName() definition so that compiler will fails
-   * since Interface expects implementation of setName()
-   */
   setName(newName: string): void {
     this.name = newName;
   }
 
   addItem(newItem: string): void {
-    /*
-     * EXERCISE: swap ...this.itemsOwned with newItem so that when 
-     * addItem is called, newItem will be added to the front of the array
-     * whereas unit test will test whether the newItem was added at the end.
-     * Also maybe remove assigning to this.itemsOwned. This could be a good 
-     * opportunity to demonstrate that spread is an immutable operation
-     */
-    this.itemsOwned = [ ...this.itemsOwned, newItem ];
+    [ newItem, ...this.itemsOwned ];
   }
 
   addNewPersonalInfo(key: string, value: any): void {
-    /*
-     * EXERCISE: note that swapping exercise for array spread wouldn't work because 
-     * JSON key-value pairs are supposed to be orderless. This could be used to demonstrate
-     * immutable nature of object spreading
-     */
-    this.personalInfo = { ...this.personalInfo, [key]: value };
+    this.personalInfo = { ...this.personalInfo, key: value };
   }
 
-  /*
-   * EXERCISE: remove one of the destructured variables and create a typo for another one
-   * numberOfRings -> rings, for instance
-   */
-  setColorWeightRings({ color, weight, numberOfRings }): void {
-    this.color = color;
+  setColorWeightRings({ weight, rings }): void {
     this.weight = weight;
-    this.numberOfRings = numberOfRings;
+    this.numberOfRings = rings;
   }
 
   sayHi(): string {
-    /*
-     * EXERCISE: replace ${this.name} with something like ${this.color}
-     * so that it doesn't print "Hi, my name is Sonic"
-     */
-    return `Hi, my name is ${this.name}`;
+    return `Hi, my name is ${this.color}`;
   }
 }

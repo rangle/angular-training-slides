@@ -1,10 +1,10 @@
-import { describe, it, before } from 'mocha';
-import { Hedgehog, Sonic } from './exercise';
-import { expect } from 'chai';
+const Hedgehog = require('./exercise').Hedgehog;
+const Sonic = require('./exercise').Sonic;
+const expect = require('chai').expect;
 
 describe('TypeScript Classes', () => {
-  let hedge: Hedgehog;
-  let sonic: Sonic;
+  let hedge;
+  let sonic;
 
   before(() => {
     hedge = new Hedgehog('brown', 10);
@@ -15,13 +15,13 @@ describe('TypeScript Classes', () => {
     expect(sonic.getNumberOfRings()).to.equal(100);
   });
 
-  it('should get 10 as the weight for sonic', () => {
-    expect(sonic.getWeight()).to.equal(10);
-  });
-
   it('should get 10 as the weight for hedge', () => {
     expect(hedge.weight).to.equal(10);
   })
+
+  it('should get 10 as the weight for sonic', () => {
+    expect(sonic.getWeight()).to.equal(10);
+  });
 
   it('should get 100 rings for sonic', () => {
     expect(sonic.getNumberOfRings()).to.equal(100);

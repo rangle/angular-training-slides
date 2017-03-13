@@ -1,4 +1,2 @@
---require ts-node/register
 --require chai
---watch-extensions ts
-*.spec.ts
+*.spec.js
