@@ -19,6 +19,14 @@ describe('TypeScript Classes', () => {
     expect(sonic.getWeight()).to.equal(10);
   });
 
+  it('should get 10 as the weight for hedge', () => {
+    expect(hedge.weight).to.equal(10);
+  })
+
+  it('should get 100 rings for sonic', () => {
+    expect(sonic.getNumberOfRings()).to.equal(100);
+  });
+
   it('should get blue as the colour for sonic', () => {
     expect(sonic.getColor()).to.equal('blue');
   });
@@ -36,5 +44,35 @@ describe('TypeScript Classes', () => {
     expect(sonic.getItems()).to.deep.equal(['speed shoes', 'fire shield']);
     expect(sonic.addItem('invincibility')).to.be.undefined;
     expect(sonic.getItems()).to.deep.equal(['speed shoes', 'fire shield', 'invincibility']);
-  })
+  });
+
+  it('add a new sidekick info to sonic\'s personal info object', () => {
+    expect(sonic.getPersonalInfo()).to.deep.equal({
+      age: 26,
+      faveConsole: 'Genesis'
+    });
+    expect(sonic.addNewPersonalInfo('sidekick', 'Tails')).to.be.undefined;
+    expect(sonic.getPersonalInfo()).to.deep.equal({
+      sidekick: 'Tails',
+      age: 26,
+      faveConsole: 'Genesis'
+    });
+  });
+
+  it('update color, weight and number of rings for Sonic at once', () => {
+    expect(sonic.getColor()).to.equal('red');
+    expect(sonic.getWeight()).to.equal(10);
+    expect(sonic.getNumberOfRings()).to.equal(100);
+
+    // update color, weight, rings at once using an object 
+    expect(sonic.setColorWeightRings({ 
+      color: 'blue',
+      weight: 15,
+      numberOfRings: 110
+    })).to.be.undefined;
+
+    expect(sonic.getColor()).to.equal('blue');
+    expect(sonic.getWeight()).to.equal(15);
+    expect(sonic.getNumberOfRings()).to.equal(110);
+  });
 })

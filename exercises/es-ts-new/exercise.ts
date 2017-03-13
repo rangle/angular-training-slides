@@ -50,12 +50,17 @@ export class Sonic extends Hedgehog implements SonicInterface {
   private numberOfRings: number;
   private name: string;
   private itemsOwned: string[];
+  private personalInfo: object;
 
   constructor (color: string, weight: number, numberOfRings: number) {
     super(color, weight);
     this.numberOfRings = numberOfRings;
     this.name = 'Sonic';
     this.itemsOwned = ['speed shoes', 'fire shield']; // items owned by default
+    this.personalInfo = {
+      age: 26,
+      faveConsole: 'Genesis'
+    };
   }
 
   getColor(): string {
@@ -68,6 +73,14 @@ export class Sonic extends Hedgehog implements SonicInterface {
 
   getNumberOfRings(): number {
     return this.numberOfRings;
+  }
+
+  getItems(): string[] {
+    return this.itemsOwned;
+  }
+
+  getPersonalInfo(): object {
+    return this.personalInfo;
   }
 
   setColor(newColor: string): void {
@@ -86,13 +99,30 @@ export class Sonic extends Hedgehog implements SonicInterface {
     /*
      * EXERCISE: swap ...this.itemsOwned with newItem so that when 
      * addItem is called, newItem will be added to the front of the array
-     * whereas unit test will test whether the newItem was added at the end
+     * whereas unit test will test whether the newItem was added at the end.
+     * Also maybe remove assigning to this.itemsOwned. This could be a good 
+     * opportunity to demonstrate that spread is an immutable operation
      */
     this.itemsOwned = [ ...this.itemsOwned, newItem ];
   }
 
-  getItems(): string[] {
-    return this.itemsOwned;
+  addNewPersonalInfo(key: string, value: any) {
+    /*
+     * EXERCISE: note that swapping exercise for array spread wouldn't work because 
+     * JSON key-value pairs are supposed to be orderless. This could be used to demonstrate
+     * immutable nature of object spreading
+     */
+    this.personalInfo = { ...this.personalInfo, [key]: value };
+  }
+
+  /*
+   * EXERCISE: remove one of the destructured variables and create a typo for another one
+   * numberOfRings -> rings, for instance
+   */
+  setColorWeightRings({ color, weight, numberOfRings }) {
+    this.color = color;
+    this.weight = weight;
+    this.numberOfRings = numberOfRings;
   }
 
   sayHi(): string {
