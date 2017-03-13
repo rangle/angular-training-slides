@@ -8,7 +8,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test-http": "ng test --app=http",
+    "test-http-solution": "ng test --app=http-solution -o",
+    "start-http": "ng serve --app=http",
+    "start-http-solution": "ng serve --app=http-solution -o" 
   },
   "private": true,
   "dependencies": {
