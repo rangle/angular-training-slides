@@ -106,7 +106,7 @@ export class Sonic extends Hedgehog implements SonicInterface {
     this.itemsOwned = [ ...this.itemsOwned, newItem ];
   }
 
-  addNewPersonalInfo(key: string, value: any) {
+  addNewPersonalInfo(key: string, value: any): void {
     /*
      * EXERCISE: note that swapping exercise for array spread wouldn't work because 
      * JSON key-value pairs are supposed to be orderless. This could be used to demonstrate
@@ -119,7 +119,7 @@ export class Sonic extends Hedgehog implements SonicInterface {
    * EXERCISE: remove one of the destructured variables and create a typo for another one
    * numberOfRings -> rings, for instance
    */
-  setColorWeightRings({ color, weight, numberOfRings }) {
+  setColorWeightRings({ color, weight, numberOfRings }): void {
     this.color = color;
     this.weight = weight;
     this.numberOfRings = numberOfRings;
