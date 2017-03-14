@@ -5,10 +5,10 @@ export interface ITodo {
 
 export class Todo implements ITodo {
   label: string;
-  done: false;
-  constructor(label) {
+  done: boolean;
+  constructor(label, done = false) {
     this.label = label;
-    this.done = false;
+    this.done = done;
   }
 }
 

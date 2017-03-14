@@ -5,18 +5,25 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { TodolistComponent } from './todolist/todolist.component';
+import { TodoListService } from './todolist/todolist.service';
+import { TestService } from './observable-test/observable-test.service';
+import { ObservableTestComponent } from './observable-test/observable-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodolistComponent
+    TodolistComponent,
+    ObservableTestComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    TodoListService,
+    TestService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

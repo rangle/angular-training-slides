@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "label": "Wake up in the morning feeling like P Diddy",
+    "done": true
+  },
+  {
+    "id": 2,
+    "label": "Grab glasses, go out the door, hit the city",
+    "done": true
+  },
+  {
+    "id": 3,
+    "label": "Go back and brush teeth with bottle of Jack",
+    "done": false
+  },
+  {
+    "id": 4,
+    "label": "Leave for the night and don't come back",
+    "done": false
+  },
+  {
+    "id": 5,
+    "label": "Get pedicure for toes, try all the clothes",
+    "done": false
+  }
+]

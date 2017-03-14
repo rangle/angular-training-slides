@@ -8,7 +8,7 @@
 </div>
 <ul>
   <li *ngFor="
-    let todo of todos;
+    let todo of todos | async;
     let i = index
   ">
     <div [ngClass]="{strike: todo.done === true}">
