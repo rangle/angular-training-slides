@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ITodo, Todo } from './todolist.model';
+import { Observable } from 'rxjs/Observable';
+import { TodoListService } from './todolist.service';
+import { ITodo } from './todolist.model';
 
 @Component({
   selector: 'app-todolist',
@@ -9,11 +11,11 @@ import { ITodo, Todo } from './todolist.model';
 export class TodolistComponent {
 
   newTodo: string;
-  todos: Array<ITodo>;
+  todos: Observable<Array<ITodo>>;
 
-  constructor() {
-    this.todos = [new Todo('default 1')];
+  constructor(private todoService: TodoListService) {
     this.newTodo = '';
+    this.todos = this.todoService.subscribeToTodos();
   }
 
   changeValue(event) {
@@ -22,17 +24,17 @@ export class TodolistComponent {
 
   addTodo() {
     if (this.newTodo.length > 0) {
-      this.todos.push(new Todo(this.newTodo));
+      this.todoService.addTodo(this.newTodo);
       this.newTodo = '';
     }
   }
 
-  deleteTodo(index) {
-    this.todos.splice(index, 1);
+  deleteTodo(index: number) {
+    this.todoService.deleteTodo(index);
   }
 
-  completeTodo(index) {
-    this.todos[index].done = !this.todos[index].done;
+  completeTodo(index: number) {
+    this.todoService.toggleTodo(index);
   }
 
 }
