@@ -1,0 +1,25 @@
+<div>
+  <input
+    [value]="newTodo"
+    (input)="changeValue($event)">
+  <button (click)="addTodo()">
+    ADD
+  </button>
+</div>
+<ul>
+  <li *ngFor="
+    let todo of todos;
+    let i = index
+  ">
+    <div [ngClass]="{strike: todo.done === true}">
+      {{todo.label}}
+    </div>
+    <button (click)="deleteTodo(i)">
+      DELETE
+    </button>
+    <button (click)="completeTodo(i)">
+      DONE
+    </button>
+  </li>
+</ul>
+
