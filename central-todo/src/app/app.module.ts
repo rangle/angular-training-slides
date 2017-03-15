@@ -8,17 +8,19 @@ import { TodolistComponent } from './todolist/todolist.component';
 import { TodoListService } from './todolist/todolist.service';
 import { TestService } from './observable-test/observable-test.service';
 import { ObservableTestComponent } from './observable-test/observable-test.component';
+import { CounterComponent } from './counter/counter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodolistComponent,
     ObservableTestComponent,
+    CounterComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [
     TodoListService,
