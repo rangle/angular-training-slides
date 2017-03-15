@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -9,6 +9,7 @@ import { TodoListService } from './todolist/todolist.service';
 import { TestService } from './observable-test/observable-test.service';
 import { ObservableTestComponent } from './observable-test/observable-test.component';
 import { CounterComponent } from './counter/counter.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,12 @@ import { CounterComponent } from './counter/counter.component';
     TodolistComponent,
     ObservableTestComponent,
     CounterComponent,
+    FormComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
   ],
   providers: [
