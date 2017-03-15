@@ -15,6 +15,10 @@ export class TodolistComponent {
 
   constructor(private todoService: TodoListService) {
     this.newTodo = '';
+    console.log('initialized');
+  }
+
+  ngOnInit(){
     this.todos = this.todoService.subscribeToTodos();
   }
 

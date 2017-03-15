@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Validators, ValidatorFn, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -13,7 +14,9 @@ export class FormComponent {
   confirmPassword: FormControl;
   myForm: FormGroup;
 
-  constructor(private builder: FormBuilder) {
+  constructor(private builder: FormBuilder,
+    private activatedRoute: ActivatedRoute) {
+
     this.username = new FormControl('', [Validators.required]);
     this.email = new FormControl('', [Validators.required]);
     this.confirmPassword = new FormControl('');
@@ -21,7 +24,9 @@ export class FormComponent {
       Validators.required,
       Validators.minLength(8),
     ]);
-
+    this.activatedRoute.params.subscribe((parameter) => {
+      this.username.patchValue(parameter['userName']);
+    });
     this.confirmPassword.setValidators([
       Validators.required,
       Validators.minLength(8),
@@ -35,7 +40,7 @@ export class FormComponent {
       confirmPassword: this.confirmPassword,
     });
 
-    this.password.valueChanges.subscribe(() => {
+    this.password.valueChanges.subscribe((value) => {
       this.myForm.controls['confirmPassword'].updateValueAndValidity();
     });
 
