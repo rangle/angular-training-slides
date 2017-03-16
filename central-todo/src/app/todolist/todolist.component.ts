@@ -9,16 +9,11 @@ import { ITodo } from './todolist.model';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
-
   newTodo: string;
   todos: Observable<Array<ITodo>>;
 
   constructor(private todoService: TodoListService) {
     this.newTodo = '';
-    console.log('initialized');
-  }
-
-  ngOnInit(){
     this.todos = this.todoService.subscribeToTodos();
   }
 
@@ -37,7 +32,7 @@ export class TodolistComponent {
     this.todoService.deleteTodo(index);
   }
 
-  completeTodo(index: number) {
+  toggleTodo(index: number) {
     this.todoService.toggleTodo(index);
   }
 
