@@ -9,7 +9,6 @@ import { ITodo } from './todolist.model';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
-
   newTodo: string;
   todos: Observable<Array<ITodo>>;
 
@@ -33,7 +32,7 @@ export class TodolistComponent {
     this.todoService.deleteTodo(index);
   }
 
-  completeTodo(index: number) {
+  toggleTodo(index: number) {
     this.todoService.toggleTodo(index);
   }
 

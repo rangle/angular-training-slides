@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Http, Jsonp } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ITodo, Todo } from './todolist.model';
@@ -8,11 +8,11 @@ import { ITodo, Todo } from './todolist.model';
 @Injectable()
 export class TodoListService {
   state: Array<ITodo>;
-  todos: Subject<Array<ITodo>>;
+  todos: BehaviorSubject<Array<ITodo>>;
 
   constructor(private http: Http) {
     this.state = [];
-    this.todos = new Subject(); 
+    this.todos = new BehaviorSubject([]);
     this.initTodos().subscribe(response => {
       const initialTodos = response.map(item => new Todo(item.label, item.done));
       this.state = initialTodos;
@@ -37,11 +37,11 @@ export class TodoListService {
 
   deleteTodo(index: number) {
     this.state.splice(index, 1);
-    this.todos.next(this.state);    
+    this.todos.next(this.state);
   }
 
   toggleTodo(index: number) {
     this.state[index].done = !this.state[index].done;
-    this.todos.next(this.state);    
+    this.todos.next(this.state);
   }
 }
