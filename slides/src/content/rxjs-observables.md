@@ -137,40 +137,20 @@ Using *Observable operators* we can perform Array-like operations to filter and 
 
 ```js
 http.get('https://jsonplaceholder.typicode.com/users')
-  .map((response) => Observable.from(response.json()))
+  .map((response) => response.json())
+  .filter((response) => response.length > 0)
   .subscribe((data) => {
     data  // data has been transformed to Observable via map()
       .filter((person) => person.id > 5)
-      .map((person) => "Dr. " + person.name)
-      .subscribe((doctor) => console.log(doctor)); 
+      .map((person) => "Dr. " + person.name);
   });
 ```
 
 * `map`: for each emitted result of an Observable execution, apply the provided function and 
-return a new `Observable` stream that emits the results. This is often used to *transform* each emitted value.
+return transformed results. This is often used to *transform* each emitted value.
 * `filter`: for each emitted result of an Observable execution, test it with "test" 
-function and return a new `Observable` that emits only the results that *passed* the test.
+function and return results that *passed* the test.
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
-
----
-
-## Promise vs Observable: Chaining Promises vs `mergeMap`
-
-Just as we can have nested Promises, we can have *nested Observables*. The previous slide contained an example of nested Observables. 
-
-Promises can be *chained* to avoid nested Promises. Similarly, Observables can utilize `mergeMap` (also known as `flatMap`) to achieve something similar:
-
-```js 
-http.get('https://jsonplaceholder.typicode.com/users')
-  .map((response) => Observable.from(response.json()))
-  .mergeMap((data) => data)
-  .filter((person) => person.id > 5)
-  .map((person) => "Dr. " + person.name)
-  .subscribe((doctor) => console.log(doctor));
-```
-
-`mergeMap` works by subscribing to and pulling values out of the inner Observable stream, which is `Observable.from(data)` in this example, and passing or *merging* them 
-back to the outer Observable stream.
 
 ---
 
