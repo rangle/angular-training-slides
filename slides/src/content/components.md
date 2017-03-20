@@ -194,6 +194,26 @@ class AppComponent { myNumber = 0 }
 
 ---
 
+## Quiz
+
+Choose all of the following that are needed to make two-way data binding work.
+
+1. `@Input` decorator
+2. `@Output` decorator
+3. `[]` attribute (as in `[hello]="hello!"`)
+4. `()`attribute (as in `(click)=sayHi()`)
+
+<aside class="notes">
+
+Selecting ALL of them is correct.
+
+If the student picks either 3 or 4, it could be that the student forgot that
+the "banana in a box" syntax `[()]` is in fact combination of `[]` and `()`
+
+</aside>
+
+---
+
 ## Creating a Template Variable from a Native Element
 
 We can create references to native DOM elements in our template using the special syntax `#myReference`
@@ -378,3 +398,21 @@ Components can be classified as "smart" or "dumb" depending on how coupled are t
 | Component tree location | Top                  | Bottom                    |
 | Easy to test?           | No                   | Yes                       |
 | A.K.A                   | Container Components | Presentational Components |
+
+---
+
+## Quiz
+
+If I want to write a custom UI Component for my project,
+which field of the `@NgModule` decorator should I put the class in?
+
+1.  `bootstrap`
+1.  `declarations`
+1.  `interfaces`
+1.  None of the above.
+
+<aside class="notes">
+
+Correct answer is "declarations".
+
+</aside>

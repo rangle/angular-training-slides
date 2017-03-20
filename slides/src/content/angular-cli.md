@@ -27,6 +27,31 @@ For example, the following command would initialize a project named `myAwesomePr
 
 ---
 
+## Quiz
+
+The name for the root module should be _________.:
+
+1. `NgModule`
+1. `AppModule`
+1. Whatever you want.
+
+<aside class="notes">
+
+Correct answer is 2.
+
+1 - NgModule is the name of the Decorator used for any Angular Module.
+I feel one can easily mistake between NgModule and AppModule
+
+3 - while it's possible that the root module can be anything, 
+convention is to name it AppModule and that's what our slides say. 
+This could be a good chance to bring it up that it's convention.
+
+<https://angular.io/docs/ts/latest/guide/appmodule.html>
+
+</aside>
+
+---
+
 ## Code Generation
 
 `angular-cli` has blueprints to generate:
