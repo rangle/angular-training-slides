@@ -91,8 +91,8 @@ Which of the below snippets would not assign a service instance to a class membe
 -->
 Injecting a service into a class accomplishes which of the following outcomes?
 
-1. A new instance of the service is constructed and made available to the class. The newly constructed instance of the service is then made available to the class.
-1. A new instance of the service is constructed only if it has not been injected before, otherwise an existing instance is reused. The constructed instance of the service is then made available to the class.
+1. A new instance of the service is constructed which is then made available to the class.
+1. A new instance of the service is constructed only if it has not been injected before, otherwise an existing instance is reused. The instance of the service is then made available to the class.
 1. An existing instance of the service is made available to the class only if it has already been registered in the `providers` array.
 
 ---
