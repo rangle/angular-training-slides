@@ -40,13 +40,13 @@ For example, the following command would initialize a project named `myAwesomePr
 | Service   (s)       |                     |
 
 ```bash
-  ng generate <blueprint> <path/to/file>
+  ng generate <path/to/blueprint>
 ```
 For example, to generate a component called `test`, use the following command
 
 ```bash
-  ng generate component test    # Full command
-  ng g c test                   # short hand for command
+  ng generate component ./components/test    # Full command
+  ng g c ./components/test                   # short hand for command
 ```
 
 ---
