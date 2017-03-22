@@ -1,0 +1,6 @@
+<p>
+  Hello World {{name}}!
+</p>
+<app-bmo-buttons (nameChange)="changeName($event)"></app-bmo-buttons>
+<input #dynamicName>
+<button (click)="changeNameDynamically(dynamicName)">Change!</button>
