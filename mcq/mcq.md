@@ -29,7 +29,7 @@ export class AppModule {}
 
 # Slide 62
 
-## How to define styles when defining a component?
+## What is one way to define styles when creating a component?
 
 1. `styles: ['p { color: green }']`
 
@@ -63,7 +63,7 @@ export class AppModule {}
 
 # Slide 86
 
-## What are the different options for specifying which `ng-content` tags to use?
+## Choose all of the following which are valid options for selecting content with `ng-content`?
 
 1. `<ng-content select=".header-content"></ng-content>`
 2. `<ng-content select="header"></ng-content>`
@@ -77,7 +77,7 @@ export class AppModule {}
 
 # Slide 96
 
-## Whis are valid structural directives? Choose every answer that is correct:
+## Which are valid structural directives? Choose every answer that is correct:
 
 1. `<p *ngIf="isVisible">Hello</p>`
 2. `<p [ngIf]="isVisible">Hello</p>`
@@ -122,12 +122,12 @@ export class AppModule {}
 
 # Slide 160
 
-## How to run the tests on a project?
+## Which of the following tools can be used to run tests in a project?
 
-1. `karma start`
-2. `chai start`
-3. `jasmine start`
-4. `phantomjs start`
+1. `karma`
+2. `chai`
+3. `jasmine`
+4. `phantomjs`
 
 <!--
 1. correct
@@ -141,7 +141,7 @@ export class AppModule {}
 ## In redux, a store is comparable to ..... in a server architecture:
 
 1. a client API
-2. a store
+2. a database
 3. a service
 
 <!--
