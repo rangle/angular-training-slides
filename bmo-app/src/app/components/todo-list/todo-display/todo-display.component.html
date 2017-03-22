@@ -1,0 +1,9 @@
+<div *ngIf="todoList.length === 0">
+  Relax. There's nothing that needs to be done.
+</div>
+
+<div *ngFor="let todo of todoList; let todoIndex = index;">
+  <span [ngClass]="isComplete(todo)">{{todo.name}}</span>
+  <button type="button" (click)="completeTask(todoIndex);">Complete</button>
+  <button type="button" (click)="deleteTask(todoIndex);">Delete</button>
+</div>
