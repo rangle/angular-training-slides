@@ -80,15 +80,13 @@ export class AppModule {}
 ## Which are valid structural directives? Choose every answer that is correct:
 
 1. `<p *ngIf="isVisible">Hello</p>`
-2. `<p [ngIf]="isVisible">Hello</p>`
 3. `<p (ngIf)="isVisible">Hello</p>`
 4. `<p [(ngIf)]="isVisible">Hello</p>`
 
 <!--
 1. correct
-2. correct
-3. incorrect, parens are used for event binding
-4. incorrect, banana boxes are used for two-way data binding
+2. incorrect, parens are used for event binding
+3. incorrect, banana boxes are used for two-way data binding
 -->
 
 # Slide 108
