@@ -1,4 +1,4 @@
-# Slide 54
+# Slide 54 (structure of a function module)
 
 ```
 // app.module.ts
@@ -27,7 +27,7 @@ export class AppModule {}
 4. `imports: [BrowserModule, FormsModule], declarations: [AppComponent],
    exports: [AppComponent]`
 
-# Slide 62
+# Slide 62 (component definition/styles property)
 
 ## What is one way to define styles when creating a component?
 
@@ -47,21 +47,7 @@ export class AppModule {}
 4. student confused between the roles of a template vs a style
 --> 
 
-# Slide 74
-
-## `@Input` is used to:
-
-1. Pass data into another component
-2. Capture data passed from another component
-3. Display an HTML `<input>` element
-
-<!--
-1. student is confused between @Input and @Output
-2. correct answer
-3. student is confused between a template and a decorator
--->
-
-# Slide 86
+# Slide 86 (components in depth/creating a template variable)
 
 ## Choose all of the following which are valid options for selecting content with `ng-content`?
 
@@ -75,7 +61,7 @@ export class AppModule {}
 3. student confused with other frameworks
 -->
 
-# Slide 96
+# Slide 96 (directives/ngStyle)
 
 ## Which are valid structural directives? Choose every answer that is correct:
 
@@ -89,7 +75,7 @@ export class AppModule {}
 3. incorrect, banana boxes are used for two-way data binding
 -->
 
-# Slide 108
+# Slide 114 (Services/registering)
 
 ## How do you register a service in a module?
 
@@ -104,7 +90,7 @@ export class AppModule {}
 3. correct
 -->
 
-# Slide 129
+# Slide 129 (ngForms/binding)
 
 ## Which are the correct ways for binding variables to an Angular form?
 
@@ -118,7 +104,7 @@ export class AppModule {}
 3. correct
 -->
 
-# Slide 160
+# Slide 166  (Testing)
 
 ## Which of the following tools can be used to run tests in a project?
 
@@ -134,7 +120,7 @@ export class AppModule {}
 4. phatomjs is a headless, scriptable browser API, not a test runner
 -->
 
-# Slide 188
+# Slide 194 (redux vs server architecture)
 
 ## In redux, a store is comparable to ..... in a server architecture:
 
