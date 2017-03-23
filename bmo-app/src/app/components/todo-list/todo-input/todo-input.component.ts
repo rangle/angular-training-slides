@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { TodoListItem } from '../../../models/todo-list-item';
 
 @Component({
   selector: 'todo-input',
@@ -13,11 +14,7 @@ export class TodoInputComponent implements OnInit {
   }
 
   addTask(taskInput){
-    let task = {
-      name : taskInput.value,
-      isComplete : false
-    };
-    this.taskReceived.emit(task);
+    this.taskReceived.emit(new TodoListItem(taskInput.value));
     taskInput.value = '';
   }
 

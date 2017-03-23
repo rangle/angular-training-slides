@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoListItem } from '../../models/todo-list-item';
+import { TodoListService } from '../../services/todo-list.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'todo-list',
@@ -6,23 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todoList = [];
+  todoList: Array<TodoListItem> = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private todoListService: TodoListService,
+              private storeService : Store<any>
+  ) { 
   }
 
-  onTaskReceived(task){
-    this.todoList.push(task);
+  ngOnInit() {
+    this.todoListService.getDefaultList();
+  }
+
+  onTaskReceived(task: TodoListItem){
+    this.storeService.dispatch({
+      type: 'ADD_TODO_LIST_TASK',
+      payload: task
+    });
+    this.todoListService.addTask(task);
   }
 
   onTaskCompleted(taskIndex) {
-    this.todoList[taskIndex].isComplete = true;
+    this.storeService.dispatch({
+      type: 'COMPLETE_TODO_LIST_TASK',
+      payload: {
+        taskIndex : taskIndex
+      }
+    });
+    this.todoListService.completeTask(taskIndex);
   }
   
   onTaskDeleted(taskIndex) {
-    this.deleteTaskAt(taskIndex);
+    this.todoListService.deleteTask(taskIndex);
   }
 
   deleteTaskAt(index) {

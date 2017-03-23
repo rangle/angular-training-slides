@@ -10,6 +10,11 @@ import { BmoButtonComponent } from './components/hello-world/bmo-buttons/bmo-but
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoInputComponent } from './components/todo-list/todo-input/todo-input.component';
 import { TodoDisplayComponent } from './components/todo-list/todo-display/todo-display.component';
+import { TodoListService } from './services/todo-list.service';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { todoListReducer } from './store/todo-list';
+import { helloReducer } from './store/hello';
 
 @NgModule({
   declarations: [
@@ -24,9 +29,18 @@ import { TodoDisplayComponent } from './components/todo-list/todo-display/todo-d
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.provideStore({ 
+      todoList: todoListReducer,
+      hello: helloReducer
+    }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 5
+    })
   ],
-  providers: [],
+  providers: [
+    TodoListService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
