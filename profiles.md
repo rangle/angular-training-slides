@@ -1,0 +1,74 @@
+# Learner Profiles
+
+These profiles describe the learners we are trying to help with this course,
+and are meant to help us answer questions about goals, pace, and content.
+Each profile has:
+
+1.  General background
+2.  What they do and don't already know
+3.  What they think they want to be able to do
+4.  What they will get out of the course
+5.  Any special needs or consideration
+
+## Zuko
+
+1.  Taught himself PHP and JavaScript in high school;
+    struggled through a CS degree (didn't see the point of the theory);
+    has worked for a couple of small website companies.
+
+2.  Wide-ranging but gappy knowledge of Unix, PHP, Python, and C;
+    solid understanding of networking (DNS, AWS, etc.);
+    competent with ES5 and JQuery;
+    no experience with enterprise software;
+    has never programmed as part of a team;
+    no experience with (or interest in) the "business side of things".
+
+3.  Wants to learn how to build big applications,
+    both to advance his craft
+    and to get a better job.
+
+4.  Exposure to enterprise-scale features of framework
+    (dependency injection, modularization)
+    *and* the reasons they are useful.
+
+5.  It will be hard to convince Zuko that Angular's complexity has value,
+    since he could quickly throw together
+    a PHP/JQuery equivalent of any of our examples.
+    Zuko also prefers to learn on his own,
+    and can frequently be found searching Stack Overflow and working on his own examples
+    in the middle of lectures.
+
+## Toph
+
+1.  Senior developer with 12 years of experience in three-tier .NET applications;
+    leading a team of 4 building new desktop and mobile interfaces
+    to legacy inventory control system that's being turned into a service;
+    spends half her time negotiating requirements and schedules,
+    the other half architecting,
+    and the *other* half coding (most frequently pair debugging with her team).
+
+2.  Solid understanding of Windows, Visual Studio, .NET,
+    and enterprise-scale middleware and database technology;
+    no previous experience with JavaScript.
+
+3.  Wants to learn enough about Angular to be able to architect solutions using it
+    and pair with (junior) team members who are coding and debugging.
+
+4.  Understanding of what problems Angular solves
+    what other technologies (e.g., Redux) should be used with it,
+    and what development tools she should encourage her team to use.
+
+5.  May be interrupted several times during the course
+    to handle critical management issues.
+
+## Iroh
+
+1.  General background
+
+2.  What they do and don't already know
+
+3.  What they think they want to be able to do
+
+4.  What they will get out of the course
+
+5.  Any special needs or consideration
