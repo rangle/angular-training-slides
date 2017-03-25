@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoListItem } from '../../models/todo-list-item';
 import { TodoListService } from '../../services/todo-list.service';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'todo-list',
@@ -12,7 +13,8 @@ export class TodoListComponent implements OnInit {
   todoList: Array<TodoListItem> = [];
 
   constructor(private todoListService: TodoListService,
-              private storeService : Store<any>
+              private storeService : Store<any>,
+              private router: Router
   ) { 
   }
 
@@ -25,7 +27,6 @@ export class TodoListComponent implements OnInit {
       type: 'ADD_TODO_LIST_TASK',
       payload: task
     });
-    this.todoListService.addTask(task);
   }
 
   onTaskCompleted(taskIndex) {
@@ -35,15 +36,16 @@ export class TodoListComponent implements OnInit {
         taskIndex : taskIndex
       }
     });
-    this.todoListService.completeTask(taskIndex);
   }
   
   onTaskDeleted(taskIndex) {
-    this.todoListService.deleteTask(taskIndex);
+    this.storeService.dispatch({
+      type: 'DELETE_TODO_LIST_TASK',
+      payload: {
+        taskIndex : taskIndex
+      }
+    });
   }
 
-  deleteTaskAt(index) {
-    this.todoList.splice(index, 1);
-  }
 
 }

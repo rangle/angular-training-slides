@@ -15,6 +15,14 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { todoListReducer } from './store/todo-list';
 import { helloReducer } from './store/hello';
+import { RouterModule } from '@angular/router';
+import { NavigationComponent } from './components/navigation/navigation.component';
+
+let routes = [
+  { path: '', redirectTo: 'hello-world', pathMatch: 'full'},
+  { path: 'hello-world', component: HelloWorldComponent},
+  { path: 'todo-list', component: TodoListComponent},
+];
 
 @NgModule({
   declarations: [
@@ -25,11 +33,13 @@ import { helloReducer } from './store/hello';
     TodoListComponent,
     TodoInputComponent,
     TodoDisplayComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(routes),
     StoreModule.provideStore({ 
       todoList: todoListReducer,
       hello: helloReducer
