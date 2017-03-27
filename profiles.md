@@ -63,12 +63,20 @@ Each profile has:
 
 ## Iroh
 
-1.  General background
+1.  Studied computer networking at college and then got into programming;
+    has been working for six years as a front-end web developer.
 
-2.  What they do and don't already know
+2.  Uses JQuery and NPM every day;
+    has written a few unit tests here and there,
+    but nothing systematic;
+    has good self-taught design skills.
 
-3.  What they think they want to be able to do
+3.  Wants to get up to speed with Angular as quickly as possible;
+    also wants to learn more about general programming skills
+    (e.g., testing and performance tuning).
 
-4.  What they will get out of the course
+4.  Wants to go through the notes on his own,
+    asking questions whenever he runs into something he can't figure out
+    after fifteen minutes on Stack Overflow.
 
-5.  Any special needs or consideration
+5.  Color-blind (red/green).
