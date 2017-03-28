@@ -6,3 +6,4 @@
 training/
 .idea
 yarn.lock
+*~
