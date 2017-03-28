@@ -8,31 +8,15 @@
 
 ---
 
-## Structure of this Training
+## Structure
 
-- 8 hours training in 2 days
-- 5 min break around 2:00 pm
-- 10 min break around 3:00 pm
-- 5 min break around 4:00 pm
-- Q&A sessions
+FIXME
 
 ---
 
-## Table of Contents
+## Syllabus
 
-1. Introduction
-1. Introduction to ES6/ES2015
-1. Introduction to TypeScript
-1. Introduction to Observables
-1. Creating a hello world application
-1. Components In Depth
-1. Directives
-1. Pipes
-1. Services
-1. Miscellaneous Topics
-1. Forms
-1. Routing
-1. Unit Testing
+FIXME
 
 ---
 
