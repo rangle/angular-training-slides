@@ -175,10 +175,13 @@ https://github.com/rangle/angular-training-slides/issues/261
 ---
 
 FIXME: Create slide for `router.navigate` and programmatically navigating between routes
+https://github.com/rangle/angular-training-slides/issues/262
 
 ---
 
-FIXME: Better flesh out these authorization sections. (Content from: https://angular-2-training-book.rangle.io/handout/routing/route_guards.html)
+FIXME: Better flesh out these authorization sections.
+https://github.com/rangle/angular-training-slides/issues/263
+(Content from: https://angular-2-training-book.rangle.io/handout/routing/route_guards.html)
 
 ## Route Authorization (1/3)
 
@@ -237,7 +240,8 @@ canDeactivate(component: AccountPage) {
 ---
 
 FIXME: Create lazy loading section
-https://angular-2-training-book.rangle.io/handout/modules/lazy-loading-module.html
+https://github.com/rangle/angular-training-slides/issues/264
+Content: https://angular-2-training-book.rangle.io/handout/modules/lazy-loading-module.html
 
 ---
 
