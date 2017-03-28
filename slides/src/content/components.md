@@ -9,10 +9,10 @@ The decorator `@Input` can be used to capture data passed from the a component
 ```ts
 @Component({
   selector: 'rio-app',
-  template: '<rio-greeter [name]="name"></rio-greeter>'
+  template: '<rio-greeter [name]="firstName"></rio-greeter>'
 })
 export class AppComponent {
-  name = 'John';
+  firstName = 'John';
 }
 ```
 
