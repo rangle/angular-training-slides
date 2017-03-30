@@ -93,3 +93,73 @@ This will:
 - Has ES6 and ES7 features
 - Compiles to JavaScript before being run in the browser
 - No runtime support for types
+
+---
+
+## First Look at the Component
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: '<h1>{{title}}</h1>',
+  styles: ['h1 { color: font-size: 30px; }']
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+
+- Import statement gives you access to Angular components
+- `@Component` is a decorator function that tells Angular this class is a component
+- `selector` is the way you reference a component. Used like an HTML tag `<app-root></app-root>`
+- `template` is what gets rendered onto the page. For web applications, this is HTML
+- `styles` are css stylesheets that get applied to your component
+- `AppComponent` is a class that decides how the component should act
+
+---
+
+## Generating a New Component
+
+- We'll use Angular CLI to create a new component
+- `ng generate [component path]`
+- Component gets added to the list of declarations
+- Generated component follows the same structure as `AppComponent`
+- Prefix `app` on both components. This is an Angular best practice
+
+---
+
+## Integrating a Component
+
+Every component has a selector
+
+
+*example.component.ts*
+```
+@Component({
+	selector: 'app-example',
+	template: '<p>Multiple component example</p>'
+})
+export class ExampleComponent { }
+```
+
+---
+
+## Integrating a Component
+
+Use selector as an HTML tag within another component's template
+
+
+*app.component.ts*
+```
+@Component({
+	selector: 'app-root',
+	template: `
+	  <h1>My Angular App</h1>
+	  <app-example></app-example>
+	`
+})
+export class AppComponent { }
+```
+[View Example](https://plnkr.co/edit/CMGx2TLUdPcL0D4tvGI9?p=preview)
