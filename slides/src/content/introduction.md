@@ -139,7 +139,7 @@ export class AppComponent {
 ## Generating a New Component
 
 - We'll use Angular CLI to create a new component
-- `ng generate [component path]`
+- `ng generate component [component path]`
 - Component gets added to the list of declarations
 - Generated component follows the same structure as `AppComponent`
 - Prefix `app` on both components. This is an Angular best practice
@@ -184,8 +184,8 @@ export class AppComponent { }
 
 ## Conditional Rendering
 
-- Done using an Angular directive
-- Directives are some logic that affects how some chunk of the page is rendered
+- Done using an Angular __directive__
+- __Directives__ are some logic that affects how some chunk of the page is rendered
 - To render conditionally, Angular provides the built in `ngIf` directive
 
 ---
@@ -194,7 +194,11 @@ export class AppComponent { }
 
 - Used within a component's template
 - Invoked by using a data binding
-- `[target]="expression"`
+
+```html
+[target]="expression"
+```
+
 - The __target__ of a data binding is the directive
 - The __expression__ in a data binding is a JavaScript expression that produces a value (with some [exceptions](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#template-expressions))
 
@@ -209,20 +213,20 @@ export class AppComponent { }
 [View Example](https://plnkr.co/edit/gVYY0CZU2qFvFlFXIB4m?p=preview)
 
 - Slightly different syntax. Using an asterisk
-- Can be bound to components as well as plain HTML
+- Can be bound to both components and plain HTML
 
 ---
 
 ## Handling Events
 
-We can bind an expression to any DOM event using the (event) syntax:
+We can bind an expression to any DOM event using the `(event)` syntax:
 
 ```typescript
 @Component({
   selector: 'app-counter',
   template: `
     <div>
-      <p>Count: {{ num }}</p>
+      <p>Count: {{num}}</p>
       <button (click)="increment()">Increment</button>
     </div>
     `
@@ -258,6 +262,38 @@ export class CounterComponent {
 - Are colon delimited sets of values
 
 ```html
-Angular 2.0 was first released on {{ng2ReleaseDate | date:'fullDate'}}
+Angular 2.0 was released on {{ng2ReleaseDate | date:'fullDate'}}
 ```
 [View Example](https://plnkr.co/edit/6dKkWSzX3JdUyKyGjWg1?p=preview)
+
+---
+
+## Generating a Pipe
+
+- Generate using the Angular CLI
+- `ng generate pipe [pipe path]`
+- Pipe is added to app module declarations
+
+---
+
+## A Look at the Pipe
+
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({ name: 'greet' })
+export class GreetPipe implements PipeTransform {
+  transform(name: string, title = ''): string {
+    return `Hello, ${title} ${name}`;
+  }
+}
+```
+[View Example](https://plnkr.co/edit/Jts8wGqIW0gG932sBzMm?p=preview)
+
+- `Pipe` imported from `@angular/core`
+- `@Pipe` is a decorator
+- `name` property instead of selector
+- Pipe name is not prefixed
+- Implements the `PipeTransform` interface
+- `transform` acceps initial value to pipe followed by all arguments passed
+- Returns some value
