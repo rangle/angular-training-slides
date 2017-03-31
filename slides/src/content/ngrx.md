@@ -2,7 +2,7 @@
 
 ---
 
-## Motivation 
+## What Should a Good State System Achieve? 
 
 1. Create [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth) 
 1. [Separation of Concern](https://en.wikipedia.org/wiki/Separation_of_concerns) : Separation of Data and Logic
@@ -13,7 +13,13 @@
 
 ---
 
-## Structure of Systems - Redux vs Server Architecture
+## Why We Can't Use Backend Programming Patterns to Model Frontend?
+
+FIXME
+
+---
+
+## Structure of Systems - Redux vs Backend Architecture
 
 | Function | Angular With `@ngrx`  | Server |
 |---|---|---|
@@ -30,9 +36,9 @@
 
 ---
 
-## Setup Ngrx Dev-Tools
+## Redux System Sounds Complex
 
-FIXME
+FIXME (Setup Ngrx Dev-Tools)
 
 ---
 
@@ -48,7 +54,7 @@ FIXME
 
 ---
 
-## Dispatching An Action
+## How do We Dispatch An Action
 
 ```ts
 import { Store } from '@ngrx/store';
@@ -86,7 +92,9 @@ export class PersonInputComponent {
 
 ---
 
-## Store
+## How Do We Interract With Actions
+
+### A store is:
 
 1. Responsible for application state (Immutability, Persisting to Disk etc.)
 1. The [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
@@ -123,13 +131,15 @@ export const people = (state = [], action) => {
 
 ---
 
-## Handling Async Events in the Application With Redux
+## How Do We Get Information From the Store?
 
 FIXME
 
 ---
 
-## The ngrx/effects Library
+## Handling Async Events in the Application With Redux
+
+### The ngrx/effects Library is:
 
 1. Responsible for Business Logic and Async actions (Http Calls)
 1. Does not keep local state
@@ -159,3 +169,26 @@ export class CollectionEffects {
 }
 ```
 
+---
+
+## FAQ: Is the Reducer the Store?
+
+FIXME
+
+---
+
+## FAQ: Does the UI Braodcast Actions and Store Broadcast Actions Back?
+
+FIXME
+
+---
+
+## FAQ: Instead of Dealing With Observables, Can we Simply Call Methods Directly?
+
+FIXME
+
+---
+
+## FAQ: I Have an Awesome Idea/Implementation that Does the Same Thing, Can I Use That?
+
+FIXME 
