@@ -169,6 +169,24 @@ The reason that the `params` property on `ActivatedRoute` is an Observable is th
 
 ---
 
+## Handling 404
+
+To detect unmatched routes you can use the `**` wildcard in the path. 
+This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. This is usually your last route in the route configuration. 
+
+```
+const routes: Routes = [
+  { path: 'component-one', component: ComponentOne },
+  { path: 'component-two', component: ComponentTwo },
+  { path: 'component-three', component: ComponentThree },
+  ...
+  { path: '**', component: Four0FourComponent }
+];
+```
+
+Note: This does not return a 404 status code. 
+
+
 FIXME: Handling 404/500's
 https://github.com/rangle/angular-training-slides/issues/261
 
