@@ -7,7 +7,6 @@
 1. Create [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth) 
 1. [Separation of Concern](https://en.wikipedia.org/wiki/Separation_of_concerns) : Separation of Data and Logic
 1. Improve scalability by having things _react_ to events as opposed to caller dictating actions
-1. Reduce Complexity of Mental Map by promoting separation of responsibility between components
 1. Create a coherent framework so future developers will know how to add features by following convention
 1. [Uni-Directional Data Flow](http://redux.js.org/docs/basics/DataFlow.html) : Easy to reason about the interractions between actors
 
@@ -44,11 +43,11 @@ FIXME (Setup Ngrx Dev-Tools)
 
 ## Actions
 
-1. Responsible for Communication between parts of redux
+1. Responsible for communication between parts of redux
 1. Implemented with [Observable](http://reactivex.io/rxjs/) streams
-1. Use actions instead of function Invocation
+1. Use actions instead of function invocation
 1. Listeners are responsible to determine how to react to actions
-1. Has 2 properties, `type`, and `payload`
+1. Has 2 properties, `type`, and by convention, `payload`
     1. `type` is the identifier the listeners can use to listen to actions
     1. `payload` is a flexible object that carries information
 
@@ -79,9 +78,9 @@ export class PersonInputComponent {
 
 ---
 
-## `@Component` use `Actions` to communicate
+## `@Component` Use `Actions` to Communicate
 
-1. Responsible for Presentation and User Interractions
+1. Responsible for presentation and user Interactions
 1. It is blind to the complexities of the app (Doesn't know what happens after action is broadcasted)
 1. React to state change via select
 1. Affect the state via Actions
@@ -100,7 +99,7 @@ export class PersonInputComponent {
 1. The [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
 1. Keeper of stateful information, void of business logic
 1. Can only be affected by actions
-1. Prevent unintentional modifications by other methods via Object Reference, or Directly Accessing Store Members
+1. Prevent unintentional modifications by other methods via object reference, or directly accessing store members
 
 ---
 
@@ -143,7 +142,7 @@ FIXME
 
 1. Responsible for Business Logic and Async actions (Http Calls)
 1. Does not keep local state
-1. Listens on the Action Stream and adheres to 'Action In Action Out'
+1. Listens on the action stream and adheres to 'Action In Action Out'
 1. Typical use is take user input, make http call, and provide output to go into store
 
 ---
@@ -165,7 +164,7 @@ export class CollectionEffects {
             type : ActionTypes.REMOVE_BOOK_SUCCESS,
             payload : book.id
         })
-        .catch(() => of(new collection.RemoveBookFailAction(book)));
+        .catch(() => Observable.of(new collection.RemoveBookFailAction(book)));
 }
 ```
 
