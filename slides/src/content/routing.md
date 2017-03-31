@@ -186,10 +186,6 @@ const routes: Routes = [
 
 Note: This does not return a 404 status code. 
 
-
-FIXME: Handling 404/500's
-https://github.com/rangle/angular-training-slides/issues/261
-
 ---
 
 FIXME: Create slide for `router.navigate` and programmatically navigating between routes
