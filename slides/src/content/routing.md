@@ -188,8 +188,41 @@ Note: This does not return a 404 status code.
 
 ---
 
-FIXME: Create slide for `router.navigate` and programmatically navigating between routes
-https://github.com/rangle/angular-training-slides/issues/262
+## Navigating programmatically
+
+To navigate programmatically you can use the `router.navigate` method with the path array as the argument.
+For example to navigate to our component-one, we could use:
+
+```
+var path = ['component-one'];
+router.navigate(path);
+```
+
+The path array can be seen as segments of an URL. 
+For example, using the following path in our array:
+
+```
+var path = ['component-one', 'param1', 'param2'];
+router.navigate(path);
+```
+
+Will navigate to:
+
+```
+http://localhost:4200/component-one/param1/param2
+```
+
+To use the router service, we need to import it and inject it into our constructor. 
+
+```
+import { Router } from '@angular/router';
+...
+constructor(router: Router){
+  var path = ['component-one'];
+  router.navigate(path);
+}
+...
+```
 
 ---
 
