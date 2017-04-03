@@ -174,7 +174,7 @@ The reason that the `params` property on `ActivatedRoute` is an Observable is th
 To detect unmatched routes you can use the `**` wildcard in the path. 
 This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. This is usually your last route in the route configuration. 
 
-```
+```javascript
 const routes: Routes = [
   { path: 'component-one', component: ComponentOne },
   { path: 'component-two', component: ComponentTwo },
@@ -193,7 +193,7 @@ Note: This does not return a 404 status code.
 To navigate programmatically you can use the `router.navigate` method with the path array as the argument.
 For example to navigate to our component-one, we could use:
 
-```
+```javascript
 var path = ['component-one'];
 router.navigate(path);
 ```
@@ -201,7 +201,7 @@ router.navigate(path);
 The path array can be seen as segments of an URL. 
 For example, using the following path in our array:
 
-```
+```javascript
 var path = ['component-one', 'param1', 'param2'];
 router.navigate(path);
 ```
@@ -214,7 +214,7 @@ http://localhost:4200/component-one/param1/param2
 
 To use the router service, we need to import it and inject it into our constructor. 
 
-```
+```javascript
 import { Router } from '@angular/router';
 ...
 constructor(router: Router){
@@ -236,7 +236,7 @@ To control whether the user can navigate to or away from a given route, we can u
 
 In order to use route guards, we must register them with the specific routes we want them to run for.
 
-```
+```javascript
 const routes: Routes = [
   { path: 'home', component: HomePage },
   {
@@ -256,7 +256,7 @@ To guard a route against unauthorized activation, we can implement the `CanActiv
 
 When `canActivate` returns `true`, the user can activate the route. When `canActivate` returns `false`, the user cannot access the route.
 
-```
+```javascript
 @Injectable()
 export class LoginRouteGuard implements CanActivate {
 
@@ -278,7 +278,7 @@ The canDeactivate function passes the component being deactivated as an argument
 
 We can use that component to determine whether the user can deactivate.
 
-```
+```javascript
 canDeactivate(component: AccountPage) {
   return component.areFormsSaved();
 }
@@ -286,9 +286,61 @@ canDeactivate(component: AccountPage) {
 
 ---
 
-FIXME: Create lazy loading section
-https://github.com/rangle/angular-training-slides/issues/264
-Content: https://angular-2-training-book.rangle.io/handout/modules/lazy-loading-module.html
+## Lazy Loading - WIP
+
+To take advantage of lazy loading it's important to group the application into modules. Lazy Loading allows us to load modules of the application on demand. Because these modules are not loaded during our bootstrap phase, it helps us to decrease the startup time. On demand modules can be loaded when the user navigates to a specific route. Let's take a look at a simple example:
+
+*root module app/app.module.ts*
+```javascript
+import { NgModule } from '@angular/core';
+import { BrowserModule  } from '@angular/platform-browser';
+
+import { AppComponent } from './app.component';
+import { EagerComponent } from './eager.component';
+import { routing } from './app.routing';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    routing
+  ],
+  declarations: [
+    AppComponent,
+    EagerComponent
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+This is a very basic module with two components: `AppComponent` and `EagerComponent`. Let's take a look at the `AppComponent` where the navigation is defined. 
+
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <h1>My App</h1>
+    <nav>
+      <a routerLink="eager">Eager</a>
+      <a routerLink="lazy">Lazy</a>
+    </nav>
+    <router-outlet></router-outlet>
+  `
+})
+export class AppComponent {}
+``` 
+
+Our `routing` file looks like this:
+
+```javascript
+const routes: Routes = [
+  { path: '', redirectTo: 'eager', pathMatch: 'full' },
+  { path: 'eager', component: EagerComponent },
+  { path: 'lazy', loadChildren: 'lazy/lazy.module#LazyModule' }
+];
+```
 
 ---
 
@@ -335,3 +387,9 @@ nextPage() {
 [View Example](http://plnkr.co/edit/Ko6VFRGRmu5jJ9ArwxvC?p=preview)
 
 ---
+
+FIXME: What are child routes
+https://github.com/rangle/angular-training-slides/issues/280
+Content: https://angular-2-training-book.rangle.io/handout/routing/child_routes.html
+- show path configuration for child routes
+- show example how this is useful
