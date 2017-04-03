@@ -114,11 +114,57 @@ For example the following code defines a link to the route at path `component-on
 <a [routerLink]="['/component-one']">Component One</a>
 ```
 
-Alternatively, you can navigate to a route by calling the `navigate` function on the router:
+Alternatively, you can navigate to a route by calling the `navigate` function on the router with the path array as the argument. For example to navigate to our component-one, we could use:
 
 ```javascript
-this.router.navigate(['/component-one']);
+var path = ['component-one'];
+router.navigate(path);
 ```
+
+The path array can be seen as segments of an URL. 
+For example, using the following path in our array:
+
+```javascript
+var path = ['component-one', 'param1', 'param2'];
+router.navigate(path);
+```
+
+Will navigate to:
+
+```
+http://localhost:4200/component-one/param1/param2
+```
+
+To use the router service, we need to import it and inject it into our constructor. 
+
+```javascript
+import { Router } from '@angular/router';
+...
+constructor(router: Router){
+  var path = ['component-one'];
+  router.navigate(path);
+}
+...
+```
+
+---
+
+## Handling 404
+
+To detect unmatched routes you can use the `**` wildcard in the path. 
+This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. This is usually your last route in the route configuration. 
+
+```javascript
+const routes: Routes = [
+  { path: 'component-one', component: ComponentOne },
+  { path: 'component-two', component: ComponentTwo },
+  { path: 'component-three', component: ComponentThree },
+  ...
+  { path: '**', component: Four0FourComponent }
+];
+```
+
+Note: This does not return a 404 status code. 
 
 ---
 ## Route Parameters (1/2)
@@ -169,120 +215,46 @@ The reason that the `params` property on `ActivatedRoute` is an Observable is th
 
 ---
 
-## Handling 404
+## Passing Optional Parameters (1/2)
 
-To detect unmatched routes you can use the `**` wildcard in the path. 
-This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. This is usually your last route in the route configuration. 
+Use the `[queryParams]` directive along with `[routerLink]` to pass query parameters. For example:
+
+```html
+<a [routerLink]="['product-list']" [queryParams]="{ page: 99 }">Go to Page 99</a>
+```
+
+Alternatively, we can navigate programmatically using the `Router` service:
 
 ```javascript
-const routes: Routes = [
-  { path: 'component-one', component: ComponentOne },
-  { path: 'component-two', component: ComponentTwo },
-  { path: 'component-three', component: ComponentThree },
-  ...
-  { path: '**', component: Four0FourComponent }
-];
-```
-
-Note: This does not return a 404 status code. 
-
----
-
-## Navigating programmatically
-
-To navigate programmatically you can use the `router.navigate` method with the path array as the argument.
-For example to navigate to our component-one, we could use:
-
-```javascript
-var path = ['component-one'];
-router.navigate(path);
-```
-
-The path array can be seen as segments of an URL. 
-For example, using the following path in our array:
-
-```javascript
-var path = ['component-one', 'param1', 'param2'];
-router.navigate(path);
-```
-
-Will navigate to:
-
-```
-http://localhost:4200/component-one/param1/param2
-```
-
-To use the router service, we need to import it and inject it into our constructor. 
-
-```javascript
-import { Router } from '@angular/router';
-...
-constructor(router: Router){
-  var path = ['component-one'];
-  router.navigate(path);
-}
-...
-```
-
----
-
-FIXME: Better flesh out these authorization sections.
-https://github.com/rangle/angular-training-slides/issues/263
-(Content from: https://angular-2-training-book.rangle.io/handout/routing/route_guards.html)
-
-## Route Authorization (1/3)
-
-To control whether the user can navigate to or away from a given route, we can use route guards.
-
-In order to use route guards, we must register them with the specific routes we want them to run for.
-
-```javascript
-const routes: Routes = [
-  { path: 'home', component: HomePage },
-  {
-    path: 'accounts',
-    component: AccountPage,
-    canActivate: [LoginRouteGuard],
-    canDeactivate: [SaveFormsGuard]
+  goToPage(pageNum) {
+    this.router.navigate(['/product-list'], { queryParams: { page: pageNum } });
   }
-];
 ```
 
 ---
 
-## Route Authorization (2/3)
+## Passing Optional Parameters (2/2)
 
-To guard a route against unauthorized activation, we can implement the `CanActivate` interface by implementing the `canActivate` function.
-
-When `canActivate` returns `true`, the user can activate the route. When `canActivate` returns `false`, the user cannot access the route.
+Similar to reading route parameters, the `Router` service returns an Observable we can subscribe to to read the query parameters:
 
 ```javascript
-@Injectable()
-export class LoginRouteGuard implements CanActivate {
 
-  constructor(private loginService: LoginService) {}
+ngOnInit() {
+  this.sub = this.route
+    .queryParams
+    .subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      this.page = +params['page'] || 0; // (+) converts string 'page' to a number
+    });
+}
 
-  canActivate() {
-    return this.loginService.isLoggedIn(); // true or false
-  }
+nextPage() {
+  this.router.navigate(['product-list'],
+    { queryParams: { page: this.page + 1 } });
 }
 ```
 
----
-
-## Route Authorization (3/3)
-
-CanDeactivate works in a similar way to CanActivate but there are some important differences.
-
-The canDeactivate function passes the component being deactivated as an argument to the function.
-
-We can use that component to determine whether the user can deactivate.
-
-```javascript
-canDeactivate(component: AccountPage) {
-  return component.areFormsSaved();
-}
-```
+[View Example](http://plnkr.co/edit/Ko6VFRGRmu5jJ9ArwxvC?p=preview)
 
 ---
 
@@ -342,49 +314,63 @@ const routes: Routes = [
 ];
 ```
 
----
+FIXME: Better flesh out these authorization sections.
+https://github.com/rangle/angular-training-slides/issues/263
+(Content from: https://angular-2-training-book.rangle.io/handout/routing/route_guards.html)
 
-## Passing Optional Parameters (1/2)
+## Route Authorization (1/3)
 
+To control whether the user can navigate to or away from a given route, we can use route guards.
 
-Use the `[queryParams]` directive along with `[routerLink]` to pass query parameters. For example:
-
-```html
-<a [routerLink]="['product-list']" [queryParams]="{ page: 99 }">Go to Page 99</a>
-```
-
-Alternatively, we can navigate programmatically using the `Router` service:
+In order to use route guards, we must register them with the specific routes we want them to run for.
 
 ```javascript
-  goToPage(pageNum) {
-    this.router.navigate(['/product-list'], { queryParams: { page: pageNum } });
+const routes: Routes = [
+  { path: 'home', component: HomePage },
+  {
+    path: 'accounts',
+    component: AccountPage,
+    canActivate: [LoginRouteGuard],
+    canDeactivate: [SaveFormsGuard]
   }
+];
 ```
 
 ---
 
-## Passing Optional Parameters (2/2)
+## Route Authorization (2/3)
 
-Similar to reading route parameters, the `Router` service returns an Observable we can subscribe to to read the query parameters:
+To guard a route against unauthorized activation, we can implement the `CanActivate` interface by implementing the `canActivate` function.
+
+When `canActivate` returns `true`, the user can activate the route. When `canActivate` returns `false`, the user cannot access the route.
 
 ```javascript
+@Injectable()
+export class LoginRouteGuard implements CanActivate {
 
-ngOnInit() {
-  this.sub = this.route
-    .queryParams
-    .subscribe(params => {
-      // Defaults to 0 if no query param provided.
-      this.page = +params['page'] || 0; // (+) converts string 'page' to a number
-    });
-}
+  constructor(private loginService: LoginService) {}
 
-nextPage() {
-  this.router.navigate(['product-list'],
-    { queryParams: { page: this.page + 1 } });
+  canActivate() {
+    return this.loginService.isLoggedIn(); // true or false
+  }
 }
 ```
 
-[View Example](http://plnkr.co/edit/Ko6VFRGRmu5jJ9ArwxvC?p=preview)
+---
+
+## Route Authorization (3/3)
+
+CanDeactivate works in a similar way to CanActivate but there are some important differences.
+
+The canDeactivate function passes the component being deactivated as an argument to the function.
+
+We can use that component to determine whether the user can deactivate.
+
+```javascript
+canDeactivate(component: AccountPage) {
+  return component.areFormsSaved();
+}
+```
 
 ---
 
