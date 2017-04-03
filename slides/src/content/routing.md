@@ -258,7 +258,7 @@ nextPage() {
 
 ---
 
-## Lazy Loading - WIP
+## Lazy Loading
 
 To take advantage of lazy loading it's important to group the application into modules. Lazy Loading allows us to load modules of the application on demand. Because these modules are not loaded during our bootstrap phase, it helps us to decrease the startup time. On demand modules can be loaded when the user navigates to a specific route. To setup lazy loading we need:
 
@@ -358,8 +358,46 @@ canDeactivate(component: AccountPage) {
 
 ---
 
+## Child Routes
+
+Child routes are a perfect case for parent/child pages or views. For example: The product details page may have a tabbed navigation section that shows the product overview by default. When the user clicks the "Technical Specs" tab the section shows the specs instead. This feature is very common on sites like ebay or amazon. 
+
+If the user clicks on the product with ID 3, we want to show the product details page with the overview:
+
+```
+localhost:3000/product-details/3/overview
+```
+
+When the user clicks "Technical Specs":
+
+```
+localhost:3000/product-details/3/specs
+```
+
+`overview` and `specs` are child routes of product-details/:id. They are only reachable within product details.
+Our Routes with children would look like:
+
+```javascript
+export const routes: Routes = [
+  { path: '', redirectTo: 'product-list', pathMatch: 'full' },
+  { path: 'product-list', component: ProductList },
+  { path: 'product-details/:id', component: ProductDetails,
+    children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: Overview },
+      { path: 'specs', component: Specs }
+    ]
+  }
+];
+```
+
+The parent product-details would contain a `<router-outlet></router-outlet>` to display the contents of the child. 
+
+---
+
 FIXME: What are child routes
 https://github.com/rangle/angular-training-slides/issues/280
 Content: https://angular-2-training-book.rangle.io/handout/routing/child_routes.html
 - show path configuration for child routes
 - show example how this is useful
+
