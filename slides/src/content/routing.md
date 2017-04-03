@@ -260,51 +260,14 @@ nextPage() {
 
 ## Lazy Loading - WIP
 
-To take advantage of lazy loading it's important to group the application into modules. Lazy Loading allows us to load modules of the application on demand. Because these modules are not loaded during our bootstrap phase, it helps us to decrease the startup time. On demand modules can be loaded when the user navigates to a specific route. Let's take a look at a simple example:
+To take advantage of lazy loading it's important to group the application into modules. Lazy Loading allows us to load modules of the application on demand. Because these modules are not loaded during our bootstrap phase, it helps us to decrease the startup time. On demand modules can be loaded when the user navigates to a specific route. To setup lazy loading we need:
 
-*root module app/app.module.ts*
-```javascript
-import { NgModule } from '@angular/core';
-import { BrowserModule  } from '@angular/platform-browser';
+* Remove the component from the `declarations` array of the root module
+* In the route config use `loadChildren` in the path instead of a component
+* In the route config we pass a string instead of a symbol to avoid loading the module eagerly
+* In the route config we define not only the path to the module but the name of the class as well
 
-import { AppComponent } from './app.component';
-import { EagerComponent } from './eager.component';
-import { routing } from './app.routing';
-
-@NgModule({
-  imports: [
-    BrowserModule,
-    routing
-  ],
-  declarations: [
-    AppComponent,
-    EagerComponent
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule {}
-```
-
-This is a very basic module with two components: `AppComponent` and `EagerComponent`. Let's take a look at the `AppComponent` where the navigation is defined. 
-
-```javascript
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  template: `
-    <h1>My App</h1>
-    <nav>
-      <a routerLink="eager">Eager</a>
-      <a routerLink="lazy">Lazy</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `
-})
-export class AppComponent {}
-``` 
-
-Our `routing` file looks like this:
+Here is how our routing should look like:
 
 ```javascript
 const routes: Routes = [
@@ -313,6 +276,27 @@ const routes: Routes = [
   { path: 'lazy', loadChildren: 'lazy/lazy.module#LazyModule' }
 ];
 ```
+
+There is nothing special in our `LazyModule` and `LazyComponent`, they remain simple. Routing for a feature module should always call `forChild` instead of `forRoot`. This is specific to feature modules and not related to lazy loading.  
+
+```javascript
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { LazyComponent } from './lazy.component';
+
+const routes: Routes = [
+  { path: '', component: LazyComponent }
+];
+
+export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+```
+
+Our `LazyComponent` has now been setup for lazy loading. If we start the app, we will see that the `LazyComponent` does not get loaded right away. It only gets loaded the first time, when we navigate to the `lazy` route.  
+
+[View Example](https://plnkr.co/edit/vpCqRHDAj7V6mlN1AknN?p=preview)
+
+---
 
 FIXME: Better flesh out these authorization sections.
 https://github.com/rangle/angular-training-slides/issues/263
