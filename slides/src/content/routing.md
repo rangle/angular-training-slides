@@ -104,7 +104,7 @@ export class AppComponent {}
 
 ---
 
-## Defining Links Between Routes
+## Defining Links Between Routes (1/2)
 
 Add links to routes using the `RouterLink` directive.
 
@@ -114,12 +114,16 @@ For example the following code defines a link to the route at path `component-on
 <a [routerLink]="['/component-one']">Component One</a>
 ```
 
-Alternatively, you can navigate to a route by calling the `navigate` function on the router with the path array as the argument. For example to navigate to our component-one, we could use:
+Alternatively, you can navigate to a route by calling the `navigate` function on the router with the path array as the argument. For example to navigate to component-one, we could use:
 
 ```javascript
 var path = ['component-one'];
 router.navigate(path);
 ```
+
+---
+
+## Defining Links Between Routes (2/2)
 
 The path array can be seen as segments of an URL. 
 For example, using the following path in our array:
@@ -135,7 +139,7 @@ Will navigate to:
 http://localhost:4200/component-one/param1/param2
 ```
 
-To use the router service, we need to import it and inject it into our constructor. 
+To use the router service, we need to import and inject it into our constructor. 
 
 ```javascript
 import { Router } from '@angular/router';
@@ -152,7 +156,9 @@ constructor(router: Router){
 ## Handling 404
 
 To detect unmatched routes you can use the `**` wildcard in the path. 
-This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. This is usually your last route in the route configuration. 
+This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. 
+
+This is usually your last route in the route configuration. 
 
 ```javascript
 const routes: Routes = [
@@ -258,9 +264,9 @@ nextPage() {
 
 ---
 
-## Lazy Loading
+## Lazy Loading (1/3)
 
-To take advantage of lazy loading it's important to group the application into modules. Lazy Loading allows us to load modules of the application on demand. Because these modules are not loaded during our bootstrap phase, it helps us to decrease the startup time. On demand modules can be loaded when the user navigates to a specific route. To setup lazy loading we need:
+To take advantage of lazy loading it's important to group the application into modules. Lazy Loading allows us to load modules of the application on demand. Because these modules are not loaded during our bootstrap phase, it helps us to decrease the startup time. On demand modules can be loaded when the user navigates to a specific route. In order to setup lazy loading we need the following:
 
 * Remove the component from the `declarations` array of the root module
 * In the route config use `loadChildren` in the path instead of a component
@@ -277,7 +283,11 @@ const routes: Routes = [
 ];
 ```
 
-There is nothing special in our `LazyModule` and `LazyComponent`, they remain simple. Routing for a feature module should always call `forChild` instead of `forRoot`. This is specific to feature modules and not related to lazy loading.  
+---
+
+## Lazy Loading (2/3)
+
+There is nothing special in our `LazyModule` and `LazyComponent`, they remain simple. However routing for a feature module should always call `forChild` instead of `forRoot`, which we have already seen. This is specific to any feature modules and not related to lazy loading.  
 
 ```javascript
 import { ModuleWithProviders } from '@angular/core';
@@ -292,7 +302,7 @@ const routes: Routes = [
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
 ```
 
-Our `LazyComponent` has now been setup for lazy loading. If we start the app, we will see that the `LazyComponent` does not get loaded right away. It only gets loaded the first time, when we navigate to the `lazy` route.  
+Our `LazyComponent` has now been setup for lazy loading. If we start the app, we will see that the `LazyComponent` does not get loaded right away. It only gets loaded the first time, when we navigate to the `lazy` route. If we navigate back and forth now between an eager loaded and lazy loaded module, we will see that both components are cached now. 
 
 [View Example](https://plnkr.co/edit/vpCqRHDAj7V6mlN1AknN?p=preview)
 
@@ -358,9 +368,11 @@ canDeactivate(component: AccountPage) {
 
 ---
 
-## Child Routes
+## Child Routes (1/4)
 
-Child routes are a perfect case for parent/child pages or views. For example: The product details page may have a tabbed navigation section that shows the product overview by default. When the user clicks the "Technical Specs" tab the section shows the specs instead. This feature is very common on sites like ebay or amazon. 
+Child routes are a perfect case for parent/child pages or views. 
+
+For example: The product details page may have a tabbed navigation section that shows the product overview by default. When the user clicks the "Technical Specs" tab the section shows the specs instead. This feature is very common on sites like ebay or amazon. 
 
 If the user clicks on the product with ID 3, we want to show the product details page with the overview:
 
@@ -374,8 +386,13 @@ When the user clicks "Technical Specs":
 localhost:3000/product-details/3/specs
 ```
 
-`overview` and `specs` are child routes of product-details/:id. They are only reachable within product details.
-Our Routes with children would look like:
+`overview` and `specs` are child routes of product-details/:id. 
+
+---
+
+## Child Routes (2/4)
+
+The child routes are only reachable from within product details. Our Routes with children would look like:
 
 ```javascript
 export const routes: Routes = [
@@ -391,7 +408,61 @@ export const routes: Routes = [
 ];
 ```
 
-The parent product-details would contain a `<router-outlet></router-outlet>` to display the contents of the child. 
+The parent product-details template will contain a `<router-outlet></router-outlet>` to display the contents of the child. 
+
+---
+
+## Child Routes (3/4)
+
+
+An alternative to display the `overview` content is to change our children array from:
+
+```
+    children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: Overview },
+      { path: 'specs', component: Specs }
+    ]
+```
+
+to
+
+```
+    children: [
+      { path: '', component: Overview },
+      { path: 'specs', component: Specs }
+    ]
+```
+
+This way we can get rid of the first empty item, which essentially just redirects the user to the `overview` route.
+
+---
+
+## Child Routes (4/4)
+
+To display the `overview` or `specs` section of a parent, the child route will need the product ID from the parent. The child route component can access the parent route's parameters as follows using the `route` and `activatedRoute`
+
+```javascript
+export default class Overview {
+  parentRouteId: number;
+  private sub: any;
+
+  constructor(private router: Router,
+    private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Get parent ActivatedRoute of this route.
+    this.sub = this.router.routerState.parent(this.route)
+      .params.subscribe(params => {
+        this.parentRouteId = +params["id"];
+      });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+}
+```
 
 ---
 
