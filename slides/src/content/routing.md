@@ -80,10 +80,9 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Dynamically Adding Route Components
+## Adding RouterOutlet
 
-Rather than define each route's component separately, use `RouterOutlet`.
-Angular dynamically adds the component corresponding to the active route into the `<router-outlet></router-outlet>` element.
+In order to render the content of the individual routes we will need to add the `<router-outlet></router-outlet>`. Angular will dynamically place the content after the `<router-outlet></router-outlet>`. 
 
 ```javascript
 @Component({
@@ -93,8 +92,8 @@ Angular dynamically adds the component corresponding to the active route into th
       <a [routerLink]="['/component-one']">Component One</a>
       <a [routerLink]="['/component-two']">Component Two</a>
     </nav>
-    <!-- Route components are added by router here -->
     <router-outlet></router-outlet>
+    <!-- Route components are added by router here -->
   `
 })
 export class AppComponent {}
