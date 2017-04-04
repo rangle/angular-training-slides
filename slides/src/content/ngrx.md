@@ -80,7 +80,7 @@ export class PersonInputComponent {
 
 ## `@Component` Uses `Actions` to Communicate
 
-1. Responsible for presentation and user Interactions
+1. Responsible for presentation and user interactions
 1. It is blind to the complexities of the app (Doesn't know what happens after action is broadcasted)
 1. React to state change via select
 1. Affect the state via Actions
@@ -132,7 +132,38 @@ export const people = (state = [], action) => {
 
 ## How Do We Get Information From the Store?
 
-FIXME
+1. State is exposed through the `Store` service as an `Observable` stream
+1. Using the select pattern
+1. `Store` provides a `.select()` method to select pieces of state:
+  1. By key: `this.store.select('people')`
+  1. By nested key: `this.store.select('city', 'people')`
+  1. By function: `this.store.select(state => state.people)`
+1. Can chain other operators like `.filter()`, `.map()` to have finer-grained control over selected data
+
+---
+
+## Sample Select
+
+```ts
+@Component({
+  selector: 'people',
+  template: `
+    <ul>
+      <li *ngFor="let person of people">{{ person.name }}</li>
+    </ul>
+  `
+})
+export class PeopleComponent implements OnInit {
+  private people: Person[] = [];
+
+  constructor(private store: Store<any>) { }
+
+  ngOnInit() {
+    this.store.select('people')
+      .subscribe((people: Person[]) => this.people = people);
+  }
+}
+```
 
 ---
 
