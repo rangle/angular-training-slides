@@ -29,6 +29,10 @@ The Base URL tag must be set within the `<head>` tag of index.html:
 
 This tells the router how to compose navigation URLs.
 
+Notes:
+
+In the demos we use a script tag to set the base tag. In a real application it must be set as above.
+
 ---
 
 ## Configuring Routes (2/3) - Route Definition Object
@@ -80,27 +84,22 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## Dynamically Adding Route Components
+## Redirecting the Router to Another Route
 
-Rather than define each route's component separately, use `RouterOutlet`.
-Angular dynamically adds the component corresponding to the active route into the `<router-outlet></router-outlet>` element.
+When your application starts, it navigates to the empty route by default.
+We can configure the router to redirect to a named route by default:
 
 ```javascript
-@Component({
-  selector: 'rio-app',
-  template: `
-    <nav>
-      <a [routerLink]="['/component-one']">Component One</a>
-      <a [routerLink]="['/component-two']">Component Two</a>
-    </nav>
-    <!-- Route components are added by router here -->
-    <router-outlet></router-outlet>
-  `
-})
-export class AppComponent {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'component-one', pathMatch: 'full' },
+  { path: 'component-one', component: ComponentOne },
+  { path: 'component-two', component: ComponentTwo }
+];
 ```
 
-[View Example](https://plnkr.co/edit/3EH52DtjS1Z5fUbycMX9?p=preview)
+This tells the router to redirect to component-one when matching the empty path ('').
+
+When starting the application, it will automatically navigate to the route for `component-one`.
 
 ---
 
@@ -121,6 +120,31 @@ this.router.navigate(['/component-one']);
 ```
 
 ---
+
+## Dynamically Adding Route Components
+
+Rather than define each route's component separately, use `RouterOutlet`.
+Angular dynamically adds the component corresponding to the active route into the `<router-outlet></router-outlet>` element.
+
+```javascript
+@Component({
+  selector: 'rio-app',
+  template: `
+    <nav>
+      <a [routerLink]="['/component-one']">Component One</a>
+      <a [routerLink]="['/component-two']">Component Two</a>
+    </nav>
+    <router-outlet></router-outlet>
+    <!-- Route components are added by router here -->
+  `
+})
+export class AppComponent {}
+```
+
+[View Example](https://plnkr.co/edit/3EH52DtjS1Z5fUbycMX9?p=preview)
+
+---
+
 ## Route Parameters (1/2)
 
 Adding `:id` in the path of the `product-details` route places the parameter in the route's path. For example `localhost:3000/product-details/5`
@@ -165,88 +189,73 @@ export class ProductDetails {
 
 Notes:
 
-The reason that the `params` property on `ActivatedRoute` is an Observable is that the router may not recreate the component when navigating to that same component. In this case the parameters may change without the component being recreated.
+The reason that the `params` property on `ActivatedRoute` is an Observable is that the router may not recreate the component when navigating to the same component. In this case the parameter may change without the component being recreated.
 
 ---
 
-FIXME: Handling 404/500's
-https://github.com/rangle/angular-training-slides/issues/261
+## Child Routes (1/3)
 
----
+Specify child routes by using the `children` route property.
 
-FIXME: Create slide for `router.navigate` and programmatically navigating between routes
-https://github.com/rangle/angular-training-slides/issues/262
-
----
-
-FIXME: Better flesh out these authorization sections.
-https://github.com/rangle/angular-training-slides/issues/263
-(Content from: https://angular-2-training-book.rangle.io/handout/routing/route_guards.html)
-
-## Route Authorization (1/3)
-
-To control whether the user can navigate to or away from a given route, we can use route guards.
-
-In order to use route guards, we must register them with the specific routes we want them to run for.
-
-```
-const routes: Routes = [
-  { path: 'home', component: HomePage },
-  {
-    path: 'accounts',
-    component: AccountPage,
-    canActivate: [LoginRouteGuard],
-    canDeactivate: [SaveFormsGuard]
+```javascript
+export const routes: Routes = [
+  { path: 'product-details/:id', component: ProductDetails,
+    children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: Overview },
+      { path: 'specs', component: Specs }
+    ]
   }
 ];
 ```
 
+This will create the following API structure:
+
+- `product-details/3/overview`
+- `product-details/3/specs`
+
 ---
 
-## Route Authorization (2/3)
+## Child Routes (2/3)
 
-To guard a route against unauthorized activation, we can implement the `CanActivate` interface by implementing the `canActivate` function.
+Using child routes requires an additional `<router-outlet></router-outlet>` just like we used in the root application component.
 
-When `canActivate` returns `true`, the user can activate the route. When `canActivate` returns `false`, the user cannot access the route.
-
+```javascript
+@Component({
+  selector: 'rio-product-details',
+  template: `
+    <p>Product Details: {{id}}</p>
+    <router-outlet></router-outlet>
+    <!-- Overview & Specs components get added here by the router -->
+  `
+})
 ```
-@Injectable()
-export class LoginRouteGuard implements CanActivate {
 
-  constructor(private loginService: LoginService) {}
+[View Example](https://plnkr.co/edit/FOeNsspRfjg3PVLiUsip?p=preview)
 
-  canActivate() {
-    return this.loginService.isLoggedIn(); // true or false
+---
+
+## Child Routes (3/3)
+To access a parent's route parameters:
+
+```javascript
+export default class Overview {
+  constructor(private router: Router,
+    private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Get parent ActivatedRoute of this route.
+    this.sub = this.router.routerState.parent(this.route)
+      .params.subscribe(params => {
+        // params['id'] is parent's product id
+      });
   }
 }
 ```
 
 ---
 
-## Route Authorization (3/3)
-
-CanDeactivate works in a similar way to CanActivate but there are some important differences.
-
-The canDeactivate function passes the component being deactivated as an argument to the function.
-
-We can use that component to determine whether the user can deactivate.
-
-```
-canDeactivate(component: AccountPage) {
-  return component.areFormsSaved();
-}
-```
-
----
-
-FIXME: Create lazy loading section
-https://github.com/rangle/angular-training-slides/issues/264
-Content: https://angular-2-training-book.rangle.io/handout/modules/lazy-loading-module.html
-
----
-
 ## Passing Optional Parameters (1/2)
-
 
 Use the `[queryParams]` directive along with `[routerLink]` to pass query parameters. For example:
 
@@ -286,5 +295,3 @@ nextPage() {
 ```
 
 [View Example](http://plnkr.co/edit/Ko6VFRGRmu5jJ9ArwxvC?p=preview)
-
----
