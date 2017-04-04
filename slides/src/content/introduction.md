@@ -6,6 +6,14 @@
 
 ## About Me
 
+<img src="content/images/john_chen.jpg" height="200px"></img>
+
+Tsung-Ting (John) Chen
+
+Solutions Architect @ Rangle.io
+
+Github: [github.com/tsungting](https://github.com/tsungting)
+
 ---
 
 ## Structure of this Training
@@ -18,21 +26,23 @@
 
 ---
 
-## Table of Contents
+## Day 1 Contents
 
-1. Introduction
-1. Introduction to ES6/ES2015
-1. Introduction to TypeScript
-1. Introduction to Observables
-1. Creating a hello world application
-1. Components In Depth
-1. Directives
-1. Pipes
-1. Services
-1. Miscellaneous Topics
-1. Forms
-1. Routing
-1. Unit Testing
+- Introduction
+- Angular CLI
+- Creating a Todo List application
+- Components In Depth
+- Directives
+- Pipes
+
+---
+
+## Day 2 Contents
+
+- Services and DI Injection
+- Forms
+- Routing
+- Unit Testing 
 
 ---
 
@@ -40,12 +50,10 @@
 
 ---
 
-## What Makes Angular Good?
+## What Is Angular
 
-- Modular architecture
-- Better performance than Angular 1:
-  - Improved Change detection
-  - Ahead of Time compiler
+- Rendering Engline
+  - Take an abstract idea like `TODO List` and put it on the screen
 - It's made to scale:
   - Modules
   - Dependency Injection (that makes sense)
@@ -53,4 +61,3 @@
   - Supporting projects: CLI, Universal, Nativescript
 - A complete and opinionated solution
 - You don't need to be a Javascript expert
-- Can be integrated with Redux

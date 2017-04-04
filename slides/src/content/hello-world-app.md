@@ -297,22 +297,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ---
 
-## JIT vs AOT
-
-| Characteristic        | JIT          | AOT               |
-| --------------------- | ------------ | ----------------- |
-| Compilation target    | Browser      | Server            |
-| Compilation context   | Runtime      | Build             |
-| Bundle size           | Huge (~3 MB) | Smaller (~400 KB) |
-| Execution Performance | -            | Better            |
-| Startup time          | -            | Shorter           |
-
-- AoT compiles component templates in the server
-- With AoT the compiler is not shipped to the browser
-
----
-
-## Loading an App Using Webpack
+## The index html
 
 ```html
 <!DOCTYPE html>
