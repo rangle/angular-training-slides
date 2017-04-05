@@ -61,8 +61,16 @@
 ## Getting Set Up
 
 1. Install NVM (Node Version Manager) -- [nvm.sh](http://nvm.sh)
+  - NVM allows for easy installations of Node versions and switching between them. Allowing for easy management of different environments.
 1. Install the latest LTS version of node -- `nvm install --lts`
 1. Install Angular CLI -- `npm install --global @angular/cli`
+
+
+**For Windows Users**
+
+1. Install the Latest Node LTS version (https://nodejs.org/en/download/)
+1. Install Angular CLI
+  - We recommend using `git-bash`, a command line executable that is bundled with Git
 
 ---
 
@@ -72,9 +80,11 @@
 
 This will:
 
-- Install Angular
+- Install Angular (if it isn't already installed)
 - Install node dependencies
 - Create scaffolding
+
+(Note: Installation may take a few minutes for the first run)
 
 ---
 
@@ -92,12 +102,13 @@ This will:
 - TypeScript is exactly like JavaScript, but with types
 - Has ES6 and ES7 features
 - Compiles to JavaScript before being run in the browser
-- No runtime support for types
+- So types aren't visible in browser's debugger at runtime
 
 ---
 
 ## First Look at the Component
 
+*app.component.ts*
 ```typescript
 import { Component } from '@angular/core';
 
@@ -111,11 +122,12 @@ export class AppComponent {
 }
 ```
 
-- Import statement gives you access to Angular components
-- `@Component` is a decorator function that tells Angular this class is a component
-- `selector` is the way you intend to reference the component. Used like an HTML tag `<app-root></app-root>`
-- `template` is what gets rendered onto the page. For web applications, this is HTML
-- `styles` are css stylesheets that get applied to your component
+- `import` statement gives you access to Angular components
+- `@Component` is a decorator that tells Angular this class is a component
+- `selector` is the way you intend to reference the component
+  - Used like an HTML tag `<app-root></app-root>`
+- `template` is what gets rendered onto the page
+- `styles` are CSS that get applied to your component
 - `AppComponent` is a class that decides how the component should act
 
 ---
@@ -132,7 +144,14 @@ export class AppComponent {
 
 - `<h1>{{title}}</h1>` represents __interpolation__
 - Interpolation attempts to evaluate the expression between the curly braces and turn that into a string
-- Symbols (such as title) are evaluated within an expression context, in this case, the component's class members
+- Symbols (such as title) are evaluated within an expression context
+  - In this case, the component's class members
+
+---
+
+## Taking Our Component For a Run
+
+FIXME
 
 ---
 
@@ -178,7 +197,6 @@ Use selector as an HTML tag within another component's template
 export class AppComponent { }
 ```
 [View Example](https://plnkr.co/edit/CMGx2TLUdPcL0D4tvGI9?p=preview)
-
 
 ---
 
@@ -268,6 +286,15 @@ Angular 2.0 was released on {{ng2ReleaseDate | date:'fullDate'}}
 
 ---
 
+## Built-in Angular Pipes
+
+- [DatePipe](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html) - Formats dates with configuration options
+- [UpperCasePipe](https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html) - Formats a string upper case
+- [LowerCasePipe](https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html) - Formats a string to lower case
+- [CurrencyPipe](https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html) - Formats a number to a currency based on a locale
+- [PercentPipe](https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html) - Formats numbers as a percentage based on a locale
+
+---
 ## Generating a Pipe
 
 - Generate using the Angular CLI
