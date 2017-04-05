@@ -31,13 +31,7 @@ FIXME
 
 ## Redux as a System
 
-<img src="images/redux-and-data-flow.png" width="50%"/>
-
----
-
-## Redux System Sounds Complex
-
-FIXME (Setup Ngrx Dev-Tools)
+<img src="/content/images/redux-and-data-flow.png" width="50%"/>
 
 ---
 
@@ -106,7 +100,7 @@ export class PersonInputComponent {
 ## Sample Store
 
 ```ts
-//Root module
+// Root module
 import { StoreModule } from '@ngrx/store';
 import { people } from './people'; // Reducers
 
@@ -117,8 +111,8 @@ export class AppModule {  }
 ```
 
 ```ts
-//Reducer
-export const people = (state = [], action) => {
+// Reducer
+export function people (state = [], action) {
   switch (action.type) {
     case 'REMOVE_PERSON':
       return state.filter(person => person.id !== action.payload);
@@ -127,6 +121,50 @@ export const people = (state = [], action) => {
   }
 }
 ```
+
+
+---
+
+## Redux Sounds Complex
+
+The best way to learn Redux is to visualize what is happening inside of the system.
+
+We can do this using the [Redux DevTools Extension](http://extension.remotedev.io/#installation) which is useful not only for visualization, but debugging our application as well.
+
+We can go ahead an install this extension into our browser of choice with the appropriate link [here](http://extension.remotedev.io/#installation) (in our case we will be using Google Chrome).
+
+---
+
+## @ngrx/store-devtools
+
+With our extension installed, we need to configure our application to make use of the dev tools by installing `@ngrx/store-devtools`:
+
+`npm install @ngrx/store-devtools --save`
+
+and then import the `StoreDevtoolsModule` into our module.
+
+```ts
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+@NgModule({
+  imports: [
+    StoreModule.provideStore(rootReducer),
+    // Note that you must instrument after importing StoreModule
+    StoreDevtoolsModule.instrumentOnlyWithExtension({})
+  ]
+})
+export class AppModule { }
+```
+
+---
+
+## Redux DevTools
+
+Upon successful installation of the Redux DevTools Extension and configuration of of the `StoreDevToolsModule`, there will be a new "Redux" tab in our browser's developer tools pane.
+
+Selecting this tab, we should now see something similar to this.
+
+<img src="/content/images/redux-devtools.png" width="50%"/>
 
 ---
 
