@@ -54,8 +54,6 @@
 - A complete and opinionated solution
 - You don't need to be a Javascript expert
 - Can be integrated with Redux
-=======
-
 
 ---
 
@@ -89,7 +87,6 @@ This will:
 - Create scaffolding
 
 **Note:** This may take a few minutes to run the first time.
-
 **Proxies:** Make sure to disable any proxies that you may have setup in your environment, as they can interfere with downloading the packages. 
 
 ---
@@ -153,8 +150,6 @@ export class AppComponent {
 - Interpolation attempts to evaluate the expression between the curly braces and turn that into a string
 - Symbols (such as title) are evaluated within an expression context
   - in this case, the component's class members
-- Once we have created our simple component we can start our website
-  - using `ng serve`
 
 ---
 
@@ -220,8 +215,6 @@ Use selector as an HTML tag within another component's template
 export class AppComponent { }
 ```
 [View Example](https://plnkr.co/edit/CMGx2TLUdPcL0D4tvGI9?p=preview)
-
-![](/content/images/angular-app.png)
 
 ---
 
@@ -297,10 +290,15 @@ export class CounterComponent {
 Angular 2.0 was released on {{ng2ReleaseDate | date:'fullDate'}}
 ```
 
-- Other useful pipes that come with angular are:
-- `DatePipe`, `UpperCasePipe`, `LowerCasePipe`, `CurrencyPipe`, and `PercentPipe`
-
 [View Example](https://plnkr.co/edit/6dKkWSzX3JdUyKyGjWg1?p=preview)
+
+## Built-in Angular Pipes
+ 
+- [DatePipe](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html) - Formats dates with configuration options
+- [UpperCasePipe](https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html) - Formats a string upper case
+- [LowerCasePipe](https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html) - Formats a string to lower case
+- [CurrencyPipe](https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html) - Formats a number to a currency based on a locale
+- [PercentPipe](https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html) - Formats numbers as a percentage based on a locale
 
 ---
 
