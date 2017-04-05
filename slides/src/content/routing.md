@@ -307,10 +307,6 @@ Our `LazyComponent` has now been setup for lazy loading. If we start the app, we
 
 ---
 
-FIXME: Better flesh out these authorization sections.
-https://github.com/rangle/angular-training-slides/issues/263
-(Content from: https://angular-2-training-book.rangle.io/handout/routing/route_guards.html)
-
 ## Route Authorization (1/3)
 
 To control whether the user can navigate to or away from a given route, we can use route guards.
