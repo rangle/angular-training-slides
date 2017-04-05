@@ -125,7 +125,7 @@ export class AppComponent {
 }
 ```
 
-- import statement gives you access to Angular components
+- `import` statement gives you access to Angular components
 - `@Component` is a decorator that tells Angular this class is a component
 - `selector` is the way you intend to reference the component
   - Used like an HTML tag `<app-root></app-root>`
