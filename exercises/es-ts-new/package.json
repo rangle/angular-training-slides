@@ -1,0 +1,21 @@
+{
+  "name": "es-ts-new",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --opts mocha.opts && rm -rf test || true",
+    "test:json": "mocha --opts mocha.opts --reporter json && rm -rf test || true",
+    "compile": "tsc exercise.ts && rm -rf exercise.js && echo \"Compilation was successful\" || true",
+    "start": "ts-node exercise.ts || true"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "es6-promise": "^4.1.0",
+    "mocha": "^3.2.0",
+    "typescript": "^2.2.1"
+  },
+  "devDependencies": {
+    "ts-node": "^2.1.0"
+  }
+}
