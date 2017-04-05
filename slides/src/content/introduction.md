@@ -39,10 +39,12 @@ Github: [github.com/tsungting](https://github.com/tsungting)
 
 ## Day 2 Contents
 
-- Services and DI Injection
-- Forms
-- Routing
-- Unit Testing 
+- Custom Capitalize Pipe
+- Observable in Service
+- Unit Testing
+- Redux
+- Routing (?)
+- Forms (?)
 
 ---
 

@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class TodoService {
-  tasks : Array<Object> = [];
 
-  constructor() { 
-    this.addTask('task 1');
-    this.addTask('task 2');
-    this.addTask('task 3');
+  constructor(private http : Http,
+              private storeService : Store<any>
+  ) { 
   }
 
-  getTasks(){
-    return this.tasks;
+  getDefaultTodoList(){
+    console.time('defaultListLoaded');
+    this.http.get('http://www.json-generator.com/api/json/get/bHbBeYXhnS')
+      .map((data) => data.json())
+      .subscribe((jsonData) => {
+        console.timeEnd('defaultListLoaded');
+        let formattedTasks = jsonData.map((task) => {
+          return this.getTodoTaskForDisplay(task.label, task.done);
+        });
+        this.storeService.dispatch({
+          type: 'DEFAULT_TODO_LIST_LOADED',
+          payload: formattedTasks
+        });
+      });
   }
 
-  addTask(taskInput : string){
-    this.tasks.push({
-      label: taskInput,
-      isComplete: false
-    });
-  }
-  
-  completeTask(index: number){
-    let taskToComplete : any = this.tasks[index];
-    taskToComplete.isComplete = !taskToComplete.isComplete;
+  getTodoTaskForDisplay(label, isComplete){
+    return {
+      label: label,
+      isComplete: isComplete
+    }
   }
 
-  deleteTask(index: number){
-    this.tasks.splice(index, 1);
-  }
 }

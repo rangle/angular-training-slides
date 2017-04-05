@@ -1,6 +1,6 @@
 <ul>
-  <li *ngFor="let task of tasksToDisplay; let i = index;">
-    <span [ngClass]="{complete: task.isComplete}">{{task.label}}</span> 
+  <li *ngFor="let task of tasksToDisplay | async; let i = index;">
+    <span [ngClass]="{complete: task.isComplete}">{{task.label | capitalize}}</span> 
     <button (click)="completeTask(i)">{{getCompleteButtonText(task)}}</button> 
     <button (click)="deleteTask(i)">Delete</button>
   </li>
