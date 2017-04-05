@@ -35,7 +35,7 @@ This tells the router how to compose navigation URLs.
 
 The `Routes` type is an array of routes that defines the routing for the application.
 
-```javascript
+```ts
 const routes: Routes = [
   { path: 'component-one', component: ComponentOne },
   { path: 'component-two', component: ComponentTwo }
@@ -62,7 +62,7 @@ Notes:
 `RouterModule.forRoot` takes the `Routes` array as an argument and returns a _configured_ router module.
 This router module must be specified in the list of imports of the app module.
 
-```javascript
+```ts
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [{ path: 'component-one', component: ComponentOne }];
@@ -84,7 +84,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 In order to render the content of the individual routes we will need to add the `<router-outlet></router-outlet>`. Angular will dynamically place the content after the `<router-outlet></router-outlet>`. 
 
-```javascript
+```ts
 @Component({
   selector: 'rio-app',
   template: `
@@ -115,8 +115,8 @@ For example the following code defines a link to the route at path `component-on
 
 Alternatively, you can navigate to a route by calling the `navigate` function on the router with the path array as the argument. For example to navigate to component-one, we could use:
 
-```javascript
-var path = ['component-one'];
+```ts
+var path = ['/component-one'];
 router.navigate(path);
 ```
 
@@ -127,8 +127,8 @@ router.navigate(path);
 The path array can be seen as segments of an URL. 
 For example, using the following path in our array:
 
-```javascript
-var path = ['component-one', 'param1', 'param2'];
+```ts
+var path = ['/component-one', 'param1', 'param2'];
 router.navigate(path);
 ```
 
@@ -140,11 +140,11 @@ http://localhost:4200/component-one/param1/param2
 
 To use the router service, we need to import and inject it into our constructor. 
 
-```javascript
+```ts
 import { Router } from '@angular/router';
 ...
 constructor(router: Router){
-  var path = ['component-one'];
+  var path = ['/component-one'];
   router.navigate(path);
 }
 ...
@@ -159,11 +159,11 @@ This wildcard will actually match all URLs, therefore its important that you lis
 
 This is usually your last route in the route configuration. 
 
-```javascript
+```ts
 const routes: Routes = [
-  { path: 'component-one', component: ComponentOne },
-  { path: 'component-two', component: ComponentTwo },
-  { path: 'component-three', component: ComponentThree },
+  { path: '/component-one', component: ComponentOne },
+  { path: '/component-two', component: ComponentTwo },
+  { path: '/component-three', component: ComponentThree },
   ...
   { path: '**', component: Four0FourComponent }
 ];
@@ -176,7 +176,7 @@ Note: This does not return a 404 status code.
 
 Adding `:id` in the path of the `product-details` route places the parameter in the route's path. For example `localhost:3000/product-details/5`
 
-```javascript
+```ts
 export const routes: Routes = [
   { path: 'product-details/:id', component: ProductDetails }
 ];
@@ -197,7 +197,7 @@ export const routes: Routes = [
 
 The `ActivatedRoute` service provides a `params` Observable which we can subscribe to to get the route parameters.
 
-```javascript
+```ts
 import { ActivatedRoute } from '@angular/router';
 
 @Component({ ... })
@@ -225,12 +225,12 @@ The reason that the `params` property on `ActivatedRoute` is an Observable is th
 Use the `[queryParams]` directive along with `[routerLink]` to pass query parameters. For example:
 
 ```html
-<a [routerLink]="['product-list']" [queryParams]="{ page: 99 }">Go to Page 99</a>
+<a [routerLink]="['/product-list']" [queryParams]="{ page: 99 }">Go to Page 99</a>
 ```
 
 Alternatively, we can navigate programmatically using the `Router` service:
 
-```javascript
+```ts
   goToPage(pageNum) {
     this.router.navigate(['/product-list'], { queryParams: { page: pageNum } });
   }
@@ -242,7 +242,7 @@ Alternatively, we can navigate programmatically using the `Router` service:
 
 Similar to reading route parameters, the `Router` service returns an Observable we can subscribe to to read the query parameters:
 
-```javascript
+```ts
 
 ngOnInit() {
   this.sub = this.route
@@ -254,7 +254,7 @@ ngOnInit() {
 }
 
 nextPage() {
-  this.router.navigate(['product-list'],
+  this.router.navigate(['/product-list'],
     { queryParams: { page: this.page + 1 } });
 }
 ```
@@ -274,7 +274,7 @@ To take advantage of lazy loading it's important to group the application into m
 
 Here is how our routing should look like:
 
-```javascript
+```ts
 const routes: Routes = [
   { path: '', redirectTo: 'eager', pathMatch: 'full' },
   { path: 'eager', component: EagerComponent },
@@ -288,7 +288,7 @@ const routes: Routes = [
 
 There is nothing special in our `LazyModule` and `LazyComponent`, they remain simple. However routing for a feature module should always call `forChild` instead of `forRoot`, which we have already seen. This is specific to any feature modules and not related to lazy loading.  
 
-```javascript
+```ts
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -313,7 +313,7 @@ To control whether the user can navigate to or away from a given route, we can u
 
 In order to use route guards, we must register them with the specific routes we want them to run for.
 
-```javascript
+```ts
 const routes: Routes = [
   { path: 'home', component: HomePage },
   {
@@ -333,7 +333,7 @@ To guard a route against unauthorized activation, we can implement the `CanActiv
 
 When `canActivate` returns `true`, the user can activate the route. When `canActivate` returns `false`, the user cannot access the route.
 
-```javascript
+```ts
 @Injectable()
 export class LoginRouteGuard implements CanActivate {
 
@@ -355,7 +355,7 @@ The canDeactivate function passes the component being deactivated as an argument
 
 We can use that component to determine whether the user can deactivate.
 
-```javascript
+```ts
 canDeactivate(component: AccountPage) {
   return component.areFormsSaved();
 }
@@ -389,7 +389,7 @@ localhost:3000/product-details/3/specs
 
 The child routes are only reachable from within product details. Our Routes with children would look like:
 
-```javascript
+```ts
 export const routes: Routes = [
   { path: '', redirectTo: 'product-list', pathMatch: 'full' },
   { path: 'product-list', component: ProductList },
@@ -412,7 +412,7 @@ The parent product-details template will contain a `<router-outlet></router-outl
 
 An alternative to display the `overview` content is to change our children array from:
 
-```
+```ts
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: Overview },
@@ -422,7 +422,7 @@ An alternative to display the `overview` content is to change our children array
 
 to
 
-```
+```ts
     children: [
       { path: '', component: Overview },
       { path: 'specs', component: Specs }
@@ -435,9 +435,9 @@ This way we can get rid of the first empty item, which essentially just redirect
 
 ## Child Routes (4/4)
 
-To display the `overview` or `specs` section of a parent, the child route will need the product ID from the parent. The child route component can access the parent route's parameters as follows using the `route` and `activatedRoute`
+To display the `overview` or `specs` section of a parent, the child route will need the product ID from the parent. The child route component can access the parent route's parameters as follows using the `Router` and `ActivatedRoute`
 
-```javascript
+```ts
 export default class Overview {
   parentRouteId: number;
   private sub: any;
@@ -460,10 +460,3 @@ export default class Overview {
 ```
 
 ---
-
-FIXME: What are child routes
-https://github.com/rangle/angular-training-slides/issues/280
-Content: https://angular-2-training-book.rangle.io/handout/routing/child_routes.html
-- show path configuration for child routes
-- show example how this is useful
-
