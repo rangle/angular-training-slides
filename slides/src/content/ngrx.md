@@ -1,10 +1,11 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Redux (@ngrx)
 
 ---
 
-## Motivation 
+## Motivation
 
-1. Create [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth) 
+1. Create [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
 1. [Separation of Concern](https://en.wikipedia.org/wiki/Separation_of_concerns) : Separation of Data and Logic
 1. Improve scalability by having things _react_ to events as opposed to caller dictating actions
 1. Reduce Complexity of Mental Map by promoting separation of responsibility between components
@@ -17,10 +18,10 @@
 
 | Function | Angular With `@ngrx`  | Server |
 |---|---|---|
-| Data Storage | Store  |  Database  | 
+| Data Storage | Store  |  Database  |
 | Presentation View |  `@Component`  | Client API  |
 | Logic to massage data for Storage |  `@Effects`  | Services |
-| Communication | Action / Observables  | Function Invocation | 
+| Communication | Action / Observables  | Function Invocation |
 
 ---
 
@@ -34,7 +35,7 @@
 
 ---
 
-## Sample Store 
+## Sample Store
 
 ```ts
 //Root module
@@ -165,6 +166,6 @@ function getCredentials(){
 
 ---
 
-## Redux as a System 
+## Redux as a System
 
 <img src="content/images/redux-and-data-flow.png" width="50%"/>

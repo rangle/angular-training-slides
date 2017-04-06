@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Components In Depth
 
 ---

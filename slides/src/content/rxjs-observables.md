@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Introduction to Observables
 
 Notes:
@@ -34,7 +35,7 @@ Objectives:
 
 ## Subscribing to an Observable
 
-Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit: 
+Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit:
 
 ```javascript
 
@@ -101,7 +102,7 @@ const getData$ = http.get('https://example.com/api/products')
   return response.json();
 });
 getData$.subscribe((data) => {
-  // 
+  //
 });
 ```
 
@@ -122,7 +123,7 @@ const clickStreamSubscription = clickStream.subscribe(
 );
 
 setTimeout(() => {
-  clickStreamSubscription.unsubscribe(); 
+  clickStreamSubscription.unsubscribe();
 }, 3000);
 ```
 
@@ -157,7 +158,7 @@ Angular's `AsyncPipe`
 
 ## The Filter Operators
 
-In addition to `map`, the `filter` operator is also available: 
+In addition to `map`, the `filter` operator is also available:
 
 ```js
 searchString$
@@ -185,7 +186,7 @@ Observables can be nested.
 
 Observables can utilize `mergeMap` (also known as `flatMap`) to combine more than one observable:
 
-```js 
+```js
 http.get('https://jsonplaceholder.typicode.com/users')
   .map((response) => Observable.from(response.json()))
   .mergeMap((data) => data)
@@ -202,18 +203,18 @@ http.get('https://jsonplaceholder.typicode.com/users')
 
 We can resolve multiple observables together using the `forkJoin` operator.
 
-```js 
+```js
 const users = http.get(
   'https://jsonplaceholder.typicode.com/users/'
 ).map((data) => data.json());
-  
+
 const posts = http.get(
   'https://jsonplaceholder.typicode.com/posts/'  
 ).map((data) => data.json());
-  
+
 Observable.forkJoin([users, posts])
   .subscribe((data) => {
     console.log(data[0]); // response for users
     console.log(data[1]); // response for posts
 });
-``` 
+```

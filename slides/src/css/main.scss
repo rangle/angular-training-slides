@@ -10,15 +10,15 @@
 @font-face {
   font-family: 'Calibre';
   src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot");
-  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix") format("embedded-opentype"), 
-  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2") format("woff2"), 
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix") format("embedded-opentype"),
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2") format("woff2"),
   url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff") format("woff")
 }
 @font-face {
   font-family: 'Calibre';
   src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot");
-  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix") format("embedded-opentype"), 
-  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2") format("woff2"), 
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix") format("embedded-opentype"),
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2") format("woff2"),
   url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff") format("woff")
 }
 
@@ -26,9 +26,10 @@
 $purpleDark: #230E2D;
 $ranglePurple: #422D51;
 $rangleRed: #ee302f;
+$rangleWhite: #FFFFFF;
 
 // Background of the presentation
-$backgroundColor: $ranglePurple;
+$backgroundColor: $rangleWhite;
 
 // Primary/body text
 $mainFont: 'Calibre', sans-serif;
@@ -41,7 +42,7 @@ $blockMargin: 20px;
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'Calibre', sans-serif;
-$headingColor: #fff;
+$headingColor: $rangleRed;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
@@ -49,8 +50,8 @@ $headingTextShadow: none;
 $headingFontWeight: normal;
 $heading1TextShadow: $headingTextShadow;
 
-$heading1Size: 3em;
-$heading2Size: 1.8em;
+$heading1Size: 1.5em;
+$heading2Size: 1.4em;
 $heading3Size: 1.55em;
 $heading4Size: 1.00em;
 
@@ -71,17 +72,28 @@ $selectionColor: #fff;
 // Theme template ------------------------------
 @import '~reveal.js/css/theme/template/theme.scss';
 // ---------------------------------------------
- 
+
 // Overrides -----------------------------------
 #rangle-io {
-  background: url('../content/images/logo-rangleio.svg') no-repeat;
+  background: url('../content/images/logo-rangleio-purple.svg') no-repeat;
   background-size: contain;
-  height: 0.5em;
-  text-indent: -9999em;
-  margin-top: 0.5em;
+  height: 0.4em;
+  text-indent: -99999em;
+  position: absolute !important;
+  top: 180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 0 !important;
+  right: 0 !important;
 
-  &:after {
+  &:before {
     display: none;
+  }
+}
+
+body {
+  p, ul, ol, table {
+    color: $ranglePurple;
   }
 }
 
@@ -92,19 +104,32 @@ $selectionColor: #fff;
     margin: 20px 0;
   }
 
-  h1:after, h2:after {
+  h1:after {
     content: '';
-    background-color: $rangleRed;
+    background-color: $ranglePurple;
     display: block;
     height: 4px;
-    width: 2em;
-    margin: 0.25em 0;
+    width: 18em;
+    margin-top: -200px;
+  }
+
+  h1 {
+    color: $rangleRed;
+    font-weight: bold;
+
+    position: absolute !important;
+    top: 250px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
   }
 
   .slides {
     text-align: left;
-    background: url('../content/images/logo-rangleio.svg') top right no-repeat;
+    background: url('../content/images/logo-rangleio-purple.svg') top right no-repeat;
     background-size: 125px auto;
+    margin-top: 60px;
 
     > section,
     > section > section {
@@ -143,3 +168,7 @@ $selectionColor: #fff;
     background: $rangleRed;
   }
 }
+
+html.the-end .state-background {
+   background-color: rgba(0,0,0, 0.8);
+ }

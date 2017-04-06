@@ -1,3 +1,5 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
 # Introduction to ES6/ES2015
 
 ---
@@ -10,12 +12,12 @@
 
 ```js
 class Hamburger {
-  constructor() { }   // constructor 
+  constructor() { }   // constructor
   listToppings() { }  // method
 }
 ```
 
-- Methods of the class can be accessed using a class object. 
+- Methods of the class can be accessed using a class object.
 
 ```js
 let burger = new Hamburger();
@@ -52,7 +54,7 @@ class Toppings {
     return this.formatToppings(this.toppings);
   }
   fetch(){
-    getFromServer(function callback(){ 
+    getFromServer(function callback(){
       this.formatToppings(); // not gonna work, because this will be undefined
     });
   }
@@ -82,7 +84,7 @@ class Toppings {
     return this.formatToppings(this.toppings);
   }
   fetch(){
-    getFromServer(function callback(){ 
+    getFromServer(function callback(){
       this.formatToppings(); // not gonna work, because this will be undefined
     });
   }
@@ -94,7 +96,7 @@ class Toppings {
     return this.formatToppings(this.toppings);
   }
   fetch(){
-    getFromServer(() => { 
+    getFromServer(() => {
       this.formatToppings(); // this will work
     });
   }
@@ -356,7 +358,7 @@ msgAfterTimeout("", "Foo", 100).then((msg) =>
 
 ## Promises
 
-- You can create a promise that resolves when a set of Promises all resolve (via the static `Promise.all(iterable)`) or when the first of a set of Promises resolve (via the static `Promise.race(iterable)`) 
+- You can create a promise that resolves when a set of Promises all resolve (via the static `Promise.all(iterable)`) or when the first of a set of Promises resolve (via the static `Promise.race(iterable)`)
 
 ```js
 function fetchAsync (url, timeout, onData, onError) { … }

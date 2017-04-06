@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Pipes
 
 ---
@@ -18,7 +19,7 @@ Passing arguments:
 <!-- <p>Total price is CA$10.12</p> -->
 ```
 
-Chaining pipes: 
+Chaining pipes:
 
 ```html
 <p>Total price is {{ 10.1234 | currency: "CAD" | lowercase }}</p>
@@ -29,7 +30,7 @@ Chaining pipes:
 
 [View Example](https://plnkr.co/edit/p89vQtCkr51Turd3R2pM?p=preview)
 
-Notes: 
+Notes:
 
 - 3rd argument for currency is whether to show $ symbol
 
@@ -107,7 +108,7 @@ Notes:
 export class AppComponent {
   myPromise = Promise.resolve('Hello');
   myObservable$ = Observable.interval(1000);
-  
+
 }
 ```
 

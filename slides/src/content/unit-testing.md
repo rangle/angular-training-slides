@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Unit Testing
 
 ---
@@ -140,7 +141,7 @@ describe('Testing message state in message.component', () => {
 
 ## Injecting Dependencies and DOM Changes (1/5)
 
-Angular2 components often have services that deliver asynchronous data as dependencies. 
+Angular2 components often have services that deliver asynchronous data as dependencies.
 
 We can use Angular2's `TestBed` utility to provide mock dependencies before each test.
 
@@ -170,7 +171,7 @@ export class AppComponent {
 
 ## Injecting Dependencies and DOM Changes (3/5)
 
-Using `TestBed` lets us create a test module to test this component. 
+Using `TestBed` lets us create a test module to test this component.
 
 This is what a normal module might look like:
 
@@ -202,7 +203,7 @@ beforeEach(() => {
       { provide: QuoteService, useClass: MockQuoteService }
     ]
   });
-  
+
   fixture = TestBed.createComponent(AppComponent);
   fixture.detectChanges();
 });
