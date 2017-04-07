@@ -25,7 +25,6 @@ Github: [github.com/tsungting](https://github.com/tsungting)
 - Refactor into Parent and Child Components
 - Add Text Input for Dyncamic Greeting
 - Use `uppercase` pipe and write `capitalize` pipe
-- 
 
 ---
 
@@ -48,5 +47,5 @@ Github: [github.com/tsungting](https://github.com/tsungting)
 - Write Action for Todo List
 - Write Reducer for Todo List
 - Wire up Todo List to Component
-- Discussion about Search Engine Optimization
+- Discussion About Search Engine Optimization
 - Q & A
