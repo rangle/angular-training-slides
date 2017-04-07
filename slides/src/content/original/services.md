@@ -14,7 +14,7 @@ import { Injectable } from '@angular/core';
 export class MyService { /* ... */ }
 ```
 
-- Services need to be register in a module
+- Services need to be registered in a module
 
 ```ts
 @NgModule({
