@@ -416,3 +416,21 @@ which field of the `@NgModule` decorator should I put the class in?
 Correct answer is "declarations".
 
 </aside>
+
+---
+
+## Quiz
+
+Which are the correct ways for binding variables to an Angular form?
+
+1. `<input name="firstName" [ngModel]="firstName">`
+2. `<input name="firstName" (ngModel)="firstName">`
+3. `<input name="firstName" [(ngModel)]="fistName">`
+
+<aside class="notes">
+
+1. correct
+2. student is confused with parens vs brackets data binding
+3. correct
+
+</aside>
