@@ -12,13 +12,19 @@
 
 ---
 
-## Why Can't We Use Backend Programming Patterns to Model Frontend?
+## Why Can't We Use Backend Programming Patterns to Model Frontend Dataflow?
 
-FIXME
+There are two major differences between handling server requests and user interractions.
+
+1. The user requests are handled by the screen; server requests are handled by multi-threaded servlets
+1. The user requests often modify the same objects; server requests usually modify objects of different users
+1. The user expects to be notified about change immediately, server only inform change when requested
+
+<strong> Due to these reasons the front-end has to think differently about components communicating with each other.</strong>
 
 ---
 
-## Structure of Systems - Redux vs Backend Architecture
+## Similarities of Structure - Redux vs Backend Architecture
 
 | Function | Angular With `@ngrx`  | Server |
 |---|---|---|
