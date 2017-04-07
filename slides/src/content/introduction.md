@@ -6,51 +6,47 @@
 
 ## About Me
 
----
+<img src="content/images/john_chen.jpg" height="200px"></img>
 
-## Structure of this Training
+Tsung-Ting (John) Chen
 
-- 8 hours training in 2 days
-- 5 min break around 2:00 pm
-- 10 min break around 3:00 pm
-- 5 min break around 4:00 pm
-- Q&A sessions
+Solutions Architect @ Rangle.io
+
+Github: [github.com/tsungting](https://github.com/tsungting)
 
 ---
 
-## Table of Contents
+## Day 1
 
-1. Introduction
-1. Introduction to ES6/ES2015
-1. Introduction to TypeScript
-1. Introduction to Observables
-1. Creating a hello world application
-1. Components In Depth
-1. Directives
-1. Pipes
-1. Services
-1. Miscellaneous Topics
-1. Forms
-1. Routing
-1. Unit Testing
+- Introduce Angular Cli
+- Build 'App Works' Application
+- Change Into Greeter Application
+- Add Buttons to Tell Who to Greet
+- Refactor into Parent and Child Components
+- Add Text Input for Dyncamic Greeting
+- Use `uppercase` pipe and write `capitalize` pipe
+- 
 
 ---
 
-# Introduction
+## Day 2
+
+- Review: Build TODO List Application
+- Extract Logic Out Into Services
+- Unit Test Component and Services
+- Introduce Behavior Subject Observables
+- Use Http Service to Load Default Items
+- Convert API Object to Strongly Typed Objects
+- Introduce Routing
 
 ---
 
-## What Makes Angular Good?
+## Day 3
 
-- Modular architecture
-- Better performance than Angular 1:
-  - Improved Change detection
-  - Ahead of Time compiler
-- It's made to scale:
-  - Modules
-  - Dependency Injection (that makes sense)
-  - Typescript and tooling
-  - Supporting projects: CLI, Universal, Nativescript
-- A complete and opinionated solution
-- You don't need to be a Javascript expert
-- Can be integrated with Redux
+- Introduce Redux and ngrx
+- Install Chrome Redux Dev-Tool
+- Write Action for Todo List
+- Write Reducer for Todo List
+- Wire up Todo List to Component
+- Discussion about Search Engine Optimization
+- Q & A
