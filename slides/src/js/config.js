@@ -4,12 +4,13 @@ var libPath = '../node_modules/reveal.js/';
 
 Reveal.initialize({
   center: false,
-  controls: false,
+  controls: true,
   history: true,
   previewLinks: true,
   width: '100%',
   height: '100%',
   margin: 0.05,
+  slideNumber: true,
   dependencies: [
     // Cross-browser shim that fully implements classList
     {

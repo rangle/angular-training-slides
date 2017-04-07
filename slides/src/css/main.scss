@@ -79,13 +79,11 @@ $selectionColor: #fff;
   background: url('../content/images/logo-rangleio-purple.svg') no-repeat;
   background-size: contain;
   height: 0.4em;
-  text-indent: -99999em;
-  position: absolute !important;
-  top: 180px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
   left: 0 !important;
+  position: absolute !important;
   right: 0 !important;
+  text-indent: -99999em;
+  top: 180px !important;
 
   &:before {
     display: none;
@@ -106,31 +104,38 @@ body {
   }
 
   h1:after {
-    content: '';
     background-color: $ranglePurple;
+    content: '';
     display: block;
     height: 4px;
-    width: 18em;
     margin-top: -200px;
+    width: 18em;
   }
 
   h1 {
     color: $rangleRed;
     font-weight: bold;
-
-    position: absolute !important;
-    top: 250px !important;
+    left: 0 !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    left: 0 !important;
+    position: absolute !important;
     right: 0 !important;
+    top: 250px !important;
+  }
+
+  .slide-number {
+    font-size: 1em;
+  }
+
+  .controls {
+    bottom: 50px;
   }
 
   .slides {
-    text-align: left;
     background: url('../content/images/logo-rangleio-purple.svg') top right no-repeat;
     background-size: 125px auto;
     margin-top: 60px;
+    text-align: left;
 
     > section,
     > section > section {
@@ -141,14 +146,14 @@ body {
   // Code block styling
   .hljs {
     background: $lightGrey;
-    padding: 0.8em;
     margin: 20px auto;
+    padding: 0.8em;
   }
 
   pre {
-    width: auto;
-    font-size: 0.75em;
     box-shadow: none;
+    font-size: 0.75em;
+    width: auto;
 
     code {
       max-height: none;
@@ -159,8 +164,8 @@ body {
   p code,
   li code,
   table code {
-    padding: 0 5px;
     font-size: 0.8em;
+    padding: 0 5px;
   }
 
   .progress span {
