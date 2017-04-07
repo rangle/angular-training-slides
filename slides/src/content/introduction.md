@@ -16,6 +16,19 @@ Github: [github.com/tsungting](https://github.com/tsungting)
 
 ---
 
+## About Me
+
+<img src="content/images/philip_dasilva.png" height="200px"></img>
+
+Philip Da Silva
+
+Solutions Architect @ Rangle.io
+
+Github: [github.com/rpdasilva](https://github.com/rpdasilva) |
+Twitter: [@rpdasilva](https://twitter.com/rpdasilva)
+
+---
+
 ## Day 1
 
 - Introduce Angular Cli
