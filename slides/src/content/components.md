@@ -421,6 +421,24 @@ Correct answer is "declarations".
 
 ## Quiz
 
+`@Input` is used to:
+
+1. Pass data into another component
+2. Capture data passed from another component
+3. Display an HTML `<input>` element
+
+<aside class="notes">
+
+1. student is confused between @Input and @Output
+2. correct answer
+3. student is confused between a template and a decorator
+
+</aside>
+
+---
+
+## Quiz
+
 Which are the correct ways for binding variables to an Angular form?
 
 1. `<input name="firstName" [ngModel]="firstName">`
