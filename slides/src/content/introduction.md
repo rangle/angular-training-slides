@@ -1,14 +1,12 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
 
-### Rangle.io
+#### Rangle.io
 
 # Angular Training
 
 ---
 
 ## About Me
-
-fdksfhsdhfuishdf
 
 ---
 

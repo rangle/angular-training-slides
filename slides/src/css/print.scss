@@ -25,4 +25,13 @@
     text-indent: 0;
     background-image: none;
   }
+
+  h1 {
+    position: inline-block !important;
+    top: 0px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
 }

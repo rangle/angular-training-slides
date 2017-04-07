@@ -1,5 +1,5 @@
 @import '~reveal.js/css/reveal.css';
-@import '~highlight.js/styles/tomorrow-night-blue.css';
+@import '~highlight.js/styles/color-brewer.css';
 
 // Default mixins and settings -----------------
 @import '~reveal.js/css/theme/template/mixins.scss';
@@ -27,6 +27,7 @@ $purpleDark: #230E2D;
 $ranglePurple: #422D51;
 $rangleRed: #ee302f;
 $rangleWhite: #FFFFFF;
+$lightGrey: #F7F7F7;
 
 // Background of the presentation
 $backgroundColor: $rangleWhite;
@@ -52,8 +53,8 @@ $heading1TextShadow: $headingTextShadow;
 
 $heading1Size: 1.5em;
 $heading2Size: 1.4em;
-$heading3Size: 1.55em;
-$heading4Size: 1.00em;
+$heading3Size: 1em;
+$heading4Size: 1.8em;
 
 // Links and actions
 $linkColor: lighten( $rangleRed, 20% );
@@ -139,16 +140,15 @@ body {
 
   // Code block styling
   .hljs {
-    background: $purpleDark;
-    color: rgba(255,255,255,0.9);
+    background: $lightGrey;
     padding: 0.8em;
     margin: 20px auto;
-    line-height: 1.1em;
   }
 
   pre {
     width: auto;
     font-size: 0.75em;
+    box-shadow: none;
 
     code {
       max-height: none;
@@ -159,7 +159,6 @@ body {
   p code,
   li code,
   table code {
-    background-color: $purpleDark;
     padding: 0 5px;
     font-size: 0.8em;
   }
