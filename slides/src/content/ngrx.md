@@ -43,7 +43,7 @@ There are two major differences between handling server requests and user interr
 
 ## Actions
 
-1. Responsible for communication between parts of redux
+1. Responsible for passing data towards the store
 1. Implemented with [Observable](http://reactivex.io/rxjs/) streams
 1. Use actions instead of function invocation
 1. Listeners are responsible to determine how to react to actions
@@ -78,11 +78,10 @@ export class PersonInputComponent {
 
 ---
 
-## `@Component` Uses `Actions` to Communicate
+## `@Component` Uses `Actions` to Broadcast to the Store
 
 1. Responsible for presentation and user interactions
-1. It is blind to the complexities of the app (Doesn't know what happens after action is broadcasted)
-1. React to state change via select
+1. Components are blind to the complexities of the app (Doesn't know what happens after action is broadcasted)
 1. Affect the state via Actions
 1. Describes a need without dictating how to fulfill the need
 1. Eg. Need => MAIL_REQUIRED
@@ -177,6 +176,7 @@ Selecting this tab, we should now see something similar to this.
 ## How Do We Get Information From the Store?
 
 1. State is exposed through the `Store` service as an `Observable` stream
+1. The select carries information away from the store
 1. Using the select pattern
 1. `Store` provides a `.select()` method to select pieces of state:
   1. By key: `this.store.select('people')`
@@ -213,7 +213,7 @@ export class PeopleComponent implements OnInit {
 
 ## Handling Async Events in the Application With Redux
 
-### The ngrx/effects Library is:
+### The @ngrx/effects Library is:
 
 1. Responsible for Business Logic and Async actions (Http Calls)
 1. Does not keep local state
@@ -256,6 +256,8 @@ No, a reducer only describes _how_ the store's state should change based on a di
 The UI should not broadcast actions directly, it can and often should dispatch actions through "action creator" methods which can be made available through a component or service.
 
 In a more traditional Flux architecture, while a store may have broadcasted actions whenever state changed, Redux does not. Instead of reacting to actions dispatched out from our store, we instead react to the changes in our state itself, we don't concerned ourselves with _how_ state has changed.
+
+The Actions are generally what we call the events being broadcasted to the store.  When events leave the store due to a state change it is done through a store select.
 
 ---
 
