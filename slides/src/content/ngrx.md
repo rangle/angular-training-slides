@@ -69,7 +69,7 @@ export class PersonInputComponent {
   constructor(private store: Store<any>) { }
 
   add(name) {
-    this.store.dispatch({ type: 'ADD_PERSON', payload: {
+    this.store.dispatch({ type: 'TODO_TASK_ADDED', payload: {
       name: name,
     });
   }
@@ -83,10 +83,10 @@ export class PersonInputComponent {
 1. Responsible for presentation and user interactions
 1. Components are blind to the complexities of the app (Doesn't know what happens after action is broadcasted)
 1. Affect the state via Actions
-1. Describes a need without dictating how to fulfill the need
-1. Eg. Need => MAIL_REQUIRED
-    1. `personOne` reacts by => `startWalking()`
-    1. `personTwo` reacts by => `callTaxi()`
+1. Describes a need or event without dictating how to fulfill the need or what to do with the event
+1. Eg. Event => TODO_TASK_ADDED
+    1. `taskDisplay` reacts by => `displayTask()`
+    1. `deleteButton` reacts by => `enableDeleteTask()`
 
 ---
 
@@ -116,11 +116,11 @@ export class AppModule {  }
 ```
 
 ```ts
-// Reducer
+// Reducer (be careful if we use export const people = (state, action) => {} syntax AOT will complain)
 export function people (state = [], action) {
   switch (action.type) {
-    case 'REMOVE_PERSON':
-      return state.filter(person => person.id !== action.payload);
+    case 'TODO_TASK_ADDED':
+      return state.concat(action.payload);
     default:
       return state;
   }
