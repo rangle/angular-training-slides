@@ -109,3 +109,54 @@ _src/app/app.component.html_ (with error)
 ```
 
 - Have to quote the value inside the double quotes or Angular will try to evaluate it
+
+---
+
+## Refactoring
+
+- Pass a variable instead of a constant string
+- While we're at it, remove the heading from the child component
+- And use a proper list instead of a bunch of paragraphs
+
+_src/app/app.component.html_
+```html
+<h1>{{title}}</h1>
+<app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
+```
+
+- `[thingsToDo]` on the *left* is the input parameter in the child
+- `thingsToDo` on the *right* is what we're passing in
+
+---
+
+## Refactoring
+
+- Move the loop over the list into the child component's HTML
+
+_src/app/to-do-list/to-do-list.component.html_
+```html
+<ul>
+  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">{{item}}</li>
+</ul>
+```
+
+- Create the required variable in the child component class
+
+_src/app/to-do-list/to-do-list.component.ts_
+```ts
+export class ToDoListComponent implements OnInit {
+
+  @Input() thingsToDo: string[];
+
+  …as before…
+}
+```
+
+---
+
+## Refactoring
+
+![After Refactoring](content/images/screenshot-refactored.png)
+
+- More elaborate than necessary if we were stopping here…
+- …but absolutely necessary to control complexity in large projects
