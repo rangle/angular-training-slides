@@ -8,17 +8,17 @@
 1. [Separation of Concern](https://en.wikipedia.org/wiki/Separation_of_concerns) : Separation of Data and Logic
 1. Improve scalability by having things _react_ to events as opposed to caller dictating actions
 1. Create a coherent framework so future developers will know how to add features by following convention
-1. [Uni-Directional Data Flow](http://redux.js.org/docs/basics/DataFlow.html) : Easy to reason about the interractions between actors
+1. [Uni-Directional Data Flow](http://redux.js.org/docs/basics/DataFlow.html) : Easy to reason about the interactions between actors
 
 ---
 
 ## Why Can't We Use Backend Programming Patterns to Model Frontend Dataflow?
 
-There are two major differences between handling server requests and user interractions.
+There are two major differences between handling server requests and user interactions.
 
 1. The user requests are handled by the screen; server requests are handled by multi-threaded servlets
 1. The user requests often modify the same objects; server requests usually modify objects of different users
-1. The user expects to be notified about change immediately, server only inform change when requested
+1. The user expects to be notified about change immediately, server only informs change when requested
 
 <strong> Due to these reasons the front-end has to think differently about components communicating with each other.</strong>
 
@@ -90,7 +90,7 @@ export class PersonInputComponent {
 
 ---
 
-## How Do We Interract With Actions
+## How Do We Interact With Actions
 
 ### A store is:
 
