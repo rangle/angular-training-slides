@@ -1,17 +1,27 @@
 
-##Forms in Angular
+## Forms in Angular
+
+Angular has two approaches to forms:
+
+- **Template Driven Forms:** Controls & validation rules are defined in the template with directives
+
+- **Reactive Forms:** Controls & validation rules are defined in the within the component class or service
 
 ---
 
-## How do I create forms in Angular (10 min)
+# Template Driven Forms
+
+---
+
+## Creating Template Driven Forms
 
 - To make use of forms we need to import the `FormsModule` into the application module. 
 - This module will allow us to use all the features of the template-driven forms including `ngModel`.  
   - `ngModel` allows us to use the two-way databinding syntax to bind data to form-controls. 
 - The `FormsModule` is available in the `@angular/forms` package. 
 
+_app.module.ts_
 
-__app.module.ts__
 ```ts
 import { FormsModule } from '@angular/forms';
 ...
@@ -33,9 +43,9 @@ export class AppModule { }
 
 ---
 
-## How do I handle forms data (10 min)
+## How To Handle Form Data
 
-- To handle forms data we will be using the `ngModel` and `ngForm` directive. 
+- To handle form data we will be using the `ngModel` and `ngForm` directive. 
 - `ngForm` provides properties to get information from the form like `value` and `valid`. 
 - `ngModel` provides the same property for the individual fields. 
 
@@ -54,8 +64,6 @@ Here is a how a simple template driven form looks like:
 
 [View Example](https://plnkr.co/edit/sdVst5yprdQUgQctQz9p?p=preview)
 
-FIXME: Show example and a few properties (maybe form.value)
-
 ---
 
 ## NgForm / NgModel
@@ -73,11 +81,11 @@ FIXME: Show example and a few properties (maybe form.value)
 - `pristine`: Indicates if it had changed from default view (boolean)
 - `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
 
-FIXME: Show example and a few properties (maybe form.valid)
+[View Example](https://plnkr.co/edit/oVQhf641Nx1qpaBG5jeN?p=preview)
 
 ---
 
-## How do I handle form submission (15 min)
+## How To Handle Form Submissions
 
 - `ngSubmit` is a built-in event called whenever the form is submitted
 - This event handler gets added into our `form` element
@@ -100,13 +108,13 @@ registerUser (signupForm: NgForm) {
 }
 ```
 
-FIXME: Show plnkr example
+[View Example](https://plnkr.co/edit/Xxcf46sO5TWK1EKme1qF?p=preview)
 
 ---
 
-## How do I validate my form (10 min) (1/2)
+## How To Validate A Form (1/2)
 
-When using template driven forms we can use 4 built-in validators: `required`, `pattern`, `minlength` and `maxlength`.
+When using template driven forms we can use 4 built-in validators: `required`, `pattern`, `minlength` and `maxlength`
 
 ```html
 <!-- a required field -->
@@ -123,90 +131,88 @@ When using template driven forms we can use 4 built-in validators: `required`, `
 ```
 
 - `pattern` is a less-powerful version of JavaScript's RegExp syntax
-- `maxlength` is special in that it prevents additional characters from being entered. Others only produce a warning.
+- `maxlength` is special in that it prevents additional characters from being entered. Others only produce a warning
 
 ---
 
-## How do I validate my form (10 min) (2/2)
+## How To Validate A Form (2/2)
 
-To perform validation, we need to create template variables for every field `#field="ngModel"`.
+- To perform validation, we need to create a template variable for the given field `#field="ngModel"`
 
 ```html
-<p>First Name: <input name="firstName" #firstName="ngModel" required></p>  
+<p>First Name: <input name="firstName" #firstName="ngModel" ngModel required></p>  
 ```
 
-Template variables are instances of `NgModel` but they share some properties from `FormControl`:
+In the above example the template variable `#firstName` is an instances of `FormControl`
 
 - `value`: Returns the value
 - `valid`: Returns field validity (boolean)
 - `pristine`: Indicates if it had changed from default view (boolean)
 - `touched`: Indicates if the field was clicked, tabbed or tapped (boolean)
 
-FIXME: Validate plnkr
-[View Example](https://plnkr.co/edit/bWdmou8gdyqhqsu8jGtI?p=preview)
+[View Example](https://plnkr.co/edit/TzrNBQUmJYhnvEzR3Gwt?p=preview)
 
 ---
 
-## How do I display error messages (15 min)
+## How To Display Error Messages
 
 - Using form validation state i.e: `myForm.errors.required`
-- For this to work, we need to make sure that our controls are instances of a `NgModel`
+- Validators produce errors which can be checked calling `hasError` on the `FormControl`
 
 ```html
 <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
-  <p>First Name: <input name="firstName" #firstName="ngModel" required></p>
+  <p>First Name: <input name="firstName" #firstName="ngModel" ngModel required></p>
   <ul class="errors" [hidden]="firstName.valid">
     <li [hidden]="!firstName.hasError('required')">
       The first name is required
     </li>
   </ul>
-  <button type="submit">Sign Up</button>
+  <button type="submit" [disabled]="!signupForm.valid">Sign Up</button>
 </form>
 ```
 
-FIXME: Show plnkr example
+[View Example](https://plnkr.co/edit/zgAQW3pQjGqRGhAQvE7j?p=preview)
 
 ---
 
-FIXME
-## Can I change the look of my form based on validation (10 min) (1/3)
+## How To Style A Form (1/3)
 
-- Along with two way databinding the `ngModel` gives us additional information about the state of a control. 
-- For example, it can notify us if the control was touched, changed or if the value become invalid. 
-- The following CSS class and javascript properties are available for this:
+- Along with two way databinding the `ngModel` gives us additional information about the state of a control
+- For example, it can notify us if the control was touched, changed or if the value became invalid
+- The following CSS class are available for this:
 
-|  Class / Property if true | Class / Property if false | Description |
+|  Class if true | Class if false | Description |
 | --------------- | --------------- | ----------- |
-| ng-valid / valid | ng-invalid / invalid | The model is valid |
-| ng-dirty / dirty | ng-pristine / pristing | The control has been interacted with |
-| ng-touched / touched | ng-untouched / untouched | The control has been blurred  |
+| ng-valid | ng-invalid | The model is valid |
+| ng-dirty  | ng-pristine | The control has been interacted with |
+| ng-touched | ng-untouched | The control has been blurred  |
 
 ---
 
-## Can I change the look of my form based on validation (10 min) (2/3)
+## How To Style A Form (2/3)
 
 - Let's see how we can change our previous example to take benefit of this feature. 
 
 ```html
 <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
-  <p>First Name: <input name="firstName" #firstName="ngModel" required></p>
+  <p>First Name: <input name="firstName" #firstName="ngModel" ngModel required></p>
   <ul class="errors" [hidden]="firstName.valid || firstName.untouched">
     <li [hidden]="!firstName.hasError('required')">
       The first name is required
     </li>
   </ul>
-  <button type="submit">Sign Up</button>
+  <button type="submit" [disabled]="!signupForm.valid">Sign Up</button>
 </form>
 ```
 
 - We can now see that the error list does not appear any more unless the control has been interacted with. 
 - We are using the `untouched` property to accomplish this. 
 
-FIXME: Show plnkr example from code in slide
+[View Example](https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview)
 
 ---
 
-## Can I change the look of my form based on validation (10 min) (3/3)
+## How To Style A Form (3/3)
 
 Combining these classes and properties with CSS and HTML allows us to create very user-friendly forms.
 
@@ -219,33 +225,30 @@ Combining these classes and properties with CSS and HTML allows us to create ver
 }
 ```
 
-Similar to this we can also take advantage of the `signupForm.valid` property and disable our sign up button when the form is invalid.
-
-```html
-...
-<button type="submit" [disabled]="!signupForm.valid">Sign Up</button>
-...
-```
-
-FIXME: Show plnkr with changes in a demo. 
+[View Example](https://plnkr.co/edit/BQdO11mdaRpsrk7OD40e?p=preview)
 
 ---
 
-## Can I bind a model to a form instead of using a template (25 min) (1/4)
+# Reactive Forms
 
-- To bind a model to a form, we need to create model driven forms
-- Model driven forms are also known as Reactive Forms
-- With model driven forms we can control and manipulate controls directly from the component
+---
+
+## How Reactive Forms Work (1/5)
+
+- Reactive forms works by binding a form to a model
+- With reactive forms we can handle controls directly within the component
 - We can push data to the controls and pull values as they change
 - We will not be using things like `ngModel` and `required` in the template
  - instead we will define the validation and model as part of our component
+- Reactive Forms are also known as Model driven forms
 
 ---
 
-## Can I bind a model to a form instead of using a template (25 min) (2/2)
+## How Reactive Forms Work (2/5)
 
-To create model driven forms, we import the `ReactiveFormsModule` module into our root module
+To create reactive forms, we need to import the `ReactiveFormsModule` module in our root module
 
+_app.module.ts_
 ```ts
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 ...
@@ -266,9 +269,9 @@ export class AppModule { }
 
 ---
 
-## Can I bind a model to a form instead of using a template (25 min) (3/4)
+## How Reactive Forms Work (3/5)
 
-Reactive Forms are then declared programmatically using the `FormBuilder` service. 
+Reactive Forms are declared programmatically using the `FormBuilder` service. 
 
 ```ts
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -294,9 +297,7 @@ export class SignupComponent {
 
 ---
 
-## Can I bind a form to a model instead of using a template (25 min) (4/4)
-
-- Let's finally modify our template to use the created form controls
+## How Reactive Forms Work (4/5)
 
 ```html
 <form [formGroup]="signupForm" (ngSubmit)="registerUser()" novalidate>
@@ -305,32 +306,13 @@ export class SignupComponent {
 </form>
 ```
 
-- Our model driven template is a lot cleaner than our template form
-
-FIXME: Show plnkr with changes in a demo.
-
----
-
-## Can I bind a model to a form instead of using a template (25 min) (2/2)
-
-- Now that we a basic reactive form running, let's add our model to it. 
-
-_User.ts_
-```ts
-export class User {
-  firstName: string;
-  constructor(firstName) {
-    this.firstName = firstName;
-  }
-}
-```
-
-NOTE: Need to review this with Philip or John, as its unclear to me how the model is being bound to the form. 
+- Our model driven template is no longer using `required` or `ngModel`
+  - We do not need the `ngModel` 
+- We are also not creating any template variables
 
 ---
 
-
-## How do validate my form model (15 min) (1/3)
+## How To Validate Reactive Forms
 
 - Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
 - Validators produce errors which can be checked calling `hasError` on the `FormControl`
@@ -357,7 +339,7 @@ export class SignupComponent {
 
 ---
 
-## How do validate my form model (15 min)  - Custom Validators (2/3)
+## Custom Validators (1/2)
 
 - Custom validators can also be provided to `FormControl`s
 - Return `null` if the field is valid or `{ validatorName: true }` when invalid
@@ -373,11 +355,11 @@ export class CustomValidators {
 }
 ```
 
-Note: Validators can also be define as plain functions
+Note: Validators can also be defined as plain functions
 
 ---
 
-## How do validate my form model (15 min) - Checking a Custom Validator (3/3)
+## Custom Validators (2/2)
 
 - Validate a field using `email.hasError('emailFormat')` in the template
 
@@ -403,38 +385,37 @@ export class SignupComponent {
 
 ---
 
-## How can I logically separate different sections of a form (1/4)
+## How To Logically Separate Form Sections (1/4)
 
 - Dividing large forms into small sections makes it easier to track validation issues
 - It allows us to query individual groups to narrow down invalid controls
-- Dividing forms into sections can also be useful if your backend requires pre-formatted data
+- It's also useful if you want to create a form from a schema
 - To group the sections, we need to use `FormGroup`
 - We can create nested `FormGroup`s within other `FormGroup`s
 
 ---
 
-## Nested Structure Example (2/4)
+## How To Logically Separate Form Sections (2/4)
 
-
-- To create the below structure, we need to create several `FormGroup`s and add `FormControl`s to it
+- We want to create the below data structure and turn that into an angular form
 
 ```ts
-{                           <- mainForm: FormGroup
-  "billTo": {                 <- billTo: FormGroup
-    "firstName": "Mike",        <- firstName: FormControl
-    "lastName": "Miles"         <- lastName: FormControl
+{                           
+  "billTo": {                
+    "firstName": "Mike",      
+    "lastName": "Miles"       
   },
-  "card": {                   <- card: FormGroup
-    "accountNumer": "...",     <- accountNumber: FormControl
-    "expiration": "12/2020",   <- expiration: FormControl
-    "cvv": "222"               <- cvv: FormControl
+  "card": {                   
+    "accountNumer": "...",     
+    "expiration": "12/2020",  
+    "cvv": "222"              
   }
 }
 ```
 
 ---
 
-## Nested Structure Example (3/4)
+## How To Logically Separate Form Sections (3/4)
 
 - The structure can be converted the below code
 
@@ -455,7 +436,7 @@ export class GroupingExampleComponent  {
 
 ---
 
-## Nested Structure Example (4/4)
+## How To Logically Separate Form Sections (4/4)
 
 - Let's first inject a `FormBuilder` into our constructor
 
