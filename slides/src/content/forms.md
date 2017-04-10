@@ -385,7 +385,7 @@ export class SignupComponent {
 
 ---
 
-## How To Logically Separate Form Sections (1/4)
+## How To Logically Separate Form Sections (1/5)
 
 - Dividing large forms into small sections makes it easier to track validation issues
 - It allows us to query individual groups to narrow down invalid controls
@@ -395,7 +395,7 @@ export class SignupComponent {
 
 ---
 
-## How To Logically Separate Form Sections (2/4)
+## How To Logically Separate Form Sections (2/5)
 
 - We want to create the below data structure and turn that into an angular form
 
@@ -415,7 +415,7 @@ export class SignupComponent {
 
 ---
 
-## How To Logically Separate Form Sections (3/4)
+## How To Logically Separate Form Sections (3/5)
 
 - The structure can be converted the below code
 
@@ -436,7 +436,7 @@ export class GroupingExampleComponent  {
 
 ---
 
-## How To Logically Separate Form Sections (4/4)
+## How To Logically Separate Form Sections (4/5)
 
 - Let's first inject a `FormBuilder` into our constructor
 
@@ -465,6 +465,28 @@ this.mainForm = this.fb.group({
 ```
 
 [View Example](http://plnkr.co/edit/rJ576V7ncL0Fjm3T7zpt?p=preview)
+
+---
+
+## How To Logically Separate Form Sections (5/5)
+
+- Instead of creating new `FormControl` instances in your component, you can also use `FormControlName`
+- In that case we also need to change our template to:
+
+```html
+<input class="form-control" type="input" name="lastName" id="lastName" formControlName="lastName">
+```
+
+- Our component can also be changed to use the shortcut to create a `FormControl`
+
+```ts
+createBillToFormFields() {
+  this.billTo = this.fb.group({
+    firstName: new FormControl('Mike', [Validators.required]),
+    lastName: ['', Validators.required ]
+  });
+}
+```
 
 ---
 
