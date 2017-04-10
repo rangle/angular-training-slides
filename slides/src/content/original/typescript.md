@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Introduction to TypeScript
 
 ---
@@ -139,7 +140,7 @@ Using a `?` lets `tsc` know that `isDebug` is an optional parameter. `tsc` will 
 class Foo { foo: number; }
 class Bar { bar: string; }
 
-class Baz { 
+class Baz {
   foo: number;
   bar: string;
   constructor(foo: Foo, bar: Bar) { }
@@ -226,7 +227,7 @@ let numbers = [2, 3, 5, 7, 11];
 numbers = ['this will generate a type error'];
 ```
 ```bash
-tsc ./type-inference-finds-error.ts 
+tsc ./type-inference-finds-error.ts
 type-inference-finds-error.ts(2,1): error TS2322: Type 'string[]' is not assignable to type 'number[]'.
   Type 'string' is not assignable to type 'number'.
 ```
@@ -235,7 +236,7 @@ interface FakeEvent {
   type: string;
 }
 interface FakeEventHandler {
-  (e: FakeEvent): void; 
+  (e: FakeEvent): void;
 }
 class FakeWindow {
   onMouseDown: FakeEventHandler
@@ -247,7 +248,7 @@ fakeWindow.onMouseDown = (a: number) => {
 };
 ```
 ```bash
-tsc ./type-inference-finds-error-2.ts 
+tsc ./type-inference-finds-error-2.ts
 type-inference-finds-error-2.ts(14,1): error TS2322: Type '(a: number) => void' is not assignable to type 'FakeEventHandler'.
   Types of parameters 'a' and 'e' are incompatible.
     Type 'number' is not assignable to type 'FakeEvent'.
@@ -349,7 +350,7 @@ function sendRequest (cb: (err: Error|null, response: Object) => void): void {
 - Decorator can be simple (function returning value) or factories (function returning function)
 
 ```ts
-// simple, used as @sealed 
+// simple, used as @sealed
 function sealed(target) {
     // do something with 'target' ...
 }
@@ -370,7 +371,7 @@ function color(value: string) { // this is the decorator factory
 ```ts
 function Override(label: string) {
   return function (target: any, key: string) {
-    Object.defineProperty(target, key, { 
+    Object.defineProperty(target, key, {
       configurable: false,
       get: () => label
     });

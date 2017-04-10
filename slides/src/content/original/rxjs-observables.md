@@ -1,166 +1,192 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Introduction to Observables
+
+Notes:
+Objectives:
+1. To be able to inject http into an Angular component, get a value from a typical REST endpoint and bind it directly to the template.
+2. To be able to explain what the `async` pipe does and describe how you would mimic the behaviour of the `async` pipe in a component by subscribing to an observable.
 
 ---
 
 ## What are Observables?
 
-* The `Observable` is a proposed standard for managing asynchronous data for ES7 and beyond.
-* Available for use via [RxJS library](https://github.com/ReactiveX/rxjs).
-* Allows for effective handling of a *stream* of asynchronous events with operations similar to 
-array methods like `map` and `filter`.
-* Similar in purpose to Promises but also more powerful with added features like disposability.
-* Angular uses it, a lot!
+* ECMA Stage 1, expected to move to Stage 2 soon.
+* Available for use now via [RxJS library](https://github.com/ReactiveX/rxjs).
+* Used in many languages and frameworks.
+* Used extensively in Angular.
+* Observables help with asynchronous behaviours.
 
----
++++
 
-## Why Not Just Use Promises?
+## Quiz 1
 
-* Both `Promises` and `Observables` are used for dealing with asynchronous code. However, 
-Observables are considered more powerful because:
-  * `Observables` are more expressive.
-  * `Observables` are cancellable.
-  * `Observables` have rich API that make operations like retrying much easier (*i.e.*, with `retry` and 
-  `retryWhen` operators).
+1. An observable will:
+  1. two-way data bind a property
+  2. push notifications to an observer
+  3. let angular know when change detetection is requried
 
----
++++
 
-## Creating an Observable
+## Definition from rxjs docs
 
-```js
-import {Observable} from 'rxjs/Observable';
-
-const observable = new Observable(observer => {
-  observer.next(1);
-  observer.next(2);
-  observer.complete();
-})
-```
-Creating the Observable alone does not trigger anything.
-Creating an Observable is like defining a function: 
-- A function does not do anything until it is *called*. 
-- Likewise, an Observable does not start streaming data until it's been *subscribed*.
+> The Observer and Observable interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The Observable object represents the object that sends notifications (the provider); the Observer object represents the class that receives them (the observer).
 
 ---
 
 ## Subscribing to an Observable
 
-```js
-const subscription = observable.subscribe(
-  value => console.log('value', value),    // handles next
-  error => console.log('error', error),    // handles error 
-  () => console.log('complete'),  // handles complete
-);
+Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit:
+
+```javascript
+
+getData$.subscribe(data => {
+  // when the getData$ observable fires, log the data
+  console.log(data);
+});
+
 ```
 
-Subscribing to the Observable we created earlier would print:
+Notes:
+*concepts*: Observable, subscribe method, callback function
 
-```
-value 1
-value 2
-complete
-```
++++
 
-Also calling `subscribe` returns a *Subscription* object which is used to *dispose* or *cancel*
-execution of an Observable.
+## Quiz 2
+
+2. Subscribing to an observable
+  1. returns another observable
+  2. allows you join multiple observables together
+  3. provides a callback to the observable
+  4. is not required in Angular
 
 ---
 
-## Constructing Observables from Other Sources
+## The Map Operator
 
-You can construct an Observable by converting existing JavaScript constructs like event listeners.  
+* You pass it a function that transforms (maps) the data returned.
 
-For instance, say we have a button defined in our DOM as such:
+For example: an observable based on an input event will pass the event object to the callback.  We can make it return the input's value using the `map` operator:
 
-```html
-<button>Click Me!</button>
+```javascript
+const searchString$ = Observable
+  .fromEvent(document.querySelector('.search-input'), 'input')
+  .map(event => {
+    return event.target.value;
+  });
 ```
 
-And we want `Clicked!` to be printed to console whenever the button is clicked. 
-We can use `fromEvent` creation operator to create an Observable from the click event listener:
+Notes:
+https://jsbin.com/genayadivo/edit?html,js,console,output
+*concepts*: operators, map operator (instance method)
 
-```js 
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
++++
 
-const clickStream = Observable.fromEvent(document.querySelector('button'), 'click');
+## Quiz 3
 
-const clickStreamSubscription = clickStream.subscribe(
-  () => console.log('Clicked!')
-);
-```
-
-Similarly to `fromEvent`, RxJS library provides [a number of different ways to create Observables](http://reactivex.io/rxjs/manual/overview.html#creation-operators) such as `fromPromise`.
+3. The map operator
+  1. will perform `Array.map` on the result of an observable, only when it is an array.
+  2. will return an observable
+  3. enables geolocation in Angular
+  4. will modify the result returned by an observable
 
 ---
 
-## Disposing (Cancelling) Observable Execution
+## Angular's Http Service
 
-Say, for some reason, we want to the button to stop printing `Clicked!` to console after 3 seconds. 
+* `Http` from `'@angular/http'` has methods such as `get` that return observables.
+* Map is often used with `Http` as in the following example:
 
-We can achieve this by *disposing* or *cancelling* the Observable execution. This is done by *unsubscribing* from the executing Observable.
+```javascript
+const getData$ = http.get('https://example.com/api/products')
+.map(response => {
+  return response.json();
+});
+getData$.subscribe((data) => {
+  //
+});
+```
+
+In this example, `map` is used because `get` is an observable of an object with a `json` method.  Usually, we want the return value of `json()`, not the response object!
+
+---
+
+## What about Unsubscribing?
+
+* Observables that finish, including `http.get` don't need to be unsubscribed.
+* Sometimes observables never finish.  An observable based on an event stream such as `searchString$` will keep calling the function we subscribe with every time it emits a value. We can stop this by unsubscribing from the observable.
+* The `subscribe()` method returns a *subscription*.
+* A subscription has an `unsubscribe()` method.
 
 ```js
 const clickStreamSubscription = clickStream.subscribe(
-  () => console.log('Click me!')
+  () => console.log('clicked!')
 );
 
 setTimeout(() => {
-  clickStreamSubscription.unsubscribe(); 
+  clickStreamSubscription.unsubscribe();
 }, 3000);
 ```
 
-Notice that subscribing to the Observable returns a *Subscription* object. We can then use this Subscription object's 
-`unsubscribe` method to dispose the Observable stream.
+Notes:
+*concept*: subscription, unsubscribe method
 
 ---
 
-## Observable HTTP Events in Angular
+## Angular's AsyncPipe
 
-One of the most common uses for Observables in Angular is to handle HTTP events:
+* The `AsyncPipe` helps us write less by taking an observable and:
+  - subscribing to it
+  - returning the returned value so it can be placed in your template
+  - unsubscibing, when the value is no longer needed
 
-```js 
-http.get('http://jsonplaceholder.typicode.com/users/')
-  .map((response) => Observable.from(response.json()))
-  .subscribe((data) => {
-    data.forEach(user => console.log(user.name));
-  });
-```
+Example (`name$` is an observable):
 
-* `.map((data) => new Observable(data.json()))` transforms the `response` (response data) into a new Observable stream that emits `response` in a JSON object form.
-* We can then work with to response data as a JSON object by subscribing to the newly transformed Observable stream.
+`<div> {{ name$ | async }} </div>`
+
++++
+
+## Quiz 4
+
+Angular's `AsyncPipe`
+  1. accepts an observable and binds the value to a template
+  2. gets data from a rest endpoint
+  3. makes async code look procedural
+  4. can't be chained with pure pipes
+
 
 ---
 
-## Observable Operations
+## The Filter Operators
 
-Using *Observable operators* we can perform Array-like operations to filter and transform values as they are emitted by the Observable execution: 
+In addition to `map`, the `filter` operator is also available:
 
 ```js
-http.get('https://jsonplaceholder.typicode.com/users')
-  .map((response) => Observable.from(response.json()))
-  .subscribe((data) => {
-    data  // data has been transformed to Observable via map()
-      .filter((person) => person.id > 5)
-      .map((person) => "Dr. " + person.name)
-      .subscribe((doctor) => console.log(doctor)); 
-  });
+searchString$
+  .filter(searchString => searchString.length > 3)
+  .subscribe(value = console.log(value));
 ```
 
-* `map`: for each emitted result of an Observable execution, apply the provided function and 
-return a new `Observable` stream that emits the results. This is often used to *transform* each emitted value.
-* `filter`: for each emitted result of an Observable execution, test it with "test" 
-function and return a new `Observable` that emits only the results that *passed* the test.
+* 'filter' returns an observable and fires only when the value emitted from the observable has length greater than 3.
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
+
++++
+
+## Quiz 5
+
+Operators:
+  1. Start execution of an observable when invoked
+  2. Return subscriptions so you can unsubscribe
+  3. Are methods on an observable that return an observable
 
 ---
 
-## Promise vs Observable: Chaining Promises vs `mergeMap`
+## Chaining Promises vs `mergeMap`
 
-Just as we can have nested Promises, we can have *nested Observables*. The previous slide contained an example of nested Observables. 
+Observables can be nested.
 
-Promises can be *chained* to avoid nested Promises. Similarly, Observables can utilize `mergeMap` (also known as `flatMap`) to achieve something similar:
+Observables can utilize `mergeMap` (also known as `flatMap`) to combine more than one observable:
 
-```js 
+```js
 http.get('https://jsonplaceholder.typicode.com/users')
   .map((response) => Observable.from(response.json()))
   .mergeMap((data) => data)
@@ -169,29 +195,26 @@ http.get('https://jsonplaceholder.typicode.com/users')
   .subscribe((doctor) => console.log(doctor));
 ```
 
-`mergeMap` works by subscribing to and pulling values out of the inner Observable stream, which is `Observable.from(data)` in this example, and passing or *merging* them 
-back to the outer Observable stream.
+`mergeMap` works by subscribing to and pulling values out of the inner Observable stream, which is `Observable.from(data)` in this example, and passing or *merging* them back to the outer Observable stream.
 
 ---
 
-## Promise vs Observable: `Promise.all` vs `forkJoin`
+## Combining multiple observables using `forkJoin`
 
-One common scenario when working with Promises is resolving multiple promises together. This is commonly achieved using `Promise.all`.
+We can resolve multiple observables together using the `forkJoin` operator.
 
-The same can be achieved with Observables using `forkJoin` operator.
-
-```js 
+```js
 const users = http.get(
   'https://jsonplaceholder.typicode.com/users/'
 ).map((data) => data.json());
-  
+
 const posts = http.get(
   'https://jsonplaceholder.typicode.com/posts/'  
 ).map((data) => data.json());
-  
+
 Observable.forkJoin([users, posts])
   .subscribe((data) => {
     console.log(data[0]); // response for users
     console.log(data[1]); // response for posts
 });
-``` 
+```

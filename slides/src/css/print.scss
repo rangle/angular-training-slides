@@ -22,7 +22,23 @@
   }
 
   #rangle-io {
-    text-indent: 0;
     background-image: none;
+    left: 0 !important;
+    position: relative !important;
+    right: 0 !important;
+    text-indent: 0;
+    top: 0 !important;
+  }
+
+  .reveal h1 {
+    left: 0 !important;
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
+  .reveal .controls,
+  .reveal .slide-number {
+    display: none !important;
   }
 }

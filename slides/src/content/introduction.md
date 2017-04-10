@@ -1,6 +1,8 @@
-# Angular Training
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 
-# Rangle.io
+#### Rangle.io
+
+# Angular Training
 
 ---
 
@@ -35,6 +37,7 @@
 1. Unit Testing
 
 ---
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 
 # Introduction
 

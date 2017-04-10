@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Directives
 
 ---
@@ -99,7 +100,7 @@ Resulting class attribute:
 Used with a string:
 
 ```ts
-@Component({ selector: 'class-as-string', 
+@Component({ selector: 'class-as-string',
   template: '<p ngClass="centered-text underlined" class="orange"></p>',
   styles: [ ... ]
 })
@@ -127,7 +128,7 @@ export class ClassAsStringComponent {
 Used with an array:
 
 ```ts
-@Component({ selector: 'class-as-string', 
+@Component({ selector: 'class-as-string',
   template: '<p [ngClass]="['centered-text', 'underlined']" class="orange"></p>',
   styles: [ ... ]
 })
@@ -137,7 +138,7 @@ export class ClassAsStringComponent {}
 Or using an array property
 
 ```ts
-@Component({ selector: 'class-as-string', 
+@Component({ selector: 'class-as-string',
   template: '<p [ngClass]="classes" class="orange"></p>',
   styles: [ ... ]
 })
@@ -156,8 +157,8 @@ export class ClassAsStringComponent {
 @Component({
   selector: 'class-as-string',
   template: `
-    <p 
-      [ngClass]="{'centered-text': isCentered, underlined: isUnderlined}" 
+    <p
+      [ngClass]="{'centered-text': isCentered, underlined: isUnderlined}"
       class="orange">
     </p>`,
   styles: [ ... ]
@@ -222,7 +223,7 @@ Is equivalent to:
 export class AppComponent {
   exists = true;
 
-  toggleExists() { 
+  toggleExists() {
     this.exists = !this.exists;
   }
 }
@@ -266,7 +267,7 @@ export class AppComponent {
 Provides some other values that can be bound to: `index`, `first`, `last`, `even`, `odd`
 
 ```html
-<for-example 
+<for-example
   *ngFor="let episode of episodes; let i = index; let isOdd = odd"
   [episode]="episode"
   [ngClass]="{ odd: isOdd }">
@@ -288,7 +289,7 @@ export class AppComponent {
 
 Notes:
 
-- You might want to talk about trackBy 
+- You might want to talk about trackBy
 
 ---
 
@@ -323,7 +324,7 @@ export class AppComponent {
 ---
 
 ## Using Multiple Structural Directives
-   
+
 A component or native element can only be bound to one directive at a time
 
 ```html

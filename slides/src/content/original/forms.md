@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Forms
 
 ---
@@ -27,6 +28,7 @@ Angular has two approaches to forms:
 
 ---
 
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Template Driven Forms
 
 ---
@@ -122,7 +124,7 @@ to:
 
 ---
 
-## Binding Variables to the Form 
+## Binding Variables to the Form
 
 Add a default value from your model with one way data binding:
 
@@ -219,12 +221,12 @@ Template variables are instances of `NgModel` but they share some properties fro
 [View Example](https://plnkr.co/edit/dA0RTZhUgLmDX47vJ3XQ?p=preview)
 
 ---
-
-# Model Driven Forms 
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+# Model Driven Forms
 
 ---
 
-## Creating Model Driven Forms 
+## Creating Model Driven Forms
 
 Form declared programmatically using the `FormBuilder` service
 
@@ -239,7 +241,7 @@ export class SignupComponent {
   constructor (builder: FormBuilder) {
     this.firstName = new FormControl('', []);
 
-    this.signupForm = builder.group({ 
+    this.signupForm = builder.group({
       firstName: this.firstName;
     });
   }
@@ -378,4 +380,3 @@ this.signupForm = builder.group({
 | Form instance    | Declare in template `#signupForm="ngForm"` | Declare in class `[formGroup]="signupForm"` |
 | `(ngSubmit)`       | `registerUser(signupForm)`                 | `registerUser()`                              |
 | Control instance | Declare in template `ngModel`              | Declare in class `[formControl]="firstName"`   |
-
