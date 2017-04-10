@@ -1,17 +1,15 @@
 
 ##Forms in Angular
 
-Forms are essential to any web application. 
-
-For Example: They help you to login, book flights or buy goods on a website. Angular provides several in-built modules, validators and user controls to make the user-experience effective.
-
 ---
 
 ## How do I create forms in Angular (10 min)
 
-To make use of forms we need to import the `FormsModule` into the application module. This module will allow us to use all the features of the template-driven forms including `ngModel`.  The `FormsModule` is available in the `@angular/forms` package. 
+- To make use of forms we need to import the `FormsModule` into the application module. 
+- This module will allow us to use all the features of the template-driven forms including `ngModel`.  
+  - `ngModel` allows us to use the two-way databinding syntax to bind data to form-controls. 
+- The `FormsModule` is available in the `@angular/forms` package. 
 
-`ngModel` allows us to use the two-way databinding syntax to bind data to form-controls. 
 
 __app.module.ts__
 ```ts
@@ -37,9 +35,9 @@ export class AppModule { }
 
 ## How do I handle forms data (10 min)
 
-To handle forms data we will be using the `ngModel` and `ngForm` directive. 
-`ngForm` provides properties to get information from the form like `value` and `valid`. 
-`ngModel` provides the same property for the individual fields. 
+- To handle forms data we will be using the `ngModel` and `ngForm` directive. 
+- `ngForm` provides properties to get information from the form like `value` and `valid`. 
+- `ngModel` provides the same property for the individual fields. 
 
 Here is a how a simple template driven form looks like:
 
@@ -210,7 +208,7 @@ FIXME: Show plnkr example from code in slide
 
 ## Can I change the look of my form based on validation (10 min) (3/3)
 
-- Combining these classes and properties with CSS and HTML allows us to create very user-friendly forms.
+Combining these classes and properties with CSS and HTML allows us to create very user-friendly forms.
 
 ```css
 .ng-valid[required], .ng-valid.required  {
@@ -222,6 +220,7 @@ FIXME: Show plnkr example from code in slide
 ```
 
 Similar to this we can also take advantage of the `signupForm.valid` property and disable our sign up button when the form is invalid.
+
 ```html
 ...
 <button type="submit" [disabled]="!signupForm.valid">Sign Up</button>
@@ -232,30 +231,261 @@ FIXME: Show plnkr with changes in a demo.
 
 ---
 
-## Can I create custom validators (15 min)
-- Create a custom validator
-- Note: Discuss with Philip if we want to create a directive to do validation in a template driven form or if we are here refering to custom validation in the FormBuilder, which is essentially a lot easier. 
+## Can I bind a model to a form instead of using a template (25 min) (1/4)
 
---- 
+- To bind a model to a form, we need to create model driven forms
+- Model driven forms are also known as Reactive Forms
+- With model driven forms we can control and manipulate controls directly from the component
+- We can push data to the controls and pull values as they change
+- We will not be using things like `ngModel` and `required` in the template
+ - instead we will define the validation and model as part of our component
 
-FIXME
-## Can I bind a form to a model instead of using a template (25 min)
-- Import ReactiveFormsModule
-- Inject / configure FormBuilder
+---
 
---- 
+## Can I bind a model to a form instead of using a template (25 min) (2/2)
 
-FIXME
-## How do validate my form model (15 min)
-- Validators in FormBuilder
+To create model driven forms, we import the `ReactiveFormsModule` module into our root module
 
---- 
+```ts
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+...
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    ...
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+...
+```
 
-FIXME
-## How can I logically separate different sections of a form (10 min)
-- use FormGroups
+---
 
---- 
+## Can I bind a model to a form instead of using a template (25 min) (3/4)
+
+Reactive Forms are then declared programmatically using the `FormBuilder` service. 
+
+```ts
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
+@Component({ ... })
+export class SignupComponent {
+  signupForm: FormGroup;
+  firstName: FormControl;
+
+  constructor (builder: FormBuilder) {
+    this.firstName = new FormControl('', []);
+
+    this.signupForm = builder.group({ 
+      firstName: this.firstName;
+    });
+  }
+}
+```
+
+- `FormControl` tracks the value, state and validity of a form control
+- `FormGroup` tracks the group and validity state of a group of FormControls
+- `FormBuilder` can be used to create `FormGroup`s and `FormControl`s for us
+
+---
+
+## Can I bind a form to a model instead of using a template (25 min) (4/4)
+
+- Let's finally modify our template to use the created form controls
+
+```html
+<form [formGroup]="signupForm" (ngSubmit)="registerUser()" novalidate>
+  <p>First Name: <input [formControl]="firstName"></p>
+  <button type="submit">Sign Up</button>
+</form>
+```
+
+- Our model driven template is a lot cleaner than our template form
+
+FIXME: Show plnkr with changes in a demo.
+
+---
+
+## Can I bind a model to a form instead of using a template (25 min) (2/2)
+
+- Now that we a basic reactive form running, let's add our model to it. 
+
+_User.ts_
+```ts
+export class User {
+  firstName: string;
+  constructor(firstName) {
+    this.firstName = firstName;
+  }
+}
+```
+
+NOTE: Need to review this with Philip or John, as its unclear to me how the model is being bound to the form. 
+
+---
+
+
+## How do validate my form model (15 min) (1/3)
+
+- Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
+- Validators produce errors which can be checked calling `hasError` on the `FormControl`
+
+```ts
+import { Validators, FormControl } from '@angular/forms';
+
+@Component({ ... })
+export class SignupComponent {
+  constructor( ... ) {
+    this.firstName = new FormControl('', [Validators.minLength(5)]);
+    ...
+  }  
+}
+```
+
+```html
+<li [hidden]="!firstName.hasError('minlength')">
+  First Name can not be shorter than 5 characters
+</li>
+```
+
+[View Example](https://plnkr.co/edit/m8cTaN?p=preview)
+
+---
+
+## How do validate my form model (15 min)  - Custom Validators (2/3)
+
+- Custom validators can also be provided to `FormControl`s
+- Return `null` if the field is valid or `{ validatorName: true }` when invalid
+
+```ts
+import { FormControl } from '@angular/form';
+
+export class CustomValidators {
+  static emailFormat(ctrl: FormControl) {
+    let pattern: RegExp = /\S+@\S+\.\S+/;
+    return pattern.test(ctrl.value) ? null : { emailFormat: true };
+  }
+}
+```
+
+Note: Validators can also be define as plain functions
+
+---
+
+## How do validate my form model (15 min) - Checking a Custom Validator (3/3)
+
+- Validate a field using `email.hasError('emailFormat')` in the template
+
+```ts
+import { CustomValidators } from './custom-validators';
+
+@Component({ ... })
+export class SignupComponent {
+  constructor( ... ) {
+    this.email = new FormControl('', [ CustomValidators.emailFormat ]);
+    ...
+  }  
+}
+```
+
+```html
+<li [hidden]="!email.hasError('emailFormat')">
+  Invalid email format
+</li>
+```
+
+[View Example](https://plnkr.co/edit/m6heM7?p=preview)
+
+---
+
+## How can I logically separate different sections of a form (1/4)
+
+- Dividing large forms into small sections makes it easier to track validation issues
+- It allows us to query individual groups to narrow down invalid controls
+- Dividing forms into sections can also be useful if your backend requires pre-formatted data
+- To group the sections, we need to use `FormGroup`
+- We can create nested `FormGroup`s within other `FormGroup`s
+
+---
+
+## Nested Structure Example (2/4)
+
+
+- To create the below structure, we need to create several `FormGroup`s and add `FormControl`s to it
+
+```ts
+{                           <- mainForm: FormGroup
+  "billTo": {                 <- billTo: FormGroup
+    "firstName": "Mike",        <- firstName: FormControl
+    "lastName": "Miles"         <- lastName: FormControl
+  },
+  "card": {                   <- card: FormGroup
+    "accountNumer": "...",     <- accountNumber: FormControl
+    "expiration": "12/2020",   <- expiration: FormControl
+    "cvv": "222"               <- cvv: FormControl
+  }
+}
+```
+
+---
+
+## Nested Structure Example (3/4)
+
+- The structure can be converted the below code
+
+```ts
+export class GroupingExampleComponent  {
+  mainForm: FormGroup;
+
+  billTo: FormGroup;
+  firstName: FormControl;
+  lastName: FormControl;
+
+  card: FormGroup;
+  accountNumber: FormControl;
+  expirationMonth: FormControl;
+  cvvNumber: FormControl;
+...
+```
+
+---
+
+## Nested Structure Example (4/4)
+
+- Let's first inject a `FormBuilder` into our constructor
+
+```ts
+constructor(private fb: FormBuilder) { }
+```
+- Once we have the controls initialized we can go ahead and add them to the individual groups
+- In the below example, we are adding the `firstName` to the `billTo` group
+
+```ts
+createBillToFormFields() {
+  this.firstName = new FormControl('Mike', [Validators.required]);
+
+  this.billTo = this.fb.group({
+    firstName: this.firstName
+  });
+}
+```
+
+- Once all sub groups are created we can add them into the `mainForm` group:
+
+```ts
+this.mainForm = this.fb.group({
+  billTo: this.billTo
+});
+```
+
+[View Example](http://plnkr.co/edit/rJ576V7ncL0Fjm3T7zpt?p=preview)
+
+---
 
 FIXME
 ## How can I dynamically generate form fields (10 min)
