@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app works!';
 
-  setTitle() {
-    this.title = 'title is set';
+  setTitle(title: string) {
+    this.title = title;
   }
 }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TodoListItem } from '../models/todo-list-item';
 import { BehaviorSubject } from 'rxjs';
+import { Http } from '@angular/http';
 
-var id = 0;
 
 @Injectable()
 export class TodoService {
+  private id = 0;
   todoList$: BehaviorSubject<Array<TodoListItem>>;
 
   todoList: Array<TodoListItem> = [
@@ -13,8 +14,27 @@ export class TodoService {
     this.getTodoItem('Get Gas'),
   ];
 
-  constructor() {
+  constructor(private http: Http) {
     this.todoList$ = new BehaviorSubject(this.todoList);
+  }
+
+  getDefaultList() {
+    const url = 'http://www.json-generator.com/api/json/get/bHbBeYXhnS';
+
+    this.http
+      .get(url)
+      .map(data => data.json())
+      .map((todos) => this.mapServerTodo(todos))
+      .subscribe((data: Array<TodoListItem>) => {
+        this.todoList = data;
+        this.emitTodos();
+      });
+  }
+
+  mapServerTodo(todos) {
+    return todos.map((todo) => {
+      return this.getTodoItem(todo.label, todo.done);
+    });
   }
 
   emitTodos(){
@@ -27,13 +47,15 @@ export class TodoService {
     this.emitTodos();
   }
 
-  private getTodoItem(todoText: string): TodoListItem {
-    return new TodoListItem(id++, todoText);
+  private getTodoItem(todoText: string, isCompleted: boolean = false): TodoListItem {
+    const newID = this.id++;
+    console.log('next ID is: ', newID, todoText);
+    return new TodoListItem(newID, todoText, isCompleted);
   }
 
   completeTodo(id: number) {
     this.todoList = this.todoList.map(todoItem => {
-      if (todoItem.id === id) {
+      if (todoItem.id === this.id) {
         todoItem.isCompleted = true;
       }
       return todoItem;

@@ -1,13 +1,23 @@
+import { Component } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 
-describe('AppComponent', () => {
+@Component({
+  selector: 'avy-todo-list',
+  template: `Mock Todo List`
+})
+class MockTodoListComponent {
+}
+
+
+fdescribe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
-      ],
+        AppComponent,
+        MockTodoListComponent
+      ]
     }).compileComponents();
   }));
 
@@ -23,10 +33,24 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('app works!');
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it(`should set title when setTitle is called`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+    const app = fixture.debugElement.componentInstance;
+
+    app.setTitle('new value');
+
+    expect(app.title).toEqual('new value');
   }));
+
+  it(`should display current title in an h1`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const appInstance = fixture.debugElement.componentInstance;
+    const appElement = fixture.debugElement.nativeElement;
+
+    appInstance.setTitle('new value');
+    fixture.detectChanges();
+
+    expect(appElement.querySelector('h1').textContent).toEqual('new value');
+  }));
+
 });
