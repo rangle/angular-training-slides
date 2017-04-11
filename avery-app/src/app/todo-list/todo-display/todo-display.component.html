@@ -1,0 +1,8 @@
+<div *ngFor="let todo of todoList">
+  <span [class.strike]="todo.isCompleted">{{ todo.label }}</span>
+  <avy-button label="Complete"
+    [hidden]="todo.isCompleted"
+    (onLabel)="completeTodo(todo.id)"></avy-button>
+  <avy-button label="Delete"
+    (onLabel)="deleteTodo(todo.id)"></avy-button>
+</div>

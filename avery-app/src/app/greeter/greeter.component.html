@@ -2,6 +2,7 @@
 
 <avy-button
   *ngFor="let name of names | sort : 'desc'"
+  [label]="name"
   (onLabel)="setName($event)"></avy-button>
 
 <avy-dynamic-greet-input

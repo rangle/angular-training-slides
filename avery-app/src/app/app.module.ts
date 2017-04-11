@@ -8,6 +8,9 @@ import { GreeterComponent } from './greeter/greeter.component';
 import { DynamicGreetInputComponent } from './greeter/dynamic-greet-input/dynamic-greet-input.component';
 import { SharedModule } from './shared/shared.module';
 import { HeroSplashComponent } from './hero-splash/hero-splash.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoInputComponent } from './todo-list/todo-input/todo-input.component';
+import { TodoDisplayComponent } from './todo-list/todo-display/todo-display.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { HeroSplashComponent } from './hero-splash/hero-splash.component';
     GreeterComponent,
     DynamicGreetInputComponent,
     HeroSplashComponent,
+    TodoListComponent,
+    TodoInputComponent,
+    TodoDisplayComponent,
   ],
   imports: [
     BrowserModule,

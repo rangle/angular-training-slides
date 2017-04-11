@@ -1,0 +1,6 @@
+<avy-todo-input (onTodoItem)="addTodos($event)"></avy-todo-input>
+
+<avy-todo-display
+  [todoList]="todoList"
+  (onCompleted)="handleCompletedTodo($event)"
+  (onDeleted)="handleDeletedTodo($event)"></avy-todo-display>
