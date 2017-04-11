@@ -1,64 +1,137 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 
-## Formatting Output
+## Building Applications with Angular
 
-- An expression can be passed into an Angular pipe. This transforms it into a new value
-- Angular has a number of built-in pipes for common use such as `LowerCasePipe` and `DatePipe`
+# Pipes
 
+---
+
+## Roadmap
+
+1. How do I format data using a pipe?
+1. How do I create my own pipes?
+
+---
+
+## Motivation
+
+- Classes could turn everything into strings for display
+- Often easier to use a *pipe* in the HTML
+  - Takes a value as input, produces a new value as output
+  - Just like a Unix command-line pipe
+- Angular comes with several pipes for common operations
+- Very easy to add new ones
+
+---
+
+## Adding a Pipe
+
+- Put the name of the pipe inside `{{…}}`
+- Use vertical bar `|` as separator
+
+_src/app/to-do-list/to-do-list.component.html_
 ```html
-<h2>Search results</h2>
-<p>Your search <strong>{{search.term | lowercase}}</strong> had {{search.results}} results.</p>
+<ul>
+  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
+    {{item | uppercase}}
+  </li>
+</ul>
 ```
-[View Example](https://plnkr.co/edit/HjvjjxmZhpk7VyiycQj5?p=preview)
+
+![Converting to Upper Case](content/images/screenshot-uppercase.png)
 
 ---
 
 ## Passing Arguments to the Pipe
 
 - Pipes also accept arguments
-- Are colon delimited sets of values
+- Use colon as delimiter
 
 ```html
-Angular 2.0 was released on {{ng2ReleaseDate | date:'fullDate'}}
+Price is {{ 100.12345 | currency:"CAD":true:"1.2" | lowercase }}
 ```
 
-[View Example](https://plnkr.co/edit/6dKkWSzX3JdUyKyGjWg1?p=preview)
+produces:
+
+```html
+Price is ca$100.12
+```
+
+---
 
 ## Built-in Angular Pipes
  
-- [DatePipe](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html) - Formats dates with configuration options
-- [UpperCasePipe](https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html) - Formats a string upper case
-- [LowerCasePipe](https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html) - Formats a string to lower case
-- [CurrencyPipe](https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html) - Formats a number to a currency based on a locale
-- [PercentPipe](https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html) - Formats numbers as a percentage based on a locale
+- [date](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html): formats dates in various ways
+- [uppercase](https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html): converts a string to upper case
+- [lowercase](https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html): converts a string to lower case
+- [currency](https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html): formats a number as a currency
+- [percent](https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html): formats a number as a percentage
 
 ---
 
 ## Generating a Pipe
 
-- Generate using the Angular CLI
-- `ng generate pipe [pipe path]`
-- Pipe is added to app module declarations
+- Use `ng generate pipe titlecase`
+- Creates `src/app/titlecase.*`
+  - Note: in the `app` directory
+  - We could (and should) create a `pipes` directory
+```
+├── src
+│   ├── app
+│   │   ├── titlecase.spec.ts
+│   │   └── titlecase.ts
+```
 
 ---
 
-## A Look at the Pipe
+## What's in a Pipe?
 
-```typescript
+_src/app/titlecase.ts_
+```ts
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'greet' })
-export class GreetPipe implements PipeTransform {
-  transform(name: string, title = ''): string {
-    return `Hello, ${title} ${name}`;
+@Pipe({
+  name: 'titlecase'
+})
+export class TitlecasePipe implements PipeTransform {
+
+  transform(value: any, args?: any): any {
+    return null;
   }
 }
 ```
-[View Example](https://plnkr.co/edit/Jts8wGqIW0gG932sBzMm?p=preview)
 
-- `Pipe` imported from `@angular/core`
-- `@Pipe` is a decorator
-- `name` property instead of selector
-- Pipe name is not prefixed
-- Implements the `PipeTransform` interface
-- `transform` acceps initial value to pipe followed by all arguments passed
+- Import declarations from `@angular/core`
+- Decorate class with `@Pipe` using `name` property
+- `transform` accepts initial value and any optional arguments
 - Returns some value
+
+---
+
+## Defining Our Transformation
+
+_src/app/titlecase.ts_
+```ts
+export class TitlecasePipe implements PipeTransform {
+
+  transform(value: any, args?: any): any {
+    return value.charAt(0).toUpperCase()
+         + value.substr(1).toLowerCase();
+  }
+}
+```
+
+---
+
+## Using Our Pipe
+
+_src/app/to-do-list/to-do-list.component.html_
+```html
+<ul>
+  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
+    {{item | titlecase}}
+  </li>
+</ul>
+```
+
+![Converting to Title Case](content/images/screenshot-titlecase.png)
