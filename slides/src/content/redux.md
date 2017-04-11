@@ -15,36 +15,45 @@
 
 ---
 
-## What Should a Good State System Achieve?
+## The Problem
 
-1. Create [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
-1. [Separation of Concern](https://en.wikipedia.org/wiki/Separation_of_concerns) : Separation of Data and Logic
-1. Improve scalability by having things _react_ to events as opposed to caller dictating actions
-1. Create a coherent framework so future developers will know how to add features by following convention
-1. [Uni-Directional Data Flow](http://redux.js.org/docs/basics/DataFlow.html) : Easy to reason about the interactions between actors
+- Different parts of an application need to reflect different aspects of its state
+- Different parts of an application can *update* different aspects of its state
+- Those updates can happen asynchronously
 
 ---
 
-## Why Can't We Use Backend Programming Patterns to Model Frontend Dataflow?
+## What Should a Good State Management System Do?
 
-There are two major differences between handling server requests and user interactions.
+1. Provide a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
+1. Provide [separation of concern](https://en.wikipedia.org/wiki/Separation_of_concerns)
+   - Data and logic should be able to evolve separately
+1. Improve scalability by having things *react* to events
+   - As opposed to a caller dictating actions
+1. Create a coherent framework so future developers will know where and how to add features
+1. Provide [uni-directional data flow](http://redux.js.org/docs/basics/DataFlow.html)
+   so that future developers can reason about interactions
 
-1. The user requests are handled by the screen; server requests are handled by multi-threaded servlets
-1. The user requests often modify the same objects; server requests usually modify objects of different users
-1. The user expects to be notified about change immediately, server only informs change when requested
+---
 
-<strong> Due to these reasons the front-end has to think differently about components communicating with each other.</strong>
+## Why Do We Need a New Pattern?
+
+Server requests are different from user interactions:
+
+1. User requests are handled by a single-threaded browser, while server requests are handled by multi-threaded servlets
+1. User requests often modify the same objects but server requests usually modify different ones
+1. Users expect to be notified about changes immediately: servers are more patient
 
 ---
 
 ## Similarities of Structure - Redux vs Backend Architecture
 
-| Function | Angular With `@ngrx`  | Server |
-|---|---|---|
-| Data Storage | Store  |  Database  |
-| Presentation View |  `@Component`  | Client API  |
-| Logic to massage data for Storage |  `@Effects`  | Services |
-| Communication | Action / Observables  | Function Invocation |
+| Function                          | Angular With Redux   | Server              |
+|-----------------------------------|----------------------|---------------------|
+| Data Storage                      | Store                | Database            |
+| Presentation View                 | `@Component`         | Client API          |
+| Logic to massage data for Storage | `@Effects`           | Services            |
+| Communication                     | Action / Observables | Function Invocation |
 
 ---
 
@@ -54,234 +63,294 @@ There are two major differences between handling server requests and user intera
 
 ---
 
+## The Store
+
+- Stores the entire current state of the application
+- In principle, entire state replaced each time something changes
+  - I.e., state is never modified in place
+  - So no need to worry about concurrency effects
+  - In practice, can often replace some parts and copy other parts forward
+- Application components watch [Observable](http://reactivex.io/rxjs/) streams for updates
+  and change what they display
+
+FIXME: diagram of state update
+
+---
+
 ## Actions
 
-1. Responsible for passing data towards the store
-1. Implemented with [Observable](http://reactivex.io/rxjs/) streams
-1. Use actions instead of function invocation
-1. Listeners are responsible to determine how to react to actions
-1. Has 2 properties, `type`, and by convention, `payload`
-    1. `type` is the identifier the listeners can use to listen to actions
-    1. `payload` is a flexible object that carries information
+- Actions are objects that tell the store how to update itself
+  - Use actions instead of direct function invocation so that they can be serialized
+- Each action is an `Object` with:
+  - `type`: identifies what kind of action this is (to allow selection and filtering)
+  - `payload`: extra information needed to carry out the action
+    - Name is just a convention, but a widely-used one
 
 ---
 
-## How do We Dispatch An Action
+## Plan for Refactoring
 
+1. Define the *reducer* that turns a state and an action into a new state
+1. Define actions
+1. Main component will dispatch an action to add an item
+1. Display will monitor the store for changes
+
+Notes:
+
+1. We will use [@ngrx](https://github.com/ngrx) for our store
+   - Many other implementations of the Redux pattern exist
+1. We will leave room in our store to add more state later
+1. Angular CLI doesn't know anything about @ngrx, so we have to do most of the work by hand
+
+---
+
+## Install Required Software
+
+- `npm install @ngrx/core @ngrx/store --save`
+- The `--save` option updates `package.json`
+- So the next person can just do `npm install`
+
+---
+
+## Create the Reducer
+
+- Create a new file `src/app/store.ts`
+- Import `Action` to define the shape of actions
+- Define constants for action names (as strings)
+- Also define the initial state
+  - An empty item list
+- New state is the old list plus a new item
+  - New item arrives as action's payload
+- Do *not* use `items.push` to update existing state
+  - More efficient…
+  - …but only if correctness and programmer time aren't issues
+
+---
+
+## Create the Reducer
+
+- Set up definitions
+
+_src/app/store.ts_
 ```ts
-import { Store } from '@ngrx/store';
-import { people } from './people';
+import { Action } from '@ngrx/store';
 
-@Component({
-  selector: 'person-input',
-  template: `
-    <button (click)="add('John')">Add Person</button>
-  `
-})
-export class PersonInputComponent {
-  constructor(private store: Store<any>) { }
+export const ITEM_ADD = 'ITEM_ADD';
 
-  add(name) {
-    this.store.dispatch({ type: 'TODO_TASK_ADDED', payload: {
-      name: name,
-    });
-  }
+export interface AppState {
+  items: string[];
 }
+
+const DEFAULT_STATE: AppState = {
+  items: []
+};
 ```
 
 ---
 
-## `@Component` Uses `Actions` to Broadcast to the Store
+## Create the Reducer
 
-1. Responsible for presentation and user interactions
-1. Components are blind to the complexities of the app (Doesn't know what happens after action is broadcasted)
-1. Affect the state via Actions
-1. Describes a need or event without dictating how to fulfill the need or what to do with the event
-1. Eg. Event => TODO_TASK_ADDED
-    1. `taskDisplay` reacts by => `displayTask()`
-    1. `deleteButton` reacts by => `enableDeleteTask()`
+- Define the reducer function
 
----
-
-## How Do We Interact With Actions
-
-### A store is:
-
-1. Responsible for application state (Immutability, Persisting to Disk etc.)
-1. The [Single Source of Truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
-1. Keeper of stateful information, void of business logic
-1. Can only be affected by actions
-1. Prevent unintentional modifications by other methods via object reference, or directly accessing store members
-
----
-
-## Sample Store
-
+_src/app/store.ts_
 ```ts
-// Root module
-import { StoreModule } from '@ngrx/store';
-import { people } from './people'; // Reducers
+export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
+  let newState;
 
-@NgModule({
-  imports: [ ..., StoreModule.provideStore({ people }) ],
-})
-export class AppModule {  }
-```
-
-```ts
-// Reducer (be careful if we use export const people = (state, action) => {} syntax AOT will complain)
-export function people (state = [], action) {
   switch (action.type) {
-    case 'TODO_TASK_ADDED':
-      return state.concat(action.payload);
-    default:
-      return state;
+
+  case ITEM_ADD:
+    newState = {items: [...state.items, action.payload]};
+    return newState;
+
+  default:
+    return state;
   }
 }
 ```
 
-
 ---
 
-## Redux Sounds Complex
+## Add the Store to the Application
 
-The best way to learn Redux is to visualize what is happening inside of the system.
-
-We can do this using the [Redux DevTools Extension](http://extension.remotedev.io/#installation) which is useful not only for visualization, but debugging our application as well.
-
-We can go ahead an install this extension into our browser of choice with the appropriate link [here](http://extension.remotedev.io/#installation) (in our case we will be using Google Chrome).
-
----
-
-## @ngrx/store-devtools
-
-With our extension installed, we need to configure our application to make use of the dev tools by installing `@ngrx/store-devtools`:
-
-`npm install @ngrx/store-devtools --save`
-
-and then import the `StoreDevtoolsModule` into our module.
-
+_src/app/app.module.ts_
 ```ts
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store';
 
 @NgModule({
+  declarations: [
+    …as before…
+  ],
   imports: [
-    StoreModule.provideStore(rootReducer),
-    // Note that you must instrument after importing StoreModule
-    StoreDevtoolsModule.instrumentOnlyWithExtension({})
-  ]
+    …as before…
+    StoreModule.provideStore(reducer)
+  ],
+  …as before…
 })
 export class AppModule { }
 ```
 
----
-
-## Redux DevTools
-
-Upon successful installation of the Redux DevTools Extension and configuration of of the `StoreDevToolsModule`, there will be a new "Redux" tab in our browser's developer tools pane.
-
-Selecting this tab, we should now see something similar to this.
-
-<img src="/content/images/redux-devtools.png" width="50%"/>
+- Note the `provideStore` call in `imports`
 
 ---
 
-## How Do We Get Information From the Store?
+## Clean Up the Main Application's HTML
 
-1. State is exposed through the `Store` service as an `Observable` stream
-1. The select carries information away from the store
-1. Using the select pattern
-1. `Store` provides a `.select()` method to select pieces of state:
-  1. By key: `this.store.select('people')`
-  1. By nested key: `this.store.select('city', 'people')`
-  1. By function: `this.store.select(state => state.people)`
-1. Can chain other operators like `.filter()`, `.map()` to have finer-grained control over selected data
-
----
-
-## Sample Select
-
+_src/app/app.component.html_ (old)
 ```ts
-@Component({
-  selector: 'people',
-  template: `
-    <ul>
-      <li *ngFor="let person of people">{{ person.name }}</li>
-    </ul>
-  `
-})
-export class PeopleComponent implements OnInit {
-  private people: Person[] = [];
+<h1>{{title}}</h1>
+<app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
+<app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
+```
 
-  constructor(private store: Store<any>) { }
+_src/app/app.component.html_ (new)
+```ts
+<h1>{{title}}</h1>
+<app-to-do-list></app-to-do-list>
+<app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
+```
+
+---
+
+## Dispatch Actions for New Items
+
+_src/app/app.component.ts_
+```ts
+import { Store } from '@ngrx/store';
+import { AppState, ITEM_ADD, reducer } from './store';
+
+export class AppComponent {
+
+  constructor (
+    private store: Store<AppState>
+  ) {
+  }
+
+  onNewItem(item: string) {
+    this.store.dispatch({type: ITEM_ADD, payload: item});
+  }
+}
+```
+
+- Note: no longer storing state in `AppComponent`
+
+---
+
+## Update the To-Do List Display
+
+_src/app/to-do-list/to-do-list.component.ts_
+```ts
+import { Store } from '@ngrx/store';
+import { AppState } from '../store';
+
+export class ToDoListComponent implements OnInit {
+
+  thingsToDo: string[];
+
+  constructor(
+    private store: Store<AppState>
+  ) {
+  }
 
   ngOnInit() {
-    this.store.select('people')
-      .subscribe((people: Person[]) => this.people = people);
+    this.store
+      .select('items')
+      .subscribe((items: string[]) => {this.thingsToDo = items.slice();});
   }
 }
 ```
 
 ---
 
-## Handling Async Events in the Application With Redux
+## Picking That Apart
 
-### The @ngrx/effects Library is:
+_src/app/to-do-list/to-do-list.component.ts_
+```ts
+    this.store
+      .select('items')
+      .subscribe((items: string[]) => {this.thingsToDo = items.slice();});
+```
 
-1. Responsible for Business Logic and Async actions (Http Calls)
-1. Does not keep local state
-1. Listens on the action stream and adheres to 'Action In Action Out'
-1. Typical use is take user input, make http call, and provide output to go into store
+- The store is observable
+- So we can filter (select) top-level elements by name
+  - Only pay attention to events signalling changes to `store['items']`
+- And subscribe to just those changes
+- When we get a new list of items…
+  - …because that's all we're paying attention to…
+- …we copy it into the list we're displaying…
+  - …because we don't way to share state
 
 ---
 
-## Handling Side Effects with `@Effect`
+## Redux Seems Complex
 
-```ts
+So let's see how we'd go about deleting items:
 
-@Injectable()
-export class CollectionEffects {
-    constructor(private actions$: Actions, private db: Database) { }
+1. Add a `Delete` button beside each item in the display.
+1. Have the `onDelete` handler in `ToDoListComponent` dispatch an `ITEM_DELETE` event
+   - With the text of the item to delete as its payload
+1. Have the store update state when it receives that action
+1. There is no Step 4
 
-    @Effect()
-    removeBookFromCollection$: Observable<Action> = this.actions$
-        .ofType(collection.ActionTypes.REMOVE_BOOK)
-        .map((action: collection.RemoveBookAction) => action.payload)
-        .mergeMap(book => this.db.executeWrite('books', 'delete', [ book.id ]))
-        .map(() => {
-            type : ActionTypes.REMOVE_BOOK_SUCCESS,
-            payload : book.id
-        })
-        .catch(() => Observable.of(new collection.RemoveBookFailAction(book)));
-}
+---
+
+## Update the To-Do List Display
+
+_src/app/to-do-list/to-do-list.component.html_
+```html
+<table>
+  <tr>
+    <th>Delete</th>
+    <th>Item</th>
+  </tr>
+  <tr *ngFor="let item of thingsToDo">
+    <td><button (click)="onDelete(item)">X</button></td>
+    <td>{{item}}</td>
+  </tr>
+</table>
 ```
 
 ---
 
-## FAQ: Is the Reducer the Store?
+## Provide the Deletion Method
 
-No, a reducer only describes _how_ the store's state should change based on a dispatched action. Our actual state is stored outside of our reducers. In the case of `@ngrx`, state is stored within an `Observable` stream that can be listened to.
+_src/app/to-do-list/to-do-list.component.ts_
+```ts
+import { AppState, ITEM_DELETE } from '../store';
 
----
+export class ToDoListComponent implements OnInit {
 
-## FAQ: Does the UI Broadcast Actions and Store Broadcast Actions Back?
+  …as before…
 
-The UI should not broadcast actions directly, it can and often should dispatch actions through "action creator" methods which can be made available through a component or service.
+  onDelete(item) {
+    this.store.dispatch({type: ITEM_DELETE, payload: item});
+  }
+}
+```
 
-In a more traditional Flux architecture, while a store may have broadcasted actions whenever state changed, Redux does not. Instead of reacting to actions dispatched out from our store, we instead react to the changes in our state itself, we don't concerned ourselves with _how_ state has changed.
-
-The Actions are generally what we call the events being broadcasted to the store.  When events leave the store due to a state change it is done through a store select.
-
----
-
-## FAQ: Instead of Dealing With Observables, Can we Simply Call Methods Directly?
-
-By calling methods directly, we must now take on the responsibility of manually managing state (often spread across numerous locations) and ensuring that all concerned portions of our application are notified of updated state. This approach tends to be more error-prone and is more difficult to maintain and scale in larger applications.
-
-The advantage of Redux is that this state management is handled in one location which is easier to reason about, and our application can simply react whenever application state changes.
+- Compilation error because `ITEM_DELETE` doesn't yet exist
 
 ---
 
-## FAQ: I Have an Awesome Idea/Implementation that Does the Same Thing, Can I Use That?
+## Upgrade the Store
 
-Absolutely. Ultimately Redux is just a pattern for state management. Be warned however that many of the strengths of Redux lie in its conventions and community support. Convention allows other developers to ramp up quickly on a pattern they're already familiar with, and community support means better tooling, more middleware,updates/bug fixes, and a larger knowledge base to draw upon. Choose whichever solution ends up being best for you and your team.
+_src/app/store.ts_
+```ts
+export const ITEM_DELETE = 'ITEM_DELETE';
+
+export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
+
+  switch (action.type) {
+
+  case ITEM_DELETE:
+    newState = {
+      items: state.items.filter(item => {return item != action.payload})
+    };
+    return newState;
+
+  …other cases…
+
+  }
+}
+```
