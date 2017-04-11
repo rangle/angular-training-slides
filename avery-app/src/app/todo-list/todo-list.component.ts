@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListItem } from '../models/todo-list-item';
+import {TodoService} from '../services/todo.service';
 
 let id = 0;
 
@@ -9,36 +10,27 @@ let id = 0;
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todoList: Array<TodoListItem> = [
-    this.getTodoItem('Buy Milk'),
-    this.getTodoItem('Get Gas'),
-  ];
+  private todoList: Array<TodoListItem> = [];
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
+    this.todoService.todoList$
+      .subscribe((listOfTodos) => {
+        this.todoList = listOfTodos;
+        console.log('todo list received', this.todoList);
+      })
   }
 
   addTodos(todo: string) {
-    this.todoList = this.todoList
-      .concat(this.getTodoItem(todo));
-  }
-
-  getTodoItem(todoText: string): TodoListItem {
-    return new TodoListItem(id++, todoText);
+    this.todoService.addTodos(todo);
   }
 
   handleCompletedTodo(id: number) {
-    this.todoList.map((todoItem) => {
-      if (todoItem.id === id){
-        todoItem.isCompleted = true;
-      }
-      return todoItem;
-    });
+    this.todoService.completeTodo(id);
   }
 
   handleDeletedTodo(todoId: number) {
-    this.todoList = this.todoList
-      .filter(todo => todoId !== todo.id);
+    this.todoService.deleteTodo(todoId);
   }
 }

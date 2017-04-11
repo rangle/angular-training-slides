@@ -11,6 +11,7 @@ import { HeroSplashComponent } from './hero-splash/hero-splash.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoInputComponent } from './todo-list/todo-input/todo-input.component';
 import { TodoDisplayComponent } from './todo-list/todo-display/todo-display.component';
+import { TodoService } from './services/todo.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { TodoDisplayComponent } from './todo-list/todo-display/todo-display.comp
     HttpModule,
     SharedModule
   ],
-  providers: [],
+  providers: [TodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
