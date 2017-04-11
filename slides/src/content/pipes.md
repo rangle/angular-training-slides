@@ -73,8 +73,9 @@ Price is ca$100.12
 
 - Use `ng generate pipe titlecase`
 - Creates `src/app/titlecase.*`
-  - Note: in the `app` directory
+  - Note: in the `src/app` directory
   - We could (and should) create a `pipes` directory
+
 ```
 ├── src
 │   ├── app
