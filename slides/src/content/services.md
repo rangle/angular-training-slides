@@ -8,7 +8,10 @@
 
 ## Roadmap
 
-FIXME
+1. What is a service?
+1. How do we create services?
+1. How do we use services?
+1. Why do we use services?
 
 ---
 
