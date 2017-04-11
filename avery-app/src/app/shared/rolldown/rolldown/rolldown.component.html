@@ -1,0 +1,8 @@
+<h1>
+  <ng-content select="[heading]"></ng-content>
+</h1>
+
+<div *ngIf="isOpen">
+  <ng-content select="content"></ng-content>
+  <button (click)="rollup()">Close</button>
+</div>

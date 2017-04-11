@@ -1,0 +1,8 @@
+<h1>Hello, {{currentName}}</h1>
+
+<avy-button
+  *ngFor="let name of names | sort : 'desc'"
+  (onLabel)="setName($event)"></avy-button>
+
+<avy-dynamic-greet-input
+  (nameEntered)="addName($event)"></avy-dynamic-greet-input>
