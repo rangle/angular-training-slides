@@ -6,7 +6,16 @@
 
 ---
 
-## Overview
+## Roadmap
+
+1. How do I install the software I need for this training?
+1. How do I create a new Angular project?
+1. What is in a basic Angular project?
+1. What is TypeScript?
+
+---
+
+## Software Overview
 
 - NPM (Node Package Manager) allows you to install JavaScript libraries
 - NVM (Node version Manager) allows you to download, install, and switch between Node versions

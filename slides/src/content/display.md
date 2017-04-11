@@ -6,6 +6,16 @@
 
 ---
 
+## Roadmap
+
+1. Where do I put static data in a component?
+1. How do I display multiple values?
+1. How do I make items findable?
+1. How do I control what is displayed?
+1. When does Angular update its display of data?
+
+---
+
 ## Make the Data
 
 - Change the title

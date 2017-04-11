@@ -6,6 +6,15 @@
 
 ---
 
+## Roadmap
+
+1. How do I handle events?
+1. How do I handle inputs?
+1. How do I make a reusable component?
+1. How do child components send data to their parents?
+
+---
+
 ## Handling Events
 
 - Bind an expression to any DOM event using `(event)="action"` in a tag

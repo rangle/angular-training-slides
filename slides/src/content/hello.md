@@ -6,6 +6,15 @@
 
 ---
 
+## Roadmap
+
+1. What makes up a component?
+1. How is a component's behavior defined?
+1. How is a component's appearance defined?
+1. How do I run an Angular application?
+
+---
+
 ## What's Where
 
 ```

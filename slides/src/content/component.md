@@ -6,6 +6,15 @@
 
 ---
 
+## Roadmap
+
+1. How do I create a new component?
+1. How does Angular name components?
+1. How do I include a component in my display?
+1. How do I pass data to a component?
+
+---
+
 ## Generating a New Component
 
 - Use Angular CLI to create a new component to display the list

@@ -30,7 +30,7 @@ services and solutions.
 
 ---
 
-## Structure (Online)
+## Structure (Online) <!-- FIXME: delete if in person -->
 
 - 8 hours each day for 3 days
 - Coffee breaks mid-morning and mid-afternoon
