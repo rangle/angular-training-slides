@@ -1,4 +1,3 @@
-
 ## Forms in Angular
 
 Angular has two approaches to forms:
@@ -15,10 +14,10 @@ Angular has two approaches to forms:
 
 ## Creating Template Driven Forms
 
-- To make use of forms we need to import the `FormsModule` into the application module. 
-- This module will allow us to use all the features of the template-driven forms including `ngModel`.  
-  - `ngModel` allows us to use the two-way databinding syntax to bind data to form-controls. 
-- The `FormsModule` is available in the `@angular/forms` package. 
+- To make use of forms we need to import the `FormsModule` into the application module.
+- This module will allow us to use all the features of the template-driven forms including `ngModel`.
+  - `ngModel` allows us to use the two-way databinding syntax to bind data to form-controls.
+- The `FormsModule` is available in the `@angular/forms` package.
 
 _app.module.ts_
 
@@ -45,9 +44,9 @@ export class AppModule { }
 
 ## How To Handle Form Data
 
-- To handle form data we will be using the `ngModel` and `ngForm` directive. 
-- `ngForm` provides properties to get information from the form like `value` and `valid`. 
-- `ngModel` provides the same property for the individual fields. 
+- To handle form data we will be using the `ngModel` and `ngForm` directive.
+- `ngForm` provides properties to get information from the form like `value` and `valid`.
+- `ngModel` provides the same property for the individual fields.
 
 Here is a how a simple template driven form looks like:
 
@@ -68,13 +67,13 @@ Here is a how a simple template driven form looks like:
 
 ## NgForm / NgModel
 
-`NgForm` exposes several useful properties related to the form: 
+`NgForm` exposes several useful properties related to the form:
 
 - `signupForm.value`: Shows all form values
 - `signupForm.valid`: Shows if the form is valid
 - `signupForm.value.firstName`: Shows the value of the `firstName` field.
 
-`NgModel` has similiar properties and more that are related specifically to the fields. 
+`NgModel` has similiar properties and more that are related specifically to the fields.
 
 - `value`: Returns the value
 - `valid`: Returns field validity (boolean)
@@ -140,7 +139,7 @@ When using template driven forms we can use 4 built-in validators: `required`, `
 - To perform validation, we need to create a template variable for the given field `#field="ngModel"`
 
 ```html
-<p>First Name: <input name="firstName" #firstName="ngModel" ngModel required></p>  
+<p>First Name: <input name="firstName" #firstName="ngModel" ngModel required></p>
 ```
 
 In the above example the template variable `#firstName` is an instances of `FormControl`
@@ -191,7 +190,7 @@ In the above example the template variable `#firstName` is an instances of `Form
 
 ## How To Style A Form (2/3)
 
-- Let's see how we can change our previous example to take benefit of this feature. 
+- Let's see how we can change our previous example to take benefit of this feature.
 
 ```html
 <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
@@ -205,8 +204,8 @@ In the above example the template variable `#firstName` is an instances of `Form
 </form>
 ```
 
-- We can now see that the error list does not appear any more unless the control has been interacted with. 
-- We are using the `untouched` property to accomplish this. 
+- We can now see that the error list does not appear any more unless the control has been interacted with.
+- We are using the `untouched` property to accomplish this.
 
 [View Example](https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview)
 
@@ -271,7 +270,7 @@ export class AppModule { }
 
 ## How Reactive Forms Work (3/5)
 
-Reactive Forms are declared programmatically using the `FormBuilder` service. 
+Reactive Forms are declared programmatically using the `FormBuilder` service.
 
 ```ts
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -284,7 +283,7 @@ export class SignupComponent {
   constructor (builder: FormBuilder) {
     this.firstName = new FormControl('', []);
 
-    this.signupForm = builder.group({ 
+    this.signupForm = builder.group({
       firstName: this.firstName;
     });
   }
@@ -307,7 +306,7 @@ export class SignupComponent {
 ```
 
 - Our model driven template is no longer using `required` or `ngModel`
-  - We do not need the `ngModel` 
+  - We do not need the `ngModel`
 - We are also not creating any template variables
 
 ---
@@ -325,7 +324,7 @@ export class SignupComponent {
   constructor( ... ) {
     this.firstName = new FormControl('', [Validators.minLength(5)]);
     ...
-  }  
+  }
 }
 ```
 
@@ -371,7 +370,7 @@ export class SignupComponent {
   constructor( ... ) {
     this.email = new FormControl('', [ CustomValidators.emailFormat ]);
     ...
-  }  
+  }
 }
 ```
 
@@ -400,15 +399,15 @@ export class SignupComponent {
 - We want to create the below data structure and turn that into an angular form
 
 ```ts
-{                           
-  "billTo": {                
-    "firstName": "Mike",      
-    "lastName": "Miles"       
+{
+  "billTo": {
+    "firstName": "Mike",
+    "lastName": "Miles"
   },
-  "card": {                   
-    "accountNumer": "...",     
-    "expiration": "12/2020",  
-    "cvv": "222"              
+  "card": {
+    "accountNumer": "...",
+    "expiration": "12/2020",
+    "cvv": "222"
   }
 }
 ```
