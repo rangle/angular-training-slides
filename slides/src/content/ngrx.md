@@ -1,5 +1,17 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-# Redux (@ngrx)
+
+## Building Applications with Angular
+
+# Managing State with Redux
+
+---
+
+## Roadmap
+
+1. How should we keep track of our application's state?
+1. What are the principal components of the Redux model?
+1. How do we dispatch actions?
+1. How do we respond to state changes?
 
 ---
 
