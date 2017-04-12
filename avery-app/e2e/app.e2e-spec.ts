@@ -11,4 +11,19 @@ describe('avery-app App', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('app works!');
   });
+
+  it('should have 5 todo items displayed', () => {
+  });
+
+  it('avery.com/rolls should open request sample modal', () => {
+    page.navigateTo('http://www.avery.com/rolls');
+    expect(page.getAveryRollsHeader()).toEqual('Avery WePrint™ Roll Labels');
+
+    expect(page.getModalCloseButton().isPresent()).toBeFalsy();
+
+    page.requestSample()
+      .then(() => {
+        expect(page.getModalCloseButton().isDisplayed()).toBeTruthy();
+      });
+  });
 });
