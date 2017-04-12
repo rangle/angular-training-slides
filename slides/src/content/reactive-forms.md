@@ -8,175 +8,195 @@
 
 ## Roadmap
 
-FIXME
+- How do reactive forms differ from template driven forms?
+- FIXME
 
 ---
 
-## Overview
+## Overview (again)
 
 - Template Driven Forms: controls and validation rules defined in the template with directives
 - Reactive Forms: controls and validation rules defined in the component class or service
-
-
----
-
-## How Reactive Forms Work (1/5)
-
-- Reactive forms works by binding a form to a model
-- With reactive forms we can handle controls directly within the component
-- We can push data to the controls and pull values as they change
-- We will not be using things like `ngModel` and `required` in the template
- - instead we will define the validation and model as part of our component
-- Reactive Forms are also known as Model driven forms
+  - Binding a form to a model
+  - Also known as model driven forms
+- Reactive forms can handle controls directly within the component
+  - Push data to the controls and pull values as they change
+- Do *not* use `ngModel` and `required` in the template
+ - Define the validation and model as part of our component
 
 ---
 
-## How Reactive Forms Work (2/5)
+## Creating Reactive Forms
 
-To create reactive forms, we need to import the `ReactiveFormsModule` module in our root module
+- Import `ReactiveFormsModule` from `@angular/forms` into `app.module.ts`
 
-_app.module.ts_
+_src/app/app.module.ts_
 ```ts
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-...
+
 @NgModule({
   declarations: [
-    AppComponent
+    …
   ],
   imports: [
-    ...
+    …
     ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-...
 ```
 
 ---
 
-## How Reactive Forms Work (3/5)
+## Declaring a Reactive Form
 
-Reactive Forms are declared programmatically using the `FormBuilder` service.
+- Reactive Forms are declared using the `FormBuilder` service
+- `FormControl` tracks the value, state and validity of a form control
+- `FormGroup` tracks the group and validity state of a group of FormControls
+- Use the `FormBuilder` service to create `FormGroup` and `FormControl` instances
+- We will rebuild our `GenericInputComponent` to use these
+  - Will get compilation errors until modifications complete
 
+---
+
+## Declaring a Reactive Form
+
+_src/app/generic-input/generic-input.component.ts_
 ```ts
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
-@Component({ ... })
-export class SignupComponent {
-  signupForm: FormGroup;
-  firstName: FormControl;
+export class GenericInputComponent implements OnInit {
 
-  constructor (builder: FormBuilder) {
-    this.firstName = new FormControl('', []);
+  @Output() newItem: EventEmitter<string> = new EventEmitter();
+  textEntryForm: FormGroup;
+  textEntryControl: FormControl;
 
-    this.signupForm = builder.group({
-      firstName: this.firstName;
+  constructor(
+    private builder: FormBuilder
+  ) {
+    this.textEntryControl = new FormControl('', []);
+    this.textEntryForm = builder.group({
+      textEntry: this.textEntryControl
     });
   }
 }
 ```
 
-- `FormControl` tracks the value, state and validity of a form control
-- `FormGroup` tracks the group and validity state of a group of FormControls
-- `FormBuilder` can be used to create `FormGroup`s and `FormControl`s for us
-
 ---
 
-## How Reactive Forms Work (4/5)
+## Modifying the View
 
 ```html
-<form [formGroup]="signupForm" (ngSubmit)="registerUser()" novalidate>
-  <p>First Name: <input [formControl]="firstName"></p>
-  <button type="submit">Sign Up</button>
+<form [formGroup]="textEntryForm" (ngSubmit)="addToDo()">
+  <p>
+    Item: <input [formControl]="textEntryControl">
+    <button type="submit">Add</button>
+  </p>
 </form>
 ```
 
-- Our model driven template is no longer using `required` or `ngModel`
-  - We do not need the `ngModel`
-- We are also not creating any template variables
+- Unlike template driven forms, we do not use `required` or `ngModel`
+- Also not creating any template variables
 
 ---
 
-## How To Validate Reactive Forms
+## Validating Reactive Forms
 
 - Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
-- Validators produce errors which can be checked calling `hasError` on the `FormControl`
+- Validators produce errors which can be checked by calling `hasError` on the `FormControl`
 
+_src/app/generic-input/generic-input.components.ts_
 ```ts
-import { Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
-@Component({ ... })
-export class SignupComponent {
-  constructor( ... ) {
-    this.firstName = new FormControl('', [Validators.minLength(5)]);
-    ...
+export class GenericInputComponent {
+  constructor(…) {
+    this.textEntryControl = new FormControl('', [Validators.minLength(5)]);
+    …
   }
 }
 ```
 
+---
+
+## Validating Reactive Forms
+
+- Now use the validator in the form's HTML
+
 ```html
-<li [hidden]="!firstName.hasError('minlength')">
-  First Name can not be shorter than 5 characters
-</li>
+<ul [hidden]="textEntryControl.valid || textEntryControl.untouched">
+  <li [hidden]="!textEntryControl.hasError('minlength')">
+    Item must have at least five characters
+  </li>
+</ul>
 ```
 
-[View Example](https://plnkr.co/edit/m8cTaN?p=preview)
+<!-- preview: https://plnkr.co/edit/m8cTaN?p=preview -->
 
 ---
 
-## Custom Validators (1/2)
+## Custom Validators
 
-- Custom validators can also be provided to `FormControl`s
-- Return `null` if the field is valid or `{ validatorName: true }` when invalid
+- Can also provide custom validators to `FormControl` that return:
+  - `null` if the field is valid
+  - `{ validatorName: true }` if it is not
 
+_src/app/generic-input.component.ts_
 ```ts
 import { FormControl } from '@angular/form';
 
 export class CustomValidators {
-  static emailFormat(ctrl: FormControl) {
-    let pattern: RegExp = /\S+@\S+\.\S+/;
-    return pattern.test(ctrl.value) ? null : { emailFormat: true };
+  static timeFormat(ctrl: FormControl) {
+    const pattern: RegExp = /\d\d:\d\d/;
+    return pattern.test(ctrl.value) ? null : {timeFormat: true};
   }
 }
 ```
 
-Note: Validators can also be defined as plain functions
+- Note: validators can also be defined as plain functions
+- And we really ought to put our validators in their own files…
 
 ---
 
-## Custom Validators (2/2)
+## Custom Validators
 
-- Validate a field using `email.hasError('emailFormat')` in the template
+- Validate a field by adding `timeFormat.hasError('timeFormat')` to the `FormControl` constructor
 
 ```ts
-import { CustomValidators } from './custom-validators';
-
 @Component({ ... })
-export class SignupComponent {
-  constructor( ... ) {
-    this.email = new FormControl('', [ CustomValidators.emailFormat ]);
-    ...
+export class GenericInputComponent {
+  constructor(…) {
+    this.textEntryControl = new FormControl('', [ CustomValidators.timeFormat ]);
+    …
   }
 }
 ```
 
+- And display an error message
+
 ```html
-<li [hidden]="!email.hasError('emailFormat')">
-  Invalid email format
+<li [hidden]="!textEntry.hasError('timeFormat')">
+  Invalid time format
 </li>
 ```
 
-[View Example](https://plnkr.co/edit/m6heM7?p=preview)
+---
+
+## Custom Validators
+
+![Custom Validators](content/images/screenshot-invalid-time-format.png)
+
+<!-- preview: https://plnkr.co/edit/m6heM7?p=preview -->
 
 ---
 
-## How To Logically Separate Form Sections (1/5)
+## Separating Form Sections
 
 - Dividing large forms into small sections makes it easier to track validation issues
-- It allows us to query individual groups to narrow down invalid controls
-- It's also useful if you want to create a form from a schema
+  - Allows us to query individual groups to narrow down invalid controls
+- Also useful for creating a form from a schema
 - To group the sections, we need to use `FormGroup`
 - We can create nested `FormGroup`s within other `FormGroup`s
 
@@ -235,10 +255,10 @@ constructor(private fb: FormBuilder) { }
 
 ```ts
 createBillToFormFields() {
-  this.firstName = new FormControl('Mike', [Validators.required]);
+  this.textEntryControl = new FormControl('Mike', [Validators.required]);
 
   this.billTo = this.fb.group({
-    firstName: this.firstName
+    firstName: this.textEntryControl
   });
 }
 ```
