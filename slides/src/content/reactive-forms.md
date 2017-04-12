@@ -8,8 +8,10 @@
 
 ## Roadmap
 
-- How do reactive forms differ from template driven forms?
-- FIXME
+1. How do reactive forms differ from template driven forms?
+1. How do I create a reactive form?
+1. How do I validate a reactive form?
+1. How can I create my own validators?
 
 ---
 

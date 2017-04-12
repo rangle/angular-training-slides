@@ -8,11 +8,11 @@
 
 ## Roadmap
 
-- How does Angular support forms?
-- How do I create a template driven form?
-- How do I handle form data?
-- How do I validate form data?
-- How do I display error messages?
+1. How does Angular support forms?
+1. How do I create a template driven form?
+1. How do I handle form data?
+1. How do I validate form data?
+1. How do I display error messages?
 
 ---
 
