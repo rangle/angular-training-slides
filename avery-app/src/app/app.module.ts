@@ -14,6 +14,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoInputComponent } from './todo-list/todo-input/todo-input.component';
 import { TodoDisplayComponent } from './todo-list/todo-display/todo-display.component';
 import { TodoService } from './services/todo.service';
+import { todosReducer } from './store/todos.reducer'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { TodoService } from './services/todo.service';
     FormsModule,
     HttpModule,
     SharedModule,
-    StoreModule.provideStore({}),
+    StoreModule.provideStore({
+      todos: todosReducer
+    }),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [TodoService],

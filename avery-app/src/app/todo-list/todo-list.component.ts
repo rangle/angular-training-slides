@@ -20,11 +20,11 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.todoAction.getDefaultList();
-    this.todoAction.todoList$
-      .subscribe((listOfTodos) => {
+    this.store.select('todos')
+      .subscribe((listOfTodos: Array<TodoListItem>) => {
         this.todoList = listOfTodos;
         console.log('todo list received', this.todoList);
-      })
+      });
   }
 
   addTodos(todo: string) {

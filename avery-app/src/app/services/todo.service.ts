@@ -15,8 +15,10 @@ export class TodoService {
     this.getTodoItem('Get Gas'),
   ];
 
-  constructor(private http: Http,
-              private store: Store<any>) {
+  constructor(
+    private http: Http,
+    private store: Store<any>
+  ) {
     this.todoList$ = new BehaviorSubject(this.todoList);
   }
 
