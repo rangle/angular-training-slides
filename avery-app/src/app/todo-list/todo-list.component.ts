@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListItem } from '../models/todo-list-item';
-import { TodoService } from '../services/todo.service';
+import { TodoActions } from '../actions/todo.actions';
 import { Store } from '@ngrx/store';
 
 let id = 0;
@@ -14,12 +14,13 @@ export class TodoListComponent implements OnInit {
   todoList: Array<TodoListItem> = [];
 
   constructor(
-    private todoAction: TodoService,
+    private todoAction: TodoActions,
     private store: Store<any>
   ) { }
 
   ngOnInit() {
     this.todoAction.getDefaultList();
+
     this.store.select('todos')
       .subscribe((listOfTodos: Array<TodoListItem>) => {
         this.todoList = listOfTodos;
@@ -29,12 +30,6 @@ export class TodoListComponent implements OnInit {
 
   addTodos(todo: string) {
     this.todoAction.addTodos(todo);
-    this.store.dispatch({
-      type: 'ADD_TODOS',
-      payload: {
-        label: todo
-      }
-    });
   }
 
   handleCompletedTodo(id: number) {

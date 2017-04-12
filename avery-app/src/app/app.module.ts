@@ -13,7 +13,7 @@ import { HeroSplashComponent } from './hero-splash/hero-splash.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoInputComponent } from './todo-list/todo-input/todo-input.component';
 import { TodoDisplayComponent } from './todo-list/todo-display/todo-display.component';
-import { TodoService } from './services/todo.service';
+import { TodoActions } from './actions/todo.actions';
 import { todosReducer } from './store/todos.reducer'
 
 @NgModule({
@@ -36,7 +36,7 @@ import { todosReducer } from './store/todos.reducer'
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
-  providers: [TodoService],
+  providers: [TodoActions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
