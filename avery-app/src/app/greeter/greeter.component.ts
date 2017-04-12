@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/store';
 
 @Component({
   selector: 'app-greeter',
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GreeterComponent implements OnInit {
   currentName = 'world';
+  greeting: string;
 
   names = [
     'john',
@@ -15,9 +18,11 @@ export class GreeterComponent implements OnInit {
     'mike'
   ];
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.store.select('greeter')
+      .subscribe((greeting: string) => this.greeting = greeting);
   }
 
   setName(name: string) {

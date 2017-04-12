@@ -32,7 +32,8 @@ import { todosReducer } from './store/todos.reducer'
     HttpModule,
     SharedModule,
     StoreModule.provideStore({
-      todos: todosReducer
+      todos: todosReducer,
+      greeter: () => 'hi'
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
