@@ -4,37 +4,35 @@
 
 ---
 
-<img src="content/images/augury.svg" width="200" style="box-shadow: none"/>
 ## What is Augury?
 
-Augury (https://augury.angular.io/) is a Chrome DevTools extensions that allows for easy debugging and profiling of Angular 2 applications.
+- [Augury](https://augury.angular.io/) is a Chrome DevTools extensions for debugging and profiling Angular 2 applications
+- Disclaimer: Augury was authored by [Rangle.io](http://rangle.io)
 
-_Disclaimer: Augury was authored by Rangle.io_
+<img src="content/images/augury.svg" width="200" style="box-shadow: none" alt="Augury Logo"/>
 
 ---
 
+## Installing Augury
 
-## How to get Augury
+- Augury is available through the Chrome web store and installed as a Chrome extension
+- After installation, a tab labelled _Augury_ should be available in Chrome DevTools
 
-- Augury is available through the Chrome web store and installed as a Chrome extension.
-- After downloading and installing Augury, a tab labelled _Augury_ should be available in Chrome DevTools
-
-![](content/images/chrome-devtools-augury.png)
+![Augury in DevTools](content/images/chrome-devtools-augury.png)
 
 ---
 
 ## Integrating With Your Application
 
-For Augury to work with your application, it needs to be running in development mode. For our Angular CLI project, this is the default mode served by `ng serve`
+- Augury allows us to inspect our component tree to check the applicaton state at any point
+  - Application must be running in development mode for Augury to work
+  - This is the default for Angular CLI projects run with `ng serve`
+- Displays what components are in our component tree
+- Component properties' values are displayed and editable
+- Custom events can be triggered using arbitrary values
 
 ---
 
 ## Basic Inspection with Augury
 
-![](content/images/augury-component-tree.png)
-
-- Augury allows us to inspect our component tree to check out the state of our application at any point
-- What components are in our component tree are displayed
-- Values of different component properties are displayed and editable
-- Custom events can be triggered using inputted values
-
+![Augury in Action](content/images/augury-component-tree.png)
