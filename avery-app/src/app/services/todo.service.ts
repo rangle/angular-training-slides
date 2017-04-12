@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TodoListItem } from '../models/todo-list-item';
 import { BehaviorSubject } from 'rxjs';
 import { Http } from '@angular/http';
+import { Store } from '@ngrx/store';
 
 
 @Injectable()
@@ -14,7 +15,8 @@ export class TodoService {
     this.getTodoItem('Get Gas'),
   ];
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private store: Store<any>) {
     this.todoList$ = new BehaviorSubject(this.todoList);
   }
 
@@ -26,8 +28,10 @@ export class TodoService {
       .map(data => data.json())
       .map((todos) => this.mapServerTodo(todos))
       .subscribe((data: Array<TodoListItem>) => {
-        this.todoList = data;
-        this.emitTodos();
+        this.store.dispatch({
+          type: 'DEFAULT_TODOS_RECEIVED',
+          payload: data
+        });
       });
   }
 

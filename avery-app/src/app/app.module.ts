@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { GreeterComponent } from './greeter/greeter.component';
@@ -27,7 +29,9 @@ import { TodoService } from './services/todo.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    SharedModule
+    SharedModule,
+    StoreModule.provideStore({}),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]
