@@ -248,3 +248,115 @@ export class AppComponent {
 ![Connecting the Wires](content/images/screenshot-handling-event.png)
 
 FIXME: diagram showing data flow
+
+---
+
+## Question
+
+Which of the following is invalid syntax for handling an event?
+
+1. `<message (messageSent)="onMessageSent($event)"></message>`
+
+2. `<message (messageSent)="onMessageSent(message)"></message>`
+
+3. `<message (messageSent)="sent"></message>`
+
+4. `<message (messageSent)="sent=$event"></message>`
+
++++
+
+Correct answer is 3.
+
+1: Values emitted are exposed via the `$event` variable.
+
+2: This answer may expose a misunderstanding that values referenced as
+callback arguments are class members.
+
+3: Not choosing this answer may expose confusion in terms of inputs
+vs. outputs, and/or two-way bound `[()]` properties.
+
+4: This answer may expose a misunderstanding that values passed into
+outputs must be callbacks. In reality, they are simply expressions
+which also have special handling for callback syntax
+
+---
+
+## Question
+
+What is the difference between:
+
+(A) `<counter [count]="count()"></counter>`
+
+(B) `<counter (count)="count()"></counter>`
+
+1. None.
+
+2. (A) passes the result of calling `this.count()` into the `<counter>` component via an input.
+   (B) calls `this.count()` whenever the `<counter>` component emits a value through its own `EventEmitter` member `count`.
+
+3. (A) calls `this.count()` whenever the `<counter>` component emits a value through its own `EventEmitter` member `count`.
+   (B) passes the resulting value of calling `this.count()` into the `<counter>` component via an input.
+
+4. (A) emits a value from the parent into the `<counter>` component from an `EventEmitter` member called `count`.
+   (B) assigns values emitted from the `<counter>` component to `this.count`.
+
++++
+
+Correct answer is 2.
+
+1, 3, 4: This answer may expose a misunderstanding of the input `[]`
+output `()` paradigm and what the syntax represents.
+
+---
+
+## Question
+
+Given the following components, which message will be logged to the console when `child`'s button is clicked?
+
+```ts
+@Component({
+  selector: 'parent',
+  template: '<child (messageSent)="handleMessageSent($event)"></child>'
+})
+export class Parent {
+  @Output() messageSent = new EventEmitter();
+  message = 'I am the parent';
+  handleMessageSent() { console.log(this.message); }
+}
+
+@Component({
+  selector: 'child',
+  template: '<button (click)="sendMessage()">Click me</button>'
+})
+export class Child {
+  @Output() messageSent = new EventEmitter();
+  message = 'I am the child';
+  handleMessageSent() { console.log(this.message); }
+  sendMessage() { this.messageSent.emit(true); }
+}
+```
+
+---
+
+## Question (continued)
+
+1. I am the child
+
+2. I am the parent  
+   I am the child
+
+3. I am the child  
+   I am the parent
+
+4. I am the parent
+
++++
+
+Correct answer is 4.
+
+1: This answer may expose confusion between which component actually
+handles the event.
+
+2,3: This answer may expose a misunderstanding that both child and
+parent components are able to listen to the custom event, and thus
+both log their messages.
