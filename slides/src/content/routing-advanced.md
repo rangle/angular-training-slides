@@ -1,3 +1,15 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
+## Building Applications with Angular
+
+# Advanced Routing
+
+---
+
+## Roadmap
+
+FIXME: this module needs to be updated and proof-read
+
 ---
 
 Alternatively, you can navigate to a route by calling the `navigate` function on the router with the path array as the argument. For example to navigate to component-one, we could use:

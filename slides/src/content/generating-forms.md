@@ -8,7 +8,7 @@
 
 ## Roadmap
 
-FIXME
+FIXME: this module needs to be filled in and proof-read
 
 ---
 

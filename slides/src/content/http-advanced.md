@@ -1,3 +1,14 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
+## Building Applications with Angular
+
+# Advanced HTTP
+
+---
+
+## Roadmap
+
+FIXME: this module needs to be updated and proof-read
 
 ---
 

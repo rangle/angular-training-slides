@@ -354,3 +354,116 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
   }
 }
 ```
+
+---
+
+## Getting Information from a Store
+
+- State is exposed through the `Store` service as an `Observable` stream
+- The `select` carries information away from the store
+  - `Store` provides a `.select()` method to select pieces of state:
+  - By key: `this.store.select('people')`
+  - By nested key: `this.store.select('city', 'people')`
+  - By function: `this.store.select(state => state.people)`
+- Can chain other operators like `.filter()`, `.map()` to have finer-grained control over selected data
+
+---
+
+## Handling Async Events in the Application With Redux
+
+- The `@ngrx/effects` library is responsible for business logic and async actions
+  - E.g., HTTP calls
+- Does not keep local state
+- Listens on the action stream
+  - Adheres to "Action In/Action Out"
+- Typical use is:
+  1. Take user input
+  1. make HTTP call
+  1. Provide output to go into store
+
+---
+
+## Handling Side Effects with `@Effect`
+
+```ts
+@Injectable()
+export class CollectionEffects {
+  constructor(
+    private actions: Actions,
+    private db: Database
+  ) {}
+
+  @Effect()
+  removeBookFromCollection: Observable<Action> = this.actions
+    .ofType(collection.ActionTypes.REMOVE_BOOK)
+    .map((action: collection.RemoveBookAction) => action.payload)
+    .mergeMap(book => this.db.executeWrite('books', 'delete', [ book.id ]))
+    .map(() => {
+      type : ActionTypes.REMOVE_BOOK_SUCCESS,
+      payload : book.id
+    })
+    .catch(() => Observable.of(new collection.RemoveBookFailAction(book)));
+}
+```
+
+---
+
+## FAQ
+
+**Is the reducer the store?**
+
+No, a reducer only describes _how_ the store's state should change
+based on a dispatched action. Our actual state is stored outside of
+our reducers. In the case of `@ngrx`, state is stored within an
+`Observable` stream that can be listened to.
+
+---
+
+## FAQ
+
+**Does the UI broadcast actions and store broadcast actions back?**
+
+The UI should not broadcast actions directly, it can and often should
+dispatch actions through "action creator" methods which can be made
+available through a component or service.
+
+In a more traditional Flux architecture, while a store may have
+broadcasted actions whenever state changed, Redux does not. Instead of
+reacting to actions dispatched out from our store, we instead react to
+the changes in our state itself, we don't concerned ourselves with
+*how* state has changed.
+
+The actions are generally what we call the events being broadcasted to
+the store.  When events leave the store due to a state change it is
+done through a store select.
+
+---
+
+## FAQ
+
+**Instead of dealing with observables, can we simply call methods directly?**
+
+By calling methods directly, we must now take on the responsibility of
+manually managing state (often spread across numerous locations) and
+ensuring that all concerned portions of our application are notified
+of updated state. This approach tends to be more error-prone and is
+more difficult to maintain and scale in larger applications.
+
+The advantage of Redux is that this state management is handled in one
+location which is easier to reason about, and our application can
+simply react whenever application state changes.
+
+---
+
+## FAQ
+
+**I have an awesome idea/implementation that does the same thing, can I use that?**
+
+Absolutely. Ultimately Redux is just a pattern for state
+management. Be warned however that many of the strengths of Redux lie
+in its conventions and community support. Convention allows other
+developers to ramp up quickly on a pattern they're already familiar
+with, and community support means better tooling, more
+middleware,updates/bug fixes, and a larger knowledge base to draw
+upon. Choose whichever solution ends up being best for you and your
+team.

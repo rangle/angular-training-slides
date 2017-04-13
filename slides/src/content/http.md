@@ -8,7 +8,9 @@
 
 ## Roadmap
 
-1. FIXME
+1. How does Angular interact with HTTP?
+1. How can I get data from a server?
+1. How can I send data to a server?
 
 ---
 

@@ -44,12 +44,14 @@ services and solutions.
 ## Syllabus
 
 *  Day 1
-   * AM: setup, hello world, data display, and creating components
-   * PM: data binding and using pipes
-*  FIXME
-   * Forms
-   * Redux
-   * Testing
+   * AM: setting up, displaying data, and creating components
+   * PM: data binding, event handling, and pipes
+*  Day 2
+   * AM: services and unit testing
+   * PM: Redux
+*  Day 3
+   * AM: forms
+   * PM: routing
 
 ---
 
