@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./greeter-child.component.css']
 })
 export class GreeterChildComponent implements OnInit {
-  private currentName: string;
+  currentName: string;
 
   constructor(private route: ActivatedRoute) { }
 

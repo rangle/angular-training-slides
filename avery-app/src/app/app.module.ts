@@ -32,6 +32,10 @@ const routes: Routes = [
   { path: '**', redirectTo: 'greeter' }
 ];
 
+export function greeterReducer() {
+  return 'hi';
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +55,7 @@ const routes: Routes = [
     SharedModule,
     StoreModule.provideStore({
       todos: todosReducer,
-      greeter: () => 'hi'
+      greeter: greeterReducer
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
