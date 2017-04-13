@@ -169,3 +169,147 @@ export class ToDoListComponent implements OnInit {
 
 - More elaborate than necessary if we were stopping here…
 - …but absolutely necessary to control complexity in large projects
+
+---
+
+## Question
+
+What is the best way for a child component to receive data passed to
+it from a parent component?
+
+1. A member decorated with `@Output`.
+
+2. A shared variable protected by a lock.
+
+3. A member decorated with `@Input`.
+
++++
+
+Correct answer is 3.
+
+1: This answer may expose confusion between the directionality of
+inputs and outputs.
+
+2: This answer may indicate that the learner is thinking of active
+components in a multi-threaded system.
+
+---
+
+## Question
+
+Given the following, what text would be rendered to the screen?
+
+```ts
+@Component({
+  selector: 'parent',
+  template: `
+    <div>Parent: {{ message }}</div>
+    <child message="Greetings"></child>
+  `
+})
+export class Parent {
+  @Input() message: string;
+}
+
+@Component({
+  selector: 'child',
+  template: `<div>Child: {{ message }}</div>`
+})
+export class Child {
+  @Input() message: string;
+}
+```
+
+---
+
+## Question (continued)
+
+1. Parent:  
+   Child: Greetings
+
+2. Parent: Greetings  
+   Child: Greetings
+
+3. Parent: Greetings  
+   Child:
+
++++
+
+Correct answer is 1.
+
+2: May expose confusion in the what `message="Greeting"` is actually
+doing. It does not imply a "global" member assignment, and values are
+not "inherited" or otherwise made available to child components
+implicitly.
+
+3: May expose a confusion in the directionality of the
+`message="Greeting"` assignment. In this case the parent is passing
+the string "Greeting" down into the child component, not the other way
+around.
+
+---
+
+## Question
+
+How can an object reference be passed down into a child component
+input called `data` from the parent's template?
+
+1. `[data]="myData"`
+
+2. `data="myData"`
+
+3. `(data)="myData"`
+
+4. `[data]="{{myData}}"`
+
++++
+
+Correct answer is 1.
+
+2: May expose confusion between the differences in `[]` notation, and
+passing data as a string.
+
+3: May expose confusion between the differences between input `[]`
+notation and output/event `()` notation.
+
+4: May expose confusion with what interpolation is/does and not
+understanding that it's not required here.
+
+---
+
+## Question
+
+Given the following component and usage, what would be rendered to the screen?
+
+```ts
+@Component({
+  selector: 'hal',
+  template: `<div>{{ message }}</div>`
+})
+export class Hal9000 {
+  @Input() message: string;
+}
+```
+
+```html
+<hal [message]="'Hello, Dave. You're looking well today'"></hal>
+```
+
+1. `[object Object]`
+2. Nothing, the words/grammar are not valid class members.
+3. Hello, Dave. You're looking well today
+4. None: An error will be thrown because Angular can't parse the message as an object.
+
++++
+
+Correct answer is 3.
+
+1, 2: This may expose confusion in that we're required to pass in a
+reference to a class member (or that we can pass multiple class
+members in at once) whereas `[]` notation really means we're
+evaulating an expression which can actually be anything.
+
+4: If no single quotes (`'`) were used this would be the case, however
+`[]` notation will evaluate the passed value as an expression (in the
+context of the component). In this case, `[message]` will evaluate to
+a string;
