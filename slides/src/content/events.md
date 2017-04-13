@@ -265,6 +265,8 @@ Which of the following is invalid syntax for handling an event?
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 1: Values emitted are exposed via the `$event` variable.
@@ -301,6 +303,8 @@ What is the difference between:
    (B) assigns values emitted from the `<counter>` component to `this.count`.
 
 +++
+
+## Answer
 
 Correct answer is 2.
 
@@ -351,6 +355,8 @@ export class Child {
 4. I am the parent
 
 +++
+
+## Answer
 
 Correct answer is 4.
 

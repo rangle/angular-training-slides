@@ -273,6 +273,8 @@ What is the correct way to inject a service into a class?
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 4: While it is possible to instantiate classes manually, (and in some
@@ -325,6 +327,8 @@ class member (make it available on `this`)?
 
 +++
 
+## Answer
+
 Correct answer is 1.
 
 1: While an instantiated `Http` service will be available in the
@@ -355,6 +359,8 @@ Injecting a service into a class accomplishes which of the following?
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 1, 2: Services can only be injected once they've been explicitly
@@ -376,6 +382,8 @@ must be done manually before the service can be used?
    `MyService` into the `providers` array
 
 +++
+
+## Answer
 
 Correct answer is 2.
 

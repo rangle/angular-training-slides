@@ -185,6 +185,8 @@ it from a parent component?
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 1: This answer may expose confusion between the directionality of
@@ -235,6 +237,8 @@ export class Child {
 
 +++
 
+## Answer
+
 Correct answer is 1.
 
 2: May expose confusion in the what `message="Greeting"` is actually
@@ -263,6 +267,8 @@ input called `data` from the parent's template?
 4. `[data]="{{myData}}"`
 
 +++
+
+## Answer
 
 Correct answer is 1.
 
@@ -301,6 +307,8 @@ export class Hal9000 {
 4. None: An error will be thrown because Angular can't parse the message as an object.
 
 +++
+
+## Answer
 
 Correct answer is 3.
 
