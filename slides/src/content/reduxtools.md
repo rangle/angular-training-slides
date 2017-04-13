@@ -8,7 +8,7 @@
 
 ## What is Redux DevTools?
 
-Redux DevTools is a browser extension that allows for improved debugging. Its features are:
+Redux DevTools is a browser extension that allows for improved debugging. It:
 
 - Shows application state
 - Provides visualization of all actions that have been dispatch
@@ -18,13 +18,13 @@ Redux DevTools is a browser extension that allows for improved debugging. Its fe
 
 ## How to get Redux DevTools
 
-Redux DevTools is available for:
+Redux DevTools is available in many platforms:
 
   - Chrome through the [web store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/remotedev/)
   - [Electron and others](http://extension.remotedev.io/#installation)
 
-After installing the extension, in Chrome for example, there should be a tab in the Chrome DevTools labeled "Redux".
+After installing the extension in Chrome, there should be a tab in Chrome DevTools labeled "Redux".
 
 ![](content/images/chrome-redux-devtools.png)
 
