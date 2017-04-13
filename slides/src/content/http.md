@@ -1,173 +1,160 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
+## Building Applications with Angular
+
+# The HTTP Service
+
+---
+
+## Roadmap
+
+1. FIXME
 
 ---
 
 ## The Built-in `Http` Service
 
-Service provided by Angular to perform REST operations
-
-```ts
-@Injectable()
-export class PostService {
-  constructor(private http: Http){}
-
-  getList(): Observable<Post[]> {
-    return this.http
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .map(posts => posts.json());
-  }
-}
-```
-
-- It has one method for every HTTP verb: `get`, `post`, `put`, etc.
-- Every method returns an observable that emit a single value
+- Service provided by Angular to perform REST operations
+- Has a method for each HTTP verb: `get`, `post`, `put`, `delete`
+- Each method returns an `Observable` that emits a single value
 - Connections are closed automatically after the value is emitted
 
 ---
 
-## Importing the `HttpModule`
+## Importing the Service
 
-To be able to use the `Http` service we need to import the `HttpModule`
+- Angular CLI automatically imports `HttpModule` in `app.module.ts`
 
 ```ts
 import { HttpModule } from '@angular/http';
 
 @NgModule({
+  …other content…
   imports: [
-    BrowserModule,
+    …other imports…
     HttpModule
   ],
-  /* ... */
+  …other content…
 })
 export class AppModule {}
 ```
 
-[View Example](https://plnkr.co/edit/l4n2upSueYw5UbFjZB1C?p=preview)
+<!-- preview: https://plnkr.co/edit/l4n2upSueYw5UbFjZB1C?p=preview -->
 
 ---
 
-## Handling `http` rejections
+## Interlude: Setting Up a JSON Data Server
 
-To catch rejections we can use the `subscribe` operator's `onError` callback
+- Use [JSON Server](https://github.com/typicode/json-server) to set up a little JSON store
+- `npm install json-server --save`
+- Create the file shown below in `src/db.json`
+- `./node_modules/.bin/json-server --watch src/db.json`
+- Go to <http://localhost:3000/items> to test
 
+_src/db.json_
 ```ts
-  this.http.post(`${ BASE_URL }/auth/login`, payload)
-    .map(response => response.json())
-    .subscribe(
-      (authData) => this.storeToken(authData.id_token), // onNext function
-      (err) => console.error(err),                      // onError function
-      () => console.log('Authentication Complete')      // onComplete function
-    );
+{
+  "items": {
+    "todo": [
+      {"id": 0, "text": "Learn JavaScript"},
+      {"id": 1, "text": "Learn Node"},
+      {"id": 2, "text": "Learn Angular"}
+    ]
+  }
+}
 ```
 
 ---
 
-## Using the `.catch` operator
+## Using the HTTP Service on Startup
 
-- Using `.catch` we can inspect an error and decide how to handle it
-- By not calling `subscribe` our code is more declarative
-- Can take advantage of the `async` pipe in your template
+- Modify `AppComponent` to ask `toDoService` to initialize itself
 
+_src/app/app.component.ts_
 ```ts
-  search(term: string) {
-    return this.http.get(`https://api.spotify.com/v1/dsds?q=${term}&type=artist`)
-      .map(response => response.json())
-      .catch(e => {
-        if (e.status >==  500) return cachedVersion();
+import { Component, OnInit } from '@angular/core';
+…as before…
 
-        return Observable.throw(
-          new Error(`${ e.status } ${ e.statusText }`)
-        );
-      }
-  });
+export class AppComponent implements OnInit {
+  …as before…
+  constructor(
+    private toDoService: ToDoService
+  ) {
+  }
+
+  ngOnInit() {
+    this.toDoService.initialize();
+  }
+}
 ```
+
+- Get a compiler error (since `toDoService.initialize` isn't defined yet)
 
 ---
 
-## Cancel a Request
+## Fetch Data From the Server
 
-- One of the greatest benefits to using observables over promises is the ability to cancel `http` requests
-
+_src/app/to-do.service.ts_
 ```ts
-  search() {
-    const request = this.searchService.search(this.searchField.value)
+export class ToDoService {
+
+  baseUrl: string = 'http://localhost:3000';
+
+  initialize() {
+    const url = `${this.baseUrl}/items`;
+    this.http
+      .get(url)
+      .map(res => res.json())
       .subscribe(
-        result => { this.result = result.artists.items; },
-        err => { this.errorMessage = err.message; },
-        () => { console.log('Completed'); }
+        (body) => {
+          this.items = this.jsonToList(body.todo);
+          this.changes.next(this.items);
+        },
+        (err) => { console.log(err); }
       );
-
-    setTimeout(() => {request.unsubscribe()}, 0); // cancel request after 0 milliseconds
   }
-```
-[View Example](http://plnkr.co/edit/MByeTy?p=preview)
-
----
-
-## Cancel a Request with `takeUntil`
-
-- Managing subscription cancellation via `unsubscribe` can get messy
-- The `takeUntil` operator allows us to compose your subscription management
-- `takeUntil` emits items from an observable until a given observable emits an item
-
-```ts
-search() {
-  const request = this.searchService.search(this.searchField.value)
-    .takeUntil(someOtherStream) // take until someOtherStream emits an item
-    .subscribe(
-      result => { this.result = result.artists.items; },
-      err => { this.errorMessage = err.message; },
-      () => { this.cancelMessage = 'Your request has been cancelled' }
-    );
 }
 ```
 
-- **NOTE:** `takeUntil` will complete the observable unlike `unsubscribe`
+---
 
-[View Example](https://plnkr.co/edit/v2aGkTCmi34jBr7an1i8?p=preview)
+## Fetch Data From the Server
+
+1. In real applications, `baseUrl` will be a configuration parameter.
+1. Define `url` to point to the top-level key in the "database".
+1. Use the `http` service to GET that URL…
+1. …then use `map` to extract the JSON body from the result…
+   - This is `Observable.map` on one item, not `Array.map` on many
+1. …then use `subscribe` to handle the (single) notification from the observable
+   - If all goes well, extract the text of the to-do list items with `jsonToList`
+   - If there's an error, report it
+
+<!-- comment needed to separate lists -->
+- Note: JSON Server requires us to:
+  1. Store data below top-level keys (hence `items` *and* `todo`)
+  1. Store lists as objects with an `id` field
+- Which is why we need `jsonToList`
 
 ---
 
-## Retry a request
+## Send Data to Server
 
-- Retry a failed request with the `retry` operator
-- Useful for when a user's connection is lost
-- `retry` takes an argument to specify the number of retries
-- if no argument is given, the request will be retried indefinitely
-
+_src/app/to-do.service.ts_
 ```ts
-  search(term: string) {
-    let tryCount = 0;
-    return this.http.get('https://api.spotify.com/v1/dsds?q=' + term + '&type=artist')
-      .map(response => response.json())
-      .retry(3);  // Will retry failed request 3 times
-}
-```
-- **Note:** The `onError` callback will not execute during the retry phase. The stream will only throw an error after the retry phase is complete
+  addItem(item: string) {
+    this.items.push(item);
+    this.changes.next(this.items);
 
-[View Example](http://plnkr.co/edit/zSAWwV?p=preview)
-
----
-
-## Converting requests into promises
-
-`toPromise()` converts observables returned from the http client into promises
-
-```ts
-  search(term: string) {
-    return this.http
-      .get(`https://api.spotify.com/v1/search?q=${term}&type=artist`)
-      .map((response) => response.json())
-      .toPromise();
+    const url = `${this.baseUrl}/items`;
+    this.http
+      .post(url, {todo: this.listToJson(this.items)})
+      .map(res => res.json())
+      .subscribe(
+        (err) => { console.log(err); }
+      );
   }
 ```
-It could then be consumed as a regular promise
 
-```ts
-  search(someSearchString)
-    .then((result) => {
-      this.result = result.artists.items;
-    })
-    .catch((error) => console.error(error));
-```
+- Note structure of data sent to server (required by JSON Server)
+- Only handle error returns in `subscribe`
 
-**Note:** Once converted into a promise you will lose the ability to cancel the request and chain RxJs operators
