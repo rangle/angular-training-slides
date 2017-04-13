@@ -115,9 +115,9 @@ describe('CapitalizePipe', () => {
 
 ---
 
-## Instantiate the Class in `beforeEach`
+## Instantiate the Fixture in `beforeEach`
 
-- We will need an instance for each test, so don't duplicate that code
+- We will need a fixture for each test, so don't duplicate that code
 
 _src/app/capitalize.pipe.spec.ts_
 ```ts
@@ -134,7 +134,7 @@ describe('CapitalizePipe', () => {
 }
 ```
 
-- Have to create `pipe` outside `beforeEach` so that it will be visible in test functions
+- Have to declare `pipe` outside `beforeEach` so that it will be visible in test functions
 
 ---
 
@@ -156,97 +156,97 @@ describe('CapitalizePipe', () => {
 
 ## Instantiating the component or service
 
-- How would we test the `itemCount` method of this component?
+- How would we test `itemCount` on `AppComponent`?
 
+_src/app/app.component.ts_
 ```ts
-
-export class AppComponent implements OnInit {
-
-  constructor(public todoService: TodoService) { }
-
-  ngOnInit() {
-    this.todoService.getTodoList();
-  }
-
+export class AppComponent {
+  …as before…
   itemCount() {
-    return this.todoService.todoList.length;
+    return this.toDoService.itemCount();
   }
-  
+}
+```
+
+_src/app/to-do.service.ts_
+```ts
+export class ToDoService {
+  …as before…
+  itemCount() {
+    return this.items.length;
+  }
 }
 ```
 
 ---
 
-## Mocking dependencies
+## Mocking Dependencies
 
-We need an object that matches the shape of `TodoService` to test `AppComponent`.  The component is expecting it to have a `getTodoList` method, and a property called `todoList` with the list of todos.
+- We need an object that matches the "shape" of `TodoService` to test `AppComponent`
+- The mock object must have `onNewItem` and `itemCount` methods
+- `onNewItem` doesn't actually need to do anything
+- `itemCount` can return a fixed value
 
 ```ts
 mockTodoService = {
-  getTodoList: () => {},
-  todoList: [{
-    label: 'item 1',
-    isComplete: false
-  }, {
-    label: 'item 2',
-    isComplete: true
-  }]
+  onNewItem: (item: string) => {}
+  itemCount: () => 3
 };
 ```
-In the real service, the `getTodoList` method makes a network request to get some todo and populates the `todoList` property.  For this first test, we don't need `getTodoList` to do anything.
+
+- We can inject this into `AppComponent` by passing it to the constructor
+  - Which is one of the reasons Angular uses this technique for dependency injection
 
 ---
 
-## Testing business logic (Or Verifying methods and properties)
+## Testing Business Logic
 
-- Test component methods by calling them in a test, then checking for expected outcome
-- Test properties with assertion statements
-
+_src/app/app.component.spec.ts_
 ```ts
-
-describe('AppComponent', () => {
-  let app: AppComponent;
-  let mockTodoService;
-  beforeEach(() => {
-    mockTodoService = {
-      getTodoList: () => { },
-      todoList: [
-        { label: 'item 1', isComplete: false },
-        { label: 'item 2', isComplete: true }
-      ]
-    };
-    app = new AppComponent(mockTodoService);
-  });
   describe('the itemCount method', () => {
-    it('should return the number of todos', () => {
-      expect(app.itemCount()).toEqual(2);
+
+    let app: AppComponent;
+    let mockToDoService;
+
+    beforeEach(() => {
+      mockToDoService = {
+        onNewItem: (item: string) => {}
+        itemCount: () => 3
+      };
+      app = new AppComponent(mockToDoService);
+    });
+
+    it('should return the number of items', () => {
+      expect(app.itemCount()).toEqual(3);
     });
   });
-});
-
 ```
 
-FIXME (update example): [View Example](http://plnkr.co/edit/XUM8Gfz08nfbQf1BhDN1?p=preview)
+<!-- preview: http://plnkr.co/edit/XUM8Gfz08nfbQf1BhDN1?p=preview FIXME update -->
 
 ---
 
-## How do I configure the testing module?
+## When to Use TestBed
 
-## When to use TestBed
 `TestBed` is helpful when:
 
-1. you have logic in your templates and you want to render a component class along with its template for testing.
-2. you want to use Angular's injector to handle dependecy injection for you.
-3. you want to test how different elements integrate in the Angular runtime.
+1. you have logic in your templates and you want to render a component class along with its template for testing
+2. you want to use Angular's injector to handle dependecy injection for you
+3. you want to test how different elements integrate in the Angular runtime
 
-With `TestBed` we do not instantiate the class we want to test, we let Angular do that for us.  Using the test fixture, Angular will give us the instance it created.
+<!-- comment needed to separate lists -->
+
+- We do not instantiate the class we want to test when using `TestBed`
+  - We let Angular do that for us
+- Using the test fixture, Angular will give us the instance it created
 
 ---
 
-## Providing mock dependencies
+## Providing Mock Dependencies
 
-We can declare `mockTodoService` as we did before and have Angular inject it for us.
+- We can declare `mockTodoService` as we did before and have Angular inject it for us
 
+_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ mockTodoService ]
@@ -258,28 +258,36 @@ TestBed.configureTestingModule({
 
 ---
 
-## Injecting real providers and spying on their methods
+## Spying on Real Service Providers
 
-We can have Angular create the real service.  If there are any methods that we want to mock, we can do that through a Jasmine *spy*.  The spy will ensure we are not actaully calling the real method.
+- Alternatively, we can have Angular create the real service
+- And mock specific methods through a Jasmine *spy*
+  - The spy will ensure we don't actually call the real method
+- Always obtain injected dependencies from `TestBed`
+  so that the spy is set on the instance that is injected and not the object we created
 
-Always obtain injected dependencies from TestBed itself so that the spy is set on the instance that is injected and not the object we created.
-
-
+_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ AppComponent ]
   providers:[ TodoService ]
 });
 
-todoService = TestBed.get(TodoService);
-spyOn(todoService, 'getTodoList').and.callFake(() => );
+const todoService = TestBed.get(TodoService);
+spyOn(todoService, 'itemCount').and.callFake(() => 3);
 ```
+
+<!--
+FIXME: check the example above
+1. Do we still call `compileComponents` on `TestBed`?
+2. Is the syntax right for `callFake`?
+-->
 
 ---
 
-## Importing real modules from the app
+## Importing Real Application Modules
 
-We can import a real module that declares the component and provides the service it depends on.
+- We can import a real module that declares the component and provides the service it depends on
 
 ```ts
 TestBed.configureTestingModule({
@@ -287,15 +295,18 @@ TestBed.configureTestingModule({
 })
 ```
 
-Notes:
-This approach of inject actual services, or importing real modules often works, but sometimes Angular is not able to resolve all of the required dependencies.  When we mock things, we have more control, but if mocks get too complicated, they could be harder to maintain.
+- Inject actual services or importing real modules often works…
+- …but sometimes Angular is not able to resolve all of the required dependencies
+- We have more control when we mock things…
+- …but if mocks get too complicated, they can be expensive to maintain
 
 ---
 
-## How do I test a component using ComponentFixture?
+## Testing Components Using ComponentFixture
 
-Here is how we obtain the instance from the fixutre.
+Here is how we obtain the instance from the fixture:
 
+_src/app/app.component.spec.ts_
 ```ts
 let fixture: ComponentFixture<AppComponent>;
 let comp: AppComponent;
@@ -315,17 +326,24 @@ beforeEach(() => {
 
 ---
 
-## Change detection
+## Change Detection
 
-We must tell angular when to run change detection during our tests. We can do that using the fixture:
+- We must tell Angular when to run change detection during our tests
+- Use the fixture to do this:
 
+_src/app/app.component.spec.ts_
 ```ts
 fixture = TestBed.createComponent(AppComponent);
 fixture.detectChanges()
 ```
 
-We can indicate that we want **automatic change detection** when cofiguring our test module like this:
+---
 
+## Change Detection
+
+- Can indicate that we want *automatic change detection* when configuring our test module
+
+_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ ],
@@ -337,16 +355,15 @@ TestBed.configureTestingModule({
 
 ---
 
-## Querying the native element
+## Querying Native Elements
 
-Once change detection has run, we can check that the expeced output was rendered to the DOM. 
+- Once change detection has run, we can check that the expeced output was rendered to the DOM
 
+_src/app/app.component.spec.ts_
 ```ts
 describe('AppComponent', () => {
   let comp: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let el: HTMLElement;
-  let de: DebugElement;
 
   beforeEach(() => {
     // TestBed.configureModule({ ...
@@ -355,28 +372,29 @@ describe('AppComponent', () => {
   });
 
   it('should show the number of items', () => {
-    de = fixture.debugElement.query(By.css('.qa-todo-count'));
-    el = fixture.nativeElement;
+    const de = fixture.debugElement.query(By.css('.qa-todo-count'));
+    const el = fixture.nativeElement;
     fixture.detectChanges();
-    expect(el.textContent).toContain('Todos: 2');
+    expect(el.textContent).toContain('3 item(s)');
   });
-
 });
 ```
 
 ---
 
-## How do I deal with asynchronous behaviour in my tests
+## Dealing With Asynchronous Behavior in Tests
 
-- The CLI uses the asynchronous function `compileComponents` and it wraps it in the `async` function.
+- Angular CLI uses the asynchronous function `compileComponents` and wraps it in the `async` function
 - `compileComponents` is required for testing when classes reference external files through `templateUrls` and `styleUrls`.
-- We usually don't need to do this because Webpack will inline our templates and css as part of the build process, but we will often need to use `async` and a similar function `fakeAsync` in our tests.
+- We usually don't need to do this
+  - Webpack will inline our templates and css as part of the build process
+  - But we will often need to use `async` and a similar function `fakeAsync` in our tests
 
 ---
 
-## Running tests in a zone
+## Running Tests in a Zone
 
-In Jasmine, we can run asynchronous tests like this:
+- Jasmine can run asynchronous tests like this:
 
 ```ts
 it('should...', (done) => {
@@ -387,25 +405,24 @@ it('should...', (done) => {
 });
 ```
 
-Without `done` the test finishes before the callback is run.
-
-Angular's solution is to run all of our test code inside a zone.js zone where it can track all asynchronous activity and wait for all tasks to complete.
-
-+++
-
-## Zone.js
-
-Zones allow Angular to create execution contexts that track the completion of ansynchronous operations. Zone.js accomplishes this by monkey patching of many common asynchronous methods.
-
-Zones are used in Angular applications to let Angular know when change detection should run, as change detection is often required after asynchronous operations complete.
-
-For more information see https://angular-2-training-book.rangle.io/handout/zones/.
+- Without `done` the test finishes before the callback is run
+- Angular's solution is to run all of our test code inside a [Zone.js](https://github.com/angular/zone.js) zone
+  where it can track all asynchronous activity and wait for all tasks to complete
 
 ---
 
-## `async`
+## Interlude: Zone.js
 
-The same test could be written like this:
+- Zones allow Angular to create execution contexts that track the completion of ansynchronous operations
+- [Zone.js](https://github.com/angular/zone.js) accomplishes this by monkey patching many common asynchronous methods
+- Zones are used in Angular applications to let Angular know when change detection should run
+  - Since change detection is often required after asynchronous operations complete
+
+---
+
+## Using `async`
+
+- The same test could be written as:
 
 ```ts
 it('should...', async(() => {
@@ -415,13 +432,14 @@ it('should...', async(() => {
 }));
 ```
 
-Angular will wait for the `expect` function to complete.
+- Angular will now wait for the `expect` function to complete
 
 ---
 
-## `fakeAsync`
+## Using `fakeAsync`
 
-Here is a test that tests a debounced input  
+- This test tests debouncing *without* actually waiting for hundreds of milliseconds
+  - Assumes `comp` has been assigned a component to test
 
 ```ts
 it('should debounce change to search query for 300 ms', fakeAsync(() => {
@@ -436,25 +454,21 @@ it('should debounce change to search query for 300 ms', fakeAsync(() => {
 
 ---
 
-## How do I test services
+## Testing Services
 
-- When testing services in Angular, we employ many of the same techniques and strategies used for testing components.
-- Data is the main emphasis in testing services - are we _getting_, _storing_ and _propagating_ data correctly.
-
----
-
-## What to test
-
-Typically services will make Https requests, so we will want to:
-- verify the contents of the request being made (correct URL)
-- ensure that the data we mock is returned by the right method
-- ensure that data is being returned in the correct format
+- Test services in Angular using many of the same techniques and strategies used for testing components
+- Main emphasis in testing services is data
+  - Are we *getting*, *storing*, and *propagating* data correctly?
+- Services will typically make HTTPS requests, so we will want to:
+  - Verify the contents of the request being made (correct URL)
+  - Ensure that the data we mock is returned by the right method
+  - Ensure that data is being returned in the correct format
 
 ---
 
-##  Mocking Angular’s Http services
+##  Mocking Angular’s Http Service
 
-Suppose we want to test `TodoService`, which uses `Http`'s `get` method:
+- Suppose we want to test a version of `TodoService` that uses `Http`'s `get` method
 
 ```ts
 export class TodoService {
@@ -474,15 +488,13 @@ export class TodoService {
     };
   }
 }
-
 ```
 
 ---
 
+## Creating and Injecting the Mock Object
 
-## Creating and inject a the mock (1/2)
-
-The backend returns data that looks like this:
+- The backend returns data that looks like this:
 
 ```json
 {
@@ -503,9 +515,9 @@ The backend returns data that looks like this:
 
 ---
 
-## Creating and inject a the mock (2/2)
+## Creating and Injecting the Mock Object
 
-We can create a light mock of the Http service.
+- We can create a light mock of the `Http` service:
 
 ```ts
 beforeEach(() => {
@@ -514,7 +526,13 @@ beforeEach(() => {
 });
 ```
 
-We then create a spy for its `get` method and return an observable similar to what the real Http service would do and instantiate the service.
+---
+
+## Creating and Injecting the Mock Object
+
+- We then create a spy for its `get` method
+- Return an observable similar to what the real `Http` service would
+- Then instantiate the service
 
 ```ts
   spyOn(mockHttp, 'get').and.returnValue(Observable.of({
@@ -530,9 +548,11 @@ We then create a spy for its `get` method and return an observable similar to wh
 
 ---
 
-## Asserting on the request and response
+## Asserting on the Request and Response
 
-This method still allows us to check to see that the service has requested the right URL, and that it returns that expected data.
+- This method still allows us to check that the service
+  - Has requested the right URL
+  - Returns that expected data
 
 ```ts
 it('should have the list of todos', () => {
@@ -541,4 +561,4 @@ it('should have the list of todos', () => {
 });
 ```
 
-FIXME: update this example [View Example](http://plnkr.co/edit/eplM1SETfR51USVZLUlU?p=preview)
+<!-- preview: http://plnkr.co/edit/eplM1SETfR51USVZLUlU?p=preview FIXME: update this -->
