@@ -82,6 +82,9 @@ _src/app/app.component.spec.ts_
 
 ## Testing a Pipe
 
+- `ng generate pipe pipe capitalize`
+
+_src/app/capitalize.pipe.ts_
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
@@ -96,27 +99,58 @@ export class CapitalizePipe implements PipeTransform {
 
 ---
 
-## Instantiate the class in the `beforeEach`
+## Starter Code for Testing
 
+_src/app/capitalize.pipe.spec.ts_
 ```ts
-beforeEach(() => {
-  const capitalizePipe = new CapitalizePipe();
+import { CapitalizePipe } from './capitalize.pipe';
+
+describe('CapitalizePipe', () => {
+  it('create an instance', () => {
+    const pipe = new CapitalizePipe();
+    expect(pipe).toBeTruthy();
+  });
 });
 ```
 
 ---
 
-## Running `expect` on the transform method
+## Instantiate the Class in `beforeEach`
 
+- We will need an instance for each test, so don't duplicate that code
+
+_src/app/capitalize.pipe.spec.ts_
 ```ts
-it('should capitaze a work', () => {
-  expect(capitalizePipe.transform('foo')).toEqual('Foo');
-});
+describe('CapitalizePipe', () => {
+
+  let pipe;
+  
+  beforeEach(() => {
+    pipe = new CapitalizePipe();
+  });
+
+  …instance creation test as before…
+
+}
 ```
+
+- Have to create `pipe` outside `beforeEach` so that it will be visible in test functions
 
 ---
 
-## How do I do an isolated component test
+## Add a Test
+
+_src/app/capitalize.pipe.spec.ts_
+```ts
+describe('CapitalizePipe', () => {
+
+  …as before…
+
+  it('should capitalize a word', () => {
+    expect(pipe.transform('foo')).toEqual('Foo');
+  });
+}
+```
 
 ---
 
