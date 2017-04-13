@@ -12,45 +12,33 @@ FIXME
 
 ---
 
-## How do I run a test in Angular? (10 minutes)
+## Toolchain
+
+- [Jasmine](https://jasmine.github.io/): behavior-driven testing framework
+- [Karma](https://karma-runner.github.io/1.0/index.html): test runner
+- [Istanbul](https://gotwarlost.github.io/istanbul/): coverage report generator
 
 ---
 
-### The toolchain
+## Running Tests
 
-- Jasmine - the testing framework that ships with Angular
-- Karma - the test runner
-- Istanbul - generates coverage reports
-
----
-
-### Running tests with the CLI and viewing output
-
-- `ng test` - Lauches a browser for testing and watches for changes. Compiles and re-runs tests as files change.
-- `ng test --code-coverage` - Puts a coverage report in the coverage/ directory.
+- `ng test`: lauches a browser for testing and watches for changes.
+  - Compiles and re-runs tests as files change
+- `ng test --code-coverage`: puts a coverage report in `coverage/` directory
 
 ---
 
-### Creating new elements and running tests in watch mode with the CLI
+## Creating Test Files
 
-Tests area automatically created by the CLI.
-
-- The CLI puts test files alongside the file being tested so they are easier to find.
-- It adds `.spec` to the test file names so Jasmine and the build system recognize them as tests.
-
-1. Run `ng test`
-2. Run `ng g c MyComponent`
-3. Open the test that is generated.
+- Angular CLI automatically creates test files for components
+- Adds `.spec` to test file names so Jasmine and the build system recognize them as tests
+- E.g., `src/app/app.component.spec.ts` does basic tests of `AppComponent`
 
 ---
 
-## How do I write tests? (10 minutes)
+## Arrange, Act and Assert with Jasmine
 
----
-
-### Arrange, Act and Assert with Jasmine
-
-Note the following in the generated test:
+Note the following in the generated tests:
 
 - `describe` explains what the test is
 - `beforeEach` runs code before each test
@@ -60,9 +48,39 @@ Note the following in the generated test:
 
 ---
 
-## How do I test a pipe?
+## Getting Tests to Run
 
+- Run `ng test`: 4 failures
+- Have to include our dependencies in `app.component.spec.ts`
+  - And in `to-do-list.component.spec.ts`
 
+_src/app/app.component.spec.ts_
+```ts
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+        ToDoListComponent,
+        GenericInputComponent
+      ],
+      providers: [
+        ToDoService
+      ]
+    }).compileComponents();
+```
+
+---
+
+## Cleaning Up Technical Debt
+
+- Title is now "To Do" instead of "app works!"
+- Notice we're no longer passing data to the display in `thingsToDo`,
+  so remove it from the HTML and erase the `@Input`
+
+![Auto-Generated Tests Running](content/images/screenshot-jasmine-defaults-run.png)
+
+---
+
+## Testing a Pipe
 
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
@@ -78,7 +96,7 @@ export class CapitalizePipe implements PipeTransform {
 
 ---
 
-### Instantiate the class in the `beforeEach`
+## Instantiate the class in the `beforeEach`
 
 ```ts
 beforeEach(() => {
@@ -88,7 +106,7 @@ beforeEach(() => {
 
 ---
 
-### Running `expect` on the transform method
+## Running `expect` on the transform method
 
 ```ts
 it('should capitaze a work', () => {
@@ -98,11 +116,11 @@ it('should capitaze a work', () => {
 
 ---
 
-## How do I do an isolated component test (10 minutes)
+## How do I do an isolated component test
 
 ---
 
-### Instantiating the component or service
+## Instantiating the component or service
 
 - How would we test the `itemCount` method of this component?
 
@@ -125,7 +143,7 @@ export class AppComponent implements OnInit {
 
 ---
 
-### Mocking dependencies
+## Mocking dependencies
 
 We need an object that matches the shape of `TodoService` to test `AppComponent`.  The component is expecting it to have a `getTodoList` method, and a property called `todoList` with the list of todos.
 
@@ -145,7 +163,7 @@ In the real service, the `getTodoList` method makes a network request to get som
 
 ---
 
-### Testing business logic (Or Verifying methods and properties)
+## Testing business logic (Or Verifying methods and properties)
 
 - Test component methods by calling them in a test, then checking for expected outcome
 - Test properties with assertion statements
@@ -178,9 +196,9 @@ FIXME (update example): [View Example](http://plnkr.co/edit/XUM8Gfz08nfbQf1BhDN1
 
 ---
 
-## How do I configure the testing module? (15 minutes)?
+## How do I configure the testing module?
 
-### When to use TestBed
+## When to use TestBed
 `TestBed` is helpful when:
 
 1. you have logic in your templates and you want to render a component class along with its template for testing.
@@ -191,7 +209,7 @@ With `TestBed` we do not instantiate the class we want to test, we let Angular d
 
 ---
 
-### Providing mock dependencies
+## Providing mock dependencies
 
 We can declare `mockTodoService` as we did before and have Angular inject it for us.
 
@@ -206,7 +224,7 @@ TestBed.configureTestingModule({
 
 ---
 
-### Injecting real providers and spying on their methods
+## Injecting real providers and spying on their methods
 
 We can have Angular create the real service.  If there are any methods that we want to mock, we can do that through a Jasmine *spy*.  The spy will ensure we are not actaully calling the real method.
 
@@ -225,7 +243,7 @@ spyOn(todoService, 'getTodoList').and.callFake(() => );
 
 ---
 
-### Importing real modules from the app
+## Importing real modules from the app
 
 We can import a real module that declares the component and provides the service it depends on.
 
@@ -240,7 +258,7 @@ This approach of inject actual services, or importing real modules often works, 
 
 ---
 
-## How do I test a component using ComponentFixture? (20 minutes)
+## How do I test a component using ComponentFixture?
 
 Here is how we obtain the instance from the fixutre.
 
@@ -263,7 +281,7 @@ beforeEach(() => {
 
 ---
 
-### Change detection
+## Change detection
 
 We must tell angular when to run change detection during our tests. We can do that using the fixture:
 
@@ -285,7 +303,7 @@ TestBed.configureTestingModule({
 
 ---
 
-### Querying the native element
+## Querying the native element
 
 Once change detection has run, we can check that the expeced output was rendered to the DOM. 
 
@@ -314,7 +332,7 @@ describe('AppComponent', () => {
 
 ---
 
-## How do I deal with asynchronous behaviour in my tests (15 minutes)
+## How do I deal with asynchronous behaviour in my tests
 
 - The CLI uses the asynchronous function `compileComponents` and it wraps it in the `async` function.
 - `compileComponents` is required for testing when classes reference external files through `templateUrls` and `styleUrls`.
@@ -322,7 +340,7 @@ describe('AppComponent', () => {
 
 ---
 
-### Running tests in a zone
+## Running tests in a zone
 
 In Jasmine, we can run asynchronous tests like this:
 
@@ -341,7 +359,7 @@ Angular's solution is to run all of our test code inside a zone.js zone where it
 
 +++
 
-### Zone.js
+## Zone.js
 
 Zones allow Angular to create execution contexts that track the completion of ansynchronous operations. Zone.js accomplishes this by monkey patching of many common asynchronous methods.
 
@@ -351,7 +369,7 @@ For more information see https://angular-2-training-book.rangle.io/handout/zones
 
 ---
 
-### `async`
+## `async`
 
 The same test could be written like this:
 
@@ -367,7 +385,7 @@ Angular will wait for the `expect` function to complete.
 
 ---
 
-### `fakeAsync`
+## `fakeAsync`
 
 Here is a test that tests a debounced input  
 
@@ -384,13 +402,14 @@ it('should debounce change to search query for 300 ms', fakeAsync(() => {
 
 ---
 
-## How do I test services (20 minutes)
+## How do I test services
+
 - When testing services in Angular, we employ many of the same techniques and strategies used for testing components.
 - Data is the main emphasis in testing services - are we _getting_, _storing_ and _propagating_ data correctly.
 
 ---
 
-### What to test
+## What to test
 
 Typically services will make Https requests, so we will want to:
 - verify the contents of the request being made (correct URL)
@@ -399,7 +418,7 @@ Typically services will make Https requests, so we will want to:
 
 ---
 
-###  Mocking Angular’s Http services
+##  Mocking Angular’s Http services
 
 Suppose we want to test `TodoService`, which uses `Http`'s `get` method:
 
@@ -427,7 +446,7 @@ export class TodoService {
 ---
 
 
-### Creating and inject a the mock (1/2)
+## Creating and inject a the mock (1/2)
 
 The backend returns data that looks like this:
 
@@ -450,7 +469,7 @@ The backend returns data that looks like this:
 
 ---
 
-### Creating and inject a the mock (2/2)
+## Creating and inject a the mock (2/2)
 
 We can create a light mock of the Http service.
 
@@ -477,7 +496,7 @@ We then create a spy for its `get` method and return an observable similar to wh
 
 ---
 
-### Asserting on the request and response
+## Asserting on the request and response
 
 This method still allows us to check to see that the service has requested the right URL, and that it returns that expected data.
 
