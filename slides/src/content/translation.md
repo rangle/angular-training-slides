@@ -2,57 +2,61 @@
 
 ## Building Applications with Angular
 
-# Translations (i18n)
+# Translations
 
 ---
 
 ## Roadmap
 
-- Installation
-- Configuring TranslateModule
-- Creating Translation Files
-- Programmatically Creating Translations
-- Usage
+- How do I localize an Angular application?
 
 ---
 
-## Installation
+## Setting Up
 
-- Install `npm install @ngx-translate/core --save`
+- We use `ngx-translate` to manage translations
+  - Other options are available
+- Install with `npm install @ngx-translate/core --save`
 - Import `TranslateModule` in the root module
 - Use `TranslateModule.forRoot()` to configure the `TranslateModule`
   - `TranslateModule.forRoot()` should be only called once in your root module
+
+---
+
+## Setting Up
 
 _src/app/app.module.ts_
 ```ts
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    …
-  ],
+  …
   imports: [
     …
     TranslateModule.forRoot({…})
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  …
 })
 export class AppModule { }
 ```
 
 ---
 
-## Configuring TranslateModule
+## Configuring the Translation Module
 
-- Can be used to specify a loader, parser or missing translation handler
+- Can specify a loader, parser, or missing translation handler
 - A loader can be used to load translations
   - `TranslateHttpLoader` can be used to load translations from HTTP
   - `npm install @ngx-translate/http-loader --save`
 - Create a new object of `TranslateHttpLoader(http, prefix, sufix)`
- - optionally define the folder that holds the translation files (defaults to `/assets/i18n/`)
- - optionally define the file extension for your translation files (defaults to `.json`)
+  - Optionally define the folder that holds the translation files (defaults to `/assets/i18n/`)
+  - Optionally define the file extension for your translation files (defaults to `.json`)
 
+---
+
+## Configuring the Translation Module
+
+_src/app/app.module.ts_
 ```ts
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http);
@@ -76,9 +80,7 @@ export function HttpLoaderFactory(http: Http) {
 
 ## Creating Translation Files
 
-- Name your `.json` files based off the language
-  - `en.json`
-  - `fr.json`
+- Create JSON files with names based on language codes
 
 _assets/i18n/en.json_
 ```json
@@ -98,7 +100,7 @@ _assets/i18n/fr.json_
 }
 ```
 
-- Translations can be accessed using the dot notation: `HOME.TITLE`
+- Translations can be accessed using dot notation: `HOME.TITLE`
 
 ---
 
@@ -108,7 +110,7 @@ _assets/i18n/fr.json_
 
 ```ts
 translate.setTranslation('en', {
-    HELLO: 'hello {{value}}'
+  HELLO: 'hello {{value}}'
 });
 ```
 
@@ -129,26 +131,22 @@ translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
 ## Usage
 
-- Use translations via a pipe, directive or service
-
-Using a pipe
+- Using a pipe
 
 ```html
 <h2>{{ 'HOME.TITLE' | translate }}</h2>
 ```
 
-Using a directive
+- Using a directive
 
 ```html
 <div [translate]="'HOME.TITLE'"></div>
 ```
 
-Using a service
+- Using a service
 
 ```ts
 translate.get('HOME.TITLE', {}).subscribe((res: string) => {
   console.log(res);
 });
 ```
-
----
