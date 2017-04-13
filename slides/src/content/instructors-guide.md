@@ -6,6 +6,32 @@
 
 ---
 
+## Time Estimates
+
+<small>
+
+| Section                                  | Webinar    | Classroom |
+|------------------------------------------|------------|-----------|
+| [Introduction](#introduction)            | 15 minutes |           |
+| [Setup](#setup)                          | 15 minutes |           |
+| [Hello, World](#hello)                   | 15 minutes |           |
+| [Displaying Data](#display)              | 15 minutes |           |
+| [Creating a New Component](#component)   | 30 minutes |           |
+| [Handling Events](#events)               | 45 minutes |           |
+| [Augury](#augury)                        | 15 minutes |           |
+| [Pipes](#pipes)                          | 30 minutes |           |
+| [Services](#services)                    | 45 minutes |           |
+| [Unit Testing](#unit-testing)            | 90 minutes |           |
+| [Managing State with Redux](#redux)      | 90 minutes |           |
+| [Template Driven Forms](#template-forms) | 30 minutes |           |
+| [Reactive Forms](#reactive-forms)        | 45 minutes |           |
+| [Routing](#routing)                      | 45 minutes |           |
+| [The HTTP Service](#http)                | 45 minutes |           |
+
+</small>
+
+---
+
 ## Learner Profiles
 
 These profiles describe the learners we are trying to help with this course,
