@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-greeter',
@@ -18,11 +19,22 @@ export class GreeterComponent implements OnInit {
     'mike'
   ];
 
-  constructor(private store: Store<AppState>) { }
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.store.select('greeter')
       .subscribe((greeting: string) => this.greeting = greeting);
+
+    this.route.params.subscribe(params => {
+      this.currentName = params['name'];
+    });
+
+    // this.route.queryParams.subscribe(params => {
+    //   this.currentName = params['name'];
+    // });
   }
 
   setName(name: string) {

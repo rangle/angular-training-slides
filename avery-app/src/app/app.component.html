@@ -1,13 +1,23 @@
-<!--<app-greeter></app-greeter>-->
-<!--<avy-hero-splash></avy-hero-splash>-->
-<h1>{{ title }}</h1>
-<avy-todo-list></avy-todo-list>
-
-
-<!--
-  avy-todo-list
-      |
-      ~~~~> avy-todo-input
-      |
-      ~~~~> avy-todo-display
--->
+<div>
+  <span>
+    <button (click)="back()">Back</button>
+  </span>
+  <span>
+    <a routerLink="greeter" [queryParams]="{
+      name: 'Bobby'
+    }">Greeter</a>
+  </span>
+  <span>
+    <button (click)="navigateToGreeterChild()">Greeter Child</button>
+  </span>
+  <span>
+    <a [routerLink]="'todo-list'" routerLinkActive="bold border">Todo List</a>
+  </span>
+  <span>
+    <a [routerLink]="['hero']" routerLinkActive="active">Hero</a>
+  </span>
+  <span>
+    <button (click)="forward()">Forward</button>
+  </span>
+</div>
+<router-outlet></router-outlet>
