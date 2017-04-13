@@ -151,4 +151,7 @@ _src/app/app.component.html_
 |--------------|------------|
 | ![Classic View](content/images/screenshot-classic-view.png) | ![Fancy View](content/images/screenshot-fancy-view.png) |
 
-- But going to `http://localhost:4200/todo` manually re-sets the application!
+- But going to `http://localhost:4200/todo` clears all the to-do items!
+- …pause for thought…
+- Because we're re-loading the application, which throws away the accumulated list
+- We need to persist our data
