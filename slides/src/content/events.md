@@ -251,7 +251,7 @@ FIXME: diagram showing data flow
 
 ---
 
-## Question
+## Quiz
 
 Which of the following is invalid syntax for handling an event?
 
@@ -283,7 +283,7 @@ which also have special handling for callback syntax
 
 ---
 
-## Question
+## Quiz
 
 What is the difference between:
 
@@ -342,7 +342,7 @@ export class Child {
 
 ---
 
-## Question (continued)
+## Quiz (continued)
 
 1. I am the child
 

@@ -246,7 +246,7 @@ export class AppComponent {
 
 ---
 
-## Question
+## Quiz
 
 What is the correct way to inject a service into a class?
 
@@ -296,7 +296,7 @@ this type reflection to also apply to class members.
 
 ---
 
-## Question
+## Quiz
 
 Which of the below snippets would *not* assign a service instance to a
 class member (make it available on `this`)?
@@ -343,7 +343,7 @@ manually assign a provider instance to a class property.
 
 ---
 
-## Question
+## Quiz
 
 Injecting a service into a class accomplishes which of the following?
 
@@ -369,7 +369,7 @@ implicitly construct classes on request.
 
 ---
 
-## Question
+## Quiz
 
 When generating a service called `MyService` using Angular CLI, what
 must be done manually before the service can be used?

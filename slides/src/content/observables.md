@@ -1,9 +1,10 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Introduction to Observables
 
-Notes:
 Objectives:
+
 1. To be able to inject http into an Angular component, get a value from a typical REST endpoint and bind it directly to the template.
+
 2. To be able to explain what the `async` pipe does and describe how you would mimic the behaviour of the `async` pipe in a component by subscribing to an observable.
 
 ---
@@ -16,7 +17,7 @@ Objectives:
 * Used extensively in Angular.
 * Observables help with asynchronous behaviours.
 
-+++
+---
 
 ## Quiz
 
@@ -27,6 +28,8 @@ Objectives:
 3. let Angular know when change detetection is required
 
 +++
+
+## Answer
 
 Definition from RxJS docs:
 
@@ -51,10 +54,7 @@ getData$.subscribe(data => {
 
 ```
 
-Notes:
-*concepts*: Observable, subscribe method, callback function
-
-+++
+---
 
 ## Quiz
 
@@ -67,6 +67,8 @@ Subscribing to an observable:
 
 +++
 
+## Answer
+
 Correct answer is 2.
 
 ---
@@ -77,7 +79,7 @@ Correct answer is 2.
 
 For example: an observable based on an input event will pass the event object to the callback.  We can make it return the input's value using the `map` operator:
 
-```javascript
+```ts
 const searchString$ = Observable
   .fromEvent(document.querySelector('.search-input'), 'input')
   .map(event => {
@@ -89,7 +91,7 @@ Notes:
 https://jsbin.com/genayadivo/edit?html,js,console,output
 *concepts*: operators, map operator (instance method)
 
-+++
+---
 
 ## Quiz
 
@@ -102,6 +104,8 @@ The map operator:
 
 +++
 
+## Answer
+
 Correct answer is 2.
 
 ---
@@ -111,7 +115,7 @@ Correct answer is 2.
 * `Http` from `'@angular/http'` has methods such as `get` that return observables.
 * Map is often used with `Http` as in the following example:
 
-```javascript
+```ts
 const getData$ = http.get('https://example.com/api/products')
 .map(response => {
   return response.json();
@@ -132,7 +136,7 @@ In this example, `map` is used because `get` is an observable of an object with 
 * The `subscribe()` method returns a *subscription*.
 * A subscription has an `unsubscribe()` method.
 
-```js
+```ts
 const clickStreamSubscription = clickStream.subscribe(
   () => console.log('clicked!')
 );
@@ -142,14 +146,11 @@ setTimeout(() => {
 }, 3000);
 ```
 
-Notes:
-*concept*: subscription, unsubscribe method
-
 ---
 
 ## Angular's AsyncPipe
 
-* The `AsyncPipe` helps us write less by taking an observable and:
+* `AsyncPipe` helps us write less by taking an observable and:
   - subscribing to it
   - returning the returned value so it can be placed in your template
   - unsubscibing, when the value is no longer needed
@@ -158,7 +159,7 @@ Example (`name$` is an observable):
 
 `<div> {{ name$ | async }} </div>`
 
-+++
+---
 
 ## Quiz
 
@@ -171,6 +172,8 @@ Angular's `AsyncPipe`:
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 ---
@@ -179,7 +182,7 @@ Correct answer is 3.
 
 In addition to `map`, the `filter` operator is also available:
 
-```js
+```ts
 searchString$
   .filter(searchString => searchString.length > 3)
   .subscribe(value = console.log(value));
@@ -188,7 +191,7 @@ searchString$
 * 'filter' returns an observable and fires only when the value emitted from the observable has length greater than 3.
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
 
-+++
+---
 
 ## Quiz
 
@@ -200,6 +203,8 @@ Operators:
 
 +++
 
+## Answer
+
 The correct answer is 3.
 
 ---
@@ -210,7 +215,7 @@ Observables can be nested.
 
 Observables can utilize `mergeMap` (also known as `flatMap`) to combine more than one observable:
 
-```js
+```ts
 http.get('https://jsonplaceholder.typicode.com/users')
   .map((response) => Observable.from(response.json()))
   .mergeMap((data) => data)
@@ -227,7 +232,7 @@ http.get('https://jsonplaceholder.typicode.com/users')
 
 We can resolve multiple observables together using the `forkJoin` operator.
 
-```js
+```ts
 const users = http.get(
   'https://jsonplaceholder.typicode.com/users/'
 ).map((data) => data.json());

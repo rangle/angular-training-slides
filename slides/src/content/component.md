@@ -172,7 +172,7 @@ export class ToDoListComponent implements OnInit {
 
 ---
 
-## Question
+## Quiz
 
 What is the best way for a child component to receive data passed to
 it from a parent component?
@@ -224,7 +224,7 @@ export class Child {
 
 ---
 
-## Question (continued)
+## Quiz (continued)
 
 1. Parent:  
    Child: Greetings
@@ -253,7 +253,7 @@ around.
 
 ---
 
-## Question
+## Quiz
 
 How can an object reference be passed down into a child component
 input called `data` from the parent's template?
@@ -283,7 +283,7 @@ understanding that it's not required here.
 
 ---
 
-## Question
+## Quiz
 
 Given the following component and usage, what would be rendered to the screen?
 

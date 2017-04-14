@@ -45,6 +45,8 @@ Usage:
 
 +++
 
+## Answer
+
 Correct answer is 1.
 
 2, 3: `select` operates on a subset of CSS selectors `[header]`
@@ -94,6 +96,8 @@ Usage:
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 1, 2: When multiple bare `<ng-content>`'s are present, Angular will
@@ -133,6 +137,8 @@ Usage:
 3. New
 
 +++
+
+## Answer
 
 Correct answer is 3.
 
@@ -210,6 +216,8 @@ Usage:
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 1, 2: It may seem ng-content `select` should only match a single
@@ -242,6 +250,8 @@ export class ClockComponent {
 
 +++
 
+## Answer
+
 Correct answer is 3.
 
 1: This may expose a misunderstanding of class member declarations in TypeScript.
@@ -268,6 +278,8 @@ names and that suffixing an output member name with `Change`.
 
 +++
 
+## Answer
+
 Correct answer is 4.
 
 1: This may expose a misunderstanding of outputs and two-way binding
@@ -293,6 +305,8 @@ values?
 4. `<clock [time]="currentTime" (timeChange)="onTimeChange(time)"></clock>`
 
 +++
+
+## Answer
 
 Correct answer is 2.
 
@@ -445,6 +459,8 @@ Choose all of the following that are needed to make two-way data binding work.
 
 +++
 
+## Answer
+
 Selecting ALL of them is correct.
 
 If the student picks either 3 or 4, it could be that the student forgot that
@@ -594,6 +610,8 @@ which field of the `@NgModule` decorator should I put the class in?
 1.  None of the above.
 
 +++
+
+## Answer
 
 Correct answer is "declarations".
 

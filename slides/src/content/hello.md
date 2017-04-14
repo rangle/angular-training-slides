@@ -178,6 +178,8 @@ The name for the root module should be _________.:
 
 +++
 
+## Answer
+
 Correct answer is 2.
 
 1: `NgModule` is the name of the Decorator used for any Angular
