@@ -18,18 +18,23 @@ Objectives:
 
 +++
 
-## Quiz 1
+## Quiz
 
-1. An observable will:
-  1. two-way data bind a property
-  2. push notifications to an observer
-  3. let angular know when change detetection is requried
+ An observable will:
+
+1. two-way data bind a property
+2. push notifications to an observer
+3. let Angular know when change detetection is required
 
 +++
 
-## Definition from rxjs docs
+Definition from RxJS docs:
 
-> The Observer and Observable interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The Observable object represents the object that sends notifications (the provider); the Observer object represents the class that receives them (the observer).
+> The Observer and Observable interfaces provide a generalized
+> mechanism for push-based notification, also known as the observer
+> design pattern. The Observable object represents the object that
+> sends notifications (the provider); the Observer object represents
+> the class that receives them (the observer).
 
 ---
 
@@ -51,13 +56,18 @@ Notes:
 
 +++
 
-## Quiz 2
+## Quiz
 
-2. Subscribing to an observable
-  1. returns another observable
-  2. allows you join multiple observables together
-  3. provides a callback to the observable
-  4. is not required in Angular
+Subscribing to an observable:
+
+1. returns another observable
+2. allows you join multiple observables together
+3. provides a callback to the observable
+4. is not required in Angular
+
++++
+
+Correct answer is 2.
 
 ---
 
@@ -81,13 +91,18 @@ https://jsbin.com/genayadivo/edit?html,js,console,output
 
 +++
 
-## Quiz 3
+## Quiz
 
-3. The map operator
-  1. will perform `Array.map` on the result of an observable, only when it is an array.
-  2. will return an observable
-  3. enables geolocation in Angular
-  4. will modify the result returned by an observable
+The map operator:
+
+1. will perform `Array.map` on the result of an observable when it is an array
+2. will return an observable
+3. enables geolocation in Angular
+4. will modify the result returned by an observable
+
++++
+
+Correct answer is 2.
 
 ---
 
@@ -145,14 +160,18 @@ Example (`name$` is an observable):
 
 +++
 
-## Quiz 4
+## Quiz
 
-Angular's `AsyncPipe`
-  1. accepts an observable and binds the value to a template
-  2. gets data from a rest endpoint
-  3. makes async code look procedural
-  4. can't be chained with pure pipes
+Angular's `AsyncPipe`:
 
+1. accepts an observable and binds the value to a template
+2. gets data from a rest endpoint
+3. makes asynchronous code look synchronous
+4. can't be chained with pure pipes
+
++++
+
+Correct answer is 3.
 
 ---
 
@@ -171,12 +190,17 @@ searchString$
 
 +++
 
-## Quiz 5
+## Quiz
 
 Operators:
-  1. Start execution of an observable when invoked
-  2. Return subscriptions so you can unsubscribe
-  3. Are methods on an observable that return an observable
+
+1. start execution of an observable when invoked
+2. return subscriptions so you can unsubscribe
+3. are methods on an observable that return an observable
+
++++
+
+The correct answer is 3.
 
 ---
 

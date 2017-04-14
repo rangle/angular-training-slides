@@ -165,3 +165,24 @@ export class AppComponent {
 - By default, preview on <http://localhost:4200>
 - Should see **app works!**
 - Worth exploring the page using developer tools
+
+---
+
+## Quiz
+
+The name for the root module should be _________.:
+
+1. `NgModule`
+1. `AppModule`
+1. Whatever you want.
+
++++
+
+Correct answer is 2.
+
+1: `NgModule` is the name of the Decorator used for any Angular
+module.  One can easily mistake between `NgModule` and `AppModule`.
+
+3: While it's possible that the root module can be anything,
+convention is to name it `AppModule`.  This could be a good chance to
+bring it up that it's convention.

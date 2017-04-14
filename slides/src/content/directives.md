@@ -1,4 +1,7 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
+## Building Applications with Angular
+
 # Directives
 
 ---
@@ -183,113 +186,9 @@ Result:
 
 - Handles how a component or native element renders using the `<template>` tag
 - Have their own special syntax in the template `*myDirective`
-
-```html
-<p *ngIf="isVisible">I'm sometimes visible</p>
-```
-
-- No square bracket but still an expression binding
-- Uses the special tag `<template>` to delay rendering
-
-```html
-<p *myDirective="expression">Hello</p>
-```
-
-Is equivalent to:
-
-```html
-<template [myDirective]="expression">
-  <p>Hello</p>
-</template>
-```
-
-- Built-in structural directives: `ngIf`, `ngFor`, `ngSwitch`
-
----
-
-
-## `NgIf` Directive
-
-- Conditionally renders components or elements based on an expression
-- Removes or recreates a portion of the DOM tree
-
-```html
-<button type="button" (click)="toggleExists()">Toggle Component</button>
-<if-example *ngIf="exists">Hello</if-example>
-```
-
-```ts
-@Component({ ... })
-export class AppComponent {
-  exists = true;
-
-  toggleExists() {
-    this.exists = !this.exists;
-  }
-}
-```
-
-**Note:** Be aware of the cost of creating/destroying DOM elements
-
-[View Example](https://plnkr.co/edit/MTyYN0ntm1BNKE20HT7a?p=preview)
-
----
-
-## `NgFor` Directive
-
-- Mechanism to define multiple chunks of UI at once based on an iterable using a `for...of` statement
-- The internal variable of the iteration (`item`) is scoped in the template
-
-```html
-<ol>
-  <li *ngFor="let item of list">
-    <span>({{ item.id }})</span>
-    <span>{{ item.value }}</span>
-  </li>
-</ol>
-```
-
-```ts
-@Component({ ... })
-export class AppComponent {
-  list = [
-    { id: 0, value: 'zero the hero' }, // ... more objects
-  ];
-}
-```
-
-[View Example](https://plnkr.co/edit/KZjbl5CvUvD69aFwNuia?p=preview)
-
----
-
-## `NgFor` Directive (exported values)
-
-Provides some other values that can be bound to: `index`, `first`, `last`, `even`, `odd`
-
-```html
-<for-example
-  *ngFor="let episode of episodes; let i = index; let isOdd = odd"
-  [episode]="episode"
-  [ngClass]="{ odd: isOdd }">
-  {{i+1}}. {{episode.title}}
-</for-example>
-```
-
-```ts
-@Component({ ... })
-export class AppComponent {
-  episodes: any[] = [
-    { title: 'Winter Is Coming', director: 'Tim Van Patten' },
-    // ... more objects
-  ];
-}
-```
-
-[View Example](https://plnkr.co/edit/gBIXRypytj7YKnhvN2TS?p=preview)
-
-Notes:
-
-- You might want to talk about trackBy
+- Built-in structural directives
+  - `ngIf` and `ngFor`: seen before
+  - `ngSwitch` discussed below
 
 ---
 
