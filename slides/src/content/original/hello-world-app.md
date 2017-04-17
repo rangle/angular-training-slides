@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Creating a Hello World Application
 
 ---
@@ -11,7 +12,7 @@ Notes:
 - An app is a collection of Modules
 - An app has only one root module
 - An app can have multiple feature modules
-- An app uses built-in modules to have access to 
+- An app uses built-in modules to have access to
 - A module defines a collection of Components, Directives, Pipes and Services
 - There's different types of modules: root, feature, built-in and third party modules.
 
@@ -88,7 +89,7 @@ Which of the following properties is special to the root module?
 
 Correct answer is 1.
 
-The root module is used exactly for bootstrapping and the boostrap 
+The root module is used exactly for bootstrapping and the boostrap
 property is specially available to the root module
 
 2, 3, 4 - are also available to other modules and not really special.
@@ -140,9 +141,9 @@ is confused because both `declarations` and `exports` contain a list
 of the Module's elements
 
 3. -- only Services (associated with `providers` property) are public by
-default. If the student picks this, it could be that the student is 
+default. If the student picks this, it could be that the student is
 confused between Module's elements (private by default) and and Services
-(public by default) 
+(public by default)
 
 </aside>
 
@@ -242,7 +243,7 @@ styles: [`
 │   │   └── root.component.ts
 │   ├── index.html
 │   └── main.ts
-└── ... 
+└── ...
 ```
 
 - Leave the root folder for configuration files
@@ -268,7 +269,7 @@ styles: [`
 
 - Config files needed for:
   - NPM => _package.json_
-  - Webpack => _webpack.config.json_ 
+  - Webpack => _webpack.config.json_
   - Typescript => _tsconfig.json_
 
 ---

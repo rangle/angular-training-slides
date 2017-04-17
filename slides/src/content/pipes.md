@@ -1,114 +1,138 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
+## Building Applications with Angular
+
 # Pipes
 
 ---
 
-## Built-in Pipes
+## Roadmap
 
-In Angular 1, these were called filters
-
-```html
-<p>{{ 'Hello, World!' | lowercase }}</p>
-<!-- <p>hello, world!</p> -->
-```
-
-Passing arguments:
-
-```html
-<p>Total price is {{ 10.1234 | currency: "CAD": true }}</p>
-<!-- <p>Total price is CA$10.12</p> -->
-```
-
-Chaining pipes: 
-
-```html
-<p>Total price is {{ 10.1234 | currency: "CAD" | lowercase }}</p>
-<!-- <p>Total price is ca10.12</p> -->
-```
-
-**Built-in pipes:** `async`, `decimal`, `json`, `slice`, `currency`, `lowercase`, `uppercase`, `date`, `percent`, `i18nplural`
-
-[View Example](https://plnkr.co/edit/p89vQtCkr51Turd3R2pM?p=preview)
-
-Notes: 
-
-- 3rd argument for currency is whether to show $ symbol
+1. How do I format data using a pipe?
+1. How do I create my own pipes?
 
 ---
 
-## Custom Pipes
+## Motivation
 
+- Classes could turn everything into strings for display
+- Often easier to use a *pipe* in the HTML
+  - Takes a value as input, produces a new value as output
+  - Just like a Unix command-line pipe
+- Angular comes with several pipes for common operations
+- Very easy to add new ones
+
+---
+
+## Adding a Pipe
+
+- Put the name of the pipe inside `{{…}}`
+- Use vertical bar `|` as separator
+
+_src/app/to-do-list/to-do-list.component.html_
+```html
+<ul>
+  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
+    {{item | uppercase}}
+  </li>
+</ul>
+```
+
+![Converting to Upper Case](content/images/screenshot-uppercase.png)
+
+---
+
+## Passing Arguments to the Pipe
+
+- Pipes also accept arguments
+- Use colon as delimiter
+
+```html
+Price is {{ 100.12345 | currency:"CAD":true:"1.2" | lowercase }}
+```
+
+produces:
+
+```html
+Price is ca$100.12
+```
+
+---
+
+## Built-in Angular Pipes
+ 
+- [date](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html): formats dates in various ways
+- [uppercase](https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html): converts a string to upper case
+- [lowercase](https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html): converts a string to lower case
+- [currency](https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html): formats a number as a currency
+- [percent](https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html): formats a number as a percentage
+
+---
+
+## Generating a Pipe
+
+- Use `ng generate pipe titlecase`
+- Creates `src/app/titlecase.*`
+  - Note: in the `src/app` directory
+  - We could (and should) create a `pipes` directory
+
+```
+├── src
+│   ├── app
+│   │   ├── titlecase.spec.ts
+│   │   └── titlecase.ts
+```
+
+---
+
+## What's in a Pipe?
+
+_src/app/titlecase.ts_
 ```ts
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'greet' })
-export class GreetPipe implements PipeTransform {
+@Pipe({
+  name: 'titlecase'
+})
+export class TitlecasePipe implements PipeTransform {
 
-  transform(name: string, title = ''): string {
-    return `Hello, ${title} ${name}`;
+  transform(value: any, args?: any): any {
+    return null;
   }
 }
 ```
 
-Usage:
-
-```html
-<p>Hello {{ 'Smith' | greet }}</p>
-<!-- <p>Hello, Smith</p> -->
-
-<p>Hello {{ 'Smith' | greet: 'Mr.' }}</p>
-<!-- <p>Hello, Mr. Smith</p> -->
-```
+- Import declarations from `@angular/core`
+- Decorate class with `@Pipe` using `name` property
+- `transform` accepts initial value and any optional arguments
+- Returns some value
 
 ---
 
-## Pure vs Impure Pipes
+## Defining Our Transformation
 
-- A pure pipe is executed everytime the **reference** of the bound value is changed
-  - Custom pipes are pure by default
-  - All built-in pipes are pure except of `async`
-
+_src/app/titlecase.ts_
 ```ts
-@Pipe({ name: 'pure' })
-export class PurePipe implements PipeTransform { /* ... */ }
-```
+export class TitlecasePipe implements PipeTransform {
 
-- An impure pipe is executed everytime change detection is executed
-  - App performance could be severely degraded
-  - To define a pipe as impure, we need to use the property/value `pure: false`
-
-```ts
-@Pipe({ name: 'impure', pure: false })
-export class ImpurePipe implements PipeTransform { /* ... */ }
-```
-
-[View Example](https://plnkr.co/edit/a6TYpCugGXlz12B2RI2t?p=preview)
-
-Notes:
-
-- Simple types like `string`, `number` and `boolean` are immutable by default
-- Mutating an `object` or an `array` does not change the reference
-
----
-
-## The Async Pipe
-
-- Impure and stateful built-in pipe that subscribes to observables and promises
-- Ideal to handle async properties in a template
-- Highly performant
-
-```ts
-@Component({
-  selector: 'app-root',
-  template: `
-    <p>{{ myPromise | async }}</p>
-    <p>{{ myObservable$ | async }}</p>
-  `
-})
-export class AppComponent {
-  myPromise = Promise.resolve('Hello');
-  myObservable$ = Observable.interval(1000);
-  
+  transform(value: any, args?: any): any {
+    return value.charAt(0).toUpperCase()
+         + value.substr(1).toLowerCase();
+  }
 }
 ```
 
-[View Example](https://plnkr.co/edit/rpUAzH8sPK5c1NEJtAVl?p=preview)
+---
+
+## Using Our Pipe
+
+_src/app/to-do-list/to-do-list.component.html_
+```html
+<ul>
+  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
+    {{item | titlecase}}
+  </li>
+</ul>
+```
+
+![Converting to Title Case](content/images/screenshot-titlecase.png)

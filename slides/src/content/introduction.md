@@ -1,56 +1,70 @@
-# Angular Training
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 
-# Rangle.io
-
----
-
-## About Me
-
----
-
-## Structure of this Training
-
-- 8 hours training in 2 days
-- 5 min break around 2:00 pm
-- 10 min break around 3:00 pm
-- 5 min break around 4:00 pm
-- Q&A sessions
-
----
-
-## Table of Contents
-
-1. Introduction
-1. Introduction to ES6/ES2015
-1. Introduction to TypeScript
-1. Introduction to Observables
-1. Creating a hello world application
-1. Components In Depth
-1. Directives
-1. Pipes
-1. Services
-1. Miscellaneous Topics
-1. Forms
-1. Routing
-1. Unit Testing
-
----
+## Building Applications with Angular
 
 # Introduction
 
 ---
 
-## What Makes Angular Good?
+## About Rangle.io
 
-- Modular architecture
-- Better performance than Angular 1:
-  - Improved Change detection
-  - Ahead of Time compiler
-- It's made to scale:
+[Rangle.io](http://rangle.io) is North America’s leading digital
+transformation consultancy specializing in JavaScript development
+services and solutions.
+
+---
+
+## About Us <!-- FIXME: fill in trainer bios -->
+
+*   Trainer 1
+*   Trainer 2
+
+---
+
+## Structure (In-Person) <!-- FIXME: delete if online -->
+
+- 8 hours each day for 3 days
+- Coffee breaks mid-morning and mid-afternoon
+- An hour for lunch at mid-day
+- Hands on
+
+---
+
+## Structure (Online) <!-- FIXME: delete if in person -->
+
+- 8 hours each day for 3 days
+- Coffee breaks mid-morning and mid-afternoon
+- An hour for lunch at mid-day
+- Hands on
+  - We will build and test a small application
+  - Please ask lots of questions
+
+---
+
+## Syllabus
+
+*  Day 1
+   * AM: setting up, displaying data, and creating components
+   * PM: data binding, event handling, and pipes
+*  Day 2
+   * AM: services and unit testing
+   * PM: Redux
+*  Day 3
+   * AM: forms
+   * PM: routing
+
+---
+
+## Why Angular?
+
+- Built to scale:
   - Modules
-  - Dependency Injection (that makes sense)
-  - Typescript and tooling
-  - Supporting projects: CLI, Universal, Nativescript
-- A complete and opinionated solution
+  - Dependency Injection (that human beings can use)
+  - TypeScript
+  - Tooling: IDEs, [Augury](https://augury.angular.io/), …
+  - Supporting projects: Angular CLI, Universal, Nativescript, …
+- Straightforward integration with Redux for state management
 - You don't need to be a Javascript expert
-- Can be integrated with Redux
+- Better performance than Angular 1:
+  - Improved change detection
+  - Ahead of Time (AoT) compiler
