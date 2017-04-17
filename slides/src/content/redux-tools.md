@@ -18,8 +18,21 @@ FIXME: this module needs to be proof-read
 
 - Best way to learn Redux is to visualize what it's doing
 - Use [Redux DevTools Extension](http://extension.remotedev.io/)
-- Useful for debugging as well as visualization
-- [Install Google Chrome extension](http://extension.remotedev.io/#installation)
+  - Shows application state
+  - Provides visualization of all actions that have been dispatch
+  - Time travelling by moving backwards and forwards on actions that have been dispatch
+
+---
+
+## Installation
+
+- Works with many other tools:
+  - Chrome through the [web store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/remotedev/)
+  - [Electron and others](http://extension.remotedev.io/#installation)
+- After installing the extension in Chrome, there should be a tab in Chrome DevTools labeled "Redux".
+
+![](content/images/chrome-redux-devtools.png)
 
 ---
 
