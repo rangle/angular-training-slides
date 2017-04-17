@@ -282,7 +282,7 @@ simple, stateless services you may actually get the behaviour you're
 expecting), manually instantiated classes lose the benefit of
 Angular's DI (their dependencies are no longer able to be dependency
 injected) and they require you to manually construct and manage a
-dependency tree yourself. Additionally,you're overriding the default
+dependency tree yourself. Additionally, you're overriding the default
 singleton nature of providers in Angular which may lead to unexpected
 behaviour.
 
