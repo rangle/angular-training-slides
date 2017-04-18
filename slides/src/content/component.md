@@ -61,14 +61,14 @@ export class ToDoListComponent implements OnInit {
 
 ## Including a Component
 
-- Refer to component by putting its selector tag in something else's HTML
-  - Remove the completed list and summary to make things fit on the slide
+- Refer to the component by putting its `selector` in another component's template
 
 _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
+<p>Summary: {{summary()}}</p>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
-<app-to-do-list></app-to-do-list>
+<p *ngIf="thingsCompleted.length == 0">Nothing completed</p>
 ```
 
 ![Child Component (Original)](content/images/screenshot-child-initial.png)
@@ -226,13 +226,13 @@ export class Child {
 
 ## Quiz (continued)
 
-1. Parent:  
+1. Parent:
    Child: Greetings
 
-2. Parent: Greetings  
+2. Parent: Greetings
    Child: Greetings
 
-3. Parent: Greetings  
+3. Parent: Greetings
    Child:
 
 +++
