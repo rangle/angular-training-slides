@@ -103,7 +103,7 @@ export class ToDoListComponent implements OnInit {
 - And then pass data from the parent
   - Just like a function call
 
-_src/app/app.component.html_
+_src/app/app.component.html_ (with error)
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
@@ -112,12 +112,25 @@ _src/app/app.component.html_
 
 - Whoops: compiler error!
 
-_src/app/app.component.html_ (with error)
+_src/app/app.component.html_
 ```html
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
 
 - Have to quote the value inside the double quotes or Angular will try to evaluate it
+
+
+---
+
+## Passing Data to a Component
+
+- Angular also has a shorthand for passing string properties to components:
+
+```html
+<app-to-do-list heading="Things To Do"></app-to-do-list>
+```
+
+Passing strings to components in this way resembles setting properties in html elements.
 
 ---
 
@@ -226,13 +239,13 @@ export class Child {
 
 ## Quiz (continued)
 
-1. Parent:  
+1. Parent:
    Child: Greetings
 
-2. Parent: Greetings  
+2. Parent: Greetings
    Child: Greetings
 
-3. Parent: Greetings  
+3. Parent: Greetings
    Child:
 
 +++
