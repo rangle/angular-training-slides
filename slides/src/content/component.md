@@ -96,6 +96,8 @@ export class ToDoListComponent implements OnInit {
 }
 ```
 
+_Reminder: All decorators in Angulars are functions. Even if you don't pass any arguments in, you'll need to include the parentheses._
+
 ---
 
 ## Passing Data to a Component
@@ -226,13 +228,13 @@ export class Child {
 
 ## Quiz (continued)
 
-1. Parent:  
+1. Parent:
    Child: Greetings
 
-2. Parent: Greetings  
+2. Parent: Greetings
    Child: Greetings
 
-3. Parent: Greetings  
+3. Parent: Greetings
    Child:
 
 +++
