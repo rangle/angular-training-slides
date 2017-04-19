@@ -72,7 +72,7 @@ _src/db.json_
 
 - Modify `AppComponent` to ask `toDoService` to initialize itself
 
-_src/app/app.component.ts_
+#####_src/app/app.component.ts_
 ```ts
 import { Component, OnInit } from '@angular/core';
 …as before…
@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
 
 ## Fetch Data From the Server
 
-_src/app/to-do.service.ts_
+#####_src/app/to-do.service.ts_
 ```ts
 export class ToDoService {
 
@@ -141,7 +141,7 @@ export class ToDoService {
 
 ## Send Data to Server
 
-_src/app/to-do.service.ts_
+#####_src/app/to-do.service.ts_
 ```ts
   addItem(item: string) {
     this.items.push(item);

@@ -29,7 +29,7 @@
 - Create a `FancyListComponent` that displays the same to-do list in a different way
 - Allow users to switch between them by going to `/todo` and `/fancy`
 
-_src/app/fancy-list/fancy-list.component.html_
+#####_src/app/fancy-list/fancy-list.component.html_
 ```html
 <table>
   <tr *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
@@ -39,7 +39,7 @@ _src/app/fancy-list/fancy-list.component.html_
 </table>
 ```
 
-_src/app/fancy-list/fancy-list.component.css_
+#####_src/app/fancy-list/fancy-list.component.css_
 ```css
 td.item {
     color: #E0E0E0;
@@ -68,7 +68,7 @@ _src/index.html_
 - Create array of type `Routes` that specifies what to do with different paths
 - A plain TypeScript file (not created with Angular CLI)
 
-_src/app/app.routes.ts_
+#####_src/app/app.routes.ts_
 ```ts
 import { Routes } from '@angular/router';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
@@ -104,7 +104,7 @@ export const routeConfig: Routes = [
 - Add `RouterModule.forRoot(routeConfig)` to `imports`
   - Creates a *configured* router module
 
-_src/app/app.module.ts_
+#####_src/app/app.module.ts_
 ```ts
 import { RouterModule, Routes } from '@angular/router';
 import { routeConfig } from './app.routes';
@@ -127,7 +127,7 @@ export class AppModule { }
 - Use `<router-outlet></router-outlet>` to show where to display routed content
 - Angular dynamically places content *after* the tag
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <nav>
