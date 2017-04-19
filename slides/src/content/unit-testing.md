@@ -29,7 +29,7 @@
 
 ## Running Tests
 
-- `ng test`: lauches a browser for testing and watches for changes.
+- `ng test`: launches a browser for testing and watches for changes.
   - Compiles and re-runs tests as files change
 - `ng test --code-coverage`: puts a coverage report in `coverage/` directory
 
@@ -57,7 +57,7 @@ Note the following in the generated tests:
 
 ## Testing a Pipe
 
-- `ng generate pipe pipe capitalize`
+- `ng generate pipe capitalize`
 
 #####_src/app/capitalize.pipe.ts_
 ```ts
@@ -90,9 +90,9 @@ describe('CapitalizePipe', () => {
 
 ---
 
-## Instantiate the Fixture in `beforeEach`
+## Instantiate the Pipe in `beforeEach`
 
-- We will need a fixture for each test, so don't duplicate that code
+- We will need an instance for each test, so don't duplicate that code
 
 #####_src/app/capitalize.pipe.spec.ts_
 ```ts
@@ -104,7 +104,7 @@ describe('CapitalizePipe', () => {
     pipe = new CapitalizePipe();
   });
 
-  …instance creation test as before…
+  //…instance creation test as before…
 
 }
 ```
@@ -115,11 +115,13 @@ describe('CapitalizePipe', () => {
 
 ## Add a Test
 
+- Use `fdescribe` to tell Jasmine to "focus" on this test -- we have several broken tests that we'll ignore for now.
+
 #####_src/app/capitalize.pipe.spec.ts_
 ```ts
-describe('CapitalizePipe', () => {
+fdescribe('CapitalizePipe', () => {
 
-  …as before…
+  //…as before…
 
   it('should capitalize a word', () => {
     expect(pipe.transform('foo')).toEqual('Foo');
@@ -129,60 +131,27 @@ describe('CapitalizePipe', () => {
 
 ---
 
-## Getting Tests to Run
+## Instantiating the Component or Service
 
-- Run `ng test`: 4 failures
-- Have to include our dependencies in `app.component.spec.ts`
-  - And in `to-do-list.component.spec.ts`
+- We currently do not display the number of todos in `AppComponent`.
+- Let's create a method that will return the number of todos.
+- Start by removing existing test code until we have the shell of a simple test for this component.
 
 #####_src/app/app.component.spec.ts_
 ```ts
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        ToDoListComponent,
-        GenericInputComponent
-      ],
-      providers: [
-        ToDoService
-      ]
-    }).compileComponents();
-```
+import { AppComponent } from './app.component';
 
----
+fdescribe('AppComponent', () => {
 
-## Cleaning Up Technical Debt
+  beforeEach(() => {
 
-- Title is now "To Do" instead of "app works!"
-- Notice we're no longer passing data to the display in `thingsToDo`,
-  so remove it from the HTML and erase the `@Input`
+  });
 
-![Auto-Generated Tests Running](content/images/screenshot-jasmine-defaults-run.png)
+  it('should count the number of items', () => {
 
----
+  });
 
-## Instantiating the Component or Service
-
-- How would we test `itemCount` on `AppComponent`?
-
-#####_src/app/app.component.ts_
-```ts
-export class AppComponent {
-  …as before…
-  itemCount() {
-    return this.toDoService.itemCount();
-  }
-}
-```
-
-#####_src/app/to-do.service.ts_
-```ts
-export class ToDoService {
-  …as before…
-  itemCount() {
-    return this.items.length;
-  }
-}
+});
 ```
 
 ---
@@ -190,35 +159,37 @@ export class ToDoService {
 ## Mocking Dependencies
 
 - We need an object that matches the "shape" of `TodoService` to test `AppComponent`
-- The mock object must have `onNewItem` and `itemCount` methods
-- `onNewItem` doesn't actually need to do anything
-- `itemCount` can return a fixed value
+- The mock object must have `addItem` method and `items` property
+- `addItem` doesn't actually need to do anything
+- `items` should be an array of fake todos
 
 ```ts
 mockTodoService = {
-  onNewItem: (item: string) => {}
-  itemCount: () => 3
+  addItem: () => {}
+  items: ['item 1', 'item 2', 'item 3']
 };
 ```
 
-- We can inject this into `AppComponent` by passing it to the constructor
-  - Which is one of the reasons Angular uses this technique for dependency injection
+- We can manually provide this to `AppComponent` by passing it to the constructor
 
 ---
 
 ## Testing Business Logic
+
+- Here we write a failing test.
+- Next, we'll create the method in `AppComponent` that will make this test pass.
 
 #####_src/app/app.component.spec.ts_
 ```ts
   describe('the itemCount method', () => {
 
     let app: AppComponent;
-    let mockToDoService;
+    const mockToDoService;
 
     beforeEach(() => {
       mockToDoService = {
-        onNewItem: (item: string) => {}
-        itemCount: () => 3
+        addItem: () => {},
+        items: ['item 1', 'item 2', 'item 3']
       };
       app = new AppComponent(mockToDoService);
     });
@@ -235,10 +206,10 @@ mockTodoService = {
 
 ## When to Use TestBed
 
-`TestBed` is helpful when:
+`TestBed` is a class that creates a real Angular runtime for the purposes of testing Angular elements. It is helpful when:
 
 1. you have logic in your templates and you want to render a component class along with its template for testing
-2. you want to use Angular's injector to handle dependecy injection for you
+2. you want to use Angular's injector to handle dependency injection for you
 3. you want to test how different elements integrate in the Angular runtime
 
 <!-- comment needed to separate lists -->
@@ -249,69 +220,28 @@ mockTodoService = {
 
 ---
 
-## Providing Mock Dependencies
+## Configuring the Test Module
 
 - We can declare `mockTodoService` as we did before and have Angular inject it for us
+- TestBed will also instantiate the `AppComponent` and inject the dependency for us, but we must add it to the `declarations` array.
 
 #####_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
-  declarations: [ mockTodoService ]
+  declarations: [ AppComponent ],
   providers:[
-    { provide: TodoService, useValue: mockTodoService }
+    { provide: ToDoService, useValue: mockToDoService }
   ]
 })
 ```
 
 ---
 
-## Spying on Real Service Providers
-
-- Alternatively, we can have Angular create the real service
-- And mock specific methods through a Jasmine *spy*
-  - The spy will ensure we don't actually call the real method
-- Always obtain injected dependencies from `TestBed`
-  so that the spy is set on the instance that is injected and not the object we created
-
-#####_src/app/app.component.spec.ts_
-```ts
-TestBed.configureTestingModule({
-  declarations: [ AppComponent ]
-  providers:[ TodoService ]
-});
-
-const todoService = TestBed.get(TodoService);
-spyOn(todoService, 'itemCount').and.callFake(() => 3);
-```
-
-<!--
-FIXME: check the example above
-1. Do we still call `compileComponents` on `TestBed`?
-2. Is the syntax right for `callFake`?
--->
-
----
-
-## Importing Real Application Modules
-
-- We can import a real module that declares the component and provides the service it depends on
-
-```ts
-TestBed.configureTestingModule({
-  imports: [ AppModule ]
-})
-```
-
-- Inject actual services or importing real modules often works…
-- …but sometimes Angular is not able to resolve all of the required dependencies
-- We have more control when we mock things…
-- …but if mocks get too complicated, they can be expensive to maintain
-
----
-
 ## Testing Components Using ComponentFixture
 
-Here is how we obtain the instance from the fixture:
+- `ComponentFixture` is an testing utility that gives us access and control over the things we are testing.
+- Here is how we obtain the instance of our declared component from the fixture.
+  - Note that `comp` will be an instance of `AppComponent`
 
 #####_src/app/app.component.spec.ts_
 ```ts
@@ -322,7 +252,7 @@ beforeEach(() => {
   TestBed.configureTestingModule({
     declarations: [ AppComponent ],
     providers: [
-      { provide: TodoService, useValue: mockTodoService }
+      { provide: ToDoService, useValue: mockToDoService }
     ]
   });
 
@@ -333,38 +263,60 @@ beforeEach(() => {
 
 ---
 
-## Change Detection
+## Shallow Rendering
 
-- We must tell Angular when to run change detection during our tests
-- Use the fixture to do this:
-
-#####_src/app/app.component.spec.ts_
-```ts
-fixture = TestBed.createComponent(AppComponent);
-fixture.detectChanges()
-```
-
----
-
-## Change Detection
-
-- Can indicate that we want *automatic change detection* when configuring our test module
+- The above test fails because `AppComponent` itself uses components which we have not declared.
+- We could provide mocks for these components, or we can do a shallow render by adding the `CUSTOM-ELEMENTS-SCHEMA`
 
 #####_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
-  declarations: [ ],
-  providers: [
-    { provide: ComponentFixtureAutoDetect, useValue: true }
-  ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+})
+```
+
+Notes:
+
+- `NO_ERRORS_SCHEMA` is also commonly used for shallow rendering.
+
+---
+
+## Providing the Real Service
+
+- Alternatively, we can have Angular create the real service
+- We can then use `TestBed` to get a reference to the injected instance
+
+#####_src/app/app.component.spec.ts_
+```ts
+TestBed.configureTestingModule({
+  declarations: [ AppComponent ]
+  providers:[ ToDoService ]
+});
+
+const toDoService = TestBed.get(ToDoService);
+toDoService.items = ['item 1', 'item 2', 'item 3'];
+
+```
+
+---
+
+## Importing the Real Module
+
+- We can import the real module that declares the component and provides the service it depends on
+
+```ts
+TestBed.configureTestingModule({
+  imports: [ AppModule ]
 });
 ```
 
 ---
 
-## Querying Native Elements
+## Integration Testing by Querying Native Elements
 
-- Once change detection has run, we can check that the expeced output was rendered to the DOM
+- Use TestBed to get the injected ToDoService instance and assign an array of fake todo items to the `items` array.
+- We can use the `debugElement` to query the generated DOM.
+- The test fails because we changed the data in the service after the component was created and the view hasn't detected it.
 
 #####_src/app/app.component.spec.ts_
 ```ts
@@ -376,14 +328,47 @@ describe('AppComponent', () => {
     // TestBed.configureModule({ ...
     fixture = TestBed.createComponent(AppComponent);
     comp = fixture.componentInstance;
+
+    const toDoService = TestBed.get(ToDoService);
+    toDoService.items = ['item 1', 'item 2', 'item 3', 'item 4'];
   });
 
-  it('should show the number of items', () => {
-    const de = fixture.debugElement.query(By.css('.qa-todo-count'));
-    const el = fixture.nativeElement;
-    fixture.detectChanges();
-    expect(el.textContent).toContain('3 item(s)');
+  it('should show all todo items', () => {
+    const el = fixture.debugElement.query(By.css('ul'));  // from '@angular/platform-browser';
+    expect(el.children.length).toEqual(4);
   });
+});
+```
+
+---
+
+## Change Detection
+
+- We must tell Angular when to run change detection during our tests.
+- The `ComponentFixture.detectChanges` method makes this possible.
+- Our test should now pass.
+
+
+_src/app/app.component.spec.ts_
+```ts
+it('should show all todo items', () => 
+fixture.detectChanges();
+// ...
+```
+
+---
+
+## Change Detection
+
+- We can indicate that we want *automatic change detection* when configuring our test module
+
+_src/app/app.component.spec.ts_
+```ts
+TestBed.configureTestingModule({
+  declarations: [ ],
+  providers: [
+    { provide: ComponentFixtureAutoDetect, useValue: true }
+  ]
 });
 ```
 
@@ -391,7 +376,7 @@ describe('AppComponent', () => {
 
 ## Dealing With Asynchronous Behavior in Tests
 
-- Angular CLI uses the asynchronous function `compileComponents` and wraps it in the `async` function
+- Angular tests generated by the CLI use the asynchronous function `compileComponents` and wraps it in the `async` function
 - `compileComponents` is required for testing when classes reference external files through `templateUrls` and `styleUrls`.
 - We usually don't need to do this
   - Webpack will inline our templates and css as part of the build process
@@ -420,7 +405,7 @@ it('should...', (done) => {
 
 ## Interlude: Zone.js
 
-- Zones allow Angular to create execution contexts that track the completion of ansynchronous operations
+- Zones allow Angular to create execution contexts that track the completion of asynchronous operations
 - [Zone.js](https://github.com/angular/zone.js) accomplishes this by monkey patching many common asynchronous methods
 - Zones are used in Angular applications to let Angular know when change detection should run
   - Since change detection is often required after asynchronous operations complete
