@@ -215,8 +215,8 @@ _src/app/app.component.html_
 <app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
 ```
 
-- `$event` is a built-in variable representing the event
-  - In our case, a string
+- `$event` is a special Angular variable that represents the value *emitted* by the captured *event*
+  - In our case, the user-inputted string
 
 ---
 
@@ -346,10 +346,10 @@ export class Child {
 
 1. I am the child
 
-2. I am the parent  
+2. I am the parent
    I am the child
 
-3. I am the child  
+3. I am the child
    I am the parent
 
 4. I am the parent
