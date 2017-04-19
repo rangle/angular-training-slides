@@ -29,9 +29,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html'
     }),
-    new CopyWebpackPlugin([ 
-      { from: { glob: 'content/*.md' } },
-      { from: { glob: 'content/images/*' } }
+    new CopyWebpackPlugin([
+      { from: { glob: 'content/**/*.md' } },
+      { from: { glob: 'content/images/*' } },
+      { from: { glob: 'content/bios/images/*' } }
     ])
   ],
   devServer: {
