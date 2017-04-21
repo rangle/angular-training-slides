@@ -346,10 +346,10 @@ export class Child {
 
 1. I am the child
 
-2. I am the parent
+2. I am the parent<br>
    I am the child
 
-3. I am the child
+3. I am the child<br>
    I am the parent
 
 4. I am the parent
