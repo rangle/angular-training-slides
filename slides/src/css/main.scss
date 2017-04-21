@@ -132,6 +132,7 @@ body {
   h5 {
     color: $ranglePurple;
     font-size: $heading5Size;
+    margin-top: 0.5em;
   }
 
   .slide-number {
@@ -165,7 +166,7 @@ body {
     box-shadow: none;
     font-size: 0.75em;
     width: auto;
-
+    
     code {
       max-height: none;
     }
