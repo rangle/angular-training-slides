@@ -167,16 +167,18 @@ export class AppComponent {
 - Worth exploring the page using developer tools
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
-The name for the root module should be _________.:
+The name for the root module should be `_________`:
 
 1. `NgModule`
 1. `AppModule`
 1. Whatever you want.
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 

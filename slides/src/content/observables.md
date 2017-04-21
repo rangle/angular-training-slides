@@ -18,6 +18,7 @@ Objectives:
 * Observables help with asynchronous behaviours.
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -28,6 +29,7 @@ Objectives:
 3. let Angular know when change detetection is required
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -55,6 +57,7 @@ getData$.subscribe(data => {
 ```
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -66,6 +69,7 @@ Subscribing to an observable:
 4. is not required in Angular
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -92,6 +96,7 @@ https://jsbin.com/genayadivo/edit?html,js,console,output
 *concepts*: operators, map operator (instance method)
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -103,6 +108,7 @@ The map operator:
 4. will modify the result returned by an observable
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -160,6 +166,7 @@ Example (`name$` is an observable):
 `<div> {{ name$ | async }} </div>`
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -171,6 +178,7 @@ Angular's `AsyncPipe`:
 4. can't be chained with pure pipes
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -192,6 +200,7 @@ searchString$
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -202,6 +211,7 @@ Operators:
 3. are methods on an observable that return an observable
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 

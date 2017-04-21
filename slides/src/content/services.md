@@ -245,6 +245,7 @@ export class AppComponent {
   - Inject something else into `ToDoListComponent` to test its behavior
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -272,6 +273,7 @@ What is the correct way to inject a service into a class?
 ```
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -295,6 +297,7 @@ injected into a class constructor based on its type, they may expect
 this type reflection to also apply to class members.
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -326,6 +329,7 @@ class member (make it available on `this`)?
 ```
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -342,6 +346,7 @@ implicitly assign constructor arguments to the class instance.
 manually assign a provider instance to a class property.
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -358,6 +363,7 @@ Injecting a service into a class accomplishes which of the following?
    only if it has already been registered in the `providers` array.
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -368,6 +374,7 @@ registered inside of a `providers` array. Angular's DI does not
 implicitly construct classes on request.
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -382,6 +389,7 @@ must be done manually before the service can be used?
    `MyService` into the `providers` array
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 

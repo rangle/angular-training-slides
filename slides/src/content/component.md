@@ -171,6 +171,7 @@ export class ToDoListComponent implements OnInit {
 - …but absolutely necessary to control complexity in large projects
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -184,6 +185,7 @@ it from a parent component?
 3. A member decorated with `@Input`.
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -223,6 +225,7 @@ export class Child {
 ```
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz (continued)
 
@@ -236,6 +239,7 @@ export class Child {
    Child:
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -252,6 +256,7 @@ the string "Greeting" down into the child component, not the other way
 around.
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -267,6 +272,7 @@ input called `data` from the parent's template?
 4. `[data]="{{myData}}"`
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -282,6 +288,7 @@ notation and output/event `()` notation.
 understanding that it's not required here.
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -307,6 +314,7 @@ export class Hal9000 {
 4. None: An error will be thrown because Angular can't parse the message as an object.
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 

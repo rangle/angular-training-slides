@@ -250,6 +250,7 @@ export class AppComponent {
 FIXME: diagram showing data flow
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -264,6 +265,7 @@ Which of the following is invalid syntax for handling an event?
 4. `<message (messageSent)="sent=$event"></message>`
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -282,6 +284,7 @@ outputs must be callbacks. In reality, they are simply expressions
 which also have special handling for callback syntax
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -303,6 +306,7 @@ What is the difference between:
    (B) assigns values emitted from the `<counter>` component to `this.count`.
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -341,6 +345,7 @@ export class Child {
 ```
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz (continued)
 
@@ -355,6 +360,7 @@ export class Child {
 4. I am the parent
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
 ## Answer
 
