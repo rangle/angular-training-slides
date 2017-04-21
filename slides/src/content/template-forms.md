@@ -29,7 +29,7 @@
 - Import `FormsModule` from `@angular/forms` into `app.module.ts`
 - Allow us to use all the features of template-driven forms
 
-_src/app/app.module.ts_
+#####_src/app/app.module.ts_
 ```ts
 …existing imports…
 import { FormsModule } from '@angular/forms';
@@ -54,7 +54,7 @@ export class AppModule { }
 - `ngForm` provides properties to get information from the form like `value` and `valid`
 - `ngModel` provides the same property for individual fields
 
-_src/app/generic-input/generic-input.component.html_
+#####_src/app/generic-input/generic-input.component.html_
 ```html
 <form #newItemForm="ngForm">
   <p>New Item: <input name="newItem" ngModel></p>
@@ -98,7 +98,7 @@ _src/app/generic-input/generic-input.component.html_
 
 ## NgModel
 
-_src/app/generic-input/generic-input.component.html_
+#####_src/app/generic-input/generic-input.component.html_
 ```html
 <form #newItemForm="ngForm">
   <p>New Item: <input name="newItem" ngModel></p>
@@ -120,7 +120,7 @@ _src/app/generic-input/generic-input.component.html_
   - Pass the form object so that the class has everything it might want
 - Need a "submit" button to trigger form submission
 
-_src/app/generic-input/generic-input.component.html_
+#####_src/app/generic-input/generic-input.component.html_
 ```html
 <form #newItemForm="ngForm" (ngSubmit)="addToDo(newItemForm)">
   <p>
@@ -136,7 +136,7 @@ _src/app/generic-input/generic-input.component.html_
 
 - Modify `addToDo` to take an `NgForm` as input
 
-_src/app/generic-input/generic-input.component.html`
+#####_src/app/generic-input/generic-input.component.html`
 ```ts
 import { NgForm } from '@angular/forms';
 
@@ -172,7 +172,7 @@ export class GenericInputComponent implements OnInit {
 
 - To perform validation, we must create a template variable for the given field `#field="ngModel"`
 
-_src/app/generic-input/generic-input.component.html_
+#####_src/app/generic-input/generic-input.component.html_
 ```html
   …
     New Item: <input name="newItem" #newItem="ngModel" ngModel required>
@@ -226,7 +226,7 @@ _src/app/generic-input/generic-input.component.html_
 
 - Change example to use these styles
 
-_src/app/generic-input/generic-input.component.html_
+#####_src/app/generic-input/generic-input.component.html_
 ```html
 <form #newItemForm="ngForm" (ngSubmit)="registerUser(newItemForm)">
   <p>New Item: <input name="newItem" #newItem="ngModel" ngModel required></p>
@@ -247,7 +247,7 @@ _src/app/generic-input/generic-input.component.html_
 
 - Use these classes and properties with CSS and HTML to create user-friendly forms
 
-_src/app/generic-input/generic-input.component.css_
+#####_src/app/generic-input/generic-input.component.css_
 ```css
 .ng-valid[required], .ng-valid.required  {
   background-color: #DFD;

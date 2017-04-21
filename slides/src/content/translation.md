@@ -25,7 +25,7 @@
 
 ## Setting Up
 
-_src/app/app.module.ts_
+#####_src/app/app.module.ts_
 ```ts
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -56,7 +56,7 @@ export class AppModule { }
 
 ## Configuring the Translation Module
 
-_src/app/app.module.ts_
+#####_src/app/app.module.ts_
 ```ts
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http);

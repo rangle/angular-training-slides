@@ -40,7 +40,7 @@
   - `app` prefix to prevent namespace collisions
 - What to put in constructor and `ngOnInit` will be discussed later
 
-_src/app/to-do-list/to-do-list.component.ts_
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```
 @Component({
   selector: 'app-to-do-list',
@@ -64,7 +64,7 @@ export class ToDoListComponent implements OnInit {
 - Refer to component by putting its selector tag in something else's HTML
   - Remove the completed list and summary to make things fit on the slide
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
@@ -81,7 +81,7 @@ _src/app/app.component.html_
   1. Create a variable in the child to receive the value
   1. Use `@Input()` decorator to identify the variable
 
-_src/app/to-do-list/to-do-list.component.ts_
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -103,7 +103,7 @@ export class ToDoListComponent implements OnInit {
 - And then pass data from the parent
   - Just like a function call
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
@@ -112,7 +112,7 @@ _src/app/app.component.html_
 
 - Whoops: compiler error!
 
-_src/app/app.component.html_ (with error)
+#####_src/app/app.component.html_ (with error)
 ```html
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
@@ -127,7 +127,7 @@ _src/app/app.component.html_ (with error)
 - While we're at it, remove the heading from the child component
 - And use a proper list instead of a bunch of paragraphs
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
@@ -142,7 +142,7 @@ _src/app/app.component.html_
 
 - Move the loop over the list into the child component's HTML
 
-_src/app/to-do-list/to-do-list.component.html_
+#####_src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">{{item}}</li>
@@ -151,7 +151,7 @@ _src/app/to-do-list/to-do-list.component.html_
 
 - Create the required variable in the child component class
 
-_src/app/to-do-list/to-do-list.component.ts_
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 export class ToDoListComponent implements OnInit {
 

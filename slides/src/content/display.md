@@ -21,7 +21,7 @@
 - Change the title
 - Add a list of strings
 
-_src/app/app.component.ts_
+#####_src/app/app.component.ts_
 ```ts
 @Component({
   …as before…
@@ -43,7 +43,7 @@ export class AppComponent {
 - Use `*ngFor` to repeat some HTML multiple times
 - The loop variable `item` is created locally
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo">{{item}}</p>
@@ -57,7 +57,7 @@ _src/app/app.component.html_
 
 - Giving each item a unique ID allows bookmarking and testing
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
@@ -79,7 +79,7 @@ _src/app/app.component.html_
   - More precisely, whether or not something is added to the DOM
   - See how to show and hide content with styles later
 
-_src/app/app.component.ts_
+#####_src/app/app.component.ts_
 ```ts
 export class AppComponent {
   …as before…
@@ -91,7 +91,7 @@ export class AppComponent {
 
 ## Nothing to See Here, Folks
 
-_src/app/app.component.html_
+#####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>

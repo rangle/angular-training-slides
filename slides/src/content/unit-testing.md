@@ -59,7 +59,7 @@ Note the following in the generated tests:
 
 - `ng generate pipe pipe capitalize`
 
-_src/app/capitalize.pipe.ts_
+#####_src/app/capitalize.pipe.ts_
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
@@ -76,7 +76,7 @@ export class CapitalizePipe implements PipeTransform {
 
 ## Starter Code for Testing
 
-_src/app/capitalize.pipe.spec.ts_
+#####_src/app/capitalize.pipe.spec.ts_
 ```ts
 import { CapitalizePipe } from './capitalize.pipe';
 
@@ -94,7 +94,7 @@ describe('CapitalizePipe', () => {
 
 - We will need a fixture for each test, so don't duplicate that code
 
-_src/app/capitalize.pipe.spec.ts_
+#####_src/app/capitalize.pipe.spec.ts_
 ```ts
 describe('CapitalizePipe', () => {
 
@@ -115,7 +115,7 @@ describe('CapitalizePipe', () => {
 
 ## Add a Test
 
-_src/app/capitalize.pipe.spec.ts_
+#####_src/app/capitalize.pipe.spec.ts_
 ```ts
 describe('CapitalizePipe', () => {
 
@@ -135,7 +135,7 @@ describe('CapitalizePipe', () => {
 - Have to include our dependencies in `app.component.spec.ts`
   - And in `to-do-list.component.spec.ts`
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
     TestBed.configureTestingModule({
       declarations: [
@@ -165,7 +165,7 @@ _src/app/app.component.spec.ts_
 
 - How would we test `itemCount` on `AppComponent`?
 
-_src/app/app.component.ts_
+#####_src/app/app.component.ts_
 ```ts
 export class AppComponent {
   …as before…
@@ -175,7 +175,7 @@ export class AppComponent {
 }
 ```
 
-_src/app/to-do.service.ts_
+#####_src/app/to-do.service.ts_
 ```ts
 export class ToDoService {
   …as before…
@@ -208,7 +208,7 @@ mockTodoService = {
 
 ## Testing Business Logic
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
   describe('the itemCount method', () => {
 
@@ -253,7 +253,7 @@ _src/app/app.component.spec.ts_
 
 - We can declare `mockTodoService` as we did before and have Angular inject it for us
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ mockTodoService ]
@@ -273,7 +273,7 @@ TestBed.configureTestingModule({
 - Always obtain injected dependencies from `TestBed`
   so that the spy is set on the instance that is injected and not the object we created
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ AppComponent ]
@@ -313,7 +313,7 @@ TestBed.configureTestingModule({
 
 Here is how we obtain the instance from the fixture:
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
 let fixture: ComponentFixture<AppComponent>;
 let comp: AppComponent;
@@ -338,7 +338,7 @@ beforeEach(() => {
 - We must tell Angular when to run change detection during our tests
 - Use the fixture to do this:
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
 fixture = TestBed.createComponent(AppComponent);
 fixture.detectChanges()
@@ -350,7 +350,7 @@ fixture.detectChanges()
 
 - Can indicate that we want *automatic change detection* when configuring our test module
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ ],
@@ -366,7 +366,7 @@ TestBed.configureTestingModule({
 
 - Once change detection has run, we can check that the expeced output was rendered to the DOM
 
-_src/app/app.component.spec.ts_
+#####_src/app/app.component.spec.ts_
 ```ts
 describe('AppComponent', () => {
   let comp: AppComponent;

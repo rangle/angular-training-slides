@@ -131,7 +131,7 @@ Notes:
 
 - Set up definitions
 
-_src/app/store.ts_
+#####_src/app/store.ts_
 ```ts
 import { Action } from '@ngrx/store';
 
@@ -152,7 +152,7 @@ const DEFAULT_STATE: AppState = {
 
 - Define the reducer function
 
-_src/app/store.ts_
+#####_src/app/store.ts_
 ```ts
 export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
   let newState;
@@ -173,7 +173,7 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
 
 ## Add the Store to the Application
 
-_src/app/app.module.ts_
+#####_src/app/app.module.ts_
 ```ts
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store';
@@ -197,14 +197,14 @@ export class AppModule { }
 
 ## Clean Up the Main Application's HTML
 
-_src/app/app.component.html_ (old)
+#####_src/app/app.component.html_ (old)
 ```ts
 <h1>{{title}}</h1>
 <app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
 <app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
 ```
 
-_src/app/app.component.html_ (new)
+#####_src/app/app.component.html_ (new)
 ```ts
 <h1>{{title}}</h1>
 <app-to-do-list></app-to-do-list>
@@ -215,7 +215,7 @@ _src/app/app.component.html_ (new)
 
 ## Dispatch Actions for New Items
 
-_src/app/app.component.ts_
+#####_src/app/app.component.ts_
 ```ts
 import { Store } from '@ngrx/store';
 import { AppState, ITEM_ADD, reducer } from './store';
@@ -239,7 +239,7 @@ export class AppComponent {
 
 ## Update the To-Do List Display
 
-_src/app/to-do-list/to-do-list.component.ts_
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
@@ -265,7 +265,7 @@ export class ToDoListComponent implements OnInit {
 
 ## Picking That Apart
 
-_src/app/to-do-list/to-do-list.component.ts_
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
     this.store
       .select('items')
@@ -297,7 +297,7 @@ So let's see how we'd go about deleting items:
 
 ## Update the To-Do List Display
 
-_src/app/to-do-list/to-do-list.component.html_
+#####_src/app/to-do-list/to-do-list.component.html_
 ```html
 <table>
   <tr>
@@ -315,7 +315,7 @@ _src/app/to-do-list/to-do-list.component.html_
 
 ## Provide the Deletion Method
 
-_src/app/to-do-list/to-do-list.component.ts_
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 import { AppState, ITEM_DELETE } from '../store';
 
@@ -335,7 +335,7 @@ export class ToDoListComponent implements OnInit {
 
 ## Upgrade the Store
 
-_src/app/store.ts_
+#####_src/app/store.ts_
 ```ts
 export const ITEM_DELETE = 'ITEM_DELETE';
 
