@@ -9,7 +9,7 @@
 ## Roadmap
 
 1. How do I handle events?
-1. How do I handle inputs?
+1. How do I handle user input?
 1. How do I make a reusable component?
 1. How do child components send data to their parents?
 
@@ -346,10 +346,10 @@ export class Child {
 
 1. I am the child
 
-2. I am the parent  
+2. I am the parent
    I am the child
 
-3. I am the child  
+3. I am the child
    I am the parent
 
 4. I am the parent
