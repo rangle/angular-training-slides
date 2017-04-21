@@ -135,7 +135,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: '<h1>{{title}}</h1>,          // inline HTML
+  template: '<h1>{{title}}</h1>',          // inline HTML
   styles: ['h1 { font-weight: normal; }'] // inline styles
 })
 export class AppComponent {
