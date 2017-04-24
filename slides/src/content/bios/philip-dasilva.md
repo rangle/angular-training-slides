@@ -1,10 +1,10 @@
 ## Philip Da Silva
 
-<img src="content/bios/images/philip-dasilva.png" alt="Philip Da Silva" style="max-width: 200px;" />
+<img src="content/images/bios/philip-dasilva.png" alt="Philip Da Silva" style="max-width: 200px;" />
 
 Philip Da Silva is a Solutions Architect at Rangle.io specializing in front-end
 technologies and UI and is a self-proclaimed
-*[single div CSS artist](http://codepen.io/collection/DqBbZb/)*.
+[single div CSS artist](http://codepen.io/collection/DqBbZb/).
 
 * GitHub: [rpdasilva](http://github.com/rpdasilva/)
 * Twitter: [rpdasilva](https://twitter.com/rpdasilva/)
