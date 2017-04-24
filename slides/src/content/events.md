@@ -260,7 +260,7 @@ Which of the following is invalid syntax for handling an event?
 
 2. `<message (messageSent)="onMessageSent(message)"></message>`
 
-3. `<message (messageSent)="sent"></message>`
+3. `<message messageSent="onMessageSent($event)"></message>`
 
 4. `<message (messageSent)="sent=$event"></message>`
 
