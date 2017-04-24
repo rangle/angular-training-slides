@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Using the Angular CLI
 
 ---
@@ -42,8 +43,8 @@ Correct answer is 2.
 1 - NgModule is the name of the Decorator used for any Angular Module.
 I feel one can easily mistake between NgModule and AppModule
 
-3 - while it's possible that the root module can be anything, 
-convention is to name it AppModule and that's what our slides say. 
+3 - while it's possible that the root module can be anything,
+convention is to name it AppModule and that's what our slides say.
 This could be a good chance to bring it up that it's convention.
 
 <https://angular.io/docs/ts/latest/guide/appmodule.html>

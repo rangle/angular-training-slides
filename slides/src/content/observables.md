@@ -1,8 +1,10 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Introduction to Observables
 
-Notes:
 Objectives:
+
 1. To be able to inject http into an Angular component, get a value from a typical REST endpoint and bind it directly to the template.
+
 2. To be able to explain what the `async` pipe does and describe how you would mimic the behaviour of the `async` pipe in a component by subscribing to an observable.
 
 ---
@@ -15,26 +17,35 @@ Objectives:
 * Used extensively in Angular.
 * Observables help with asynchronous behaviours.
 
+---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+## Quiz
+
+ An observable will:
+
+1. two-way data bind a property
+2. push notifications to an observer
+3. let Angular know when change detetection is required
+
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
-## Quiz 1
+## Answer
 
-1. An observable will:
-  1. two-way data bind a property
-  2. push notifications to an observer
-  3. let angular know when change detetection is requried
+Definition from RxJS docs:
 
-+++
-
-## Definition from rxjs docs
-
-> The Observer and Observable interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The Observable object represents the object that sends notifications (the provider); the Observer object represents the class that receives them (the observer).
+> The Observer and Observable interfaces provide a generalized
+> mechanism for push-based notification, also known as the observer
+> design pattern. The Observable object represents the object that
+> sends notifications (the provider); the Observer object represents
+> the class that receives them (the observer).
 
 ---
 
 ## Subscribing to an Observable
 
-Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit: 
+Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit:
 
 ```javascript
 
@@ -45,18 +56,24 @@ getData$.subscribe(data => {
 
 ```
 
-Notes:
-*concepts*: Observable, subscribe method, callback function
+---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+## Quiz
+
+Subscribing to an observable:
+
+1. returns another observable
+2. allows you join multiple observables together
+3. provides a callback to the observable
+4. is not required in Angular
 
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
-## Quiz 2
+## Answer
 
-2. Subscribing to an observable
-  1. returns another observable
-  2. allows you join multiple observables together
-  3. provides a callback to the observable
-  4. is not required in Angular
+Correct answer is 2.
 
 ---
 
@@ -66,7 +83,7 @@ Notes:
 
 For example: an observable based on an input event will pass the event object to the callback.  We can make it return the input's value using the `map` operator:
 
-```javascript
+```ts
 const searchString$ = Observable
   .fromEvent(document.querySelector('.search-input'), 'input')
   .map(event => {
@@ -78,15 +95,24 @@ Notes:
 https://jsbin.com/genayadivo/edit?html,js,console,output
 *concepts*: operators, map operator (instance method)
 
+---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+## Quiz
+
+The map operator:
+
+1. will perform `Array.map` on the result of an observable when it is an array
+2. will return an observable
+3. enables geolocation in Angular
+4. will modify the result returned by an observable
+
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
-## Quiz 3
+## Answer
 
-3. The map operator
-  1. will perform `Array.map` on the result of an observable, only when it is an array.
-  2. will return an observable
-  3. enables geolocation in Angular
-  4. will modify the result returned by an observable
+Correct answer is 2.
 
 ---
 
@@ -95,13 +121,13 @@ https://jsbin.com/genayadivo/edit?html,js,console,output
 * `Http` from `'@angular/http'` has methods such as `get` that return observables.
 * Map is often used with `Http` as in the following example:
 
-```javascript
+```ts
 const getData$ = http.get('https://example.com/api/products')
 .map(response => {
   return response.json();
 });
 getData$.subscribe((data) => {
-  // 
+  //
 });
 ```
 
@@ -116,24 +142,21 @@ In this example, `map` is used because `get` is an observable of an object with 
 * The `subscribe()` method returns a *subscription*.
 * A subscription has an `unsubscribe()` method.
 
-```js
+```ts
 const clickStreamSubscription = clickStream.subscribe(
   () => console.log('clicked!')
 );
 
 setTimeout(() => {
-  clickStreamSubscription.unsubscribe(); 
+  clickStreamSubscription.unsubscribe();
 }, 3000);
 ```
-
-Notes:
-*concept*: subscription, unsubscribe method
 
 ---
 
 ## Angular's AsyncPipe
 
-* The `AsyncPipe` helps us write less by taking an observable and:
+* `AsyncPipe` helps us write less by taking an observable and:
   - subscribing to it
   - returning the returned value so it can be placed in your template
   - unsubscibing, when the value is no longer needed
@@ -142,24 +165,32 @@ Example (`name$` is an observable):
 
 `<div> {{ name$ | async }} </div>`
 
+---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+## Quiz
+
+Angular's `AsyncPipe`:
+
+1. accepts an observable and binds the value to a template
+2. gets data from a rest endpoint
+3. makes asynchronous code look synchronous
+4. can't be chained with pure pipes
+
 +++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
 
-## Quiz 4
+## Answer
 
-Angular's `AsyncPipe`
-  1. accepts an observable and binds the value to a template
-  2. gets data from a rest endpoint
-  3. makes async code look procedural
-  4. can't be chained with pure pipes
-
+Correct answer is 3.
 
 ---
 
 ## The Filter Operators
 
-In addition to `map`, the `filter` operator is also available: 
+In addition to `map`, the `filter` operator is also available:
 
-```js
+```ts
 searchString$
   .filter(searchString => searchString.length > 3)
   .subscribe(value = console.log(value));
@@ -168,14 +199,23 @@ searchString$
 * 'filter' returns an observable and fires only when the value emitted from the observable has length greater than 3.
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
 
-+++
+---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
-## Quiz 5
+## Quiz
 
 Operators:
-  1. Start execution of an observable when invoked
-  2. Return subscriptions so you can unsubscribe
-  3. Are methods on an observable that return an observable
+
+1. start execution of an observable when invoked
+2. return subscriptions so you can unsubscribe
+3. are methods on an observable that return an observable
+
++++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
+
+## Answer
+
+The correct answer is 3.
 
 ---
 
@@ -185,7 +225,7 @@ Observables can be nested.
 
 Observables can utilize `mergeMap` (also known as `flatMap`) to combine more than one observable:
 
-```js 
+```ts
 http.get('https://jsonplaceholder.typicode.com/users')
   .map((response) => Observable.from(response.json()))
   .mergeMap((data) => data)
@@ -202,18 +242,18 @@ http.get('https://jsonplaceholder.typicode.com/users')
 
 We can resolve multiple observables together using the `forkJoin` operator.
 
-```js 
+```ts
 const users = http.get(
   'https://jsonplaceholder.typicode.com/users/'
 ).map((data) => data.json());
-  
+
 const posts = http.get(
   'https://jsonplaceholder.typicode.com/posts/'  
 ).map((data) => data.json());
-  
+
 Observable.forkJoin([users, posts])
   .subscribe((data) => {
     console.log(data[0]); // response for users
     console.log(data[1]); // response for posts
 });
-``` 
+```

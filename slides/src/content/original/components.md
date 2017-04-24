@@ -1,3 +1,4 @@
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
 # Components In Depth
 
 ---
@@ -414,5 +415,41 @@ which field of the `@NgModule` decorator should I put the class in?
 <aside class="notes">
 
 Correct answer is "declarations".
+
+</aside>
+
+---
+
+## Quiz
+
+`@Input` is used to:
+
+1. Pass data into another component
+2. Capture data passed from another component
+3. Display an HTML `<input>` element
+
+<aside class="notes">
+
+1. student is confused between @Input and @Output
+2. correct answer
+3. student is confused between a template and a decorator
+
+</aside>
+
+---
+
+## Quiz
+
+Which are the correct ways for binding variables to an Angular form?
+
+1. `<input name="firstName" [ngModel]="firstName">`
+2. `<input name="firstName" (ngModel)="firstName">`
+3. `<input name="firstName" [(ngModel)]="fistName">`
+
+<aside class="notes">
+
+1. correct
+2. student is confused with parens vs brackets data binding
+3. correct
 
 </aside>

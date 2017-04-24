@@ -1,5 +1,5 @@
 @import '~reveal.js/css/reveal.css';
-@import '~highlight.js/styles/tomorrow-night-blue.css';
+@import '~highlight.js/styles/color-brewer.css';
 
 // Default mixins and settings -----------------
 @import '~reveal.js/css/theme/template/mixins.scss';
@@ -10,15 +10,15 @@
 @font-face {
   font-family: 'Calibre';
   src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot");
-  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix") format("embedded-opentype"), 
-  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2") format("woff2"), 
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix") format("embedded-opentype"),
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2") format("woff2"),
   url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff") format("woff")
 }
 @font-face {
   font-family: 'Calibre';
   src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot");
-  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix") format("embedded-opentype"), 
-  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2") format("woff2"), 
+  src: url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix") format("embedded-opentype"),
+  url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2") format("woff2"),
   url("https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff") format("woff")
 }
 
@@ -26,9 +26,11 @@
 $purpleDark: #230E2D;
 $ranglePurple: #422D51;
 $rangleRed: #ee302f;
+$rangleWhite: #FFFFFF;
+$lightGrey: #F7F7F7;
 
 // Background of the presentation
-$backgroundColor: $ranglePurple;
+$backgroundColor: $rangleWhite;
 
 // Primary/body text
 $mainFont: 'Calibre', sans-serif;
@@ -41,7 +43,7 @@ $blockMargin: 20px;
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'Calibre', sans-serif;
-$headingColor: #fff;
+$headingColor: $rangleRed;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
@@ -49,10 +51,12 @@ $headingTextShadow: none;
 $headingFontWeight: normal;
 $heading1TextShadow: $headingTextShadow;
 
-$heading1Size: 3em;
-$heading2Size: 1.8em;
-$heading3Size: 1.55em;
-$heading4Size: 1.00em;
+$heading1Size: 1.5em;
+$heading2Size: 1.4em;
+$heading3Size: 1em;
+$heading4Size: 1.8em;
+$heading5Size: 0.6em;
+
 
 // Links and actions
 $linkColor: lighten( $rangleRed, 20% );
@@ -71,40 +75,79 @@ $selectionColor: #fff;
 // Theme template ------------------------------
 @import '~reveal.js/css/theme/template/theme.scss';
 // ---------------------------------------------
- 
+
 // Overrides -----------------------------------
 #rangle-io {
-  background: url('../content/images/logo-rangleio.svg') no-repeat;
+  background: url('../content/images/logo-rangleio-purple.svg') no-repeat;
   background-size: contain;
-  height: 0.5em;
-  text-indent: -9999em;
-  margin-top: 0.5em;
+  height: 0.4em;
+  left: 0 !important;
+  position: absolute !important;
+  right: 0 !important;
+  text-indent: -99999em;
+  top: 180px !important;
 
-  &:after {
+  &:before {
     display: none;
+  }
+}
+
+body {
+  p, ul, ol, table {
+    color: $ranglePurple;
   }
 }
 
 .reveal {
   font-weight: lighter;
 
+  ol, ul {
+    width: 100%;
+  }
+
   table {
     margin: 20px 0;
   }
 
-  h1:after, h2:after {
+  h1:after {
+    background-color: $ranglePurple;
     content: '';
-    background-color: $rangleRed;
     display: block;
     height: 4px;
-    width: 2em;
-    margin: 0.25em 0;
+    margin-top: -200px;
+    width: 18em;
+  }
+
+  h1 {
+    color: $rangleRed;
+    font-weight: bold;
+    left: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 250px !important;
+  }
+
+  h5 {
+    color: $ranglePurple;
+    font-size: $heading5Size;
+    margin-top: 0.5em;
+  }
+
+  .slide-number {
+    font-size: 1em;
+  }
+
+  .controls {
+    bottom: 50px;
   }
 
   .slides {
-    text-align: left;
-    background: url('../content/images/logo-rangleio.svg') top right no-repeat;
+    background: url('../content/images/logo-rangleio-purple.svg') top right no-repeat;
     background-size: 125px auto;
+    margin-top: 60px;
+    text-align: left;
 
     > section,
     > section > section {
@@ -114,17 +157,16 @@ $selectionColor: #fff;
 
   // Code block styling
   .hljs {
-    background: $purpleDark;
-    color: rgba(255,255,255,0.9);
-    padding: 0.8em;
+    background: $lightGrey;
     margin: 20px auto;
-    line-height: 1.1em;
+    padding: 0.8em;
   }
 
   pre {
-    width: auto;
+    box-shadow: none;
     font-size: 0.75em;
-
+    width: auto;
+    
     code {
       max-height: none;
     }
@@ -134,12 +176,15 @@ $selectionColor: #fff;
   p code,
   li code,
   table code {
-    background-color: $purpleDark;
-    padding: 0 5px;
     font-size: 0.8em;
+    padding: 0 5px;
   }
 
   .progress span {
     background: $rangleRed;
   }
 }
+
+html.the-end .state-background {
+   background-color: rgba(0,0,0, 0.8);
+ }

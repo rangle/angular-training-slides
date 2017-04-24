@@ -1,4 +1,38 @@
-# Learner Profiles
+<!-- .slide: data-background="../content/images/title-slide.jpg" -->
+
+## Building Applications with Angular
+
+# Instructor's Guide
+
+---
+
+## Time Estimates
+
+<small>
+
+| Section                                  | Webinar    | Classroom |
+|------------------------------------------|------------|-----------|
+| [Introduction](#introduction)            | 15 minutes |           |
+| [Setup](#setup)                          | 15 minutes |           |
+| [Hello, World](#hello)                   | 15 minutes |           |
+| [Displaying Data](#display)              | 15 minutes |           |
+| [Creating a New Component](#component)   | 30 minutes |           |
+| [Handling Events](#events)               | 45 minutes |           |
+| [Augury](#augury)                        | 15 minutes |           |
+| [Pipes](#pipes)                          | 30 minutes |           |
+| [Services](#services)                    | 45 minutes |           |
+| [Unit Testing](#unit-testing)            | 90 minutes |           |
+| [Managing State with Redux](#redux)      | 90 minutes |           |
+| [Template Driven Forms](#template-forms) | 30 minutes |           |
+| [Reactive Forms](#reactive-forms)        | 45 minutes |           |
+| [Routing](#routing)                      | 45 minutes |           |
+| [The HTTP Service](#http)                | 45 minutes |           |
+
+</small>
+
+---
+
+## Learner Profiles
 
 These profiles describe the learners we are trying to help with this course,
 and are meant to help us answer questions about goals, pace, and content.
@@ -10,7 +44,9 @@ Each profile has:
 4.  What they will get out of the course
 5.  Any special needs or consideration
 
-## Zuko
+---
+
+## Learner Profiles: Zuko
 
 1.  Taught himself PHP and JavaScript in high school;
     struggled through a CS degree (didn't see the point of the theory);
@@ -38,7 +74,9 @@ Each profile has:
     and can frequently be found searching Stack Overflow and working on his own examples
     in the middle of lectures.
 
-## Toph
+---
+
+## Learner Profiles: Toph
 
 1.  Senior developer with 12 years of experience in three-tier .NET applications;
     leading a team of 4 building new desktop and mobile interfaces
@@ -61,7 +99,9 @@ Each profile has:
 5.  May be interrupted several times during the course
     to handle critical management issues.
 
-## Iroh
+---
+
+## Learner Profiles: Iroh
 
 1.  Studied computer networking at college and then got into programming;
     has been working for six years as a front-end web developer.
@@ -79,4 +119,4 @@ Each profile has:
     asking questions whenever he runs into something he can't figure out
     after fifteen minutes on Stack Overflow.
 
-5.  Color-blind (red/green).
+5.  Red/green Color-blind.
