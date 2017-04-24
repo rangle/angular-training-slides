@@ -229,13 +229,13 @@ export class Child {
 
 ## Quiz (continued)
 
-1. Parent:  
+1. Parent:<br>
    Child: Greetings
 
-2. Parent: Greetings  
+2. Parent: Greetings<br>
    Child: Greetings
 
-3. Parent: Greetings  
+3. Parent: Greetings<br>
    Child:
 
 +++

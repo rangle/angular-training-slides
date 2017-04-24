@@ -178,7 +178,7 @@ Result:
 <p class="orange centered-text"></p>
 ```
 
-[View Example](https://plnkr.co/edit/0xrwGT?p=preview)   
+[View Example](https://plnkr.co/edit/0xrwGT?p=preview)
 
 ---
 

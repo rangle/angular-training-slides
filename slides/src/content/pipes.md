@@ -60,7 +60,7 @@ Price is ca$100.12
 ---
 
 ## Built-in Angular Pipes
- 
+
 - [date](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html): formats dates in various ways
 - [uppercase](https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html): converts a string to upper case
 - [lowercase](https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html): converts a string to lower case

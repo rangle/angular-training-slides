@@ -23,7 +23,7 @@ router.navigate(path);
 
 ## Defining Links Between Routes (2/2)
 
-The path array can be seen as segments of an URL. 
+The path array can be seen as segments of an URL.
 For example, using the following path in our array:
 
 ```ts
@@ -37,7 +37,7 @@ Will navigate to:
 http://localhost:4200/component-one/param1/param2
 ```
 
-To use the router service, we need to import and inject it into our constructor. 
+To use the router service, we need to import and inject it into our constructor.
 
 ```ts
 import { Router } from '@angular/router';
@@ -53,10 +53,11 @@ constructor(router: Router){
 
 ## Handling 404
 
-To detect unmatched routes you can use the `**` wildcard in the path. 
-This wildcard will actually match all URLs, therefore its important that you list any other specific route paths prior to the `**` route. 
+To detect unmatched routes you can use the `**` wildcard in the path.
+This wildcard will actually match all URLs,
+therefore its important that you list any other specific route paths prior to the `**` route.
 
-This is usually your last route in the route configuration. 
+This is usually your last route in the route configuration.
 
 ```ts
 const routes: Routes = [
@@ -68,7 +69,7 @@ const routes: Routes = [
 ];
 ```
 
-Note: This does not return a 404 status code. 
+Note: This does not return a 404 status code.
 
 ---
 ## Route Parameters (1/2)
@@ -185,7 +186,11 @@ const routes: Routes = [
 
 ## Lazy Loading (2/3)
 
-There is nothing special in our `LazyModule` and `LazyComponent`, they remain simple. However routing for a feature module should always call `forChild` instead of `forRoot`, which we have already seen. This is specific to any feature modules and not related to lazy loading.  
+There is nothing special in our `LazyModule` and `LazyComponent`,
+they remain simple.
+However routing for a feature module should always call `forChild` instead of `forRoot`,
+which we have already seen.
+This is specific to any feature modules and not related to lazy loading.
 
 ```ts
 import { ModuleWithProviders } from '@angular/core';
@@ -200,7 +205,11 @@ const routes: Routes = [
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
 ```
 
-Our `LazyComponent` has now been setup for lazy loading. If we start the app, we will see that the `LazyComponent` does not get loaded right away. It only gets loaded the first time, when we navigate to the `lazy` route. If we navigate back and forth now between an eager loaded and lazy loaded module, we will see that both components are cached now. 
+Our `LazyComponent` has now been setup for lazy loading.
+If we start the app, we will see that the `LazyComponent` does not get loaded right away.
+It only gets loaded the first time, when we navigate to the `lazy` route.
+If we navigate back and forth now between an eager loaded and lazy loaded module,
+we will see that both components are cached now.
 
 [View Example](https://plnkr.co/edit/vpCqRHDAj7V6mlN1AknN?p=preview)
 
@@ -264,9 +273,13 @@ canDeactivate(component: AccountPage) {
 
 ## Child Routes (1/4)
 
-Child routes are a perfect case for parent/child pages or views. 
+Child routes are a perfect case for parent/child pages or views.
 
-For example: The product details page may have a tabbed navigation section that shows the product overview by default. When the user clicks the "Technical Specs" tab the section shows the specs instead. This feature is very common on sites like ebay or amazon. 
+For example:
+The product details page may have a tabbed navigation section
+that shows the product overview by default.
+When the user clicks the "Technical Specs" tab the section shows the specs instead.
+This feature is very common on sites like eBay or Amazon.
 
 If the user clicks on the product with ID 3, we want to show the product details page with the overview:
 
@@ -280,7 +293,7 @@ When the user clicks "Technical Specs":
 localhost:3000/product-details/3/specs
 ```
 
-`overview` and `specs` are child routes of product-details/:id. 
+`overview` and `specs` are child routes of product-details/:id.
 
 ---
 
@@ -302,7 +315,8 @@ export const routes: Routes = [
 ];
 ```
 
-The parent product-details template will contain a `<router-outlet></router-outlet>` to display the contents of the child. 
+The parent product-details template will contain a `<router-outlet></router-outlet>`
+to display the contents of the child.
 
 ---
 

@@ -248,7 +248,7 @@ const users = http.get(
 ).map((data) => data.json());
 
 const posts = http.get(
-  'https://jsonplaceholder.typicode.com/posts/'  
+  'https://jsonplaceholder.typicode.com/posts/'
 ).map((data) => data.json());
 
 Observable.forkJoin([users, posts])
