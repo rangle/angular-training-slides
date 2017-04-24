@@ -37,7 +37,7 @@
 
 ## Creating Test Files
 
-- Angular CLI automatically creates test files for components
+- Angular CLI automatically creates test files for all generated Angular elements (components, services, pipes and directives)
 - Adds `.spec` to test file names so Jasmine and the build system recognize them as tests
 - E.g., `src/app/app.component.spec.ts` does basic tests of `AppComponent`
 
