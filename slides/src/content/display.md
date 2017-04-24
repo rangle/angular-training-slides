@@ -53,23 +53,16 @@ export class AppComponent {
 
 ---
 
-## Make Items Findable
+## `*ngFor` Exports Useful Values
 
-- Giving each item a unique ID allows bookmarking and testing
+- We can obtain the 0-based index of each iteration and assign the value to a local variable:
 
 #####_src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
-<p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
+<p *ngFor="let item of thingsToDo; let i = index">({{i}}) {{item}}</p>
 ```
-
-- Use developer tools to view elements:
-
-```html
-<p _ngcontent-rsi-0 ng-reflect-id="0" id="0">(0) Learn JavaScript</p>
-```
-
-- And yes, we should use `<ul>` and `<li>`…
+- Similarly, `*ngFor` exports `first`, `last`, `even` and `odd` booleans which can also be assigned to local variables.
 
 ---
 
