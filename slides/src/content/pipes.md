@@ -46,6 +46,7 @@
 
 - Pipes also accept arguments
 - Use colon as delimiter
+- Chained pipes are evaluated from left to right
 
 ```html
 Price is {{ 100.12345 | currency:"CAD":true:"1.2" | lowercase }}
