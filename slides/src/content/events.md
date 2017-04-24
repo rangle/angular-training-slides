@@ -215,6 +215,7 @@ export class GenericInputComponent implements OnInit {
 <app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
 ```
 
+- The `onNewItem` event handler is a public method on the AppComponent class
 - `$event` is a built-in variable representing the event
   - In our case, a string
 
