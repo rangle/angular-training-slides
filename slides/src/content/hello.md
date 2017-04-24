@@ -160,8 +160,8 @@ export class AppComponent {
 ## Running the Application
 
 - `npm run start` launches the application
-  - Command is defined in `./package.json`
-  - Note: use `npm` to run, *not* `ng`
+  - Command is defined in the `scripts` section of `./package.json`
+  - Note: use `npm` to run, *not* `ng`, this ensures the local version of the Angular CLI is used, not the one globally installed on your machine.
 - By default, preview on <http://localhost:4200>
 - Should see **app works!**
 - Worth exploring the page using developer tools
