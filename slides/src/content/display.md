@@ -24,7 +24,7 @@
 #####_src/app/app.component.ts_
 ```ts
 @Component({
-  …as before…
+  // ...as before...
 }
 export class AppComponent {
   title = 'To Do';
@@ -69,7 +69,7 @@ export class AppComponent {
 <p _ngcontent-rsi-0 ng-reflect-id="0" id="0">(0) Learn JavaScript</p>
 ```
 
-- And yes, we should use `<ul>` and `<li>`…
+- And yes, we should use `<ul>` and `<li>`...
 
 ---
 
@@ -82,7 +82,7 @@ export class AppComponent {
 #####_src/app/app.component.ts_
 ```ts
 export class AppComponent {
-  …as before…
+  // ...as before...
   thingsCompleted = [];
 }
 ```
@@ -109,7 +109,7 @@ export class AppComponent {
 _app/component/app.component.ts_
 ```ts
 export class AppComponent {
-  …as before…
+  // ...as before...
   summary(): string {
     return `${this.thingsToDo.length} done / ${this.thingsCompleted.length} to do`;
   }
@@ -140,7 +140,7 @@ _app/component/app.component.html_
 _app.component/app.component.ts_
 ```
 export class AppComponent {
-  …as before…
+  // ...as before...
   constructor() {
     setInterval(() => {
       this.thingsToDo.push('make coffee');

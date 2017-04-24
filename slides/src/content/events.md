@@ -46,7 +46,7 @@
 #####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 export class ToDoListComponent implements OnInit {
-  …as before…
+  // ...as before...
 
   addToDo(text: string) {
     this.thingsToDo.push(text);
@@ -67,7 +67,7 @@ export class ToDoListComponent implements OnInit {
 
 #####_src/app/to-do-list/to-do-list.component.html_
 ```html
-…as before…
+// ...as before...
 <p>
   <input #newItem placeholder="item"/>
   <button (click)="addToDo(newItem)">+</button>
@@ -97,7 +97,7 @@ export class ToDoListComponent implements OnInit {
 #####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 export class ToDoListComponent implements OnInit {
-  …as before…
+  // ...as before...
 
   addToDo(text: HTMLInputElement) {
     this.thingsToDo.push(text.value);
@@ -155,7 +155,7 @@ export class ToDoListComponent implements OnInit {
 #####_src/app/generic-input/generic-input.component.ts_
 ```ts
 export class GenericInputComponent implements OnInit {
-  …as before…
+  // ...as before...
   addToDo(text: HTMLInputElement) {
     this.thingsToDo.push(text.value);
     text.value = '';
@@ -174,13 +174,13 @@ export class GenericInputComponent implements OnInit {
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  …as before…
+  // ...as before...
 })
 export class GenericInputComponent implements OnInit {
 
   @Output() newItem: EventEmitter<string> = new EventEmitter();
 
-  …constructor and ngOnInit as before…
+  // ...constructor and ngOnInit as before...
 
   addToDo(text: HTMLInputElement) {
     this.newItem.emit(text.value);

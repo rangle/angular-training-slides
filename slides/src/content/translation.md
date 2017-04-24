@@ -30,12 +30,10 @@
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  …
   imports: [
-    …
-    TranslateModule.forRoot({…})
+    TranslateModule.forRoot({...})
   ],
-  …
+  // ...
 })
 export class AppModule { }
 ```
@@ -62,9 +60,7 @@ export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  …
   imports: [
-    …
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -73,7 +69,7 @@ export function HttpLoaderFactory(http: Http) {
       }
     })
   ]
-  …
+  // ...
 ```
 
 ---

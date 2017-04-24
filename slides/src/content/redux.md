@@ -122,8 +122,8 @@ Notes:
 - New state is the old list plus a new item
   - New item arrives as action's payload
 - Do *not* use `items.push` to update existing state
-  - More efficient…
-  - …but only if correctness and programmer time aren't issues
+  - More efficient...
+  - ...but only if correctness and programmer time aren't issues
 
 ---
 
@@ -180,13 +180,13 @@ import { reducer } from './store';
 
 @NgModule({
   declarations: [
-    …as before…
+    // ...as before...
   ],
   imports: [
-    …as before…
+    // ...as before...
     StoreModule.provideStore(reducer)
   ],
-  …as before…
+  // ...as before...
 })
 export class AppModule { }
 ```
@@ -276,10 +276,10 @@ export class ToDoListComponent implements OnInit {
 - So we can filter (select) top-level elements by name
   - Only pay attention to events signalling changes to `store['items']`
 - And subscribe to just those changes
-- When we get a new list of items…
-  - …because that's all we're paying attention to…
-- …we copy it into the list we're displaying…
-  - …because we don't way to share state
+- When we get a new list of items...
+  - ...because that's all we're paying attention to...
+- ...we copy it into the list we're displaying...
+  - ...because we don't way to share state
 
 ---
 
@@ -321,7 +321,7 @@ import { AppState, ITEM_DELETE } from '../store';
 
 export class ToDoListComponent implements OnInit {
 
-  …as before…
+  // ...as before...
 
   onDelete(item) {
     this.store.dispatch({type: ITEM_DELETE, payload: item});
@@ -349,7 +349,7 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
     };
     return newState;
 
-  …other cases…
+  ...other cases...
 
   }
 }

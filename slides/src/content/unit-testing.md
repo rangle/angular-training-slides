@@ -104,7 +104,7 @@ describe('CapitalizePipe', () => {
     pipe = new CapitalizePipe();
   });
 
-  …instance creation test as before…
+  // ...instance creation test as before...
 
 }
 ```
@@ -119,7 +119,7 @@ describe('CapitalizePipe', () => {
 ```ts
 describe('CapitalizePipe', () => {
 
-  …as before…
+  // ...as before...
 
   it('should capitalize a word', () => {
     expect(pipe.transform('foo')).toEqual('Foo');
@@ -168,7 +168,7 @@ describe('CapitalizePipe', () => {
 #####_src/app/app.component.ts_
 ```ts
 export class AppComponent {
-  …as before…
+  // ...as before...
   itemCount() {
     return this.toDoService.itemCount();
   }
@@ -178,7 +178,7 @@ export class AppComponent {
 #####_src/app/to-do.service.ts_
 ```ts
 export class ToDoService {
-  …as before…
+  // ...as before...
   itemCount() {
     return this.items.length;
   }
@@ -302,10 +302,10 @@ TestBed.configureTestingModule({
 })
 ```
 
-- Inject actual services or importing real modules often works…
-- …but sometimes Angular is not able to resolve all of the required dependencies
-- We have more control when we mock things…
-- …but if mocks get too complicated, they can be expensive to maintain
+- Inject actual services or importing real modules often works...
+- ...but sometimes Angular is not able to resolve all of the required dependencies
+- We have more control when we mock things...
+- ...but if mocks get too complicated, they can be expensive to maintain
 
 ---
 
