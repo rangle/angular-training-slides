@@ -8,7 +8,7 @@
 
 ## What is Augury?
 
-- [Augury](https://augury.angular.io/) is a Chrome DevTools extensions for debugging and profiling Angular 2 applications
+- [Augury](https://augury.angular.io/) is a Chrome DevTools extensions for debugging and profiling Angular applications
 - Disclaimer: Augury was authored by [Rangle.io](http://rangle.io)
 
 <img src="content/images/augury.svg" width="200" style="box-shadow: none" alt="Augury Logo"/>

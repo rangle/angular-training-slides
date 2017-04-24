@@ -25,4 +25,4 @@ These are the most-used lifecycle hooks:
 ![File Structure](content/images/angular1-vs-angular2.jpg)
 
 - Angular 1: Two-way data binding. Nodes traversed one or more times.
-- Angular 2: One-way data binding. Nodes traversed once.
+- Angular 2+: One-way data binding. Nodes traversed once.
