@@ -209,22 +209,7 @@ export class GenericInputComponent implements OnInit {
 
 ## Styling the Form
 
-- Along with data binding `ngModel` gives us information about the control's state
-- Can notify us if the control was touched or changed
-  or if the value became invalid
-- The following CSS class are available for this:
-
-|  Class if true | Class if false | Description                          |
-| -------------- | -------------- | ------------------------------------ |
-| ng-valid       | ng-invalid     | The model is valid                   |
-| ng-dirty       | ng-pristine    | The control has been interacted with |
-| ng-touched     | ng-untouched   | The control has been blurred         |
-
----
-
-## Styling the Form
-
-- Change example to use these styles
+- ... so we also check that the input has been touched before showing error message
 
 #####_src/app/generic-input/generic-input.component.html_
 ```html
@@ -239,9 +224,25 @@ export class GenericInputComponent implements OnInit {
 </form>
 ```
 
-<!-- https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview -->
+---
+
+## Styling the Form
+
+- Along with data binding `ngModel` gives us information about the control's state
+- Can notify us if the control was touched or changed
+  or if the value became invalid
+- The following CSS class are available for this:
+
+|  Class if true | Class if false | Description                          |
+| -------------- | -------------- | ------------------------------------ |
+| ng-valid       | ng-invalid     | The model is valid                   |
+| ng-dirty       | ng-pristine    | The control has been interacted with |
+| ng-touched     | ng-untouched   | The control has been blurred         |
 
 ---
+
+<!-- https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview -->
+
 
 ## Styling the Form
 
