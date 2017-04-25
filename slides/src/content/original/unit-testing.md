@@ -309,7 +309,7 @@ beforeEach(() => {
 ## Testing Asynchronous Actions (1/2)
 
 - `fakeAsync` lets us simulate the passage of time using `tick`
-- Lets us test asynchronous behaviour with synchronous functions
+- Lets us test asynchronous behavior with synchronous functions
 
 Recall our `QuoteComponent`
 
