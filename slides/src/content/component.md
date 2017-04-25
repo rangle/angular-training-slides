@@ -20,6 +20,7 @@
 - Use Angular CLI to create a new component to display the list
   - But keep the data in `app.component.ts`
 - `ng generate component toDoList`
+  - `ng generate` can be run from any folder within the project
 - Creates `src/app/to-do-list/*`
 ```
 ├── src
