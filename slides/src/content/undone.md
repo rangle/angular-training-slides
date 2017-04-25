@@ -507,7 +507,7 @@ export class AppComponent {
     this.values = form.value;
   }
 }
-```    
+```
 
 [View Example](https://plnkr.co/edit/ttVaCf?p=preview)
 

@@ -99,7 +99,7 @@ describe('CapitalizePipe', () => {
 describe('CapitalizePipe', () => {
 
   let pipe;
-  
+
   beforeEach(() => {
     pipe = new CapitalizePipe();
   });

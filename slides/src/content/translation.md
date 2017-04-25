@@ -114,13 +114,13 @@ translate.setTranslation('en', {
 });
 ```
 
-- Use the `TranslateService` to set the default language
+- Use the `TranslateService` to set the default language:
 
 ```ts
 translate.setDefaultLang('en');
 ```
 
-- Or use it to get the current set language 
+- Or use it to get the current set language:
 
 ```ts
 const browserLang = translate.getBrowserLang();
