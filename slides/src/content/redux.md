@@ -421,6 +421,24 @@ our reducers. In the case of `@ngrx`, state is stored within an
 
 ## FAQ
 
+**Can I have more than one store?**
+
+No, redux uses one global store to manage state., however it is common practice
+to divide your store into separate areas of concern.
+
+Just as we can configure our store like this:
+`StoreModule.provideStore(reducer)`
+We are also able to pass in an object and associate a reducer with a given piece
+of our state
+`StoreModule.provideStore({ todos: todosReducer, users: usersReducer })`
+
+We can also take advantage of functional composition, and "combine" multiple
+reducers into one using the `combineReducers` helper function `@ngrx` provides.
+
+---
+
+## FAQ
+
 **Does the UI broadcast actions and store broadcast actions back?**
 
 The UI should not broadcast actions directly, it can and often should
