@@ -97,7 +97,7 @@ export class ToDoListComponent implements OnInit {
 }
 ```
 
-_Reminder: All decorators in Angulars are functions. Even if you don't pass any arguments in, you'll need to include the parentheses._
+Reminder: All decorators in Angulars are functions. Even if you don't pass any arguments in, you'll need to include the parentheses.
 
 ---
 

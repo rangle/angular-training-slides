@@ -60,7 +60,7 @@ In our definition, our schema has a `fields` property that defines what our form
 
 We have a basic schema service that simply parses this as JSON, serializes it into a JavaScript object and binds it to a local class member.
 
-_form-schema.service.ts_
+#####_form-schema.service.ts_
 ```ts
 export class FormSchemaService {
   schema = {};
@@ -82,7 +82,7 @@ export class FormSchemaService {
 
 To actually use this object to generate a reactive form, we need a way of mapping this object to an Angular `FormGroup` instance.
 
-_dynamic-form.service.ts_
+#####_dynamic-form.service.ts_
 ```ts
 export class DynamicFormService {
   generateForm(schema) {
@@ -109,7 +109,7 @@ export class DynamicFormService {
 
 After generating a `FormGroup` object, we can start using the reactive form within our component. Here, we use both the form schema and the `FormGroup` object within our template:
 
-_dynamic-form.component.ts_
+#####_dynamic-form.component.ts_
 ```ts
 @Component({
 	selector: 'app-dynamic-form',
@@ -136,7 +136,7 @@ _dynamic-form.component.ts_
 
 ## How to Generate Forms Dynamically (6/6)
 
-_dynamic-form.component.ts_
+#####_dynamic-form.component.ts_
 ```ts
 export class DynamicFormComponent {
   editProfileForm = new FormGroup({});

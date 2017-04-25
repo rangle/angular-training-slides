@@ -18,7 +18,7 @@
 ## Installing Augury
 
 - Augury is available through the Chrome web store and installed as a Chrome extension
-- After installation, a tab labelled _Augury_ should be available in Chrome DevTools
+- After installation, a tab labelled *Augury* should be available in Chrome DevTools
 
 ![Augury in DevTools](content/images/chrome-devtools-augury.png)
 

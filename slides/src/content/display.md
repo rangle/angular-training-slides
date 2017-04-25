@@ -106,7 +106,7 @@ export class AppComponent {
 
 - Interpolated expressions can include function and method calls
 
-_app/component/app.component.ts_
+#####_app/component/app.component.ts_
 ```ts
 export class AppComponent {
   …as before…
@@ -116,7 +116,7 @@ export class AppComponent {
 }
 ```
 
-_app/component/app.component.html_
+#####_app/component/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p>Summary: {{summary()}}</p>
@@ -137,7 +137,7 @@ _app/component/app.component.html_
 - Angular notices data changes and updates page according
 - Show this by adding a to-do item to the list every second
 
-_app.component/app.component.ts_
+#####_app.component/app.component.ts_
 ```
 export class AppComponent {
   …as before…

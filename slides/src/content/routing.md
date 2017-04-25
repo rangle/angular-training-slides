@@ -53,7 +53,7 @@ td.item {
 
 - Set `base` tag in the `<head>` of `src/index.html` to tell Angular where routes start
 
-_src/index.html_
+#####_src/index.html_
 ```html
  <base href="/">
 ```

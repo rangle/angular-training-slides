@@ -82,7 +82,7 @@ export function HttpLoaderFactory(http: Http) {
 
 - Create JSON files with names based on language codes
 
-_assets/i18n/en.json_
+#####_assets/i18n/en.json_
 ```json
 {
   "HOME": {
@@ -91,7 +91,7 @@ _assets/i18n/en.json_
 }
 ```
 
-_assets/i18n/fr.json_
+#####_assets/i18n/fr.json_
 ```json
 {
   "HOME": {
