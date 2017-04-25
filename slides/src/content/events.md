@@ -215,8 +215,8 @@ export class GenericInputComponent implements OnInit {
 <app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
 ```
 
-- `$event` is a built-in variable representing the event
-  - In our case, a string
+- `$event` is a special Angular variable that represents the value *emitted* by the captured *event*
+  - In our case, the user-inputted string
 
 ---
 
