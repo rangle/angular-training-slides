@@ -5,7 +5,7 @@ Objectives:
 
 1. To be able to inject http into an Angular component, get a value from a typical REST endpoint and bind it directly to the template.
 
-2. To be able to explain what the `async` pipe does and describe how you would mimic the behaviour of the `async` pipe in a component by subscribing to an observable.
+2. To be able to explain what the `async` pipe does and describe how you would mimic the behavior of the `async` pipe in a component by subscribing to an observable.
 
 ---
 
@@ -15,7 +15,7 @@ Objectives:
 * Available for use now via [RxJS library](https://github.com/ReactiveX/rxjs).
 * Used in many languages and frameworks.
 * Used extensively in Angular.
-* Observables help with asynchronous behaviours.
+* Observables help with asynchronous behaviors.
 
 ---
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
