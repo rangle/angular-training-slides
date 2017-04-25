@@ -1,6 +1,6 @@
-# Angular 2 Training Slides
+# Angular Training Slides
 
-Slides for the Angular 2 training created with Reveal.js and using Markdown format
+Slides for the Angular 2+ training created with Reveal.js and using Markdown format
 
 To install and start the server:
 
