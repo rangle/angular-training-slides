@@ -256,7 +256,7 @@ mockTodoService = {
 #####_src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
-  declarations: [ mockTodoService ]
+  declarations: [ AppComponent ]
   providers:[
     { provide: TodoService, useValue: mockTodoService }
   ]
