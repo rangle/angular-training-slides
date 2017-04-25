@@ -212,7 +212,7 @@ export class GenericInputComponent implements OnInit {
 - Along with data binding `ngModel` gives us information about the control's state
 - Can notify us if the control was touched or changed
   or if the value became invalid
-- The following CSS class are available for this:
+- The following CSS classes are available for this:
 
 |  Class if true | Class if false | Description                          |
 | -------------- | -------------- | ------------------------------------ |
