@@ -119,6 +119,19 @@ export class ToDoListComponent implements OnInit {
 
 - Have to quote the value inside the double quotes or Angular will try to evaluate it
 
+
+---
+
+## Passing Data to a Component
+
+- Angular also has a shorthand for passing string properties to components:
+
+```html
+<app-to-do-list heading="Things To Do"></app-to-do-list>
+```
+
+Passing strings to components in this way resembles setting properties in html elements.
+
 ---
 
 ## Refactoring
@@ -229,13 +242,13 @@ export class Child {
 
 ## Quiz (continued)
 
-1. Parent:  
+1. Parent:
    Child: Greetings
 
-2. Parent: Greetings  
+2. Parent: Greetings
    Child: Greetings
 
-3. Parent: Greetings  
+3. Parent: Greetings
    Child:
 
 +++
