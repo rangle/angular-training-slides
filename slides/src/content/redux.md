@@ -198,14 +198,14 @@ export class AppModule { }
 ## Clean Up the Main Application's HTML
 
 #####_src/app/app.component.html_ (old)
-```ts
+```html
 <h1>{{title}}</h1>
 <app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
 <app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
 ```
 
 #####_src/app/app.component.html_ (new)
-```ts
+```html
 <h1>{{title}}</h1>
 <app-to-do-list></app-to-do-list>
 <app-generic-input (newItem)="onNewItem($event)"></app-generic-input>
