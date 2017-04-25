@@ -177,7 +177,7 @@ When using template driven forms we can use 4 built-in validators: `required`, `
 
 To perform validation, we need to create template variables for every field `#field="ngModel"`
 
-```ts
+```html
 <label>
   Username:
   <input name="username" ngModel #username="ngModel" required />
