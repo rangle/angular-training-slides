@@ -1,6 +1,6 @@
 **David Barreto**
- 
-![David Barreto](./david-barreto.jpg)
+
+<img src="./david-barreto.jpg" alt="David Barreto" sytle="max-width: 200px;" />
  
 David Barreto is a Solutions Architect at Rangle.
 
