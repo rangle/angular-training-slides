@@ -10,6 +10,6 @@ David got a Master's degree in Systems Engineering and co founded two tech start
 
 For the last couple of years David has specialized in frontend technologies creating applications in Angular and React.
  
- * GitHub: [barretodavid](http://github.com/barretodavid/)
- * Twitter: [@barretodavid](https://twitter.com/barretodavid/)
- * Personal: [barretodavid.com](http://barretodavid.com/)
+* GitHub: [barretodavid](http://github.com/barretodavid/)
+* Twitter: [@barretodavid](https://twitter.com/barretodavid/)
+* Personal: [barretodavid.com](http://barretodavid.com/)
