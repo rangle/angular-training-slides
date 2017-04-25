@@ -84,7 +84,7 @@ FIXME: diagram of state update
 - Each action is an `Object` with:
   - `type`: identifies what kind of action this is (to allow selection and filtering)
   - `payload`: extra information needed to carry out the action
-    - Name is just a convention, but a widely-used one
+    - This is just a convention, but a widely-used one
 
 ---
 
