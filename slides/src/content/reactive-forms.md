@@ -1,11 +1,12 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+<!-- .slide: id="reactive-forms" -->
 
 ## Building Applications with Angular
 
 # Reactive Forms
 
 ---
-
+<!-- .slide: id="reactive-forms-roadmap" -->
 ## Roadmap
 
 1. How do reactive forms differ from template driven forms?
@@ -14,7 +15,7 @@
 1. How can I create my own validators?
 
 ---
-
+<!-- .slide: id="reactive-forms-overview" -->
 ## Overview (again)
 
 - Template Driven Forms: controls and validation rules defined in the template with directives
@@ -27,7 +28,7 @@
  - Define the validation and model as part of our component
 
 ---
-
+<!-- .slide: id="reactive-forms-creating" -->
 ## Creating Reactive Forms
 
 - Import `ReactiveFormsModule` from `@angular/forms` into `app.module.ts`
@@ -51,7 +52,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-declaring-1" -->
 ## Declaring a Reactive Form
 
 - Reactive Forms are declared using the `FormBuilder` service
@@ -62,7 +63,7 @@ export class AppModule { }
   - Will get compilation errors until modifications complete
 
 ---
-
+<!-- .slide: id="reactive-forms-declaring-2" -->
 ## Declaring a Reactive Form
 
 #####_src/app/generic-input/generic-input.component.ts_
@@ -87,7 +88,7 @@ export class GenericInputComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-modifying-the-view" -->
 ## Modifying the View
 
 ```html
@@ -103,7 +104,7 @@ export class GenericInputComponent implements OnInit {
 - Also not creating any template variables
 
 ---
-
+<!-- .slide: id="reactive-forms-validating-1" -->
 ## Validating Reactive Forms
 
 - Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
@@ -122,7 +123,7 @@ export class GenericInputComponent {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-validating-2" -->
 ## Validating Reactive Forms
 
 - Now use the validator in the form's HTML
@@ -138,7 +139,7 @@ export class GenericInputComponent {
 <!-- preview: https://plnkr.co/edit/m8cTaN?p=preview -->
 
 ---
-
+<!-- .slide: id="reactive-forms-custom-validators-1" -->
 ## Custom Validators
 
 - Can also provide custom validators to `FormControl` that return:
@@ -161,7 +162,7 @@ export class CustomValidators {
 - And we really ought to put our validators in their own files…
 
 ---
-
+<!-- .slide: id="reactive-forms-custom-validators-2" -->
 ## Custom Validators
 
 - Validate a field by adding `timeFormat.hasError('timeFormat')` to the `FormControl` constructor
@@ -185,7 +186,7 @@ export class GenericInputComponent {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-custom-validators-3" -->
 ## Custom Validators
 
 ![Custom Validators](content/images/screenshot-invalid-time-format.png)
@@ -193,7 +194,7 @@ export class GenericInputComponent {
 <!-- preview: https://plnkr.co/edit/m6heM7?p=preview -->
 
 ---
-
+<!-- .slide: id="reactive-forms-separating-forms-into-logical-sections" -->
 ## Separating Forms into Logical Sections
 
 - Dividing large forms into sections makes it easier to track validation issues
@@ -204,7 +205,7 @@ export class GenericInputComponent {
 - We can create nested `FormGroup`s within other `FormGroup`s
 
 ---
-
+<!-- .slide: id="reactive-forms-start-with-a-model" -->
 ## Start With a Model
 
 - We want to turn this data structure into an Angular form
@@ -223,7 +224,7 @@ export class GenericInputComponent {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-converting-to-code" -->
 ## Converting to Code
 
 - Turn the logical structure into a class
@@ -246,7 +247,7 @@ export class StructuredFormComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-building-the-form-1" -->
 ## Building the Form
 
 - Inject `FormBuilder` via our constructor
@@ -264,7 +265,7 @@ constructor(
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-building-the-form-2" -->
 ## Building the Form
 
 - Use helper methods to create each form group's controls
@@ -289,7 +290,7 @@ export class StructuredFormComponent implements OnInit {
 - The other group is built the same way
 
 ---
-
+<!-- .slide: id="reactive-forms-building-the-form-3" -->
 ## Building the Form
 
 - Add the sub-groups to the main form once they have been created
@@ -315,7 +316,7 @@ export class StructuredFormComponent implements OnInit {
 <!-- preview: http://plnkr.co/edit/rJ576V7ncL0Fjm3T7zpt?p=preview -->
 
 ---
-
+<!-- .slide: id="reactive-forms-using-the-form" -->
 ## Using the Form
 
 #####_src/app/structured-form/structured-form.html_
@@ -340,7 +341,7 @@ export class StructuredFormComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-wire-it-up" -->
 ## Wire It Up
 
 - Throw away most of the data for now…
@@ -365,13 +366,13 @@ export class StructuredFormComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="reactive-forms-appearance" -->
 ## Appearance
 
 ![Form With Groups](content/images/screenshot-grouped-form.png)
 
 ---
-
+<!-- .slide: id="reactive-forms-shortcuts" -->
 ## ShortCuts
 
 - Our component can also use shortcuts to create a `FormControl`

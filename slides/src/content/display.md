@@ -1,10 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="display" -->
 ## Building Applications with Angular
 
 # Displaying Data
 
 ---
+<!-- .slide: id="display-roadmap" -->
 
 ## Roadmap
 
@@ -15,7 +16,7 @@
 1. When does Angular update its display of data?
 
 ---
-
+<!-- .slide: id="display-make-the-data" -->
 ## Make the Data
 
 - Change the title
@@ -37,7 +38,7 @@ export class AppComponent {
 ```
 
 ---
-
+<!-- .slide: id="display-display-the-data" -->
 ## Display the Data
 
 - Use `*ngFor` to repeat some HTML multiple times
@@ -52,7 +53,7 @@ export class AppComponent {
 ![ngFor Output](content/images/screenshot-ngfor.png)
 
 ---
-
+<!-- .slide: id="display-ngfor-exports" -->
 ## `*ngFor` Exports Useful Values
 
 - We can obtain the 0-based index of each iteration and assign the value to a local variable:
@@ -65,7 +66,7 @@ export class AppComponent {
 - Similarly, `*ngFor` exports `first`, `last`, `even` and `odd` booleans which can also be assigned to local variables.
 
 ---
-
+<!-- .slide: id="display-ngif-1" -->
 ## Nothing to See Here, Folks
 
 - Use `*ngIf` to control whether or not something is displayed
@@ -81,7 +82,7 @@ export class AppComponent {
 ```
 
 ---
-
+<!-- .slide: id="display-ngif-2" -->
 ## Nothing to See Here, Folks
 
 #####_src/app/app.component.html_
@@ -94,7 +95,7 @@ export class AppComponent {
 ![ngIf Output](content/images/screenshot-ngif.png)
 
 ---
-
+<!-- .slide: id="display-dynamic-content-1" -->
 ## Dynamic Content
 
 - Interpolated expressions can include function and method calls
@@ -118,13 +119,13 @@ export class AppComponent {
 ```
 
 ---
-
+<!-- .slide: id="display-dynamic-content-2" -->
 ## Dynamic Content
 
 ![Interpolating Method Call](content/images/screenshot-method.png)
 
 ---
-
+<!-- .slide: id="display-dynamic-content-3" -->
 ## Dynamic Content
 
 - Angular notices data changes and updates page according
@@ -143,7 +144,7 @@ export class AppComponent {
 ```
 
 ---
-
+<!-- .slide: id="display-dynamic-content-4" -->
 ## Dynamic Content
 
 - Both the list and the summary update every second

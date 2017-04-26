@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="augury" -->
 ##  Building Applications with Angular
 
 # Augury
 
 ---
-
+<!-- .slide: id="augury-what-is-augury" -->
 ## What is Augury?
 
 - [Augury](https://augury.angular.io/) is a Chrome DevTools extensions for debugging and profiling Angular applications
@@ -14,7 +14,7 @@
 <img src="content/images/augury.svg" width="200" style="box-shadow: none" alt="Augury Logo"/>
 
 ---
-
+<!-- .slide: id="augury-installing" -->
 ## Installing Augury
 
 - Augury is available through the Chrome web store and installed as a Chrome extension
@@ -23,7 +23,7 @@
 ![Augury in DevTools](content/images/chrome-devtools-augury.png)
 
 ---
-
+<!-- .slide: id="augury-integrating" -->
 ## Integrating With Your Application
 
 - Augury allows us to inspect our component tree to check the applicaton state at any point
@@ -35,7 +35,7 @@
 - Custom events can be triggered using arbitrary values
 
 ---
-
+<!-- .slide: id="augury-inspecting" -->
 ## Basic Inspection with Augury
 
 ![Augury in Action](content/images/augury-component-tree.png)

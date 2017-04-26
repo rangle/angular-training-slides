@@ -1,18 +1,18 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="routing" -->
 ## Building Applications with Angular
 
 # Routing
 
 ---
-
+<!-- .slide: id="routing-advanced-roadmap" -->
 ## Roadmap
 
 1. How do I route different URLs to different parts of an application?
 1. How do I change what is displayed based on the URL?
 
 ---
-
+<!-- .slide: id="routing-advanced-why-routing" -->
 ## Why Routing?
 
 - Routing allows users to navigate to different parts of the application
@@ -23,7 +23,7 @@
   - But that makes locations within the application un-bookmarkable
 
 ---
-
+<!-- .slide: id="routing-fancy-lists" -->
 ## Fancy Lists
 
 - Create a `FancyListComponent` that displays the same to-do list in a different way
@@ -48,7 +48,7 @@ td.item {
 ```
 
 ---
-
+<!-- .slide: id="routing-configuring-routing" -->
 ## Configuring Routing
 
 - Set `base` tag in the `<head>` of `src/index.html` to tell Angular where routes start
@@ -62,7 +62,7 @@ td.item {
   - E.g., `http://rangle.io/some/path` would set `base` to `/some/path`
 
 ---
-
+<!-- .slide: id="routing-defining-routes" -->
 ## Defining Routes
 
 - Create array of type `Routes` that specifies what to do with different paths
@@ -82,7 +82,7 @@ export const routeConfig: Routes = [
 ```
 
 ---
-
+<!-- .slide: id="routing-common-attributes-in-routes" -->
 ## Common Attributes in Routes
 
 | Attribute    | Use |
@@ -97,7 +97,7 @@ export const routeConfig: Routes = [
 - `children` will be discussed later
 
 ---
-
+<!-- .slide: id="routing-adding-router-module" -->
 ## Adding Router Module
 
 - Import `routeConfig` into `app.module.ts`
@@ -121,7 +121,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="routing-adding-router-outlet" -->
 ## Adding RouterOutlet
 
 - Use `<router-outlet></router-outlet>` to show where to display routed content
@@ -145,7 +145,7 @@ export class AppModule { }
 <!-- preview: https://plnkr.co/edit/3EH52DtjS1Z5fUbycMX9?p=preview -->
 
 ---
-
+<!-- .slide: id="routing-final-appearance" -->
 ## Final Appearance
 
 | Classic View | Fancy View |

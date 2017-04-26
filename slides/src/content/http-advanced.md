@@ -1,17 +1,18 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+<!-- .slide: id="http-advanced" -->
 
 ## Building Applications with Angular
 
 # Advanced HTTP
 
 ---
-
+<!-- .slide: id="http-advanced-roadmap" -->
 ## Roadmap
 
 FIXME: this module needs to be updated and proof-read
 
 ---
-
+<!-- .slide: id="http-advanced-catch-operator" -->
 ## Using the `.catch` operator
 
 - Using `.catch` we can inspect an error and decide how to handle it
@@ -33,7 +34,7 @@ FIXME: this module needs to be updated and proof-read
 ```
 
 ---
-
+<!-- .slide: id="http-advanced-cancel-request" -->
 ## Cancel a Request
 
 - One of the greatest benefits to using observables over promises is the ability to cancel `http` requests
@@ -53,7 +54,7 @@ FIXME: this module needs to be updated and proof-read
 [View Example](http://plnkr.co/edit/MByeTy?p=preview)
 
 ---
-
+<!-- .slide: id="http-advanced-cancel-request-with-takeuntil" -->
 ## Cancel a Request with `takeUntil`
 
 - Managing subscription cancellation via `unsubscribe` can get messy
@@ -77,7 +78,7 @@ search() {
 [View Example](https://plnkr.co/edit/v2aGkTCmi34jBr7an1i8?p=preview)
 
 ---
-
+<!-- .slide: id="http-advanced-retry-request" -->
 ## Retry a request
 
 - Retry a failed request with the `retry` operator

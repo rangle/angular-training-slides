@@ -1,4 +1,5 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+<!-- .slide: id="observables" -->
 # Introduction to Observables
 
 Objectives:
@@ -8,7 +9,7 @@ Objectives:
 2. To be able to explain what the `async` pipe does and describe how you would mimic the behavior of the `async` pipe in a component by subscribing to an observable.
 
 ---
-
+<!-- .slide: id="observables-what-are-observables" -->
 ## What are Observables?
 
 * ECMA Stage 1, expected to move to Stage 2 soon.
@@ -18,6 +19,7 @@ Objectives:
 * Observables help with asynchronous behaviors.
 
 ---
+<!-- .slide: id="observables-quiz-1" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
@@ -42,7 +44,7 @@ Definition from RxJS docs:
 > the class that receives them (the observer).
 
 ---
-
+<!-- .slide: id="observables-subscribing" -->
 ## Subscribing to an Observable
 
 Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit:
@@ -57,6 +59,7 @@ getData$.subscribe(data => {
 ```
 
 ---
+<!-- .slide: id="observables-quiz-2" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
@@ -76,7 +79,7 @@ Subscribing to an observable:
 Correct answer is 2.
 
 ---
-
+<!-- .slide: id="observables-map-operator" -->
 ## The Map Operator
 
 * You pass it a function that transforms (maps) the data returned.
@@ -96,6 +99,7 @@ https://jsbin.com/genayadivo/edit?html,js,console,output
 *concepts*: operators, map operator (instance method)
 
 ---
+<!-- .slide: id="observables-quiz-3" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
@@ -115,7 +119,7 @@ The map operator:
 Correct answer is 2.
 
 ---
-
+<!-- .slide: id="observables-http-service" -->
 ## Angular's Http Service
 
 * `Http` from `'@angular/http'` has methods such as `get` that return observables.
@@ -134,7 +138,7 @@ getData$.subscribe((data) => {
 In this example, `map` is used because `get` is an observable of an object with a `json` method.  Usually, we want the return value of `json()`, not the response object!
 
 ---
-
+<!-- .slide: id="observables-unsubscribing" -->
 ## What about Unsubscribing?
 
 * Observables that finish, including `http.get` don't need to be unsubscribed.
@@ -153,7 +157,7 @@ setTimeout(() => {
 ```
 
 ---
-
+<!-- .slide: id="observables-asyncpipe" -->
 ## Angular's AsyncPipe
 
 * `AsyncPipe` helps us write less by taking an observable and:
@@ -166,6 +170,7 @@ Example (`name$` is an observable):
 `<div> {{ name$ | async }} </div>`
 
 ---
+<!-- .slide: id="observables-quiz-4" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
@@ -185,7 +190,7 @@ Angular's `AsyncPipe`:
 Correct answer is 3.
 
 ---
-
+<!-- .slide: id="observables-filter-operator" -->
 ## The Filter Operators
 
 In addition to `map`, the `filter` operator is also available:
@@ -200,6 +205,7 @@ searchString$
 * [See RxJS References](http://reactivex.io/rxjs/identifiers.html) for many more operators!
 
 ---
+<!-- .slide: id="observables-quiz-5" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
@@ -218,7 +224,7 @@ Operators:
 The correct answer is 3.
 
 ---
-
+<!-- .slide: id="observables-chaining-with-mergemap" -->
 ## Chaining Promises vs `mergeMap`
 
 Observables can be nested.
@@ -237,7 +243,7 @@ http.get('https://jsonplaceholder.typicode.com/users')
 `mergeMap` works by subscribing to and pulling values out of the inner Observable stream, which is `Observable.from(data)` in this example, and passing or *merging* them back to the outer Observable stream.
 
 ---
-
+<!-- .slide: id="observables-combining-with-forkjoin" -->
 ## Combining multiple observables using `forkJoin`
 
 We can resolve multiple observables together using the `forkJoin` operator.

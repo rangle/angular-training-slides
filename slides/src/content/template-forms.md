@@ -1,10 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="template-forms" -->
 ## Building Applications with Angular
 
 # Template Driven Forms
 
 ---
+<!-- .slide: id="template-forms-roadmap" -->
 
 ## Roadmap
 
@@ -15,7 +16,7 @@
 1. How do I display error messages?
 
 ---
-
+<!-- .slide: id="template-forms-overview" -->
 ## Overview
 
 - Template Driven Forms: controls and validation rules defined in the template with directives
@@ -23,7 +24,7 @@
   - Explore these in the next section
 
 ---
-
+<!-- .slide: id="template-forms-creating" -->
 ## Creating Template Driven Forms
 
 - Import `FormsModule` from `@angular/forms` into `app.module.ts`
@@ -47,7 +48,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="template-forms-handing-form-data-1" -->
 ## Handling Form Data
 
 - Use `ngModel` and `ngForm` directives to handle form data
@@ -64,7 +65,7 @@ export class AppModule { }
 <!-- example: https://plnkr.co/edit/sdVst5yprdQUgQctQz9p?p=preview -->
 
 ---
-
+<!-- .slide: id="template-forms-handling-form-data-2" -->
 ## Handling Form Data
 
 - Every `<form>` element is automatically enhanced by the `NgForm` directive
@@ -74,7 +75,7 @@ export class AppModule { }
 - Every control that registers with the `ngForm` automatically appears in the `form.value` property
 
 ---
-
+<!-- .slide: id="template-forms-ngform" -->
 ## NgForm
 
 `NgForm` instances have several useful properties:
@@ -84,7 +85,7 @@ export class AppModule { }
 - `newItemForm.value.newItem`: the value of the `newItem` field
 
 ---
-
+<!-- .slide: id="template-forms-ngmodel-1" -->
 ## NgModel
 
 `NgModel` has similiar properties and more related to specific fields:
@@ -95,7 +96,7 @@ export class AppModule { }
 - `touched`: Indicates whether the field was clicked, tabbed, or tapped (Boolean)
 
 ---
-
+<!-- .slide: id="template-forms-ngmodel-2" -->
 ## NgModel
 
 #####_src/app/generic-input/generic-input.component.html_
@@ -112,7 +113,7 @@ export class AppModule { }
 <!-- preview: https://plnkr.co/edit/oVQhf641Nx1qpaBG5jeN?p=preview -->
 
 ---
-
+<!-- .slide: id="template-forms-handling-form-submissions-1" -->
 ## Handling Form Submissions
 
 - `ngSubmit` event handler automatically added to the `form` element
@@ -131,7 +132,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="template-forms-handling-form-submissions-2" -->
 ## Handling Form Submission
 
 - Modify `addToDo` to take an `NgForm` as input
@@ -151,7 +152,7 @@ export class GenericInputComponent implements OnInit {
 <!-- preview: https://plnkr.co/edit/Xxcf46sO5TWK1EKme1qF?p=preview -->
 
 ---
-
+<!-- .slide: id="template-forms-built-in-validators" -->
 ## Built-In Validators
 
 - `required`: field cannot be empty
@@ -167,7 +168,7 @@ export class GenericInputComponent implements OnInit {
   - others only produce a warning
 
 ---
-
+<!-- .slide: id="template-forms-performing-validation" -->
 ## Performing Validation
 
 - To perform validation, we must create a template variable for the given field `#field="ngModel"`
@@ -183,7 +184,7 @@ export class GenericInputComponent implements OnInit {
 - Has `value`, `valid`, `pristine`, and `touched` properties described earlier
 
 ---
-
+<!-- .slide: id="template-forms-displaying-error-messages" -->
 ## Displaying Error Messages
 
 - Use form validation state to control visibility using `hidden` property
@@ -206,7 +207,7 @@ export class GenericInputComponent implements OnInit {
 <!-- preview: https://plnkr.co/edit/zgAQW3pQjGqRGhAQvE7j?p=preview -->
 
 ---
-
+<!-- .slide: id="template-forms-styling-the-form-1" -->
 ## Styling the Form
 
 - Along with data binding `ngModel` gives us information about the control's state
@@ -221,7 +222,7 @@ export class GenericInputComponent implements OnInit {
 | ng-touched     | ng-untouched   | The control has been blurred         |
 
 ---
-
+<!-- .slide: id="template-forms-styling-the-form-2" -->
 ## Styling the Form
 
 - Change example to use these styles
@@ -242,7 +243,7 @@ export class GenericInputComponent implements OnInit {
 <!-- https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview -->
 
 ---
-
+<!-- .slide: id="template-forms-styling-the-form-3" -->
 ## Styling the Form
 
 - Use these classes and properties with CSS and HTML to create user-friendly forms
@@ -258,7 +259,7 @@ export class GenericInputComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="template-forms-styling-the-form-4" -->
 ## Styling the Form
 
 ![Styling the Form](content/images/screenshot-form-css.png)
