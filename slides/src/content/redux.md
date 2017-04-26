@@ -159,12 +159,12 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
 
   switch (action.type) {
 
-  case ITEM_ADD:
-    newState = {items: [...state.items, action.payload]};
-    return newState;
+    case ITEM_ADD:
+      newState = {items: [...state.items, action.payload]};
+      return newState;
 
-  default:
-    return state;
+    default:
+      return state;
   }
 }
 ```
