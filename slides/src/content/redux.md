@@ -222,10 +222,7 @@ import { AppState, ITEM_ADD, reducer } from './store';
 
 export class AppComponent {
 
-  constructor (
-    private store: Store<AppState>
-  ) {
-  }
+  constructor (private store: Store<AppState>) { }
 
   onNewItem(item: string) {
     this.store.dispatch({type: ITEM_ADD, payload: item});
@@ -248,10 +245,7 @@ export class ToDoListComponent implements OnInit {
 
   thingsToDo: string[];
 
-  constructor(
-    private store: Store<AppState>
-  ) {
-  }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store
