@@ -1,18 +1,18 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="pipes" -->
 ## Building Applications with Angular
 
 # Pipes
 
 ---
-
+<!-- .slide: id="pipes-roadmap" -->
 ## Roadmap
 
 1. How do I format data using a pipe?
 1. How do I create my own pipes?
 
 ---
-
+<!-- .slide: id="pipes-motivation" -->
 ## Motivation
 
 - Classes could turn everything into strings for display
@@ -23,7 +23,7 @@
 - Very easy to add new ones
 
 ---
-
+<!-- .slide: id="pipes-adding-a-pipe" -->
 ## Adding a Pipe
 
 - Put the name of the pipe inside `{{...}}`
@@ -41,7 +41,7 @@
 ![Converting to Upper Case](content/images/screenshot-uppercase.png)
 
 ---
-
+<!-- .slide: id="pipes-passing-arguments" -->
 ## Passing Arguments to the Pipe
 
 - Pipes also accept arguments
@@ -59,7 +59,7 @@ Price is ca$100.12
 ```
 
 ---
-
+<!-- .slide: id="pipes-built-in-pipes" -->
 ## Built-in Angular Pipes
 
 - [date](https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html): formats dates in various ways
@@ -69,7 +69,7 @@ Price is ca$100.12
 - [percent](https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html): formats a number as a percentage
 
 ---
-
+<!-- .slide: id="pipes-generating-pipes" -->
 ## Generating a Pipe
 
 - Use `ng generate pipe titlecase`
@@ -85,7 +85,7 @@ Price is ca$100.12
 ```
 
 ---
-
+<!-- .slide: id="pipes-whats-in-a-pipe" -->
 ## What's in a Pipe?
 
 #####_src/app/titlecase.ts_
@@ -109,7 +109,7 @@ export class TitlecasePipe implements PipeTransform {
 - Returns some value
 
 ---
-
+<!-- .slide: id="pipes-defining-our-transformation" -->
 ## Defining Our Transformation
 
 #####_src/app/titlecase.ts_
@@ -124,7 +124,7 @@ export class TitlecasePipe implements PipeTransform {
 ```
 
 ---
-
+<!-- .slide: id="pipes-using-our-pipe" -->
 ## Using Our Pipe
 
 #####_src/app/to-do-list/to-do-list.component.html_

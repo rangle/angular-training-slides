@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+<!-- .slide: id="unit-testing" -->
 
 ## Building Applications with Angular
-
 # Unit Testing
 
 ---
-
+<!-- .slide: id="unit-testing-roadmap" -->
 ## Roadmap
 
 1. What tools should I use to test Angular applications?
@@ -18,7 +18,7 @@
 1. How can I test asynchronous behaviors?
 
 ---
-
+<!-- .slide: id="unit-testing-toolchain" -->
 ## Toolchain
 
 - [Jasmine](https://jasmine.github.io/): behavior-driven testing framework
@@ -26,7 +26,7 @@
 - [Istanbul](https://gotwarlost.github.io/istanbul/): coverage report generator
 
 ---
-
+<!-- .slide: id="unit-testing-running-tests" -->
 ## Running Tests
 
 - `ng test`: lauches a browser for testing and watches for changes.
@@ -34,7 +34,7 @@
 - `ng test --code-coverage`: puts a coverage report in `coverage/` directory
 
 ---
-
+<!-- .slide: id="unit-testing-creating-test-files" -->
 ## Creating Test Files
 
 - Angular CLI automatically creates test files for all generated Angular elements (components, services, pipes and directives)
@@ -42,7 +42,7 @@
 - E.g., `src/app/app.component.spec.ts` does basic tests of `AppComponent`
 
 ---
-
+<!-- .slide: id="unit-testing-arrange-act-assert" -->
 ## Arrange, Act and Assert with Jasmine
 
 Note the following in the generated tests:
@@ -54,7 +54,7 @@ Note the following in the generated tests:
 - `toBeTruthy` is a matcher that asserts the expected outcome
 
 ---
-
+<!-- .slide: id="unit-testing-testing-a-pipe" -->
 ## Testing a Pipe
 
 - `ng generate pipe pipe capitalize`
@@ -73,7 +73,7 @@ export class CapitalizePipe implements PipeTransform {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-starter-code" -->
 ## Starter Code for Testing
 
 #####_src/app/capitalize.pipe.spec.ts_
@@ -89,7 +89,7 @@ describe('CapitalizePipe', () => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-instantiate-fixture" -->
 ## Instantiate the Fixture in `beforeEach`
 
 - We will need a fixture for each test, so don't duplicate that code
@@ -112,7 +112,7 @@ describe('CapitalizePipe', () => {
 - Have to declare `pipe` outside `beforeEach` so that it will be visible in test functions
 
 ---
-
+<!-- .slide: id="unit-testing-add-a-test" -->
 ## Add a Test
 
 #####_src/app/capitalize.pipe.spec.ts_
@@ -128,7 +128,7 @@ describe('CapitalizePipe', () => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-getting-tests-to-run" -->
 ## Getting Tests to Run
 
 - Run `ng test`: 4 failures
@@ -150,7 +150,7 @@ describe('CapitalizePipe', () => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-cleaning-up-tech-debt" -->
 ## Cleaning Up Technical Debt
 
 - Title is now "To Do" instead of "app works!"
@@ -160,7 +160,7 @@ describe('CapitalizePipe', () => {
 ![Auto-Generated Tests Running](content/images/screenshot-jasmine-defaults-run.png)
 
 ---
-
+<!-- .slide: id="unit-testing-instantiate-component" -->
 ## Instantiating the Component or Service
 
 - How would we test `itemCount` on `AppComponent`?
@@ -186,7 +186,7 @@ export class ToDoService {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-mocking-dependencies" -->
 ## Mocking Dependencies
 
 - We need an object that matches the "shape" of `TodoService` to test `AppComponent`
@@ -205,7 +205,7 @@ mockTodoService = {
   - Which is one of the reasons Angular uses this technique for dependency injection
 
 ---
-
+<!-- .slide: id="unit-testing-testing-business-logic" -->
 ## Testing Business Logic
 
 #####_src/app/app.component.spec.ts_
@@ -232,7 +232,7 @@ mockTodoService = {
 <!-- preview: http://plnkr.co/edit/XUM8Gfz08nfbQf1BhDN1?p=preview FIXME update -->
 
 ---
-
+<!-- .slide: id="unit-testing-when-to-use-testbed" -->
 ## When to Use TestBed
 
 `TestBed` is helpful when:
@@ -248,7 +248,7 @@ mockTodoService = {
 - Using the test fixture, Angular will give us the instance it created
 
 ---
-
+<!-- .slide: id="unit-testing-providing-mock-dependencies" -->
 ## Providing Mock Dependencies
 
 - We can declare `mockTodoService` as we did before and have Angular inject it for us
@@ -264,7 +264,7 @@ TestBed.configureTestingModule({
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-spying-on-real-service-providers" -->
 ## Spying on Real Service Providers
 
 - Alternatively, we can have Angular create the real service
@@ -291,7 +291,7 @@ FIXME: check the example above
 -->
 
 ---
-
+<!-- .slide: id="unit-testing-importing-real-application-modules" -->
 ## Importing Real Application Modules
 
 - We can import a real module that declares the component and provides the service it depends on
@@ -308,7 +308,7 @@ TestBed.configureTestingModule({
 - ...but if mocks get too complicated, they can be expensive to maintain
 
 ---
-
+<!-- .slide: id="unit-testing-testing-components-using-componentfixture" -->
 ## Testing Components Using ComponentFixture
 
 Here is how we obtain the instance from the fixture:
@@ -332,7 +332,7 @@ beforeEach(() => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-change-detection-1" -->
 ## Change Detection
 
 - We must tell Angular when to run change detection during our tests
@@ -345,7 +345,7 @@ fixture.detectChanges()
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-change-detection-2" -->
 ## Change Detection
 
 - Can indicate that we want *automatic change detection* when configuring our test module
@@ -361,7 +361,7 @@ TestBed.configureTestingModule({
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-querying-native-elements" -->
 ## Querying Native Elements
 
 - Once change detection has run, we can check that the expeced output was rendered to the DOM
@@ -388,7 +388,7 @@ describe('AppComponent', () => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-dealing-with-async" -->
 ## Dealing With Asynchronous Behavior in Tests
 
 - Angular CLI uses the asynchronous function `compileComponents` and wraps it in the `async` function
@@ -398,7 +398,7 @@ describe('AppComponent', () => {
   - But we will often need to use `async` and a similar function `fakeAsync` in our tests
 
 ---
-
+<!-- .slide: id="unit-testing-running-tests-in-a-zone" -->
 ## Running Tests in a Zone
 
 - Jasmine can run asynchronous tests like this:
@@ -417,7 +417,7 @@ it('should...', (done) => {
   where it can track all asynchronous activity and wait for all tasks to complete
 
 ---
-
+<!-- .slide: id="unit-testing-zone-js" -->
 ## Interlude: Zone.js
 
 - Zones allow Angular to create execution contexts that track the completion of ansynchronous operations
@@ -426,7 +426,7 @@ it('should...', (done) => {
   - Since change detection is often required after asynchronous operations complete
 
 ---
-
+<!-- .slide: id="unit-testing-using-async" -->
 ## Using `async`
 
 - The same test could be written as:
@@ -442,7 +442,7 @@ it('should...', async(() => {
 - Angular will now wait for the `expect` function to complete
 
 ---
-
+<!-- .slide: id="unit-testing-using-fakeasync" -->
 ## Using `fakeAsync`
 
 - This test tests debouncing *without* actually waiting for hundreds of milliseconds
@@ -460,7 +460,7 @@ it('should debounce change to search query for 300 ms', fakeAsync(() => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-testing-services" -->
 ## Testing Services
 
 - Test services in Angular using many of the same techniques and strategies used for testing components
@@ -472,7 +472,7 @@ it('should debounce change to search query for 300 ms', fakeAsync(() => {
   - Ensure that data is being returned in the correct format
 
 ---
-
+<!-- .slide: id="unit-testing-mocking-http" -->
 ##  Mocking Angular’s Http Service
 
 - Suppose we want to test a version of `TodoService` that uses `Http`'s `get` method
@@ -498,7 +498,7 @@ export class TodoService {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-creating-and-injecting-mock-object-1" -->
 ## Creating and Injecting the Mock Object
 
 - The backend returns data that looks like this:
@@ -521,7 +521,7 @@ export class TodoService {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-creating-and-inject-mock-object-2" -->
 ## Creating and Injecting the Mock Object
 
 - We can create a light mock of the `Http` service:
@@ -534,7 +534,7 @@ beforeEach(() => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-creating-and-injecting-mock-object-3" -->
 ## Creating and Injecting the Mock Object
 
 - We then create a spy for its `get` method
@@ -554,7 +554,7 @@ beforeEach(() => {
 ```
 
 ---
-
+<!-- .slide: id="unit-testing-asserting-on-the-request-and-response" -->
 ## Asserting on the Request and Response
 
 - This method still allows us to check that the service

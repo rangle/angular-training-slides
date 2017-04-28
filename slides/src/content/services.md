@@ -1,11 +1,12 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+<!-- .slide: id="services" -->
 
 ## Building Applications with Angular
 
 # Services
 
 ---
-
+<!-- .slide: id="services-roadmap" -->
 ## Roadmap
 
 1. What is a service?
@@ -14,7 +15,7 @@
 1. Why do we use services?
 
 ---
-
+<!-- .slide: id="services-what-is-a-service" -->
 ## What is a Service?
 
 - Something that provides functionality to many components
@@ -23,7 +24,7 @@
 - Does not produce a view itself
 
 ---
-
+<!-- .slide: id="services-creating-a-service" -->
 ## Creating a Service
 
 - Use `ng generate service toDo`
@@ -39,7 +40,7 @@
 ```
 
 ---
-
+<!-- .slide: id="services-whats-in-a-service" -->
 ## What's in a Service?
 
 - A service is just a class decorated with `@Injectable`
@@ -57,7 +58,7 @@ export class ToDoService {
 ```
 
 ---
-
+<!-- .slide: id="services-registering-a-service-1" -->
 ## Registering a Service
 
 - Services need to be registered before they can be used
@@ -68,7 +69,7 @@ export class ToDoService {
   - And must *not* include the `.ts` suffix
 
 ---
-
+<!-- .slide: id="services-registering-a-service-2" -->
 ## Registering a Service
 
 #####_src/app/app.module.ts_
@@ -95,7 +96,7 @@ import { ToDoService } from './to-do.service';
 ```
 
 ---
-
+<!-- .slide: id="services-getting-access-to-a-service" -->
 ## Getting Access to a Service
 
 - Define a `private` constructor variable of the appropriate type
@@ -121,7 +122,7 @@ export class ToDoListComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="services-a-plan-for-refactoring" -->
 ## A Plan for Refactoring
 
 1. `GenericInputComponent` gets a new item and sends it to `AppComponent`
@@ -136,7 +137,7 @@ export class ToDoListComponent implements OnInit {
 FIXME: data flow diagram
 
 ---
-
+<!-- .slide: id="services-fill-in-the-service" -->
 ## Fill In the Service
 
 #####_src/app/to-do.service.ts_
@@ -164,7 +165,7 @@ export class ToDoService {
 ```
 
 ---
-
+<!-- .slide: id="services-what-is-a-behaviorsubject" -->
 ## Interlude: What's a Behavior Subject?
 
 - Modern JavaScript relies heavily on the *observer/observable* pattern
@@ -177,7 +178,7 @@ export class ToDoService {
 - So use a plain old list of strings called `items` to do that
 
 ---
-
+<!-- .slide: id="services-refactor-the-display" -->
 ## Refactor the Display
 
 #####_src/app/to-do-list/to-do-list.component.ts_
@@ -200,7 +201,7 @@ export class ToDoListComponent implements OnInit {
   - Otherwise this component would be sharing state with the service
 
 ---
-
+<!-- .slide: id="services-interlude-object-lifecycles" -->
 ## Interlude: Object Lifecycles
 
 - Q: why set up the subscription in `ngOnInit`?
@@ -212,7 +213,7 @@ export class ToDoListComponent implements OnInit {
 ![Angular Object Lifecycle](content/images/hooks-in-sequence-resized.png)
 
 ---
-
+<!-- .slide: id="services-refactor-the-app" -->
 ## Refactor the App
 
 #####_src/app/app.component.ts_
@@ -230,7 +231,7 @@ export class AppComponent {
 ```
 
 ---
-
+<!-- .slide: id="services-what-reactive-really-means" -->
 ## What Reactive Really Means
 
 - This is a lot of work for an application this size
@@ -245,6 +246,7 @@ export class AppComponent {
   - Inject something else into `ToDoListComponent` to test its behavior
 
 ---
+<!-- .slide: id="services-quiz-1" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz
@@ -280,13 +282,13 @@ What is the correct way to inject a service into a class?
 Correct answer is 3.
 
 4: While it is possible to instantiate classes manually, (and in some
-simple, stateless services you may actually get the behaviour you're
+simple, stateless services you may actually get the behavior you're
 expecting), manually instantiated classes lose the benefit of
 Angular's DI (their dependencies are no longer able to be dependency
 injected) and they require you to manually construct and manage a
 dependency tree yourself. Additionally, you're overriding the default
 singleton nature of providers in Angular which may lead to unexpected
-behaviour.
+behavior.
 
 1: Similar to 4 above with the caveat that `Http` will not be passed
 into the constructor to begin with. Providers may only be injected via
@@ -298,7 +300,7 @@ this type reflection to also apply to class members.
 
 ---
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
-
+<!-- .slide: id="services-quiz-2" -->
 ## Quiz
 
 Which of the below snippets would *not* assign a service instance to a
@@ -347,7 +349,7 @@ manually assign a provider instance to a class property.
 
 ---
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
-
+<!-- .slide: id="services-quiz-3" -->
 ## Quiz
 
 Injecting a service into a class accomplishes which of the following?
@@ -375,7 +377,7 @@ implicitly construct classes on request.
 
 ---
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
-
+<!-- .slide: id="services-quiz-4" -->
 ## Quiz
 
 When generating a service called `MyService` using Angular CLI, what

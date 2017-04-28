@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="hello" -->
 ## Building Applications with Angular
 
 # Hello, World
 
 ---
-
+<!-- .slide: id="hello-roadmap" -->
 ## Roadmap
 
 1. What makes up a component?
@@ -14,7 +14,7 @@
 1. How do I run an Angular application?
 
 ---
-
+<!-- .slide: id="hello-whats-where-1" -->
 ## What's Where
 
 ```
@@ -33,7 +33,7 @@ The root directory has:
   - So that everything else doesn't have to
 
 ---
-
+<!-- .slide: id="hello-whats-where-2" -->
 ## What's Where
 
 ```
@@ -56,7 +56,7 @@ The *application* as a whole has:
   - Test spec: `app.component.spec.ts`
 
 ---
-
+<!-- .slide: id="hello-whats-in-the-component-1" -->
 ## What's in the Component?
 
 #####_src/app/app.component.ts_
@@ -76,7 +76,7 @@ export class AppComponent {
 - `import` loads definition of Angular components
 
 ---
-
+<!-- .slide: id="hello-whats-in-the-component-2" -->
 ## What's in the Component?
 
 #####_src/app/app.component.ts_
@@ -99,7 +99,7 @@ export class AppComponent {
   - `styleUrls` is a list of CSS style files to apply to this component
 
 ---
-
+<!-- .slide: id="hello-whats-in-the-component-3" -->
 ## What's in the Component?
 
 #####_src/app/app.component.ts_
@@ -122,7 +122,7 @@ export class AppComponent {
   - TypeScript does *type inference* to figure that out
 
 ---
-
+<!-- .slide: id="hello-notes-on-components" -->
 ## Notes on Components
 
 - Components are the core building blocks of Angular applications
@@ -146,7 +146,7 @@ export class AppComponent {
 - Resist the temptation
 
 ---
-
+<!-- .slide: id="hello-template-syntax" -->
 ## Component Template Syntax
 
 - `<h1>{{title}}</h1>` represents *interpolation*
@@ -156,7 +156,7 @@ export class AppComponent {
 - We'll see lots more syntax later...
 
 ---
-
+<!-- .slide: id="hello-running-the-application" -->
 ## Running the Application
 
 - `npm run start` launches the application
@@ -167,6 +167,7 @@ export class AppComponent {
 - Worth exploring the page using developer tools
 
 ---
+<!-- .slide: id="hello-quiz" -->
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
 
 ## Quiz

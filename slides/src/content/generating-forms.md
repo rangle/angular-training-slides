@@ -1,5 +1,5 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="generating-forms" -->
 ## Building Applications with Angular
 
 # Generating Froms Dynamically
@@ -11,7 +11,7 @@
 FIXME: this module needs to be filled in and proof-read
 
 ---
-
+<!-- .slide: id="generating-forms-dynamically-1" -->
 ## How to Generate Forms Dynamically (1/6)
 
 With reactive forms, since the forms are created and handled primarily through component code and not in the template, it becomes much easier to create dynamic forms. We'll use an example using a JSON based schema:
@@ -43,7 +43,7 @@ With reactive forms, since the forms are created and handled primarily through c
 ```
 
 ---
-
+<!-- .slide: id="generating-forms-dynamically-2" -->
 ## How to Generate Forms Dynamically (2/6)
 
 In our definition, our schema has a `fields` property that defines what our form fields will be. For each of the fields, we accept:
@@ -55,7 +55,7 @@ In our definition, our schema has a `fields` property that defines what our form
   - `validators` - how we determine whether or not that form control is valid
 
 ---
-
+<!-- .slide: id="generating-forms-dynamically-3" -->
 ## How to Generate Forms Dynamically (3/6)
 
 We have a basic schema service that simply parses this as JSON, serializes it into a JavaScript object and binds it to a local class member.
@@ -77,7 +77,7 @@ export class FormSchemaService {
 [View Example](https://plnkr.co/edit/FjmwlCYFkvEqYqAAiJRD?p=preview)
 
 ---
-
+<!-- .slide: id="generating-forms-dynamically-4" -->
 ## How to Generate Forms Dynamically (4/6)
 
 To actually use this object to generate a reactive form, we need a way of mapping this object to an Angular `FormGroup` instance.
@@ -104,7 +104,7 @@ export class DynamicFormService {
 [View Example](https://plnkr.co/edit/FjmwlCYFkvEqYqAAiJRD?p=preview)
 
 ---
-
+<!-- .slide: id="generating-forms-dynamically-5" -->
 ## How to Generate Forms Dynamically (5/6)
 
 After generating a `FormGroup` object, we can start using the reactive form within our component. Here, we use both the form schema and the `FormGroup` object within our template:
@@ -133,7 +133,7 @@ After generating a `FormGroup` object, we can start using the reactive form with
 [View Example](https://plnkr.co/edit/FjmwlCYFkvEqYqAAiJRD?p=preview)
 
 ---
-
+<!-- .slide: id="generating-forms-dynamically-6" -->
 ## How to Generate Forms Dynamically (6/6)
 
 #####_dynamic-form.component.ts_

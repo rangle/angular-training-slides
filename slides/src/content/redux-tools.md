@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="redux-tools" -->
 ## Building Applications with Angular
 
 # Redux Tools
 
 ---
-
+<!-- .slide: id="redux-tools-roadmap" -->
 ## Roadmap
 
 1. What tools are available for working with Redux?
@@ -13,7 +13,7 @@
 FIXME: this module needs to be proof-read
 
 ---
-
+<!-- .slide: id="redux-tools-what-going-on-in-there" -->
 ## What's Going On In There?
 
 - Best way to learn Redux is to visualize what it's doing
@@ -23,7 +23,7 @@ FIXME: this module needs to be proof-read
   - Time travelling by moving backwards and forwards on actions that have been dispatch
 
 ---
-
+<!-- .slide: id="redux-tools-installation" -->
 ## Installation
 
 - Works with many other tools:
@@ -35,7 +35,7 @@ FIXME: this module needs to be proof-read
 ![](content/images/chrome-redux-devtools.png)
 
 ---
-
+<!-- .slide: id="redux-tools-configuration" -->
 ## Configuration
 
 - After installing the extension, we must configure our application to use it
@@ -56,7 +56,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="redux-tools-redux-dev-tools" -->
 ## Redux DevTools
 
 - New "Redux" tab in our browser's developer tools pane after successful installation and configuration

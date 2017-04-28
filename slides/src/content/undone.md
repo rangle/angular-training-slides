@@ -268,10 +268,10 @@ Correct answer is 3.
 1: This may expose a misunderstanding of class member declarations in TypeScript.
 
 2: This answer may expose a misunderstanding between the implicit
-behaviour of the `@Input()` decorator and having to explicitly
+behavior of the `@Input()` decorator and having to explicitly
 construct and assign an `EventEmitter` to a member decorated with
 `@Output()`. It may be assumed that by decorating something as an
-output you should achieve the expected behaviour.
+output you should achieve the expected behavior.
 
 3: This may expose confusion between the relationship of the property
 names and that suffixing an output member name with `Change`.
@@ -507,7 +507,7 @@ export class AppComponent {
     this.values = form.value;
   }
 }
-```
+```    
 
 [View Example](https://plnkr.co/edit/ttVaCf?p=preview)
 

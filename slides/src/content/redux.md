@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="redux" -->
 ## Building Applications with Angular
 
 # Managing State with Redux
 
 ---
-
+<!-- .slide: id="redux-roadmap" -->
 ## Roadmap
 
 1. How should we keep track of our application's state?
@@ -14,7 +14,7 @@
 1. How do we respond to state changes?
 
 ---
-
+<!-- .slide: id="redux-problem" -->
 ## The Problem
 
 - Different parts of an application need to reflect different aspects of its state
@@ -22,7 +22,7 @@
 - Those updates can happen asynchronously
 
 ---
-
+<!-- .slide: id="redux-what-should-it-do" -->
 ## What Should a Good State Management System Do?
 
 1. Provide a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth)
@@ -35,7 +35,7 @@
    so that future developers can reason about interactions
 
 ---
-
+<!-- .slide: id="redux-why-a-new-pattern" -->
 ## Why Do We Need a New Pattern?
 
 Server requests are different from user interactions:
@@ -45,7 +45,7 @@ Server requests are different from user interactions:
 1. Users expect to be notified about changes immediately: servers are more patient
 
 ---
-
+<!-- .slide: id="redux-redux-vs-backend" -->
 ## Similarities of Structure - Redux vs Backend Architecture
 
 | Function                          | Angular With Redux   | Server              |
@@ -56,13 +56,13 @@ Server requests are different from user interactions:
 | Communication                     | Action / Observables | Function Invocation |
 
 ---
-
+<!-- .slide: id="redux-redux-as-a-system" -->
 ## Redux as a System
 
 <img src="/content/images/redux-and-data-flow.png" width="50%"/>
 
 ---
-
+<!-- .slide: id="redux-the-store" -->
 ## The Store
 
 - Stores the entire current state of the application
@@ -76,7 +76,7 @@ Server requests are different from user interactions:
 FIXME: diagram of state update
 
 ---
-
+<!-- .slide: id="redux-actions" -->
 ## Actions
 
 - Actions are objects that tell the store how to update itself
@@ -87,7 +87,7 @@ FIXME: diagram of state update
     - This is just a convention, but a widely-used one
 
 ---
-
+<!-- .slide: id="redux-plan-for-refactoring" -->
 ## Plan for Refactoring
 
 1. Define the *reducer* that turns a state and an action into a new state
@@ -103,7 +103,7 @@ Notes:
 1. Angular CLI doesn't know anything about @ngrx, so we have to do most of the work by hand
 
 ---
-
+<!-- .slide: id="redux-installing-software" -->
 ## Install Required Software
 
 - `npm install @ngrx/core @ngrx/store --save`
@@ -111,7 +111,7 @@ Notes:
 - So the next person can just do `npm install`
 
 ---
-
+<!-- .slide: id="redux-create-the-reducer-1" -->
 ## Create the Reducer
 
 - Create a new file `src/app/store.ts`
@@ -126,7 +126,7 @@ Notes:
   - ...but only if correctness and programmer time aren't issues
 
 ---
-
+<!-- .slide: id="redux-create-the-reduce-2" -->
 ## Create the Reducer
 
 - Set up definitions
@@ -147,7 +147,7 @@ const DEFAULT_STATE: AppState = {
 ```
 
 ---
-
+<!-- .slide: id="redux-create-the-reducer-3" -->
 ## Create the Reducer
 
 - Define the reducer function
@@ -170,7 +170,7 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
 ```
 
 ---
-
+<!-- .slide: id="redux-add-the-store" -->
 ## Add the Store to the Application
 
 #####_src/app/app.module.ts_
@@ -194,7 +194,7 @@ export class AppModule { }
 - Note the `provideStore` call in `imports`
 
 ---
-
+<!-- .slide: id="redux-clean-up-html" -->
 ## Clean Up the Main Application's HTML
 
 #####_src/app/app.component.html_ (old)
@@ -212,7 +212,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="redux-dispatch-actions-for-new-items" -->
 ## Dispatch Actions for New Items
 
 #####_src/app/app.component.ts_
@@ -236,7 +236,7 @@ export class AppComponent {
 - Note: no longer storing state in `AppComponent`
 
 ---
-
+<!-- .slide: id="redux-update-todo-list-display-1" -->
 ## Update the To-Do List Display
 
 #####_src/app/to-do-list/to-do-list.component.ts_
@@ -262,7 +262,7 @@ export class ToDoListComponent implements OnInit {
 ```
 
 ---
-
+<!-- .slide: id="redux-picking-that-apart" -->
 ## Picking That Apart
 
 #####_src/app/to-do-list/to-do-list.component.ts_
@@ -282,7 +282,7 @@ export class ToDoListComponent implements OnInit {
   - ...because we don't way to share state
 
 ---
-
+<!-- .slide: id="redux-redux-seems-complex" -->
 ## Redux Seems Complex
 
 So let's see how we'd go about deleting items:
@@ -294,7 +294,7 @@ So let's see how we'd go about deleting items:
 1. There is no Step 4
 
 ---
-
+<!-- .slide: id="redux-update-todo-list-display" -->
 ## Update the To-Do List Display
 
 #####_src/app/to-do-list/to-do-list.component.html_
@@ -312,7 +312,7 @@ So let's see how we'd go about deleting items:
 ```
 
 ---
-
+<!-- .slide: id="redux-provide-deletion-method" -->
 ## Provide the Deletion Method
 
 #####_src/app/to-do-list/to-do-list.component.ts_
@@ -332,7 +332,7 @@ export class ToDoListComponent implements OnInit {
 - Compilation error because `ITEM_DELETE` doesn't yet exist
 
 ---
-
+<!-- .slide: id="redux-upgrade-the-store" -->
 ## Upgrade the Store
 
 #####_src/app/store.ts_
@@ -356,7 +356,7 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
 ```
 
 ---
-
+<!-- .slide: id="redux-getting-info-from-store" -->
 ## Getting Information from a Store
 
 - State is exposed through the `Store` service as an `Observable` stream
@@ -368,7 +368,7 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
 - Can chain other operators like `.filter()`, `.map()` to have finer-grained control over selected data
 
 ---
-
+<!-- .slide: id="redux-handle-async-events" -->
 ## Handling Async Events in the Application With Redux
 
 - The `@ngrx/effects` library is responsible for business logic and async actions
@@ -382,7 +382,7 @@ export function reducer(state: AppState = DEFAULT_STATE, action: Action) {
   1. Provide output to go into store
 
 ---
-
+<!-- .slide: id="redux-handling-side-effects" -->
 ## Handling Side Effects with `@Effect`
 
 ```ts
@@ -407,7 +407,7 @@ export class CollectionEffects {
 ```
 
 ---
-
+<!-- .slide: id="redux-faq-1" -->
 ## FAQ
 
 **Is the reducer the store?**
@@ -418,7 +418,7 @@ our reducers. In the case of `@ngrx`, state is stored within an
 `Observable` stream that can be listened to.
 
 ---
-
+<!-- .slide: id="redux-faq-2" -->
 ## FAQ
 
 **Does the UI broadcast actions and store broadcast actions back?**
@@ -438,7 +438,7 @@ the store.  When events leave the store due to a state change it is
 done through a store select.
 
 ---
-
+<!-- .slide: id="redux-faq-3" -->
 ## FAQ
 
 **Instead of dealing with observables, can we simply call methods directly?**
@@ -454,7 +454,7 @@ location which is easier to reason about, and our application can
 simply react whenever application state changes.
 
 ---
-
+<!-- .slide: id="redux-faq-4" -->
 ## FAQ
 
 **I have an awesome idea/implementation that does the same thing, can I use that?**

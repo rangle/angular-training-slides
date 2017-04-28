@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="http" -->
 ## Building Applications with Angular
 
 # The HTTP Service
 
 ---
-
+<!-- .slide: id="http-roadmap" -->
 ## Roadmap
 
 1. How does Angular interact with HTTP?
@@ -13,7 +13,7 @@
 1. How can I send data to a server?
 
 ---
-
+<!-- .slide: id="http-http-service" -->
 ## The Built-in `Http` Service
 
 - Service provided by Angular to perform REST operations
@@ -22,7 +22,7 @@
 - Connections are closed automatically after the value is emitted
 
 ---
-
+<!-- .slide: id="http-importing" -->
 ## Importing the Service
 
 - Angular CLI automatically imports `HttpModule` in `app.module.ts`
@@ -44,7 +44,7 @@ export class AppModule {}
 <!-- preview: https://plnkr.co/edit/l4n2upSueYw5UbFjZB1C?p=preview -->
 
 ---
-
+<!-- .slide: id="http-json-server" -->
 ## Interlude: Setting Up a JSON Data Server
 
 - Use [JSON Server](https://github.com/typicode/json-server) to set up a little JSON store
@@ -67,7 +67,7 @@ _src/db.json_
 ```
 
 ---
-
+<!-- .slide: id="http-using-on-startup" -->
 ## Using the HTTP Service on Startup
 
 - Modify `AppComponent` to ask `toDoService` to initialize itself
@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
 - Get a compiler error (since `toDoService.initialize` isn't defined yet)
 
 ---
-
+<!-- .slide: id="http-fetching-data-1" -->
 ## Fetch Data From the Server
 
 #####_src/app/to-do.service.ts_
@@ -119,7 +119,7 @@ export class ToDoService {
 ```
 
 ---
-
+<!-- .slide: id="http-fetching-data-2" -->
 ## Fetch Data From the Server
 
 1. In real applications, `baseUrl` will be a configuration parameter.
@@ -138,7 +138,7 @@ export class ToDoService {
 - Which is why we need `jsonToList`
 
 ---
-
+<!-- .slide: id="http-sending-data" -->
 ## Send Data to Server
 
 #####_src/app/to-do.service.ts_

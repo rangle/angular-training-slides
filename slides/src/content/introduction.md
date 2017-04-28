@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="introduction" -->
 ## Building Applications with Angular
 
 # Introduction
 
 ---
-
+<!-- .slide: id="introduction-about-rangle" -->
 ## About Rangle.io
 
 [Rangle.io](http://rangle.io) is North America’s leading digital
@@ -13,14 +13,14 @@ transformation consultancy specializing in JavaScript development
 services and solutions.
 
 ---
-
+<!-- .slide: id="introduction-about-us" -->
 ## About Us <!-- FIXME: fill in trainer bios -->
 
 *   Trainer 1
 *   Trainer 2
 
 ---
-
+<!-- .slide: id="introduction-structure-in-person" -->
 ## Structure (In-Person) <!-- FIXME: delete if online -->
 
 - 8 hours each day for 3 days
@@ -29,7 +29,7 @@ services and solutions.
 - Hands on
 
 ---
-
+<!-- .slide: id="introduction-structure-online" -->
 ## Structure (Online) <!-- FIXME: delete if in person -->
 
 - 8 hours each day for 3 days
@@ -40,7 +40,7 @@ services and solutions.
   - Please ask lots of questions
 
 ---
-
+<!-- .slide: id="introduction-syllabus" -->
 ## Syllabus
 
 *  Day 1
@@ -54,7 +54,7 @@ services and solutions.
    * PM: routing
 
 ---
-
+<!-- .slide: id="introduction-why-angular" -->
 ## Why Angular?
 
 - Built to scale:

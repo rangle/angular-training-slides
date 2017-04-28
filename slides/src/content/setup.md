@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="setup-into" -->
 ## Building Applications with Angular
 
 # Setup
 
 ---
-
+<!-- .slide: id="setup-roadmap" -->
 ## Roadmap
 
 1. How do I install the software I need for this training?
@@ -14,7 +14,7 @@
 1. What is TypeScript?
 
 ---
-
+<!-- .slide: id="setup-software-overview" -->
 ## Software Overview
 
 - NPM (Node Package Manager) allows you to install JavaScript libraries
@@ -24,7 +24,7 @@
   - So NVM allows you to do this without having to install and uninstall
 
 ---
-
+<!-- .slide: id="setup-installing-nvm" -->
 ## Installing NVM
 
 - Linux and Mac OS: go to [nvm.sh](http://nvm.sh) and follow instructions
@@ -33,14 +33,14 @@
 - Windows: go to [nvm-windows](https://github.com/coreybutler/nvm-windows)
 
 ---
-
+<!-- .slide: id="setup-installing-node" -->
 ## Installing Node
 
 - Get the latest LTS (Long Term Support) version
 - `nvm install --lts`
 
 ---
-
+<!-- .slide: id="setup-installing-angular-cli" -->
 ## Installing Angular CLI
 
 - A command-line interface (CLI) for creating and managing Angular applications
@@ -48,7 +48,7 @@
 - `npm install --global @angular/cli`
 
 ---
-
+<!-- .slide: id="setup-creating-a-new-project" -->
 ## Creating a New Project
 
 `ng new todo`
@@ -66,7 +66,7 @@ This may take a few minutes to run the first time...
 as they can interfere with downloading the packages.
 
 ---
-
+<!-- .slide: id="setup-top-level-project-structure" -->
 ## Top-Level Project Structure
 
 ```
@@ -86,7 +86,7 @@ as they can interfere with downloading the packages.
 - `tsconfig.json`: TypeScript configuration
 
 ---
-
+<!-- .slide: id="setup-typescript" -->
 ## TypeScript
 
 - TypeScript is a superset of modern JavaScript with optional type definitions
@@ -99,7 +99,7 @@ as they can interfere with downloading the packages.
   - E.g., whether to generate ES5- or ES6-compliant JavaScript
 
 ---
-
+<!-- .slide: id="setup-typescript-example" -->
 ## TypeScript Example
 
 ```ts

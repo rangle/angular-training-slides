@@ -1,17 +1,17 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="translation" -->
 ## Building Applications with Angular
 
 # Translations
 
 ---
-
+<!-- .slide: id="translation-roadmap" -->
 ## Roadmap
 
 - How do I localize an Angular application?
 
 ---
-
+<!-- .slide: id="translation-setting-up-1" -->
 ## Setting Up
 
 - We use `ngx-translate` to manage translations
@@ -22,7 +22,7 @@
   - `TranslateModule.forRoot()` should be only called once in your root module
 
 ---
-
+<!-- .slide: id="translation-setting-up-2" -->
 ## Setting Up
 
 #####_src/app/app.module.ts_
@@ -39,7 +39,7 @@ export class AppModule { }
 ```
 
 ---
-
+<!-- .slide: id="translation-configuring-the-translation-module-1" -->
 ## Configuring the Translation Module
 
 - Can specify a loader, parser, or missing translation handler
@@ -51,7 +51,7 @@ export class AppModule { }
   - Optionally define the file extension for your translation files (defaults to `.json`)
 
 ---
-
+<!-- .slide: id="translation-configuring-the-translation-module-2" -->
 ## Configuring the Translation Module
 
 #####_src/app/app.module.ts_
@@ -73,7 +73,7 @@ export function HttpLoaderFactory(http: Http) {
 ```
 
 ---
-
+<!-- .slide: id="translation-creating-translation-files" -->
 ## Creating Translation Files
 
 - Create JSON files with names based on language codes
@@ -99,7 +99,7 @@ export function HttpLoaderFactory(http: Http) {
 - Translations can be accessed using dot notation: `HOME.TITLE`
 
 ---
-
+<!-- .slide: id="translation-programmatically-creating-translations" -->
 ## Programmatically Creating Translations
 
 - Translations can be created programmatically using the `setTranslation` method from `TranslateService`
@@ -124,7 +124,7 @@ translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 ```
 
 ---
-
+<!-- .slide: id="translation-usage" -->
 ## Usage
 
 - Using a pipe

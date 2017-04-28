@@ -1,11 +1,12 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
+<!-- .slide: id="directives" -->
 
 ## Building Applications with Angular
 
 # Directives
 
 ---
-
+<!-- .slide: id="directives-what-are-directives" -->
 ## What are directives?
 
 - Directives are entities that **change the behavior** of components
@@ -18,7 +19,7 @@ There are two types of directives:
 - **Structural directives:** Changes behavior by modifying the template (`NgIf`, `NgFor`)
 
 ---
-
+<!-- .slide: id="directives-ngstyle-1" -->
 ## `NgStyle` Directive (1/2)
 
 Directive that modifies the `style` attribute of a component
@@ -45,7 +46,7 @@ export class StyleExampleComponent {
 [View Example](https://plnkr.co/edit/raYS8ou6AZru8UDc6hJs?p=preview)
 
 ---
-
+<!-- .slide: id="directives-ngstyle-2" -->
 ## `NgStyle` Directive (2/2)
 
 Directive with a property selector `[ngStyle]`
@@ -75,7 +76,7 @@ The final style it's going to be a combination of the `style` attribute and `[ng
 ```
 
 ---
-
+<!-- .slide: id="directives-ngclass-1" -->
 ## `NgClass` Directive (1/4)
 
 - Changes the `class` attribute of the host component
@@ -97,7 +98,7 @@ Resulting class attribute:
 ```
 
 ---
-
+<!-- .slide: id="directives-ngclass-2" -->
 ## `NgClass` Directive (2/4) - String
 
 Used with a string:
@@ -125,7 +126,7 @@ export class ClassAsStringComponent {
 [View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
 
 ---
-
+<!-- .slide: id="directives-ngclass-3" -->
 ## `NgClass` Directive (3/4) - Array
 
 Used with an array:
@@ -153,7 +154,7 @@ export class ClassAsStringComponent {
 [View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
 
 ---
-
+<!-- .slide: id="directives-ngclass-4" -->
 ## `NgClass` Directive (4/4) - Object
 
 ```ts
@@ -181,7 +182,7 @@ Result:
 [View Example](https://plnkr.co/edit/0xrwGT?p=preview)
 
 ---
-
+<!-- .slide: id="directives-structural-directives" -->
 ## Structural Directives
 
 - Handles how a component or native element renders using the `<template>` tag
@@ -191,7 +192,7 @@ Result:
   - `ngSwitch` discussed below
 
 ---
-
+<!-- .slide: id="directives-ngswitch" -->
 ## `NgSwitch` Directive
 
 - Multiple components can be matched using `ngSwitchCase`
@@ -221,7 +222,7 @@ export class AppComponent {
 [View Example](https://plnkr.co/edit/MEG6RBlrF82kWNYxwFlk?p=preview)
 
 ---
-
+<!-- .slide: id="directives-multiple-structural-directives" -->
 ## Using Multiple Structural Directives
 
 A component or native element can only be bound to one directive at a time

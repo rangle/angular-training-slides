@@ -1,11 +1,11 @@
 <!-- .slide: data-background="../content/images/title-slide.jpg" -->
-
+<!-- .slide: id="instructor-guide" -->
 ## Building Applications with Angular
 
 # Instructor's Guide
 
 ---
-
+<!-- .slide: id="instructor-guide-time-estimates" -->
 ## Time Estimates
 
 <small>
@@ -31,7 +31,7 @@
 </small>
 
 ---
-
+<!-- .slide: id="instructor-guide-learner-profiles" -->
 ## Learner Profiles
 
 These profiles describe the learners we are trying to help with this course,
@@ -45,7 +45,7 @@ Each profile has:
 5.  Any special needs or consideration
 
 ---
-
+<!-- .slide: id="instructor-guide-learner-profile-zuko" -->
 ## Learner Profiles: Zuko
 
 1.  Taught himself PHP and JavaScript in high school;
@@ -75,7 +75,7 @@ Each profile has:
     in the middle of lectures.
 
 ---
-
+<!-- .slide: id="instructor-guide-learner-profile-toph" -->
 ## Learner Profiles: Toph
 
 1.  Senior developer with 12 years of experience in three-tier .NET applications;
@@ -100,7 +100,7 @@ Each profile has:
     to handle critical management issues.
 
 ---
-
+<!-- .slide: id="instructor-guide-learner-profile-iroh" -->
 ## Learner Profiles: Iroh
 
 1.  Studied computer networking at college and then got into programming;
