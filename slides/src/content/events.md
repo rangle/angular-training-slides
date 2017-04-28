@@ -34,7 +34,7 @@
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">{{item}}</li>
 </ul>
-<p><button (click)="addToDo('make coffee')">make coffee</button></p>
+<button (click)="addToDo('make coffee')">make coffee</button>
 ```
 
 ---
