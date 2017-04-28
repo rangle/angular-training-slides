@@ -26,7 +26,7 @@
 
 ## Adding a Pipe
 
-- Put the name of the pipe inside `{{…}}`
+- Put the name of the pipe inside `{{...}}`
 - Use vertical bar `|` as separator
 
 #####_src/app/to-do-list/to-do-list.component.html_

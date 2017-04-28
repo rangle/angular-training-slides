@@ -24,7 +24,7 @@
 #####_src/app/app.component.ts_
 ```ts
 @Component({
-  …as before…
+  // ...as before...
 }
 export class AppComponent {
   title = 'To Do';
@@ -62,6 +62,7 @@ export class AppComponent {
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index">({{i}}) {{item}}</p>
 ```
+
 - Similarly, `*ngFor` exports `first`, `last`, `even` and `odd` booleans which can also be assigned to local variables.
 
 ---
@@ -75,7 +76,7 @@ export class AppComponent {
 #####_src/app/app.component.ts_
 ```ts
 export class AppComponent {
-  …as before…
+  // ...as before...
   thingsCompleted = [];
 }
 ```
@@ -102,7 +103,7 @@ export class AppComponent {
 #####_app/component/app.component.ts_
 ```ts
 export class AppComponent {
-  …as before…
+  // ...as before...
   summary(): string {
     return `${this.thingsToDo.length} done / ${this.thingsCompleted.length} to do`;
   }
@@ -133,7 +134,7 @@ export class AppComponent {
 #####_app.component/app.component.ts_
 ```
 export class AppComponent {
-  …as before…
+  // ...as before...
   constructor() {
     setInterval(() => {
       this.thingsToDo.push('make coffee');

@@ -361,7 +361,7 @@ msgAfterTimeout("", "Foo", 100).then((msg) =>
 - You can create a promise that resolves when a set of Promises all resolve (via the static `Promise.all(iterable)`) or when the first of a set of Promises resolve (via the static `Promise.race(iterable)`)
 
 ```js
-function fetchAsync (url, timeout, onData, onError) { … }
+function fetchAsync (url, timeout, onData, onError) { ... }
 let fetchPromised = (url, timeout) => {
     return new Promise((resolve, reject) => { fetchAsync(url, timeout, resolve, reject) })
 }

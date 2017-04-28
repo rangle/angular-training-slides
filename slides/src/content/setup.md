@@ -60,7 +60,7 @@ This will:
 - Install their dependencies
 - Set up unit testing
 
-This may take a few minutes to run the first time…
+This may take a few minutes to run the first time...
 
 **Proxies:** Please  disable any proxies that you may have setup in your environment,
 as they can interfere with downloading the packages.

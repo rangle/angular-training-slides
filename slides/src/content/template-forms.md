@@ -31,17 +31,17 @@
 
 #####_src/app/app.module.ts_
 ```ts
-…existing imports…
+// ...existing imports...
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  …as before…
+  // ...as before...
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule        // added
   ],
-  …as before…
+  // ...as before...
 })
 export class AppModule { }
 ```
@@ -69,8 +69,8 @@ export class AppModule { }
 
 - Every `<form>` element is automatically enhanced by the `NgForm` directive
 - `newItemForm` is a template variable that holds a reference to the `NgForm` directive instance
-- `ngModel` turns a form field into a `FormControl` using the element `name` property…
-- …and registers it with the form
+- `ngModel` turns a form field into a `FormControl` using the element `name` property...
+- ...and registers it with the form
 - Every control that registers with the `ngForm` automatically appears in the `form.value` property
 
 ---
@@ -141,7 +141,7 @@ export class AppModule { }
 import { NgForm } from '@angular/forms';
 
 export class GenericInputComponent implements OnInit {
-  …as before…
+  // ...as before...
   addToDo(newItemForm: NgForm) {
     this.newItem.emit(newItemForm.value.newItem);
   }
@@ -174,9 +174,9 @@ export class GenericInputComponent implements OnInit {
 
 #####_src/app/generic-input/generic-input.component.html_
 ```html
-  …
+  ...
     New Item: <input name="newItem" #newItem="ngModel" ngModel required>
-  …
+  ...
 ```
 
 - The template variable `#newItem` is an instance of `FormControl`
@@ -201,7 +201,7 @@ export class GenericInputComponent implements OnInit {
 </form>
 ```
 
-- But error message shows up before user starts typing…
+- But error message shows up before user starts typing...
 
 <!-- preview: https://plnkr.co/edit/zgAQW3pQjGqRGhAQvE7j?p=preview -->
 

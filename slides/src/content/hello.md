@@ -21,7 +21,7 @@
 ├── src
 │   ├── index.html
 │   ├── main.ts
-│   ├── app/…
+│   ├── app/...
 ```
 
 The root directory has:
@@ -150,10 +150,10 @@ export class AppComponent {
 ## Component Template Syntax
 
 - `<h1>{{title}}</h1>` represents *interpolation*
-- Evaluates the expression in `{{…}}` and inserts the result as a string
+- Evaluates the expression in `{{...}}` and inserts the result as a string
 - Symbols such as `title` are evaluated in an expression context
 - In this case, the component instance
-- We'll see lots more syntax later…
+- We'll see lots more syntax later...
 
 ---
 

@@ -87,13 +87,13 @@ export class ToDoListComponent implements OnInit {
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  …as before…
+  // ...as before...
 })
 export class ToDoListComponent implements OnInit {
 
   @Input() heading: string;
 
-  …as before…
+  // ...as before...
 }
 ```
 
@@ -173,7 +173,7 @@ export class ToDoListComponent implements OnInit {
 
   @Input() thingsToDo: string[];
 
-  …as before…
+  // ...as before...
 }
 ```
 
@@ -183,8 +183,8 @@ export class ToDoListComponent implements OnInit {
 
 ![After Refactoring](content/images/screenshot-refactored.png)
 
-- More elaborate than necessary if we were stopping here…
-- …but absolutely necessary to control complexity in large projects
+- More elaborate than necessary if we were stopping here...
+- ...but absolutely necessary to control complexity in large projects
 
 ---
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->

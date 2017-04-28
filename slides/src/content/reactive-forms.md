@@ -38,10 +38,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    …
+    // ...
   ],
   imports: [
-    …
+    // ...
     ReactiveFormsModule
   ],
   providers: [],
@@ -114,9 +114,9 @@ export class GenericInputComponent implements OnInit {
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 export class GenericInputComponent {
-  constructor(…) {
+  constructor(...) {
     this.textEntryControl = new FormControl('', [Validators.minLength(5)]);
-    …
+    // ...
   }
 }
 ```
@@ -158,7 +158,7 @@ export class CustomValidators {
 ```
 
 - Note: validators can also be defined as plain functions
-- And we really ought to put our validators in their own files…
+- And we really ought to put our validators in their own files...
 
 ---
 
@@ -169,9 +169,9 @@ export class CustomValidators {
 ```ts
 @Component({ ... })
 export class GenericInputComponent {
-  constructor(…) {
+  constructor(...) {
     this.textEntryControl = new FormControl('', [ CustomValidators.timeFormat ]);
-    …
+    // ...
   }
 }
 ```
@@ -254,7 +254,7 @@ export class StructuredFormComponent implements OnInit {
 #####_src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
-  …as before…
+  // ...as before...
 
 constructor(
     private builder: FormBuilder
@@ -272,7 +272,7 @@ constructor(
 #####_src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
-  …as before…
+  // ...as before...
 
   createResponsibleFormFields() {
     this.name = new FormControl('Zuko', [Validators.required]);
@@ -333,7 +333,7 @@ export class StructuredFormComponent implements OnInit {
     </p>
   </div>
 
-  …task form group goes here…
+  ...task form group goes here...
 
   <button type="submit" (click)="addToDo()">Add</button>
 </form>
@@ -343,7 +343,7 @@ export class StructuredFormComponent implements OnInit {
 
 ## Wire It Up
 
-- Throw away most of the data for now…
+- Throw away most of the data for now...
 
 #####_src/app/structured-form/structured-form.component.ts_
 ```ts
