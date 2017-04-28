@@ -152,22 +152,6 @@ export class GenericInputComponent implements OnInit {
 <!-- preview: https://plnkr.co/edit/Xxcf46sO5TWK1EKme1qF?p=preview -->
 
 ---
-<!-- .slide: id="template-forms-built-in-validators" -->
-## Built-In Validators
-
-- `required`: field cannot be empty
-  - `<input required>`
-- `pattern`: field value must match a regular expression
-  - `<input pattern="[A-Za-z0-9]{0,5}">`
-  - Note: `pattern` only supports a subset of JavaScript regular expression syntax
-- `minlength`: must have at least a certain number of characters
-  - `<input minlength="3">`
-- `maxlength`: may not have more than a certain number of characters
-  - `<input maxlength="5">`
-- `maxlength` prevents additional characters from being entered
-  - others only produce a warning
-
----
 <!-- .slide: id="template-forms-performing-validation" -->
 ## Performing Validation
 
@@ -182,6 +166,23 @@ export class GenericInputComponent implements OnInit {
 
 - The template variable `#newItem` is an instance of `FormControl`
 - Has `value`, `valid`, `pristine`, and `touched` properties described earlier
+
+---
+<!-- .slide: id="template-forms-built-in-validators" -->
+## Built-In Validators
+
+- `required`: field cannot be empty
+  - `<input required>`
+- `pattern`: field value must match a regular expression
+  - `<input pattern="[A-Za-z0-9]{0,5}">`
+  - Note: `pattern` only supports a subset of JavaScript regular expression syntax
+- `minlength`: must have at least a certain number of characters
+  - `<input minlength="3">`
+- `maxlength`: may not have more than a certain number of characters
+  - `<input maxlength="5">`
+  - prevents additional characters from being entered
+  - others only produce a warning
+
 
 ---
 <!-- .slide: id="template-forms-displaying-error-messages" -->
