@@ -26,7 +26,7 @@
 ```ts
 @Component({
   // ...as before...
-}
+})
 export class AppComponent {
   title = 'To Do';
   thingsToDo = [
