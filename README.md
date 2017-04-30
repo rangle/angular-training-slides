@@ -50,7 +50,7 @@ Instead, they serve two purposes:
 1.  Learners read them *after* the lesson for review and reference.
     They can also be given a printed copy of the slides to mark up
     during the lesson so that they don't have to take notes from
-    cratch.
+    scratch.
 
 The first point is essential for supporting collaboration among instructors.
 In order for two or more people to teach together effectively,
