@@ -1,8 +1,11 @@
-import Reveal from 'reveal';
+require('script!reveal.js/lib/js/head.min.js');
+require('script!reveal.js/js/reveal.js');
 
-var libPath = '../node_modules/reveal.js/';
+require('script!reveal.js/lib/js/classList');
+require('script!reveal.js/plugin/markdown/marked');
+require('script!reveal.js/plugin/markdown/markdown');
 
-Reveal.initialize({
+window.Reveal.initialize({
   center: false,
   controls: true,
   history: true,
@@ -11,43 +14,12 @@ Reveal.initialize({
   height: '100%',
   margin: 0.05,
   slideNumber: true,
-  dependencies: [
-    // Cross-browser shim that fully implements classList
-    {
-      src: libPath + 'lib/js/classList.js',
-      condition: function() {
-        return !document.body.classList;
-      }
-    },
+});
 
-    // Interpret Markdown in <section> elements
-    {
-      src: libPath + 'plugin/markdown/marked.js',
-      condition: function() {
-        return !!document.querySelector( '[data-markdown]' );
-      }
-    },
+require.ensure([], function() {
+  require('script!reveal.js/plugin/highlight/highlight.js');
+  window.hljs.initHighlightingOnLoad();
 
-    {
-      src: libPath + 'plugin/markdown/markdown.js',
-      condition: function() {
-        return !!document.querySelector( '[data-markdown]' );
-      }
-    },
-
-    // Syntax highlight for <code> elements
-    {
-      src: libPath + 'plugin/highlight/highlight.js',
-      async: true,
-      callback: function() {
-        hljs.initHighlightingOnLoad();
-      }
-    },
-
-    // Zoom in and out with Alt+click
-    { src: libPath + 'plugin/zoom-js/zoom.js', async: true },
-
-    // Speaker notes
-    { src: libPath + 'plugin/notes/notes.js', async: true }
-  ]
+  require('script!reveal.js/plugin/zoom-js/zoom.js');
+  require('script!reveal.js/plugin/notes/notes.js');
 });
