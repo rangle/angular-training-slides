@@ -117,7 +117,7 @@ Reminder: All decorators in Angulars are functions. Even if you don't pass any a
 
 - Whoops: compiler error!
 
-#####_src/app/app.component.html_ (with error)
+#####_src/app/app.component.html_ (corrected)
 ```html
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
