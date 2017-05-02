@@ -7,7 +7,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "predeploy": "npm run build",
+    "deploy": "bash deploy.sh"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "html-webpack-plugin": "2.22.0",
     "node-sass": "3.11.2",
     "sass-loader": "4.0.2",
+    "script-loader": "^0.7.0",
     "style-loader": "0.13.1",
     "webpack": "2.1.0-beta.21",
     "webpack-dev-server": "2.1.0-beta.0"

@@ -10,3 +10,7 @@ $ npm start
 ```
 
 To see the slides go to: [localhost:8081](http://localhost:8081)
+
+
+### Deployment
+You can deploy the slides to Github Pages by running `$ npm run deploy`
