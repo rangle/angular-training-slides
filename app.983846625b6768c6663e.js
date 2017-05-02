@@ -72,7 +72,7 @@
 /******/ 		script.async = true;
 /******/ 		script.timeout = 120000;
 /******/
-/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + "8dadcee06c8d86e65033" + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + "983846625b6768c6663e" + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -771,9 +771,6 @@ __webpack_require__(1)(__webpack_require__(20))
 
 // JS imports
 
-
-// require('../node_modules/reveal.js/lib/js/head.min.js');
-// require('../node_modules/reveal.js/js/reveal.js');
 
 // Conditionally add print stylesheets
 if (window.location.search.match( /print-pdf/gi )) {
