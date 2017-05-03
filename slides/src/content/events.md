@@ -12,6 +12,7 @@
 1. How do I handle user input?
 1. How do I make a reusable component?
 1. How do child components send data to their parents?
+1. How do I use two-way databinding?
 
 ---
 <!-- .slide: id="events-handling-events" -->

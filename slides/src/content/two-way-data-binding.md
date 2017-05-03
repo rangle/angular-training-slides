@@ -80,3 +80,49 @@ Total items to do: {{ thingsToDo.length }}
 ```
 
 ---
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+<!-- .slide: id="two-way-data-binding-quiz-1" -->
+## Quiz
+
+Choose all of the following that are needed to make two-way data binding work.
+
+1. `@Input` decorator
+2. `@Output` decorator
+3. `[]` attribute (as in `[hello]="hello!"`)
+4. `()`attribute (as in `(click)=sayHi()`)
+
++++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
+<!-- .slide: id="two-way-data-binding-answer-1" -->
+## Answer
+
+Selecting ALL of them is correct.
+
+If the student picks either 3 or 4, it could be that the student forgot that
+the "banana in a box" syntax `[()]` is in fact combination of `[]` and `()`
+
+---
+
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+<!-- .slide: id="two-way-data-binding-quiz-2" -->
+## Quiz
+
+Q: What is the shorthand form of `<counter [count]="parentCount" (countChange)="parentCount = $event">` ?
+
+1. `<counter [count]="parentCount">`
+2. `<counter (count)="parentCount()">`
+3. `<counter ([count])="parentCount">`
+4. `<counter [(count)]="parentCount">`
+
++++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" -->
+<!-- .slide: id="two-way-data-binding-answer-2" -->
+## Answer
+
+Correct answer is 4. 
+
+1. The student might be confusing this with the `@Input()` decorator
+2. The student might be confusing this with the `@Output()` decorator
+3. The syntax is wrong
+
+---
