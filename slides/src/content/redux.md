@@ -422,7 +422,7 @@ export class CollectionEffects {
 ```
 
 ---
-<!-- .slide: id="redux-faq-1" -->
+<!-- .slide: id="redux-faq-is-the-reducer-the-store" -->
 ## FAQ
 
 **Is the reducer the store?**
@@ -433,7 +433,7 @@ our reducers. In the case of `@ngrx`, state is stored within an
 `Observable` stream that can be listened to.
 
 ---
-<!-- .slide: id="redux-faq-2" -->
+<!-- .slide: id="redux-faq-can-i-have-more-than-one-store" -->
 ## FAQ
 
 **Can I have more than one store?**
@@ -451,7 +451,7 @@ We can also take advantage of functional composition, and "combine" multiple
 reducers into one using the `combineReducers` helper function `@ngrx` provides.
 
 ---
-
+<!-- .slide id="redux-faq-does-the-ui-broadcast-actions" -->
 ## FAQ
 
 **Does the UI broadcast actions and store broadcast actions back?**
@@ -471,7 +471,7 @@ the store.  When events leave the store due to a state change it is
 done through a store select.
 
 ---
-<!-- .slide: id="redux-faq-3" -->
+<!-- .slide: id="redux-faq-can-we-call-methods-directly" -->
 ## FAQ
 
 **Instead of dealing with observables, can we simply call methods directly?**
@@ -487,7 +487,7 @@ location which is easier to reason about, and our application can
 simply react whenever application state changes.
 
 ---
-<!-- .slide: id="redux-faq-4" -->
+<!-- .slide: id="redux-faq-can-i-roll-my-own" -->
 ## FAQ
 
 **I have an awesome idea/implementation that does the same thing, can I use that?**
