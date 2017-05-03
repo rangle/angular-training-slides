@@ -39,6 +39,8 @@
 - Component class name is `ToDoListComponent`
 - HTML selector is `app-to-do-list`
   - `app` prefix to prevent namespace collisions
+    - the prefix can be customized upfront when creating the application using the `--prefix` flag
+    - or by modifying the `prefix` property in the `.angular-cli.json`
 - What to put in constructor and `ngOnInit` will be discussed later
 
 #####_src/app/to-do-list/to-do-list.component.ts_
