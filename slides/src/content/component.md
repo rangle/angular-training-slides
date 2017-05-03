@@ -98,7 +98,8 @@ export class ToDoListComponent implements OnInit {
 }
 ```
 
-Reminder: All decorators in Angulars are functions. Even if you don't pass any arguments in, you'll need to include the parentheses.
+Reminder: Angular decorators are functions.
+Even if you don't pass arguments, you need the parentheses.
 
 ---
 <!-- .slide: id="components-passing-data-2" -->
@@ -122,8 +123,7 @@ Reminder: All decorators in Angulars are functions. Even if you don't pass any a
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
 
-- Have to quote the value inside the double quotes or Angular will try to evaluate it
-
+- Must single-quote the string or Angular will think it's a function.
 
 ---
 <!-- .slide: id="components-passing-data-3" -->
@@ -136,7 +136,7 @@ Reminder: All decorators in Angulars are functions. Even if you don't pass any a
 <app-to-do-list heading="Things To Do"></app-to-do-list>
 ```
 
-Passing strings to components in this way resembles setting properties in html elements.
+Passing strings to components in this way resembles setting properties in HTML elements.
 
 ---
 <!-- .slide: id="components-refactoring-1" -->
