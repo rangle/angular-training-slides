@@ -99,12 +99,14 @@ import { ToDoService } from './to-do.service';
 <!-- .slide: id="services-getting-access-to-a-service" -->
 ## Getting Access to a Service
 
-- Define a `private` constructor variable of the appropriate type
-- Angular's *dependency injection* system creates an instance variable with that name
+- Add a variable to the constructor with the type of the service that you want to access
+- Angular's *dependency injection* system will give the component access to an instance of that class
+- Angular's default behavior for dependencies is a singleton
+- `private` means that `toDoService` as a class property of `ToDoListComponent` can only be accessed within the component itself
+
 
 #####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
-// ...other imports as before...
 import { ToDoService } from '../to-do.service';
 
 @Component({
@@ -120,6 +122,11 @@ export class ToDoListComponent implements OnInit {
   }
 }
 ```
+
+---
+
+<!-- .slide: id="services-getting-access-to-a-service-2" -->
+
 
 ---
 <!-- .slide: id="services-a-plan-for-refactoring" -->
