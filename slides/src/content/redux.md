@@ -87,6 +87,27 @@ FIXME: diagram of state update
     - This is just a convention, but a widely-used one
 
 ---
+<!-- .slide: id="reducers" -->
+## Reducers
+
+- When actions are dispatched, reducers are called passing in the current state and the action being dispatched
+- A reducer is a pure function (without side-effects) with two parameters
+  - `state`: Is the current redux state of your store
+  - `action`: Is an `Object` that contains the `type` and `payload`
+- Reducers should not mutate the state, but return a copy or a new state
+
+```ts
+export function reducer(state: AppState = [], action: Action) {
+  switch (action.type) {
+    case ITEM_ADD:
+      //...do something with state
+    default:
+      return state;
+  }
+}
+```
+
+---
 <!-- .slide: id="redux-plan-for-refactoring" -->
 ## Plan for Refactoring
 
