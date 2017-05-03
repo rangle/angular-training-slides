@@ -84,6 +84,13 @@ export class AppModule { }
 - `newItemForm.valid`: whether the form is valid
 - `newItemForm.value.newItem`: the value of the `newItem` field
 
+#####_src/app/generic-input/generic-input.component.html_
+```html
+<form #newItemForm="ngForm">
+  <p>New Item: <input name="newItem" ngModel></p>
+</form>
+```
+
 ---
 <!-- .slide: id="template-forms-ngmodel-1" -->
 ## NgModel
