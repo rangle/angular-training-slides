@@ -42,6 +42,8 @@ Which is equivalent to:
 </ul>
 ```
 
+![Adding a remove Button](content/images/two-way-databinding.png)
+
 ---
 <!-- .slide: id="two-way-data-binding-example-2" -->
 ## Two-Way Data Binding Example
