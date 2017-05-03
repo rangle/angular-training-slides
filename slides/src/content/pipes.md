@@ -97,7 +97,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TitlecasePipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
+  transform(value: any, arguments?: any): any {
     return null;
   }
 }
@@ -105,8 +105,8 @@ export class TitlecasePipe implements PipeTransform {
 
 - Import declarations from `@angular/core`
 - Decorate class with `@Pipe` using `name` property
-- `transform` accepts initial value and any optional arguments
-- Returns some value
+- `transform` accepts an initial `value` and optionally some `arguments`
+- Returns a transformed value
 
 ---
 <!-- .slide: id="pipes-defining-our-transformation" -->
