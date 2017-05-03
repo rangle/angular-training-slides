@@ -73,7 +73,8 @@ export class AppComponent {
 }
 ```
 
-- `import` loads definition of Angular components
+- `import` loads a **decorator** that allows us to define Angular components
+- **decorators** are a proposed javascript feature that allows us to alter the functionality of a class or function
 
 ---
 <!-- .slide: id="hello-whats-in-the-component-2" -->
