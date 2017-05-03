@@ -482,7 +482,7 @@ export class TodoService {
   public todoList = [];
   constructor(private http: Http) {}
   getTodoList() {
-    return this.http.get('http://localhost:3000/todos')
+    this.http.get('http://localhost:3000/todos')
       .map(response => response.json())
       .map(item => item.map(todo => this.getTodoTaskForDisplay(todo.label, todo.done, todo.id)))
       .subscribe(todos => this.todoList = todos);
