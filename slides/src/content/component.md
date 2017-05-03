@@ -120,7 +120,7 @@ Even if you don't pass arguments, you need the parentheses.
 
 - Whoops: compiler error!
 
-#####_src/app/app.component.html_ (with error)
+#####_src/app/app.component.html_ (corrected)
 ```html
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
