@@ -64,6 +64,8 @@ export class ToDoService {
 - Services need to be registered before they can be used
   - Angular CLI does this automatically for new components
 - Must add the class name to the `providers` field in `src/app/app.module.ts`
+
+Notes:
 - Which means importing the class name from `./to-do.service`
   - Note: must have `./` at the start of the path
   - And must *not* include the `.ts` suffix
