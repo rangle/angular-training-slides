@@ -36,7 +36,7 @@ Live coding's advantages are:
     doing this, but it's left out of most textbooks.
 
 1.  Watching instructors make mistakes shows learners that it's all
-    right to make mistakes of their.  Most people model the behavior of
+    right to make mistakes of their own.  Most people model the behavior of
     their teachers: if the instructor isn't embarrassed about making and
     talking about mistakes, learners will be more comfortable doing so
     too.
@@ -84,6 +84,8 @@ After that,
 you can view the slides at any time:
 
 1.  Run `npm start` in the `./slides/` directory to run a local server.
+    This uses port 8081 by default,
+    and will fail with an error if that port is in use.
 
 1.  Go to [http://localhost:8081](http://localhost:8081/) in your browser.
 
@@ -96,6 +98,7 @@ the browser automatically redisplays within a second or two.
     Please do not make wholesale changes without careful testing.
 
 1.  Slide content is stored in multiple Markdown files in `./slides/src/content`.
+    Each file contains the source for several slides, separated by triple dashes.
     More files can be added here as needed;
     the format of each file is described below.
 
@@ -191,11 +194,11 @@ The sub-slide's title should always be "Answer".
     the class's schedule, and other specific information.
     Please do *not* include these changes in any PRs you submit to improve the core material.
 
-1.  After starting the server, generate a PDF of your slides by going to
-    [http://localhost:8081/?print-pdf](http://localhost:8081/?print-pdf)
-    and using Google Chrome's print utility (Save as PDF).
-
-1.  Share the PDF with marketing so that it can be sent to learners.
+1.  If you have been asked to create a PDF handout,
+    you can do so directly from the slides.
+    After starting the server,
+    go to [http://localhost:8081/?print-pdf](http://localhost:8081/?print-pdf)
+    and using Google Chrome's print utility to create and save a PDF.
 
 [markdown]: https://en.wikipedia.org/wiki/Markdown
 [rangle]: http://rangle.io
