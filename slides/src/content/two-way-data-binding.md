@@ -20,7 +20,7 @@ The built-in directive `NgModel` uses this trick to behave similar to Angular 1:
 <input [(ngModel)]="name" />
 ```
 
-Which is equivalent to:
+Equivalent:
 
 ```html
 <input [ngModel]="name" (ngModelChange)="name=$event" />
@@ -32,7 +32,7 @@ Which is equivalent to:
 
 - Let's add a remove button to demonstrate two-way databinding
 
-#####_src/app/to-do-list/to-do-list.component.html
+#####_src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
@@ -49,10 +49,10 @@ Which is equivalent to:
 ## Two-Way Data Binding Example
 
 - Import `Input`, `Output` from `@angular/core`
-  - and add the necessary variables as well as the `onComplete` function
-- `this.thingsToDoChange.emit(thingsToDo);` will now automatically update the `thingsToDo` variable in the `AppComponent`
+  - Add the necessary variables as well as the `onComplete` function
+- `this.thingsToDoChange.emit(thingsToDo)` will now automatically update the `thingsToDo` variable in the `AppComponent`
 
-#####_src/app/to-do-list/to-do-list.component.ts
+#####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 //... other code omitted for readability
