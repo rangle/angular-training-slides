@@ -8,7 +8,8 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
     "start": "webpack-dev-server",
-    "test": "node testing/test.js",
+    "pretest": "tsc --p ./testing/tsconfig.circleci.json", 
+    "test": "cd testing/dist/ && node index.js",
     "predeploy": "npm run build",
     "deploy": "bash deploy.sh"
   },
@@ -16,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^7.0.18",
     "copy-webpack-plugin": "3.0.1",
     "css-loader": "0.23.1",
     "file-loader": "0.9.0",
@@ -28,6 +30,7 @@
     "webpack-dev-server": "2.1.0-beta.0"
   },
   "dependencies": {
+    "cli-table": "^0.3.1",
     "highlight.js": "9.6.0",
     "reveal.js": "3.3.0",
     "reveal.js-menu": "^0.7.0"
