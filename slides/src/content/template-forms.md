@@ -164,7 +164,7 @@ export class AppModule { }
 
 - Modify `addToDo` to take an `NgForm` as input
 
-#####_src/app/generic-input/generic-input.component.html`
+#####_src/app/generic-input/generic-input.component.html_
 ```ts
 import { NgForm } from '@angular/forms';
 
@@ -202,9 +202,9 @@ export class GenericInputComponent implements OnInit {
 
 #####_src/app/generic-input/generic-input.component.html_
 ```html
-  …
+  ...
     New Item: <input name="newItem" #newItem="ngModel" ngModel required>
-  …
+  ...
 ```
 
 - As mentioned earlier the template variable `#newItem` is an instance of `FormControl`
