@@ -12,6 +12,7 @@
 1. What are the principal components of the Redux model?
 1. How do we dispatch actions?
 1. How do we respond to state changes?
+1. What tools are available for working with Redux?
 
 ---
 <!-- .slide: id="redux-problem" -->
@@ -124,12 +125,37 @@ Notes:
 1. Angular CLI doesn't know anything about @ngrx, so we have to do most of the work by hand
 
 ---
+<!-- .slide: id="redux-tools" -->
+## Redux Tools
+
+- Best way to learn Redux is to visualize what it's doing
+- Use [Redux DevTools Extension](http://extension.remotedev.io/)
+  - Shows application state
+  - Provides visualization of all actions that have been dispatch
+  - Time travelling by moving backwards and forwards on actions that have been dispatch
+
+---
+
 <!-- .slide: id="redux-installing-software" -->
 ## Install Required Software
 
 - `npm install @ngrx/core @ngrx/store --save`
+- We will also install the ngrx dev tools
+  - `npm install @ngrx/store-devtools --save`
 - The `--save` option updates `package.json`
 - So the next person can just do `npm install`
+
+---
+<!-- .slide: id="redux-redux-chrome-extensions" -->
+## Install Redux Chrome Extensions
+
+- Works with many other tools:
+  - Chrome through the [web store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/remotedev/)
+  - [Electron and others](http://extension.remotedev.io/#installation)
+- After installing the extension in Chrome, there should be a tab in Chrome DevTools labeled "Redux".
+
+![](content/images/chrome-redux-devtools.png)
 
 ---
 <!-- .slide: id="redux-create-the-reducer-1" -->
@@ -147,7 +173,7 @@ Notes:
   - ...but only if correctness and programmer time aren't issues
 
 ---
-<!-- .slide: id="redux-create-the-reduce-2" -->
+<!-- .slide: id="redux-create-the-reducer-2" -->
 ## Create the Reducer
 
 - Set up definitions
@@ -215,6 +241,26 @@ export class AppModule { }
 - Note the `provideStore` call in `imports`
 
 ---
+<!-- .slide: id="redux-add-the-storedevtools-to-the-application" -->
+## Add the StoreDevTools to the Application
+
+- Import `StoreDevtoolsModule` into our module
+
+```ts
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+@NgModule({
+  imports: [
+    // ...as before...
+    StoreModule.provideStore(reducer),
+    // Note that you must instrument after importing StoreModule
+    StoreDevtoolsModule.instrumentOnlyWithExtension({})
+  ]
+})
+export class AppModule { }
+```
+
+---
 <!-- .slide: id="redux-clean-up-html" -->
 ## Clean Up the Main Application's HTML
 
@@ -252,6 +298,14 @@ export class AppComponent {
 ```
 
 - Note: no longer storing state in `AppComponent`
+
+---
+<!-- .slide: id="redux-redux-dev-tools" -->
+## Redux DevTools
+
+- New "Redux" tab in our browser's developer tools pane after successful installation, configuration and injecting the store
+
+<img src="/content/images/redux-devtools.png" width="50%"/>
 
 ---
 <!-- .slide: id="redux-update-todo-list-display-1" -->
