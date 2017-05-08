@@ -23,8 +23,8 @@
 - Very easy to add new ones
 
 ---
-<!-- .slide: id="pipes-adding-a-pipe" -->
-## Adding a Pipe
+<!-- .slide: id="pipes-using-a-pipe" -->
+## Using a Pipe
 
 - Put the name of the pipe inside `{{...}}`
 - Use vertical bar `|` as separator
@@ -32,7 +32,7 @@
 #####_src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
-  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
+  <li *ngFor="let item of thingsToDo">
     {{item | uppercase}}
   </li>
 </ul>
