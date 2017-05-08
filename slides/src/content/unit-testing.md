@@ -40,7 +40,7 @@
 <!-- .slide: id="unit-testing-running-tests" -->
 ## Running Tests
 
-- `ng test` or `yarn test`: launches a browser for testing and watches for changes.
+- `ng test` or `yarn test`: launches a browser for testing and watches for changes
   - Compiles and re-runs tests as files change
 - `ng test --code-coverage`: puts a coverage report in `coverage/` directory
 
@@ -126,8 +126,10 @@ describe('CapitalizePipe', () => {
 <!-- .slide: id="unit-testing-add-a-test" -->
 ## Add a Test
 
-- We several broken tests that we'll simply ignore for now. Use `fdescribe` to tell Jasmine to "**f**ocus" on this test so we don't see the other failing tests.
-- Here we use the `toEqual` Jasmine matcher which performs a deep equality check. The `toBe` matcher, which performs a strict equality check (`===`), would also work here.
+- We several broken tests that we'll simply ignore for now
+  - Use `fdescribe` to tell Jasmine to "**f**ocus" on this test so we don't see the other failing tests
+- Here we use the `toEqual` Jasmine matcher which performs a deep equality check
+  - The `toBe` matcher, which performs a strict equality check (`===`), would also work here
 
 #####_src/app/capitalize.pipe.spec.ts_
 ```ts
@@ -145,24 +147,22 @@ fdescribe('CapitalizePipe', () => {
 <!-- .slide: id="unit-testing-instantiating-component--or-service" -->
 ## Instantiating the Component or Service
 
-- We currently do not display the number of todos in `AppComponent`.
-- Let's create a method that will return the number of todos.
-- Start by removing existing test code until we have the shell of a simple test for this component.
+- We currently do not display the number of todos in `AppComponent`
+- Let's create a method that will return the number of todos
+- Start by removing existing test code until we have the shell of a simple test for this component
 
 #####_src/app/app.component.spec.ts_
 ```ts
 import { AppComponent } from './app.component';
 
 fdescribe('AppComponent', () => {
-
   beforeEach(() => {
-
+    // ...
   });
 
   it('should count the number of items', () => {
-
+    // ...
   });
-
 });
 ```
 
@@ -171,7 +171,7 @@ fdescribe('AppComponent', () => {
 ## Mocking Dependencies
 
 - We need an object that matches the "shape" of `TodoService` to test `AppComponent`
-- Note the use of `as` to assert the type of our mock.
+- Note the use of `as` to assert the type of our mock
 - The mock object must have an `addItem` method and `items` property
 - `addItem` doesn't actually need to do anything
 - `items` should be an array of fake todos
@@ -191,8 +191,8 @@ mockToDoService = {
 <!-- .slide: id="unit-testing-testing-business-logic" -->
 ## Testing Business Logic
 
-- Here we write a failing test.
-- Next, we'll create the method in `AppComponent` that will make this test pass.
+- Here we write a failing test
+- Next, we'll create the method in `AppComponent` that will make this test pass
 
 #####_src/app/app.component.spec.ts_
 ```ts
@@ -219,7 +219,7 @@ mockToDoService = {
 <!-- .slide: id="unit-testing-when-to-use-testbed" -->
 ## When to Use TestBed
 
-- `TestBed` is a class that creates a real Angular runtime for the purposes of testing Angular elements.
+- `TestBed` is a class that creates a real Angular runtime for the purposes of testing Angular elements
 - It is helpful when:
   1. you have logic in your templates and you want to render a component class along with its template for testing
   2. you want to use Angular's injector to handle dependency injection for you
@@ -236,7 +236,8 @@ mockToDoService = {
 ## Configuring the Test Module
 
 - We can declare `mockToDoService` as we did before and have Angular inject it for us
-- TestBed will also instantiate the `AppComponent` and inject the dependency for us, but we must add it to the `declarations` array.
+- TestBed will also instantiate the `AppComponent` and inject the dependency for us
+  - But we must add it to the `declarations` array
 
 #####_src/app/app.component.spec.ts_
 ```ts
@@ -253,8 +254,9 @@ TestBed.configureTestingModule({
 <!-- .slide: id="unit-testing-testing-components-using-componentfixture" -->
 ## Testing Components Using ComponentFixture
 
-- `ComponentFixture` is a testing utility that gives us access and control over the things we are testing.
-- The `componentInstance` property of the fixture is an instance of `AppComponent`. Here, we assign to to the `comp` variable to be used later in our tests.
+- `ComponentFixture` is a testing utility that gives us access and control over the things we are testing
+- The `componentInstance` property of the fixture is an instance of `AppComponent`.
+  - Here, we assign to to the `comp` variable to be used later in our tests
 
 #####_src/app/app.component.spec.ts_
 ```ts
@@ -279,7 +281,7 @@ beforeEach(() => {
 <!-- .slide: id="unit-testing-shallow-rendering" -->
 ## Shallow Rendering
 
-- The above test fails because `AppComponent` uses components which we have not declared.
+- The above test fails because `AppComponent` uses components which we have not declared
 - We could provide mocks for these components, or do a shallow render by adding the `CUSTOM_ELEMENTS_SCHEMA`
 
 #####_src/app/app.component.spec.ts_
@@ -291,7 +293,7 @@ TestBed.configureTestingModule({
 
 Notes:
 
-- `NO_ERRORS_SCHEMA` is also commonly used for shallow rendering.
+- `NO_ERRORS_SCHEMA` is also commonly used for shallow rendering
 
 ---
 <!-- .slide: id="unit-testing-providing-the-real-service" -->
@@ -328,9 +330,9 @@ TestBed.configureTestingModule({
 <!-- .slide: id="unit-testing-querying-native-elements" -->
 ## Integration Testing by Querying Native Elements
 
-- Importing the `AppModule`, override the `ToDoService` by providing the mock as before.
-- We can use the `debugElement` to query the generated DOM.
-- The test fails because we changed the data in the service after the component was created and the view hasn't detected it.
+- Importing the `AppModule`, override the `ToDoService` by providing the mock as before
+- We can use the `debugElement` to query the generated DOM
+- The test fails because we changed the data in the service after the component was created and the view hasn't detected it
 
 #####_src/app/app.component.spec.ts_
 ```ts
@@ -355,9 +357,9 @@ describe('AppComponent', () => {
 <!-- .slide: id="unit-testing-change-detection" -->
 ## Change Detection
 
-- We must tell Angular when to run change detection during our tests.
-- The `ComponentFixture.detectChanges` method makes this possible.
-- Our test should now pass.
+- We must tell Angular when to run change detection during our tests
+- The `ComponentFixture.detectChanges` method makes this possible
+- Our test should now pass
 
 
 _src/app/app.component.spec.ts_
@@ -389,7 +391,7 @@ TestBed.configureTestingModule({
 ## Dealing With Asynchronous Behavior in Tests
 
 - Angular tests generated by the CLI use the asynchronous function `compileComponents` and wrap it in the `async` function
-- `compileComponents` is required for testing when classes reference external files through `templateUrls` and `styleUrls`.
+- `compileComponents` is required for testing when classes reference external files through `templateUrls` and `styleUrls`
 - We usually don't need to do this
   - Webpack will inline our templates and css as part of the build process
   - But we will often need to use `async` and a similar function `fakeAsync` in our tests
@@ -503,8 +505,8 @@ export class ToDoService {
 ## Providing a Light HTTP Mock
 
 - A light mock can be used in place of the actual Http service
-- Note the use of `as` to assert the type of our mock.
-- A Jasmine spy provides the mock implementation of the get method.
+- Note the use of `as` to assert the type of our mock
+- A Jasmine spy provides the mock implementation of the get method
 
 ```ts
 describe('toDoService', () => {
@@ -527,7 +529,7 @@ describe('toDoService', () => {
 <!-- .slide: id="unit-testing-asserting-method" -->
 ## Assert that the Method Retrieves Data
 
-- The following test checks that the `getData` method assigns the correct data in the correct format to the `toDoList` property.
+- The following test checks that the `getData` method assigns the correct data in the correct format to the `toDoList` property
 
 ```ts
   it('should return data in correct format', () => {
@@ -546,7 +548,7 @@ describe('toDoService', () => {
 <!-- .slide: id="unit-testing-spying-to-check-url" -->
 ## Using the Spy to Check the URL
 
-- The following test checks that the correct URL is being used.
+- The following test checks that the correct URL is being used
 
 ```ts
 it('should be called with http://localhost:3000/todos', () => {
