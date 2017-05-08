@@ -473,7 +473,7 @@ it('should debounce change to search query for 300 ms', fakeAsync(() => {
 
 ---
 <!-- .slide: id="unit-testing-mocking-http" -->
-##  Mocking Angular’s Http Service
+##  Mocking Angular's Http Service
 
 - Suppose we want to test a version of `TodoService` that uses `Http`'s `get` method
 
