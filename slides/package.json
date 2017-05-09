@@ -8,6 +8,7 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
     "start": "webpack-dev-server",
+    "test": "node testing/test.js",
     "predeploy": "npm run build",
     "deploy": "bash deploy.sh"
   },
