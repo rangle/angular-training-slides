@@ -14,9 +14,19 @@ window.Reveal.initialize({
   height: '100%',
   margin: 0.05,
   slideNumber: true,
+  dependencies: [
+    {
+      src: 'node_modules/reveal.js-menu/menu.js'
+    }
+  ],
+  menu: {
+    themes: false,
+    transitions: false,
+    close: false
+  }
 });
 
-require.ensure([], function() {
+require.ensure([], function () {
   require('script!reveal.js/plugin/highlight/highlight.js');
   window.hljs.initHighlightingOnLoad();
 
