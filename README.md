@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/rangle/angular-training-slides.svg?style=svg)](https://circleci.com/gh/rangle/angular-training-slides)
+
 # Angular Training Materials
 
 This repository contains slides and other materials
