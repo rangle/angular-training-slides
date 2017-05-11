@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "highlight.js": "9.6.0",
-    "reveal.js": "3.3.0"
+    "reveal.js": "3.3.0",
+    "typescript": "^2.3.2"
   }
 }
