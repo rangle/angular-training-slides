@@ -373,7 +373,7 @@ export class StructuredFormComponent implements OnInit {
 
 ---
 <!-- .slide: id="reactive-forms-shortcuts" -->
-## ShortCuts
+## Shortcuts
 
 - Our component can also use shortcuts to create a `FormControl`
 

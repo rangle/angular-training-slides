@@ -296,7 +296,7 @@ names and that suffixing an output member name with `Change`.
 Correct answer is 4.
 
 1: This may expose a misunderstanding of outputs and two-way binding
-itself, since the short-hand syntax looks like a simpe combination of
+itself, since the short-hand syntax looks like a simple combination of
 these two attributes.
 
 2: This answer may expose confusion with the naming relationship
@@ -325,10 +325,10 @@ values?
 
 Correct answer is 2.
 
-1: This may expose the assumption that values will be implcitily
+1: This may expose the assumption that values will be implicitly
 passed into the called back provided.
 
-3: This answer may expose confusion of how tw-way bindings actually
+3: This answer may expose confusion of how two-way bindings actually
 work.
 
 4: This may expose confusion or a lack of understanding what the the
@@ -353,7 +353,7 @@ These are the most-used lifecycle hooks:
 
 ## Pure vs Impure Pipes
 
-- A pure pipe is executed everytime the **reference** of the bound value is changed
+- A pure pipe is executed every time the **reference** of the bound value is changed
   - Custom pipes are pure by default
   - All built-in pipes are pure except of `async`
 
@@ -362,7 +362,7 @@ These are the most-used lifecycle hooks:
 export class PurePipe implements PipeTransform { /* ... */ }
 ```
 
-- An impure pipe is executed everytime change detection is executed
+- An impure pipe is executed every time change detection is executed
   - App performance could be severely degraded
   - To define a pipe as impure, we need to use the property/value `pure: false`
 
@@ -605,14 +605,14 @@ class ChildComponent {}
 Components can be classified as "smart" or "dumb" depending on how coupled are they to the application
 
 
-| Characteristic          | Smart Component      | Dumb Component            |
-| ----------------------- | -------------------- | ------------------------- |
-| Coupled to the app?     | Yes                  | No                        |
-| Reusable?               | No                   | Yes                       |
-| Aware of the state?     | Yes                  | No                        |
-| Component tree location | Top                  | Bottom                    |
-| Easy to test?           | No                   | Yes                       |
-| A.K.A                   | Container Components | Presentational Components |
+| Characteristic          | Smart Component      | Dumb Component          |
+| ----------------------- | -------------------- | ----------------------- |
+| Coupled to the app?     | Yes                  | No                      |
+| Reusable?               | No                   | Yes                     |
+| Aware of the state?     | Yes                  | No                      |
+| Component tree location | Top                  | Bottom                  |
+| Easy to test?           | No                   | Yes                     |
+| A.K.A                   | Container Components | Presentation Components |
 
 ---
 <!-- .slide: data-background="../content/images/question-slide.jpg" -->
