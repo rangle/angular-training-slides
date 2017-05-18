@@ -1,0 +1,713 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Managing State with Redux</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Managing State with Redux</h1>
+          <hr />
+<!-- .slide: id="redux-roadmap" -->
+<h2 id="roadmap">Roadmap</h2>
+
+<ol>
+  <li>How should we keep track of our application’s state?</li>
+  <li>What are the principal components of the Redux model?</li>
+  <li>How do we dispatch actions?</li>
+  <li>How do we respond to state changes?</li>
+  <li>What tools are available for working with Redux?</li>
+</ol>
+
+<hr />
+<!-- .slide: id="redux-problem" -->
+<h2 id="the-problem">The Problem</h2>
+
+<ul>
+  <li>Different parts of an application need to reflect different aspects of its state</li>
+  <li>Different parts of an application can <em>update</em> different aspects of its state</li>
+  <li>Those updates can happen asynchronously</li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-what-should-it-do" -->
+<h2 id="what-should-a-good-state-management-system-do">What Should a Good State Management System Do?</h2>
+
+<ol>
+  <li>Provide a <a href="https://en.wikipedia.org/wiki/Single_source_of_truth">single source of truth</a></li>
+  <li>Provide <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concern</a>
+    <ul>
+      <li>Data and logic should be able to evolve separately</li>
+    </ul>
+  </li>
+  <li>Improve scalability by having things <em>react</em> to events
+    <ul>
+      <li>As opposed to a caller dictating actions</li>
+    </ul>
+  </li>
+  <li>Create a coherent framework so future developers will know where and how to add features</li>
+  <li>Provide <a href="http://redux.js.org/docs/basics/DataFlow.html">uni-directional data flow</a>
+so that future developers can reason about interactions</li>
+</ol>
+
+<hr />
+<!-- .slide: id="redux-why-a-new-pattern" -->
+<h2 id="why-do-we-need-a-new-pattern">Why Do We Need a New Pattern?</h2>
+
+<p>Server requests are different from user interactions:</p>
+
+<ol>
+  <li>User requests are handled by a single-threaded browser, while server requests are handled by multi-threaded servlets</li>
+  <li>User requests often modify the same objects but server requests usually modify different ones</li>
+  <li>Users expect to be notified about changes immediately: servers are more patient</li>
+</ol>
+
+<hr />
+<!-- .slide: id="redux-redux-vs-backend" -->
+<h2 id="similarities-of-structure---redux-vs-backend-architecture">Similarities of Structure - Redux vs Backend Architecture</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Angular With Redux</th>
+      <th>Server</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data Storage</td>
+      <td>Store</td>
+      <td>Database</td>
+    </tr>
+    <tr>
+      <td>Presentation View</td>
+      <td><code class="highlighter-rouge">@Component</code></td>
+      <td>Client API</td>
+    </tr>
+    <tr>
+      <td>Logic to massage data for Storage</td>
+      <td><code class="highlighter-rouge">@Effects</code></td>
+      <td>Services</td>
+    </tr>
+    <tr>
+      <td>Communication</td>
+      <td>Action / Observables</td>
+      <td>Function Invocation</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<!-- .slide: id="redux-redux-as-a-system" -->
+<h2 id="redux-as-a-system">Redux as a System</h2>
+
+<p><img src="images/redux-and-data-flow.png" width="50%" /></p>
+
+<hr />
+<!-- .slide: id="redux-the-store" -->
+<h2 id="the-store">The Store</h2>
+
+<ul>
+  <li>Stores the entire current state of the application</li>
+  <li>In principle, entire state replaced each time something changes
+    <ul>
+      <li>I.e., state is never modified in place</li>
+      <li>So no need to worry about concurrency effects</li>
+      <li>In practice, can often replace some parts and copy other parts forward</li>
+    </ul>
+  </li>
+  <li>Application components watch <a href="http://reactivex.io/rxjs/">Observable</a> streams for updates
+and change what they display</li>
+</ul>
+
+<p>FIXME: diagram of state update</p>
+
+<hr />
+<!-- .slide: id="redux-actions" -->
+<h2 id="actions">Actions</h2>
+
+<ul>
+  <li>Actions are objects that tell the store how to update itself
+    <ul>
+      <li>Use actions instead of direct function invocation so that they can be serialized</li>
+    </ul>
+  </li>
+  <li>Each action is an <code class="highlighter-rouge">Object</code> with:
+    <ul>
+      <li><code class="highlighter-rouge">type</code>: identifies what kind of action this is (to allow selection and filtering)</li>
+      <li><code class="highlighter-rouge">payload</code>: extra information needed to carry out the action
+        <ul>
+          <li>This is just a convention, but a widely-used one</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<!-- .slide: id="reducers" -->
+<h2 id="reducers">Reducers</h2>
+
+<ul>
+  <li>When actions are dispatched, reducers are called passing in the current state and the action being dispatched</li>
+  <li>A reducer is a pure function (without side-effects) with two parameters
+    <ul>
+      <li><code class="highlighter-rouge">state</code>: Is the current redux state of your store</li>
+      <li><code class="highlighter-rouge">action</code>: Is an <code class="highlighter-rouge">Object</code> that contains the <code class="highlighter-rouge">type</code> and <code class="highlighter-rouge">payload</code></li>
+    </ul>
+  </li>
+  <li>Reducers should not mutate the state, but return a copy or a new state</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="err">:</span> <span class="nx">AppState</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">action</span><span class="err">:</span> <span class="nx">Action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">ITEM_ADD</span><span class="err">:</span>
+      <span class="c1">//...do something with state</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-plan-for-refactoring" -->
+<h2 id="plan-for-refactoring">Plan for Refactoring</h2>
+
+<ol>
+  <li>Define the <em>reducer</em> that turns a state and an action into a new state</li>
+  <li>Define actions</li>
+  <li>Main component will dispatch an action to add an item</li>
+  <li>Display will monitor the store for changes</li>
+</ol>
+
+<p>Notes:</p>
+
+<ol>
+  <li>We will use <a href="https://github.com/ngrx">@ngrx</a> for our store
+    <ul>
+      <li>Many other implementations of the Redux pattern exist</li>
+    </ul>
+  </li>
+  <li>We will leave room in our store to add more state later</li>
+  <li>Angular CLI doesn’t know anything about @ngrx, so we have to do most of the work by hand</li>
+</ol>
+
+<hr />
+<!-- .slide: id="redux-tools" -->
+<h2 id="redux-tools">Redux Tools</h2>
+
+<ul>
+  <li>Best way to learn Redux is to visualize what it’s doing</li>
+  <li>Use <a href="http://extension.remotedev.io/">Redux DevTools Extension</a>
+    <ul>
+      <li>Shows application state</li>
+      <li>Provides visualization of all actions that have been dispatch</li>
+      <li>Time travelling by moving backwards and forwards on actions that have been dispatch</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<!-- .slide: id="redux-installing-software" -->
+<h2 id="install-required-software">Install Required Software</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">npm install @ngrx/core @ngrx/store --save</code></li>
+  <li>We will also install the ngrx dev tools
+    <ul>
+      <li><code class="highlighter-rouge">npm install @ngrx/store-devtools --save</code></li>
+    </ul>
+  </li>
+  <li>The <code class="highlighter-rouge">--save</code> option updates <code class="highlighter-rouge">package.json</code></li>
+  <li>So the next person can just do <code class="highlighter-rouge">npm install</code></li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-redux-chrome-extensions" -->
+<h2 id="install-redux-chrome-extensions">Install Redux Chrome Extensions</h2>
+
+<ul>
+  <li>Works with many other tools:
+    <ul>
+      <li>Chrome through the <a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd">web store</a></li>
+      <li><a href="https://addons.mozilla.org/en-US/firefox/addon/remotedev/">Firefox</a></li>
+      <li><a href="http://extension.remotedev.io/#installation">Electron and others</a></li>
+    </ul>
+  </li>
+  <li>After installing the extension in Chrome, there should be a tab in Chrome DevTools labeled “Redux”.</li>
+</ul>
+
+<p><img src="content/images/chrome-redux-devtools.png" alt="" /></p>
+
+<hr />
+<!-- .slide: id="redux-create-the-reducer-1" -->
+<h2 id="create-the-reducer">Create the Reducer</h2>
+
+<ul>
+  <li>Create a new file <code class="highlighter-rouge">src/app/store.ts</code></li>
+  <li>Import <code class="highlighter-rouge">Action</code> to define the shape of actions</li>
+  <li>Define constants for action names (as strings)</li>
+  <li>Also define the initial state
+    <ul>
+      <li>An empty item list</li>
+    </ul>
+  </li>
+  <li>New state is the old list plus a new item
+    <ul>
+      <li>New item arrives as action’s payload</li>
+    </ul>
+  </li>
+  <li>Do <em>not</em> use <code class="highlighter-rouge">items.push</code> to update existing state
+    <ul>
+      <li>More efficient…</li>
+      <li>…but only if correctness and programmer time aren’t issues</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-create-the-reducer-2" -->
+<h2 id="create-the-reducer-1">Create the Reducer</h2>
+
+<ul>
+  <li>Set up definitions</li>
+</ul>
+
+<p><em>src/app/store.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Action</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ngrx/store'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">ITEM_ADD</span> <span class="o">=</span> <span class="s1">'ITEM_ADD'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">AppState</span> <span class="p">{</span>
+  <span class="nl">items</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">DEFAULT_STATE</span><span class="err">:</span> <span class="nx">AppState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">items</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-create-the-reducer-3" -->
+<h2 id="create-the-reducer-2">Create the Reducer</h2>
+
+<ul>
+  <li>Define the reducer function</li>
+</ul>
+
+<p><em>src/app/store.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="err">:</span> <span class="nx">AppState</span> <span class="o">=</span> <span class="nx">DEFAULT_STATE</span><span class="p">,</span> <span class="nx">action</span><span class="err">:</span> <span class="nx">Action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">newState</span><span class="p">;</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">case</span> <span class="nx">ITEM_ADD</span><span class="err">:</span>
+      <span class="nx">newState</span> <span class="o">=</span> <span class="p">{</span><span class="na">items</span><span class="p">:</span> <span class="p">[...</span><span class="nx">state</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">]};</span>
+      <span class="k">return</span> <span class="nx">newState</span><span class="p">;</span>
+
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-add-the-store" -->
+<h2 id="add-the-store-to-the-application">Add the Store to the Application</h2>
+
+<p><em>src/app/app.module.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">StoreModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ngrx/store'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">reducer</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./store'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
+    <span class="c1">// ...as before...</span>
+  <span class="p">],</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="c1">// ...as before...</span>
+    <span class="nx">StoreModule</span><span class="p">.</span><span class="nx">provideStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">)</span>
+  <span class="p">],</span>
+  <span class="c1">// ...as before...</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Note the <code class="highlighter-rouge">provideStore</code> call in <code class="highlighter-rouge">imports</code></li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-add-the-storedevtools-to-the-application" -->
+<h2 id="add-the-storedevtools-to-the-application">Add the StoreDevTools to the Application</h2>
+
+<ul>
+  <li>Import <code class="highlighter-rouge">StoreDevtoolsModule</code> into our module</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">StoreDevtoolsModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ngrx/store-devtools'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="c1">// ...as before...</span>
+    <span class="nx">StoreModule</span><span class="p">.</span><span class="nx">provideStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">),</span>
+    <span class="c1">// Note that you must instrument after importing StoreModule</span>
+    <span class="nx">StoreDevtoolsModule</span><span class="p">.</span><span class="nx">instrumentOnlyWithExtension</span><span class="p">({})</span>
+  <span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-clean-up-html" -->
+<h2 id="clean-up-the-main-applications-html">Clean Up the Main Application’s HTML</h2>
+
+<p><em>src/app/app.component.html</em> (old)</p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;app-to-do-list</span> <span class="err">[</span><span class="na">thingsToDo</span><span class="err">]="</span><span class="na">thingsToDo</span><span class="err">"</span><span class="nt">&gt;&lt;/app-to-do-list&gt;</span>
+<span class="nt">&lt;app-generic-input</span> <span class="err">(</span><span class="na">newItem</span><span class="err">)="</span><span class="na">onNewItem</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span><span class="nt">&gt;&lt;/app-generic-input&gt;</span>
+</code></pre>
+</div>
+
+<p><em>src/app/app.component.html</em> (new)</p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;app-to-do-list&gt;&lt;/app-to-do-list&gt;</span>
+<span class="nt">&lt;app-generic-input</span> <span class="err">(</span><span class="na">newItem</span><span class="err">)="</span><span class="na">onNewItem</span><span class="err">($</span><span class="na">event</span><span class="err">)"</span><span class="nt">&gt;&lt;/app-generic-input&gt;</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-dispatch-actions-for-new-items" -->
+<h2 id="dispatch-actions-for-new-items">Dispatch Actions for New Items</h2>
+
+<p><em>src/app/app.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Store</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ngrx/store'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppState</span><span class="p">,</span> <span class="nx">ITEM_ADD</span><span class="p">,</span> <span class="nx">reducer</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./store'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span> <span class="p">(</span><span class="k">private</span> <span class="nx">store</span><span class="err">:</span> <span class="nx">Store</span><span class="o">&lt;</span><span class="nx">AppState</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="nx">onNewItem</span><span class="p">(</span><span class="nx">item</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span><span class="na">type</span><span class="p">:</span> <span class="nx">ITEM_ADD</span><span class="p">,</span> <span class="na">payload</span><span class="p">:</span> <span class="nx">item</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Note: no longer storing state in <code class="highlighter-rouge">AppComponent</code></li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-redux-dev-tools" -->
+<h2 id="redux-devtools">Redux DevTools</h2>
+
+<ul>
+  <li>New “Redux” tab in our browser’s developer tools pane after successful installation, configuration and injecting the store</li>
+</ul>
+
+<p><img src="/content/images/redux-devtools.png" width="50%" /></p>
+
+<hr />
+<!-- .slide: id="redux-update-todo-list-display-1" -->
+<h2 id="update-the-to-do-list-display">Update the To-Do List Display</h2>
+
+<p><em>src/app/to-do-list/to-do-list.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Store</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ngrx/store'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppState</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../store'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">ToDoListComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+  <span class="nl">thingsToDo</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">store</span><span class="err">:</span> <span class="nx">Store</span><span class="o">&lt;</span><span class="nx">AppState</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">store</span>
+      <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'items'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">items</span><span class="err">:</span> <span class="kr">string</span><span class="p">[])</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">thingsToDo</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">slice</span><span class="p">();});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-picking-that-apart" -->
+<h2 id="picking-that-apart">Picking That Apart</h2>
+
+<p><em>src/app/to-do-list/to-do-list.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code>    <span class="k">this</span><span class="p">.</span><span class="nx">store</span>
+      <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'items'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">items</span><span class="err">:</span> <span class="kr">string</span><span class="p">[])</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">thingsToDo</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">slice</span><span class="p">();});</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>The store is observable</li>
+  <li>So we can filter (select) top-level elements by name
+    <ul>
+      <li>Only pay attention to events signalling changes to <code class="highlighter-rouge">store['items']</code></li>
+    </ul>
+  </li>
+  <li>And subscribe to just those changes</li>
+  <li>When we get a new list of items…
+    <ul>
+      <li>…because that’s all we’re paying attention to…</li>
+    </ul>
+  </li>
+  <li>…we copy it into the list we’re displaying…
+    <ul>
+      <li>…because we don’t way to share state</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-redux-seems-complex" -->
+<h2 id="redux-seems-complex">Redux Seems Complex</h2>
+
+<p>So let’s see how we’d go about deleting items:</p>
+
+<ol>
+  <li>Add a <code class="highlighter-rouge">Delete</code> button beside each item in the display.</li>
+  <li>Have the <code class="highlighter-rouge">onDelete</code> handler in <code class="highlighter-rouge">ToDoListComponent</code> dispatch an <code class="highlighter-rouge">ITEM_DELETE</code> event
+    <ul>
+      <li>With the text of the item to delete as its payload</li>
+    </ul>
+  </li>
+  <li>Have the store update state when it receives that action</li>
+  <li>There is no Step 4</li>
+</ol>
+
+<hr />
+<!-- .slide: id="redux-update-todo-list-display" -->
+<h2 id="update-the-to-do-list-display-1">Update the To-Do List Display</h2>
+
+<p><em>src/app/to-do-list/to-do-list.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Delete<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Item<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;td&gt;&lt;button</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">onDelete</span><span class="err">(</span><span class="na">item</span><span class="err">)"</span><span class="nt">&gt;</span>X<span class="nt">&lt;/button&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{item}}<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-provide-deletion-method" -->
+<h2 id="provide-the-deletion-method">Provide the Deletion Method</h2>
+
+<p><em>src/app/to-do-list/to-do-list.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AppState</span><span class="p">,</span> <span class="nx">ITEM_DELETE</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../store'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">ToDoListComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+  <span class="c1">// ...as before...</span>
+
+  <span class="nx">onDelete</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span><span class="na">type</span><span class="p">:</span> <span class="nx">ITEM_DELETE</span><span class="p">,</span> <span class="na">payload</span><span class="p">:</span> <span class="nx">item</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Compilation error because <code class="highlighter-rouge">ITEM_DELETE</code> doesn’t yet exist</li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-upgrade-the-store" -->
+<h2 id="upgrade-the-store">Upgrade the Store</h2>
+
+<p><em>src/app/store.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">ITEM_DELETE</span> <span class="o">=</span> <span class="s1">'ITEM_DELETE'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="err">:</span> <span class="nx">AppState</span> <span class="o">=</span> <span class="nx">DEFAULT_STATE</span><span class="p">,</span> <span class="nx">action</span><span class="err">:</span> <span class="nx">Action</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">case</span> <span class="nx">ITEM_DELETE</span><span class="err">:</span>
+    <span class="nx">newState</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">items</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">item</span> <span class="o">!=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">})</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nx">newState</span><span class="p">;</span>
+
+  <span class="p">...</span><span class="nx">other</span> <span class="nx">cases</span><span class="p">...</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-getting-info-from-store" -->
+<h2 id="getting-information-from-a-store">Getting Information from a Store</h2>
+
+<ul>
+  <li>State is exposed through the <code class="highlighter-rouge">Store</code> service as an <code class="highlighter-rouge">Observable</code> stream</li>
+  <li>The <code class="highlighter-rouge">select</code> carries information away from the store
+    <ul>
+      <li><code class="highlighter-rouge">Store</code> provides a <code class="highlighter-rouge">.select()</code> method to select pieces of state:</li>
+      <li>By key: <code class="highlighter-rouge">this.store.select('people')</code></li>
+      <li>By nested key: <code class="highlighter-rouge">this.store.select('city', 'people')</code></li>
+      <li>By function: <code class="highlighter-rouge">this.store.select(state =&gt; state.people)</code></li>
+    </ul>
+  </li>
+  <li>Can chain other operators like <code class="highlighter-rouge">.filter()</code>, <code class="highlighter-rouge">.map()</code> to have finer-grained control over selected data</li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-handle-async-events" -->
+<h2 id="handling-async-events-in-the-application-with-redux">Handling Async Events in the Application With Redux</h2>
+
+<ul>
+  <li>The <code class="highlighter-rouge">@ngrx/effects</code> library is responsible for business logic and async actions
+    <ul>
+      <li>E.g., HTTP calls</li>
+    </ul>
+  </li>
+  <li>Does not keep local state</li>
+  <li>Listens on the action stream
+    <ul>
+      <li>Adheres to “Action In/Action Out”</li>
+    </ul>
+  </li>
+  <li>Typical use is:
+    <ol>
+      <li>Take user input</li>
+      <li>make HTTP call</li>
+      <li>Provide output to go into store</li>
+    </ol>
+  </li>
+</ul>
+
+<hr />
+<!-- .slide: id="redux-handling-side-effects" -->
+<h2 id="handling-side-effects-with-effect">Handling Side Effects with <code class="highlighter-rouge">@Effect</code></h2>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">CollectionEffects</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">private</span> <span class="nx">actions</span><span class="err">:</span> <span class="nx">Actions</span><span class="p">,</span>
+    <span class="k">private</span> <span class="nx">db</span><span class="err">:</span> <span class="nx">Database</span>
+  <span class="p">)</span> <span class="p">{}</span>
+
+  <span class="err">@</span><span class="nx">Effect</span><span class="p">()</span>
+  <span class="nl">removeBookFromCollection</span><span class="p">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Action</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">actions</span>
+    <span class="p">.</span><span class="nx">ofType</span><span class="p">(</span><span class="nx">collection</span><span class="p">.</span><span class="nx">ActionTypes</span><span class="p">.</span><span class="nx">REMOVE_BOOK</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">action</span><span class="err">:</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">RemoveBookAction</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">mergeMap</span><span class="p">(</span><span class="nx">book</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">executeWrite</span><span class="p">(</span><span class="s1">'books'</span><span class="p">,</span> <span class="s1">'delete'</span><span class="p">,</span> <span class="p">[</span> <span class="nx">book</span><span class="p">.</span><span class="nx">id</span> <span class="p">]))</span>
+    <span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="na">type</span> <span class="p">:</span> <span class="nx">ActionTypes</span><span class="p">.</span><span class="nx">REMOVE_BOOK_SUCCESS</span><span class="p">,</span>
+      <span class="na">payload</span> <span class="p">:</span> <span class="nx">book</span><span class="p">.</span><span class="nx">id</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">Observable</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="k">new</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">RemoveBookFailAction</span><span class="p">(</span><span class="nx">book</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="redux-faq-is-the-reducer-the-store" -->
+<h2 id="faq">FAQ</h2>
+
+<p><strong>Is the reducer the store?</strong></p>
+
+<p>No, a reducer only describes <em>how</em> the store’s state should change
+based on a dispatched action. Our actual state is stored outside of
+our reducers. In the case of <code class="highlighter-rouge">@ngrx</code>, state is stored within an
+<code class="highlighter-rouge">Observable</code> stream that can be listened to.</p>
+
+<hr />
+<!-- .slide: id="redux-faq-can-i-have-more-than-one-store" -->
+<h2 id="faq-1">FAQ</h2>
+
+<p><strong>Can I have more than one store?</strong></p>
+
+<p>No, redux uses one global store to manage state., however it is common practice
+to divide your store into separate areas of concern.</p>
+
+<p>Just as we can configure our store like this:
+<code class="highlighter-rouge">StoreModule.provideStore(reducer)</code>
+We are also able to pass in an object and associate a reducer with a given piece
+of our state
+<code class="highlighter-rouge">StoreModule.provideStore({ todos: todosReducer, users: usersReducer })</code></p>
+
+<p>We can also take advantage of functional composition, and “combine” multiple
+reducers into one using the <code class="highlighter-rouge">combineReducers</code> helper function <code class="highlighter-rouge">@ngrx</code> provides.</p>
+
+<hr />
+<!-- .slide id="redux-faq-does-the-ui-broadcast-actions" -->
+<h2 id="faq-2">FAQ</h2>
+
+<p><strong>Does the UI broadcast actions and store broadcast actions back?</strong></p>
+
+<p>The UI should not broadcast actions directly, it can and often should
+dispatch actions through “action creator” methods which can be made
+available through a component or service.</p>
+
+<p>In a more traditional Flux architecture, while a store may have
+broadcasted actions whenever state changed, Redux does not. Instead of
+reacting to actions dispatched out from our store, we instead react to
+the changes in our state itself, we don’t concerned ourselves with
+<em>how</em> state has changed.</p>
+
+<p>The actions are generally what we call the events being broadcasted to
+the store.  When events leave the store due to a state change it is
+done through a store select.</p>
+
+<hr />
+<!-- .slide: id="redux-faq-can-we-call-methods-directly" -->
+<h2 id="faq-3">FAQ</h2>
+
+<p><strong>Instead of dealing with observables, can we simply call methods directly?</strong></p>
+
+<p>By calling methods directly, we must now take on the responsibility of
+manually managing state (often spread across numerous locations) and
+ensuring that all concerned portions of our application are notified
+of updated state. This approach tends to be more error-prone and is
+more difficult to maintain and scale in larger applications.</p>
+
+<p>The advantage of Redux is that this state management is handled in one
+location which is easier to reason about, and our application can
+simply react whenever application state changes.</p>
+
+<hr />
+<!-- .slide: id="redux-faq-can-i-roll-my-own" -->
+<h2 id="faq-4">FAQ</h2>
+
+<p><strong>I have an awesome idea/implementation that does the same thing, can I use that?</strong></p>
+
+<p>Absolutely. Ultimately Redux is just a pattern for state
+management. Be warned however that many of the strengths of Redux lie
+in its conventions and community support. Convention allows other
+developers to ramp up quickly on a pattern they’re already familiar
+with, and community support means better tooling, more
+middleware,updates/bug fixes, and a larger knowledge base to draw
+upon. Choose whichever solution ends up being best for you and your
+team.</p>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

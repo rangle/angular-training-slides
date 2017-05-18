@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Translations</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Translations</h1>
+          <hr />
+<!-- .slide: id="translation-roadmap" -->
+<h2 id="roadmap">Roadmap</h2>
+
+<ul>
+  <li>How do I localize an Angular application?</li>
+</ul>
+
+<hr />
+<!-- .slide: id="translation-setting-up-1" -->
+<h2 id="setting-up">Setting Up</h2>
+
+<ul>
+  <li>We use <code class="highlighter-rouge">ngx-translate</code> to manage translations
+    <ul>
+      <li>Other options are available</li>
+    </ul>
+  </li>
+  <li>Install with <code class="highlighter-rouge">npm install @ngx-translate/core --save</code></li>
+  <li>Import <code class="highlighter-rouge">TranslateModule</code> in the root module</li>
+  <li>Use <code class="highlighter-rouge">TranslateModule.forRoot()</code> to configure the <code class="highlighter-rouge">TranslateModule</code>
+    <ul>
+      <li><code class="highlighter-rouge">TranslateModule.forRoot()</code> should be only called once in your root module</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<!-- .slide: id="translation-setting-up-2" -->
+<h2 id="setting-up-1">Setting Up</h2>
+
+<p><em>src/app/app.module.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TranslateModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ngx-translate/core'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">TranslateModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">({...})</span>
+  <span class="p">],</span>
+  <span class="c1">// ...</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="translation-configuring-the-translation-module-1" -->
+<h2 id="configuring-the-translation-module">Configuring the Translation Module</h2>
+
+<ul>
+  <li>Can specify a loader, parser, or missing translation handler</li>
+  <li>A loader can be used to load translations
+    <ul>
+      <li><code class="highlighter-rouge">TranslateHttpLoader</code> can be used to load translations from HTTP</li>
+      <li><code class="highlighter-rouge">npm install @ngx-translate/http-loader --save</code></li>
+    </ul>
+  </li>
+  <li>Create a new object of <code class="highlighter-rouge">TranslateHttpLoader(http, prefix, sufix)</code>
+    <ul>
+      <li>Optionally define the folder that holds the translation files (defaults to <code class="highlighter-rouge">/assets/i18n/</code>)</li>
+      <li>Optionally define the file extension for your translation files (defaults to <code class="highlighter-rouge">.json</code>)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<!-- .slide: id="translation-configuring-the-translation-module-2" -->
+<h2 id="configuring-the-translation-module-1">Configuring the Translation Module</h2>
+
+<p><em>src/app/app.module.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nx">HttpLoaderFactory</span><span class="p">(</span><span class="nx">http</span><span class="err">:</span> <span class="nx">Http</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">TranslateHttpLoader</span><span class="p">(</span><span class="nx">http</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">TranslateModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">({</span>
+      <span class="na">loader</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">provide</span><span class="p">:</span> <span class="nx">TranslateLoader</span><span class="p">,</span>
+        <span class="na">useFactory</span><span class="p">:</span> <span class="nx">HttpLoaderFactory</span><span class="p">,</span>
+        <span class="na">deps</span><span class="p">:</span> <span class="p">[</span><span class="nx">Http</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+  <span class="p">]</span>
+  <span class="c1">// ...</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="translation-creating-translation-files" -->
+<h2 id="creating-translation-files">Creating Translation Files</h2>
+
+<ul>
+  <li>Create JSON files with names based on language codes</li>
+</ul>
+
+<p><em>assets/i18n/en.json</em></p>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"HOME"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"TITLE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Welcome"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><em>assets/i18n/fr.json</em></p>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"HOME"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"TITLE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bienvenue"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<ul>
+  <li>Translations can be accessed using dot notation: <code class="highlighter-rouge">HOME.TITLE</code></li>
+</ul>
+
+<hr />
+<!-- .slide: id="translation-programmatically-creating-translations" -->
+<h2 id="programmatically-creating-translations">Programmatically Creating Translations</h2>
+
+<ul>
+  <li>Translations can be created programmatically using the <code class="highlighter-rouge">setTranslation</code> method from <code class="highlighter-rouge">TranslateService</code></li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="nx">translate</span><span class="p">.</span><span class="nx">setTranslation</span><span class="p">(</span><span class="s1">'en'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">HELLO</span><span class="p">:</span> <span class="s1">'hello {{value}}'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Use the <code class="highlighter-rouge">TranslateService</code> to set the default language:</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="nx">translate</span><span class="p">.</span><span class="nx">setDefaultLang</span><span class="p">(</span><span class="s1">'en'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Or use it to get the current set language:</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">browserLang</span> <span class="o">=</span> <span class="nx">translate</span><span class="p">.</span><span class="nx">getBrowserLang</span><span class="p">();</span>
+<span class="nx">translate</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">browserLang</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/en|fr/</span><span class="p">)</span> <span class="p">?</span> <span class="nx">browserLang</span> <span class="p">:</span> <span class="s1">'en'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="translation-usage" -->
+<h2 id="usage">Usage</h2>
+
+<ul>
+  <li>Using a pipe</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h2&gt;</span>{{ 'HOME.TITLE' | translate }}<span class="nt">&lt;/h2&gt;</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Using a directive</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">[</span><span class="na">translate</span><span class="err">]="'</span><span class="na">HOME</span><span class="err">.</span><span class="na">TITLE</span><span class="err">'"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Using a service</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="nx">translate</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'HOME.TITLE'</span><span class="p">,</span> <span class="p">{}).</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">res</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

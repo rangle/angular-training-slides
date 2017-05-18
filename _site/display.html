@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Displaying Data</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Displaying Data</h1>
+          <hr />
+<!-- .slide: id="display-roadmap" -->
+
+<h2 id="roadmap">Roadmap</h2>
+
+<ol>
+  <li>Where do I put static data in a component?</li>
+  <li>How do I display multiple values?</li>
+  <li>How do I make items findable?</li>
+  <li>How do I control what is displayed?</li>
+  <li>When does Angular update its display of data?</li>
+</ol>
+
+<hr />
+<!-- .slide: id="display-make-the-data" -->
+<h2 id="make-the-data">Make the Data</h2>
+
+<ul>
+  <li>Change the title</li>
+  <li>Add a list of strings</li>
+</ul>
+
+<p><em>src/app/app.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="c1">// ...as before...</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
+  <span class="nx">title</span> <span class="o">=</span> <span class="s1">'To Do'</span><span class="p">;</span>
+  <span class="nx">thingsToDo</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'Learn JavaScript'</span><span class="p">,</span>
+    <span class="s1">'Learn Angular'</span><span class="p">,</span>
+    <span class="s1">'Learn Redux'</span>
+  <span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="display-display-the-data" -->
+<h2 id="display-the-data">Display the Data</h2>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">*ngFor</code> to repeat some HTML multiple times</li>
+  <li>The loop variable <code class="highlighter-rouge">item</code> is created locally</li>
+</ul>
+
+<p><em>src/app/app.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo"</span><span class="nt">&gt;</span>{{item}}<span class="nt">&lt;/p&gt;</span>
+</code></pre>
+</div>
+
+<p><img src="images/screenshot-ngfor.png" alt="ngFor Output" /></p>
+
+<hr />
+<!-- .slide: id="display-ngfor-exports" -->
+<h2 id="ngfor-exports-useful-values"><code class="highlighter-rouge">*ngFor</code> Exports Useful Values</h2>
+
+<ul>
+  <li>We can obtain the 0-based index of each iteration and assign the value to a local variable:</li>
+</ul>
+
+<p><em>src/app/app.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo; let i = index"</span><span class="nt">&gt;</span>({{i}}) {{item}}<span class="nt">&lt;/p&gt;</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Similarly, <code class="highlighter-rouge">*ngFor</code> exports <code class="highlighter-rouge">first</code>, <code class="highlighter-rouge">last</code>, <code class="highlighter-rouge">even</code> and <code class="highlighter-rouge">odd</code> booleans which can also be assigned to local variables.</li>
+</ul>
+
+<hr />
+<!-- .slide: id="display-ngif-1" -->
+<h2 id="nothing-to-see-here-folks">Nothing to See Here, Folks</h2>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">*ngIf</code> to control whether or not something is displayed
+    <ul>
+      <li>More precisely, whether or not something is added to the DOM</li>
+      <li>See how to show and hide content with styles later</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>src/app/app.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
+  <span class="c1">// ...as before...</span>
+  <span class="nx">thingsCompleted</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="display-ngif-2" -->
+<h2 id="nothing-to-see-here-folks-1">Nothing to See Here, Folks</h2>
+
+<p><em>src/app/app.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo; let i = index"</span> <span class="na">id=</span><span class="s">"{{i}}"</span><span class="nt">&gt;</span>({{i}}) {{item}}<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"thingsCompleted.length == 0"</span><span class="nt">&gt;</span>Nothing completed<span class="nt">&lt;/p&gt;</span>
+</code></pre>
+</div>
+
+<p><img src="images/screenshot-ngif.png" alt="ngIf Output" /></p>
+
+<hr />
+<!-- .slide: id="display-dynamic-content-1" -->
+<h2 id="dynamic-content">Dynamic Content</h2>
+
+<ul>
+  <li>Interpolated expressions can include function and method calls</li>
+</ul>
+
+<p><em>app/component/app.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
+  <span class="c1">// ...as before...</span>
+  <span class="nx">summary</span><span class="p">()</span><span class="err">:</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">thingsToDo</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span> <span class="nx">done</span> <span class="o">/</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">thingsCompleted</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span> <span class="nx">to</span> <span class="k">do</span><span class="err">`</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><em>app/component/app.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>Summary: {{summary()}}<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo; let i = index"</span> <span class="na">id=</span><span class="s">"{{i}}"</span><span class="nt">&gt;</span>({{i}}) {{item}}<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"thingsCompleted.length == 0"</span><span class="nt">&gt;</span>Nothing completed<span class="nt">&lt;/p&gt;</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="display-dynamic-content-2" -->
+<h2 id="dynamic-content-1">Dynamic Content</h2>
+
+<p><img src="images/screenshot-method.png" alt="Interpolating Method Call" /></p>
+
+<hr />
+<!-- .slide: id="display-dynamic-content-3" -->
+<h2 id="dynamic-content-2">Dynamic Content</h2>
+
+<ul>
+  <li>Angular notices data changes and updates page according</li>
+  <li>Show this by adding a to-do item to the list every second</li>
+</ul>
+
+<p><em>app.component/app.component.ts</em></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>export class AppComponent {
+  // ...as before...
+  constructor() {
+    setInterval(() =&gt; {
+      this.thingsToDo.push('make coffee');
+    }, 1000);
+  }
+}
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="display-dynamic-content-4" -->
+<h2 id="dynamic-content-3">Dynamic Content</h2>
+
+<ul>
+  <li>Both the list and the summary update every second</li>
+</ul>
+
+<p><img src="images/screenshot-dynamic.png" alt="Dynamic Updating" /></p>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

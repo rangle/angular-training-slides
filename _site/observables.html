@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Observables</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Observables</h1>
+          <hr />
+<!-- .slide id="observables-objectives" -->
+
+<p>Objectives:</p>
+
+<ol>
+  <li>
+    <p>To be able to inject http into an Angular component, get a value from a typical REST endpoint and bind it directly to the template.</p>
+  </li>
+  <li>
+    <p>To be able to explain what the <code class="highlighter-rouge">async</code> pipe does and describe how you would mimic the behavior of the <code class="highlighter-rouge">async</code> pipe in a component by subscribing to an observable.</p>
+  </li>
+</ol>
+
+<hr />
+<!-- .slide: id="observables-what-are-observables" -->
+<h2 id="what-are-observables">What are Observables?</h2>
+
+<ul>
+  <li>ECMA Stage 1, expected to move to Stage 2 soon.</li>
+  <li>Available for use now via <a href="https://github.com/ReactiveX/rxjs">RxJS library</a>.</li>
+  <li>Used in many languages and frameworks.</li>
+  <li>Used extensively in Angular.</li>
+  <li>Observables help with asynchronous behaviors.</li>
+</ul>
+
+<hr />
+<!-- .slide: id="observables-quiz-1" -->
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+<h2 id="quiz">Quiz</h2>
+
+<p>An observable will:</p>
+
+<ol>
+  <li>two-way data bind a property</li>
+  <li>push notifications to an observer</li>
+  <li>let Angular know when change detetection is required</li>
+</ol>
+
+<p>+++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" --></p>
+
+<h2 id="answer">Answer</h2>
+
+<p>Definition from RxJS docs:</p>
+
+<blockquote>
+  <p>The Observer and Observable interfaces provide a generalized
+mechanism for push-based notification, also known as the observer
+design pattern. The Observable object represents the object that
+sends notifications (the provider); the Observer object represents
+the class that receives them (the observer).</p>
+</blockquote>
+
+<hr />
+<!-- .slide: id="observables-subscribing" -->
+<h2 id="subscribing-to-an-observable">Subscribing to an Observable</h2>
+
+<p>Let’s assume we have an observable, <code class="highlighter-rouge">getData$</code>. Here is how we tell it we want to log the value it will eventually emit:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="nx">getData$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// when the getData$ observable fires, log the data</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="observables-quiz-2" -->
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+<h2 id="quiz-1">Quiz</h2>
+
+<p>Subscribing to an observable:</p>
+
+<ol>
+  <li>returns another observable</li>
+  <li>allows you join multiple observables together</li>
+  <li>provides a callback to the observable</li>
+  <li>is not required in Angular</li>
+</ol>
+
+<p>+++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" --></p>
+
+<h2 id="answer-1">Answer</h2>
+
+<p>Correct answer is 2.</p>
+
+<hr />
+<!-- .slide: id="observables-map-operator" -->
+<h2 id="the-map-operator">The Map Operator</h2>
+
+<ul>
+  <li>You pass it a function that transforms (maps) the data returned.</li>
+</ul>
+
+<p>For example: an observable based on an input event will pass the event object to the callback.  We can make it return the input’s value using the <code class="highlighter-rouge">map</code> operator:</p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">searchString$</span> <span class="o">=</span> <span class="nx">Observable</span>
+  <span class="p">.</span><span class="nx">fromEvent</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.search-input'</span><span class="p">),</span> <span class="s1">'input'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Notes:
+https://jsbin.com/genayadivo/edit?html,js,console,output
+<em>concepts</em>: operators, map operator (instance method)</p>
+
+<hr />
+<!-- .slide: id="observables-quiz-3" -->
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+<h2 id="quiz-2">Quiz</h2>
+
+<p>The map operator:</p>
+
+<ol>
+  <li>will perform <code class="highlighter-rouge">Array.map</code> on the result of an observable when it is an array</li>
+  <li>will return an observable</li>
+  <li>enables geolocation in Angular</li>
+  <li>will modify the result returned by an observable</li>
+</ol>
+
+<p>+++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" --></p>
+
+<h2 id="answer-2">Answer</h2>
+
+<p>Correct answer is 2.</p>
+
+<hr />
+<!-- .slide: id="observables-http-service" -->
+<h2 id="angulars-http-service">Angular’s Http Service</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">Http</code> from <code class="highlighter-rouge">'@angular/http'</code> has methods such as <code class="highlighter-rouge">get</code> that return observables.</li>
+  <li>Map is often used with <code class="highlighter-rouge">Http</code> as in the following example:</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">getData$</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'https://example.com/api/products'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nx">getData$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">//</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>In this example, <code class="highlighter-rouge">map</code> is used because <code class="highlighter-rouge">get</code> is an observable of an object with a <code class="highlighter-rouge">json</code> method.  Usually, we want the return value of <code class="highlighter-rouge">json()</code>, not the response object!</p>
+
+<hr />
+<!-- .slide: id="observables-unsubscribing" -->
+<h2 id="what-about-unsubscribing">What about Unsubscribing?</h2>
+
+<ul>
+  <li>Observables that finish, including <code class="highlighter-rouge">http.get</code> don’t need to be unsubscribed.</li>
+  <li>Sometimes observables never finish.  An observable based on an event stream such as <code class="highlighter-rouge">searchString$</code> will keep calling the function we subscribe with every time it emits a value. We can stop this by unsubscribing from the observable.</li>
+  <li>The <code class="highlighter-rouge">subscribe()</code> method returns a <em>subscription</em>.</li>
+  <li>A subscription has an <code class="highlighter-rouge">unsubscribe()</code> method.</li>
+</ul>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">clickStreamSubscription</span> <span class="o">=</span> <span class="nx">clickStream</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
+  <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'clicked!'</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">clickStreamSubscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">();</span>
+<span class="p">},</span> <span class="mi">3000</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="observables-asyncpipe" -->
+<h2 id="angulars-asyncpipe">Angular’s AsyncPipe</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">AsyncPipe</code> helps us write less by taking an observable and:
+    <ul>
+      <li>subscribing to it</li>
+      <li>returning the returned value so it can be placed in your template</li>
+      <li>unsubscibing, when the value is no longer needed</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Example (<code class="highlighter-rouge">name$</code> is an observable):</p>
+
+<p><code class="highlighter-rouge">&lt;div&gt; {{ name$ | async }} &lt;/div&gt;</code></p>
+
+<hr />
+<!-- .slide: id="observables-quiz-4" -->
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+<h2 id="quiz-3">Quiz</h2>
+
+<p>Angular’s <code class="highlighter-rouge">AsyncPipe</code>:</p>
+
+<ol>
+  <li>accepts an observable and binds the value to a template</li>
+  <li>gets data from a rest endpoint</li>
+  <li>makes asynchronous code look synchronous</li>
+  <li>can’t be chained with pure pipes</li>
+</ol>
+
+<p>+++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" --></p>
+
+<h2 id="answer-3">Answer</h2>
+
+<p>Correct answer is 3.</p>
+
+<hr />
+<!-- .slide: id="observables-filter-operator" -->
+<h2 id="the-filter-operators">The Filter Operators</h2>
+
+<p>In addition to <code class="highlighter-rouge">map</code>, the <code class="highlighter-rouge">filter</code> operator is also available:</p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="nx">searchString$</span>
+  <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">searchString</span> <span class="o">=&gt;</span> <span class="nx">searchString</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>‘filter’ returns an observable and fires only when the value emitted from the observable has length greater than 3.</li>
+  <li><a href="http://reactivex.io/rxjs/identifiers.html">See RxJS References</a> for many more operators!</li>
+</ul>
+
+<hr />
+<!-- .slide: id="observables-quiz-5" -->
+<!-- .slide: data-background="../content/images/question-slide.jpg" -->
+
+<h2 id="quiz-4">Quiz</h2>
+
+<p>Operators:</p>
+
+<ol>
+  <li>start execution of an observable when invoked</li>
+  <li>return subscriptions so you can unsubscribe</li>
+  <li>are methods on an observable that return an observable</li>
+</ol>
+
+<p>+++
+<!-- .slide: data-background="../content/images/answer-slide.jpg" --></p>
+
+<h2 id="answer-4">Answer</h2>
+
+<p>The correct answer is 3.</p>
+
+<hr />
+<!-- .slide: id="observables-chaining-with-mergemap" -->
+<h2 id="chaining-promises-vs-mergemap">Chaining Promises vs <code class="highlighter-rouge">mergeMap</code></h2>
+
+<p>Observables can be nested.</p>
+
+<p>Observables can utilize <code class="highlighter-rouge">mergeMap</code> (also known as <code class="highlighter-rouge">flatMap</code>) to combine more than one observable:</p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'https://jsonplaceholder.typicode.com/users'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Observable</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()))</span>
+  <span class="p">.</span><span class="nx">mergeMap</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">data</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">person</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">person</span><span class="p">.</span><span class="nx">id</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">person</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Dr. "</span> <span class="o">+</span> <span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">doctor</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">doctor</span><span class="p">));</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">mergeMap</code> works by subscribing to and pulling values out of the inner Observable stream, which is <code class="highlighter-rouge">Observable.from(data)</code> in this example, and passing or <em>merging</em> them back to the outer Observable stream.</p>
+
+<hr />
+<!-- .slide: id="observables-combining-with-forkjoin" -->
+<h2 id="combining-multiple-observables-using-forkjoin">Combining multiple observables using <code class="highlighter-rouge">forkJoin</code></h2>
+
+<p>We can resolve multiple observables together using the <code class="highlighter-rouge">forkJoin</code> operator.</p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span>
+  <span class="s1">'https://jsonplaceholder.typicode.com/users/'</span>
+<span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+
+<span class="kd">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span>
+  <span class="s1">'https://jsonplaceholder.typicode.com/posts/'</span>
+<span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+
+<span class="nx">Observable</span><span class="p">.</span><span class="nx">forkJoin</span><span class="p">([</span><span class="nx">users</span><span class="p">,</span> <span class="nx">posts</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// response for users</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// response for posts</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

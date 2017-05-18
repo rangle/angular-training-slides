@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Instructor's Guide</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Instructor's Guide</h1>
+          <hr />
+<!-- .slide: id="instructor-guide-time-estimates" -->
+<h2 id="time-estimates">Time Estimates</h2>
+
+<p><small></small></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>Webinar</th>
+      <th>Classroom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#introduction">Introduction</a></td>
+      <td>15 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#setup">Setup</a></td>
+      <td>15 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#hello">Hello, World</a></td>
+      <td>15 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#display">Displaying Data</a></td>
+      <td>15 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#component">Creating a New Component</a></td>
+      <td>30 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#events">Handling Events</a></td>
+      <td>45 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#augury">Augury</a></td>
+      <td>15 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#pipes">Pipes</a></td>
+      <td>30 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#services">Services</a></td>
+      <td>45 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#unit-testing">Unit Testing</a></td>
+      <td>90 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#redux">Managing State with Redux</a></td>
+      <td>90 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#template-forms">Template Driven Forms</a></td>
+      <td>30 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#reactive-forms">Reactive Forms</a></td>
+      <td>45 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#routing">Routing</a></td>
+      <td>45 minutes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#http">The HTTP Service</a></td>
+      <td>45 minutes</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&lt;/small&gt;</p>
+
+<hr />
+<!-- .slide: id="instructor-guide-learner-profiles" -->
+<h2 id="learner-profiles">Learner Profiles</h2>
+
+<p>These profiles describe the learners we are trying to help with this course,
+and are meant to help us answer questions about goals, pace, and content.
+Each profile has:</p>
+
+<ol>
+  <li>General background</li>
+  <li>What they do and don’t already know</li>
+  <li>What they think they want to be able to do</li>
+  <li>What they will get out of the course</li>
+  <li>Any special needs or consideration</li>
+</ol>
+
+<hr />
+<!-- .slide: id="instructor-guide-learner-profile-zuko" -->
+<h2 id="learner-profiles-zuko">Learner Profiles: Zuko</h2>
+
+<ol>
+  <li>
+    <p>Taught himself PHP and JavaScript in high school;
+struggled through a CS degree (didn’t see the point of the theory);
+has worked for a couple of small website companies.</p>
+  </li>
+  <li>
+    <p>Wide-ranging but gappy knowledge of Unix, PHP, Python, and C;
+solid understanding of networking (DNS, AWS, etc.);
+competent with ES5 and JQuery;
+no experience with enterprise software;
+has never programmed as part of a team;
+no experience with (or interest in) the “business side of things”.</p>
+  </li>
+  <li>
+    <p>Wants to learn how to build big applications,
+both to advance his craft
+and to get a better job.</p>
+  </li>
+  <li>
+    <p>Exposure to enterprise-scale features of framework
+(dependency injection, modularization)
+<em>and</em> the reasons they are useful.</p>
+  </li>
+  <li>
+    <p>It will be hard to convince Zuko that Angular’s complexity has value,
+since he could quickly throw together
+a PHP/JQuery equivalent of any of our examples.
+Zuko also prefers to learn on his own,
+and can frequently be found searching Stack Overflow and working on his own examples
+in the middle of lectures.</p>
+  </li>
+</ol>
+
+<hr />
+<!-- .slide: id="instructor-guide-learner-profile-toph" -->
+<h2 id="learner-profiles-toph">Learner Profiles: Toph</h2>
+
+<ol>
+  <li>
+    <p>Senior developer with 12 years of experience in three-tier .NET applications;
+leading a team of 4 building new desktop and mobile interfaces
+to legacy inventory control system that’s being turned into a service;
+spends half her time negotiating requirements and schedules,
+the other half architecting,
+and the <em>other</em> half coding (most frequently pair debugging with her team).</p>
+  </li>
+  <li>
+    <p>Solid understanding of Windows, Visual Studio, .NET,
+and enterprise-scale middleware and database technology;
+no previous experience with JavaScript.</p>
+  </li>
+  <li>
+    <p>Wants to learn enough about Angular to be able to architect solutions using it
+and pair with (junior) team members who are coding and debugging.</p>
+  </li>
+  <li>
+    <p>Understanding of what problems Angular solves
+what other technologies (e.g., Redux) should be used with it,
+and what development tools she should encourage her team to use.</p>
+  </li>
+  <li>
+    <p>May be interrupted several times during the course
+to handle critical management issues.</p>
+  </li>
+</ol>
+
+<hr />
+<!-- .slide: id="instructor-guide-learner-profile-iroh" -->
+<h2 id="learner-profiles-iroh">Learner Profiles: Iroh</h2>
+
+<ol>
+  <li>
+    <p>Studied computer networking at college and then got into programming;
+has been working for six years as a front-end web developer.</p>
+  </li>
+  <li>
+    <p>Uses JQuery and NPM every day;
+has written a few unit tests here and there,
+but nothing systematic;
+has good self-taught design skills.</p>
+  </li>
+  <li>
+    <p>Wants to get up to speed with Angular as quickly as possible;
+also wants to learn more about general programming skills
+(e.g., testing and performance tuning).</p>
+  </li>
+  <li>
+    <p>Wants to go through the notes on his own,
+asking questions whenever he runs into something he can’t figure out
+after fifteen minutes on Stack Overflow.</p>
+  </li>
+  <li>
+    <p>Red/green Color-blind.</p>
+  </li>
+</ol>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

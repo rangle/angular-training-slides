@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Generating Forms Dynamically</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Generating Forms Dynamically</h1>
+          <hr />
+
+<h2 id="roadmap">Roadmap</h2>
+
+<p>FIXME: this module needs to be filled in and proof-read</p>
+
+<hr />
+<!-- .slide: id="generating-forms-dynamically-1" -->
+<h2 id="how-to-generate-forms-dynamically-16">How to Generate Forms Dynamically (1/6)</h2>
+
+<p>With reactive forms, since the forms are created and handled primarily through component code and not in the template, it becomes much easier to create dynamic forms. We’ll use an example using a JSON based schema:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Edit User Profile"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First Name"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"required"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lastName"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Last Name"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"defaultValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Angular"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"required"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email Address"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"placeholder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@rangle.io"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="generating-forms-dynamically-2" -->
+<h2 id="how-to-generate-forms-dynamically-26">How to Generate Forms Dynamically (2/6)</h2>
+
+<p>In our definition, our schema has a <code class="highlighter-rouge">fields</code> property that defines what our form fields will be. For each of the fields, we accept:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">name</code> - the name or id we use refer to the form control in code</li>
+  <li><code class="highlighter-rouge">display</code> - the display name of the field in the template</li>
+  <li><code class="highlighter-rouge">defaultValue</code> - the default value of a form control</li>
+  <li><code class="highlighter-rouge">placeholder</code> - the sample value for the control if it’s empty</li>
+  <li><code class="highlighter-rouge">validators</code> - how we determine whether or not that form control is valid</li>
+</ul>
+
+<hr />
+<!-- .slide: id="generating-forms-dynamically-3" -->
+<h2 id="how-to-generate-forms-dynamically-36">How to Generate Forms Dynamically (3/6)</h2>
+
+<p>We have a basic schema service that simply parses this as JSON, serializes it into a JavaScript object and binds it to a local class member.</p>
+
+<p><em>form-schema.service.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">FormSchemaService</span> <span class="p">{</span>
+  <span class="nx">schema</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="nx">getSchemaJSON</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Observable</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="nx">exampleSchemaJSON</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">updateSchema</span><span class="p">(</span><span class="nx">toSerialize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">schema</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">toSerialize</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<p><a href="https://plnkr.co/edit/FjmwlCYFkvEqYqAAiJRD?p=preview">View Example</a></p>
+
+<hr />
+<!-- .slide: id="generating-forms-dynamically-4" -->
+<h2 id="how-to-generate-forms-dynamically-46">How to Generate Forms Dynamically (4/6)</h2>
+
+<p>To actually use this object to generate a reactive form, we need a way of mapping this object to an Angular <code class="highlighter-rouge">FormGroup</code> instance.</p>
+
+<p><em>dynamic-form.service.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">DynamicFormService</span> <span class="p">{</span>
+  <span class="nx">generateForm</span><span class="p">(</span><span class="nx">schema</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">fields</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">schema</span><span class="p">;</span>
+
+    <span class="kd">const</span> <span class="nx">formGroup</span> <span class="o">=</span> <span class="nx">fields</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span>
+      <span class="p">(</span><span class="nx">group</span><span class="p">,</span> <span class="nx">field</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">group</span><span class="p">[</span><span class="nx">field</span><span class="p">.</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormControl</span><span class="p">(</span>
+          <span class="nx">field</span><span class="p">.</span><span class="nx">defaultValue</span> <span class="p">?</span> <span class="nx">field</span><span class="p">.</span><span class="nx">defaultValue</span> <span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+          <span class="nx">getValidators</span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">validators</span> <span class="p">?</span> <span class="nx">field</span><span class="p">.</span><span class="nx">validators</span> <span class="p">:</span> <span class="p">[]));</span>
+
+        <span class="k">return</span> <span class="nx">group</span><span class="p">;</span>
+      <span class="p">},</span> <span class="p">{});</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">FormGroup</span><span class="p">(</span><span class="nx">formGroup</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<p><a href="https://plnkr.co/edit/FjmwlCYFkvEqYqAAiJRD?p=preview">View Example</a></p>
+
+<hr />
+<!-- .slide: id="generating-forms-dynamically-5" -->
+<h2 id="how-to-generate-forms-dynamically-56">How to Generate Forms Dynamically (5/6)</h2>
+
+<p>After generating a <code class="highlighter-rouge">FormGroup</code> object, we can start using the reactive form within our component. Here, we use both the form schema and the <code class="highlighter-rouge">FormGroup</code> object within our template:</p>
+
+<p><em>dynamic-form.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="na">selector</span><span class="p">:</span> <span class="s1">'app-dynamic-form'</span><span class="p">,</span>
+	<span class="na">template</span><span class="p">:</span> <span class="err">`</span>
+	  <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">schema</span><span class="p">.</span><span class="nx">name</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>	  <span class="o">&lt;</span><span class="nx">form</span> <span class="p">[</span><span class="nx">formGroup</span><span class="p">]</span><span class="o">=</span><span class="s2">"editProfileForm"</span> <span class="p">(</span><span class="nx">ngSubmit</span><span class="p">)</span><span class="o">=</span><span class="s2">"onSubmit()"</span><span class="o">&gt;</span>
+	    <span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">"let field of schema.fields"</span><span class="o">&gt;</span>
+	      <span class="o">&lt;</span><span class="nx">label</span> <span class="p">[</span><span class="k">for</span><span class="p">]</span><span class="o">=</span><span class="s2">"field.name"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">field</span><span class="p">.</span><span class="nx">display</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>	      <span class="o">&lt;</span><span class="nx">input</span>
+	        <span class="kd">type</span><span class="o">=</span><span class="s2">"text"</span>
+	        <span class="p">[</span><span class="nx">name</span><span class="p">]</span><span class="o">=</span><span class="s2">"field.name"</span>
+	        <span class="p">[</span><span class="nx">placeholder</span><span class="p">]</span><span class="o">=</span><span class="s2">"field.placeholder ? field.placeholder : ''"</span>
+	        <span class="p">[</span><span class="nx">formControlName</span><span class="p">]</span><span class="o">=</span><span class="s2">"field.name"</span><span class="o">&gt;</span>
+	    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+	    <span class="o">&lt;</span><span class="nx">button</span> <span class="kd">type</span><span class="o">=</span><span class="s2">"submit"</span> <span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="s2">"!editProfileForm.valid"</span><span class="o">&gt;</span><span class="nx">Update</span> <span class="nx">Profile</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>	  <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>	<span class="err">`</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+<p><a href="https://plnkr.co/edit/FjmwlCYFkvEqYqAAiJRD?p=preview">View Example</a></p>
+
+<hr />
+<!-- .slide: id="generating-forms-dynamically-6" -->
+<h2 id="how-to-generate-forms-dynamically-66">How to Generate Forms Dynamically (6/6)</h2>
+
+<p><em>dynamic-form.component.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">DynamicFormComponent</span> <span class="p">{</span>
+  <span class="nx">editProfileForm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormGroup</span><span class="p">({});</span>
+
+  <span class="k">private</span> <span class="nx">_schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">fields</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="p">};</span>
+
+  <span class="err">@</span><span class="nx">Input</span><span class="p">()</span>
+  <span class="nx">get</span> <span class="nx">schema</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_schema</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">set</span> <span class="nx">schema</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_schema</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">editProfileForm</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dynamicFormService</span><span class="p">.</span><span class="nx">generateForm</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">dynamicFormService</span><span class="err">:</span> <span class="nx">DynamicFormService</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<p>Notice that we’re allowing the schema to be changed at runtime, so we have to make sure to update the <code class="highlighter-rouge">FormGroup</code> whenever the schema is updated.</p>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

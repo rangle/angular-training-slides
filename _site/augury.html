@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Augury</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Augury</h1>
+          <hr />
+<!-- .slide: id="augury-what-is-augury" -->
+<h2 id="what-is-augury">What is Augury?</h2>
+
+<ul>
+  <li><a href="https://augury.angular.io/">Augury</a> is a Chrome DevTools extensions for debugging and profiling Angular applications</li>
+  <li>Disclaimer: Augury was authored by <a href="http://rangle.io">Rangle.io</a></li>
+</ul>
+
+<p><img src="./images/augury.svg" width="200" style="box-shadow: none" alt="Augury Logo" /></p>
+
+<hr />
+<!-- .slide: id="augury-installing" -->
+<h2 id="installing-augury">Installing Augury</h2>
+
+<ul>
+  <li>Augury is available through the Chrome web store and installed as a Chrome extension</li>
+  <li>After installation, a tab labelled <em>Augury</em> should be available in Chrome DevTools</li>
+</ul>
+
+<p><img src="./images/chrome-devtools-augury.png" alt="Augury in DevTools" /></p>
+
+<hr />
+<!-- .slide: id="augury-integrating" -->
+<h2 id="integrating-with-your-application">Integrating With Your Application</h2>
+
+<ul>
+  <li>Augury allows us to inspect our component tree to check the applicaton state at any point
+    <ul>
+      <li>Application must be running in development mode for Augury to work</li>
+      <li>This is the default for Angular CLI projects run with <code class="highlighter-rouge">ng serve</code>
+        <ul>
+          <li><code class="highlighter-rouge">ng serve</code> is the CLI command run by <code class="highlighter-rouge">npm start</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Displays what components are in our component tree</li>
+  <li>Component properties’ values are displayed and editable</li>
+  <li>Custom events can be triggered using arbitrary values</li>
+</ul>
+
+<hr />
+<!-- .slide: id="augury-inspecting" -->
+<h2 id="basic-inspection-with-augury">Basic Inspection with Augury</h2>
+
+<p><img src="./images/augury-component-tree.png" alt="Augury in Action" /></p>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

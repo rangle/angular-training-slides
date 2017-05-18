@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="search-domain" content="http://rangle.io" />
+    <link href="http://localhost:4000/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost:4000/css/bootstrap-theme.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Pipes</title>
+  </head>
+  <body>
+    <div class="container shadow">
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          <p><a href="http://rangle.io">Rangle.io</a> Angular Training</a></p>
+          <h1>Pipes</h1>
+          <hr />
+<!-- .slide: id="pipes-roadmap" -->
+<h2 id="roadmap">Roadmap</h2>
+
+<ol>
+  <li>How do I format data using a pipe?</li>
+  <li>How do I create my own pipes?</li>
+</ol>
+
+<hr />
+<!-- .slide: id="pipes-motivation" -->
+<h2 id="motivation">Motivation</h2>
+
+<ul>
+  <li>Classes could turn everything into strings for display</li>
+  <li>Often easier to use a <em>pipe</em> in the HTML
+    <ul>
+      <li>Takes a value as input, produces a new value as output</li>
+      <li>Just like a Unix command-line pipe</li>
+    </ul>
+  </li>
+  <li>Angular comes with several pipes for common operations</li>
+  <li>Very easy to add new ones</li>
+</ul>
+
+<hr />
+<!-- .slide: id="pipes-using-a-pipe" -->
+<h2 id="using-a-pipe">Using a Pipe</h2>
+
+<ul>
+  <li>Put the name of the pipe inside <code class="highlighter-rouge"><span class="p">{</span><span class="err">{...</span><span class="p">}</span><span class="err">}</span></code></li>
+  <li>Use vertical bar <code class="highlighter-rouge">|</code> as separator</li>
+</ul>
+
+<p><em>src/app/to-do-list/to-do-list.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo"</span><span class="nt">&gt;</span>
+    {{item | uppercase}}
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+</div>
+
+<p><img src="images/screenshot-uppercase.png" alt="Converting to Upper Case" /></p>
+
+<hr />
+<!-- .slide: id="pipes-passing-arguments" -->
+<h2 id="passing-arguments-to-the-pipe">Passing Arguments to the Pipe</h2>
+
+<ul>
+  <li>Pipes also accept arguments</li>
+  <li>Use colon as delimiter</li>
+  <li>Chained pipes are evaluated from left to right</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>Price is {{ 100.12345 | currency:"CAD":true:"1.2" | lowercase }}
+</code></pre>
+</div>
+
+<p>produces:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>Price is ca$100.12
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="pipes-built-in-pipes" -->
+<h2 id="built-in-angular-pipes">Built-in Angular Pipes</h2>
+
+<ul>
+  <li><a href="https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html">date</a>: formats dates in various ways</li>
+  <li><a href="https://angular.io/docs/ts/latest/api/common/index/UpperCasePipe-pipe.html">uppercase</a>: converts a string to upper case</li>
+  <li><a href="https://angular.io/docs/ts/latest/api/common/index/LowerCasePipe-pipe.html">lowercase</a>: converts a string to lower case</li>
+  <li><a href="https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html">currency</a>: formats a number as a currency</li>
+  <li><a href="https://angular.io/docs/ts/latest/api/common/index/PercentPipe-pipe.html">percent</a>: formats a number as a percentage</li>
+</ul>
+
+<hr />
+<!-- .slide: id="pipes-generating-pipes" -->
+<h2 id="generating-a-pipe">Generating a Pipe</h2>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">ng generate pipe titlecase</code></li>
+  <li>Creates <code class="highlighter-rouge">src/app/titlecase.*</code>
+    <ul>
+      <li>Note: in the <code class="highlighter-rouge">src/app</code> directory</li>
+      <li>We could (and should) create a <code class="highlighter-rouge">pipes</code> directory</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>├── src
+│   ├── app
+│   │   ├── titlecase.spec.ts
+│   │   └── titlecase.ts
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="pipes-whats-in-a-pipe" -->
+<h2 id="whats-in-a-pipe">What’s in a Pipe?</h2>
+
+<p><em>src/app/titlecase.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Pipe</span><span class="p">,</span> <span class="nx">PipeTransform</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Pipe</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'titlecase'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">TitlecasePipe</span> <span class="k">implements</span> <span class="nx">PipeTransform</span> <span class="p">{</span>
+
+  <span class="nx">transform</span><span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">?:</span> <span class="kr">any</span><span class="p">)</span><span class="err">:</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Import declarations from <code class="highlighter-rouge">@angular/core</code></li>
+  <li>Decorate class with <code class="highlighter-rouge">@Pipe</code> using <code class="highlighter-rouge">name</code> property</li>
+  <li><code class="highlighter-rouge">transform</code> accepts an initial <code class="highlighter-rouge">value</code> and optionally some <code class="highlighter-rouge">arguments</code></li>
+  <li>Returns a transformed value</li>
+</ul>
+
+<hr />
+<!-- .slide: id="pipes-defining-our-transformation" -->
+<h2 id="defining-our-transformation">Defining Our Transformation</h2>
+
+<p><em>src/app/titlecase.ts</em></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">TitlecasePipe</span> <span class="k">implements</span> <span class="nx">PipeTransform</span> <span class="p">{</span>
+
+  <span class="nx">transform</span><span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="kr">any</span><span class="p">)</span><span class="err">:</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">()</span>
+         <span class="o">+</span> <span class="nx">value</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+<!-- .slide: id="pipes-using-our-pipe" -->
+<h2 id="using-our-pipe">Using Our Pipe</h2>
+
+<p><em>src/app/to-do-list/to-do-list.component.html</em></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let item of thingsToDo; let i = index"</span> <span class="na">id=</span><span class="s">"{{i}}"</span><span class="nt">&gt;</span>
+    {{item | titlecase}}
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+</div>
+
+<p><img src="images/screenshot-titlecase.png" alt="Converting to Title Case" /></p>
+
+          <hr/>
+          <a href="http://localhost:4000/">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
