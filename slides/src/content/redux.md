@@ -153,7 +153,7 @@ Notes:
   - Chrome through the [web store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/remotedev/)
   - [Electron and others](http://extension.remotedev.io/#installation)
-- After installing the extension in Chrome, there should be a tab in Chrome DevTools labeled "Redux".
+- After installing the extension in Chrome, there should be a tab in Chrome DevTools labelled "Redux".
 
 ![](content/images/chrome-redux-devtools.png)
 
@@ -515,12 +515,12 @@ dispatch actions through "action creator" methods which can be made
 available through a component or service.
 
 In a more traditional Flux architecture, while a store may have
-broadcasted actions whenever state changed, Redux does not. Instead of
+broadcast actions whenever state changed, Redux does not. Instead of
 reacting to actions dispatched out from our store, we instead react to
 the changes in our state itself, we don't concerned ourselves with
 *how* state has changed.
 
-The actions are generally what we call the events being broadcasted to
+The actions are generally what we call the events being broadcast to
 the store.  When events leave the store due to a state change it is
 done through a store select.
 

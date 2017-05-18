@@ -351,7 +351,7 @@ Correct answer is 3.
 1, 2: This may expose confusion in that we're required to pass in a
 reference to a class member (or that we can pass multiple class
 members in at once) whereas `[]` notation really means we're
-evaulating an expression which can actually be anything.
+evaluating an expression which can actually be anything.
 
 4: If no single quotes (`'`) were used this would be the case, however
 `[]` notation will evaluate the passed value as an expression (in the

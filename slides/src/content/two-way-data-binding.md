@@ -30,7 +30,7 @@ Equivalent:
 <!-- .slide: id="two-way-data-binding-example-1" -->
 ## Two-Way Data Binding Example
 
-- Let's add a remove button to demonstrate two-way databinding
+- Let's add a remove button to demonstrate two-way data binding
 
 #####_src/app/to-do-list/to-do-list.component.html_
 ```html

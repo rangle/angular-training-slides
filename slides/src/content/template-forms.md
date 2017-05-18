@@ -95,7 +95,7 @@ export class AppModule { }
 <!-- .slide: id="template-forms-ngmodel-1" -->
 ## NgModel
 
-`NgModel` has similiar properties and more related to specific fields:
+`NgModel` has similar properties and more related to specific fields:
 
 - `value`: the field's value
 - `valid`: the field's validity (Boolean)

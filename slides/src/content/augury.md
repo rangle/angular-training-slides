@@ -26,7 +26,7 @@
 <!-- .slide: id="augury-integrating" -->
 ## Integrating With Your Application
 
-- Augury allows us to inspect our component tree to check the applicaton state at any point
+- Augury allows us to inspect our component tree to check the application state at any point
   - Application must be running in development mode for Augury to work
   - This is the default for Angular CLI projects run with `ng serve`
     - `ng serve` is the CLI command run by `npm start`
