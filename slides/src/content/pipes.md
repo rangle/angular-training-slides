@@ -32,7 +32,7 @@
 #####_src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
-  <li *ngFor="let item of thingsToDo">
+  <li *ngFor="let item of thingsToDo; let i = index" [id]="i">
     {{item | uppercase}}
   </li>
 </ul>
