@@ -7,3 +7,4 @@ training/
 .idea
 yarn.lock
 *~
+_site
