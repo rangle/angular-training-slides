@@ -5,14 +5,14 @@
 # Routing
 
 ---
-<!-- .slide: id="routing-advanced-roadmap" -->
+<!-- .slide: id="routing-roadmap" -->
 ## Roadmap
 
 1. How do I route different URLs to different parts of an application?
 1. How do I change what is displayed based on the URL?
 
 ---
-<!-- .slide: id="routing-advanced-why-routing" -->
+<!-- .slide: id="routing-why-routing" -->
 ## Why Routing?
 
 - Routing allows users to navigate to different parts of the application

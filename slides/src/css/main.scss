@@ -188,3 +188,14 @@ body {
 html.the-end .state-background {
    background-color: rgba(0,0,0, 0.8);
  }
+
+.searchicon {
+  display: none;
+}
+
+.searchinput {
+  vertical-align: top;
+    right: 45px;
+    top: 30px;
+    position: fixed;
+}
