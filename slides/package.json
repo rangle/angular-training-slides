@@ -8,7 +8,7 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
     "start": "webpack-dev-server",
-    "pretest": "tsc --p ./testing/tsconfig.circleci.json", 
+    "pretest": "tsc --p ./testing/tsconfig.circleci.json",
     "test": "cd testing/dist/ && node index.js",
     "predeploy": "npm run build",
     "deploy": "bash deploy.sh"
@@ -33,6 +33,7 @@
     "cli-table": "^0.3.1",
     "highlight.js": "9.6.0",
     "reveal.js": "3.3.0",
-    "reveal.js-menu": "^0.7.0"
+    "reveal.js-menu": "^0.7.0",
+    "typescript": "^2.3.2"
   }
 }
