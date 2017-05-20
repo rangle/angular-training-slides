@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="redux" -->
 ## Building Applications with Angular
 
@@ -60,7 +60,7 @@ Server requests are different from user interactions:
 <!-- .slide: id="redux-redux-as-a-system" -->
 ## Redux as a System
 
-<img src="/_includes/images/redux-and-data-flow.png" width="50%"/>
+<img src="/../images/redux-and-data-flow.png" width="50%"/>
 
 ---
 <!-- .slide: id="redux-the-store" -->
@@ -155,7 +155,7 @@ Notes:
   - [Electron and others](http://extension.remotedev.io/#installation)
 - After installing the extension in Chrome, there should be a tab in Chrome DevTools labelled "Redux".
 
-![](_includes/images/chrome-redux-devtools.png)
+![](../images/chrome-redux-devtools.png)
 
 ---
 <!-- .slide: id="redux-create-the-reducer-1" -->
@@ -305,7 +305,7 @@ export class AppComponent {
 
 - New "Redux" tab in our browser's developer tools pane after successful installation, configuration and injecting the store
 
-<img src="/_includes/images/redux-devtools.png" width="50%"/>
+<img src="/../images/redux-devtools.png" width="50%"/>
 
 ---
 <!-- .slide: id="redux-update-todo-list-display-1" -->

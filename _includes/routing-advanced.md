@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="routing-advanced" -->
 ## Building Applications with Angular
 

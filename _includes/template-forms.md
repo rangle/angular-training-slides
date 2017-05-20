@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="template-forms" -->
 ## Building Applications with Angular
 
@@ -115,7 +115,7 @@ export class AppModule { }
 <p>Form control value: {{newItemForm.value.newItem}}</p>
 ```
 
-![Showing Form Values](_includes/images/screenshot-showing-form-values.png)
+![Showing Form Values](../images/screenshot-showing-form-values.png)
 
 <!-- preview: https://plnkr.co/edit/oVQhf641Nx1qpaBG5jeN?p=preview -->
 
@@ -135,7 +135,7 @@ export class AppModule { }
 <p>Form control value: {{newItem.value}}</p>
 ```
 
-![Showing Form Values](_includes/images/screenshot-showing-form-values.png)
+![Showing Form Values](../images/screenshot-showing-form-values.png)
 
 <!-- preview: https://plnkr.co/edit/oVQhf641Nx1qpaBG5jeN?p=preview -->
 
@@ -288,6 +288,6 @@ export class GenericInputComponent implements OnInit {
 <!-- .slide: id="template-forms-styling-the-form-4" -->
 ## Styling the Form
 
-![Styling the Form](_includes/images/screenshot-form-css.png)
+![Styling the Form](../images/screenshot-form-css.png)
 
 <!-- https://plnkr.co/edit/BQdO11mdaRpsrk7OD40e?p=preview -->

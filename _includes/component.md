@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="components" -->
 ## Building Applications with Angular
 
@@ -75,7 +75,7 @@ export class ToDoListComponent implements OnInit {
 <p *ngIf="thingsCompleted.length == 0">Nothing completed</p>
 ```
 
-![Child Component (Original)](_includes/images/screenshot-child-initial.png)
+![Child Component (Original)](../images/screenshot-child-initial.png)
 
 ---
 <!-- .slide: id="components-passing-data-1" -->
@@ -189,14 +189,14 @@ export class ToDoListComponent implements OnInit {
 
 ## Refactoring
 
-![After Refactoring](_includes/images/screenshot-refactored.png)
+![After Refactoring](../images/screenshot-refactored.png)
 
 - More elaborate than necessary if we were stopping here...
 - ...but absolutely necessary to control complexity in large projects
 
 ---
 <!-- .slide: id="components-quiz-1" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -210,7 +210,7 @@ it from a parent component?
 3. A member decorated with `@Input`.
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -251,7 +251,7 @@ export class Child {
 
 ---
 <!-- .slide: id="components-quiz-3" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz (continued)
 
@@ -265,7 +265,7 @@ export class Child {
    Child:
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -283,7 +283,7 @@ around.
 
 ---
 <!-- .slide: id="components-quiz-4" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -299,7 +299,7 @@ input called `data` from the parent's template?
 4. `[data]="{{myData}}"`
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -316,7 +316,7 @@ understanding that it's not required here.
 
 ---
 <!-- .slide: id="components-quiz-5" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -342,7 +342,7 @@ export class Hal9000 {
 4. None: An error will be thrown because Angular can't parse the message as an object.
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 

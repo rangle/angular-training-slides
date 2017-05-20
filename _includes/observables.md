@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="observables" -->
 # Introduction to Observables
 
@@ -20,7 +20,7 @@ Objectives:
 
 ---
 <!-- .slide: id="observables-quiz-1" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -31,7 +31,7 @@ Objectives:
 3. let Angular know when change detection is required
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -60,7 +60,7 @@ getData$.subscribe(data => {
 
 ---
 <!-- .slide: id="observables-quiz-2" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -72,7 +72,7 @@ Subscribing to an observable:
 4. is not required in Angular
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -100,7 +100,7 @@ https://jsbin.com/genayadivo/edit?html,js,console,output
 
 ---
 <!-- .slide: id="observables-quiz-3" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -112,7 +112,7 @@ The map operator:
 4. will modify the result returned by an observable
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -171,7 +171,7 @@ Example (`name$` is an observable):
 
 ---
 <!-- .slide: id="observables-quiz-4" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -183,7 +183,7 @@ Angular's `AsyncPipe`:
 4. can't be chained with pure pipes
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -206,7 +206,7 @@ searchString$
 
 ---
 <!-- .slide: id="observables-quiz-5" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -217,7 +217,7 @@ Operators:
 3. are methods on an observable that return an observable
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 

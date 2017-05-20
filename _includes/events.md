@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="events" -->
 ## Building Applications with Angular
 
@@ -55,7 +55,7 @@ export class ToDoListComponent implements OnInit {
 }
 ```
 
-![Adding Items With a Button](_includes/images/screenshot-add-constant.png)
+![Adding Items With a Button](../images/screenshot-add-constant.png)
 
 ---
 <!-- .slide: id="events-adding-specific-items-1" -->
@@ -82,7 +82,7 @@ export class ToDoListComponent implements OnInit {
 - Fill in the input field
 - Click the button
 
-![Adding an Element (Mistaken)](_includes/images/screenshot-add-element.png)
+![Adding an Element (Mistaken)](../images/screenshot-add-element.png)
 
 - Oops
 
@@ -247,13 +247,13 @@ export class AppComponent {
 <!-- .slide: id="events-final-appearance" -->
 ## Final Appearance
 
-![Connecting the Wires](_includes/images/screenshot-handling-event.png)
+![Connecting the Wires](../images/screenshot-handling-event.png)
 
 FIXME: diagram showing data flow
 
 ---
 <!-- .slide: id="events-quiz-1" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -268,7 +268,7 @@ Which of the following is invalid syntax for handling an event?
 4. `<message (messageSent)="sent=$event"></message>`
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -288,7 +288,7 @@ which also have special handling for callback syntax
 
 ---
 <!-- .slide: id="events-quiz-2" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -310,7 +310,7 @@ What is the difference between:
    (B) assigns values emitted from the `<counter>` component to `this.count`.
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -350,7 +350,7 @@ export class Child {
 
 ---
 <!-- .slide: id="events-quiz-4" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz (continued)
 
@@ -365,7 +365,7 @@ export class Child {
 4. I am the parent
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 

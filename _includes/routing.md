@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="routing" -->
 ## Building Applications with Angular
 
@@ -150,7 +150,7 @@ export class AppModule { }
 
 | Classic View | Fancy View |
 |--------------|------------|
-| ![Classic View](_includes/images/screenshot-classic-view.png) | ![Fancy View](_includes/images/screenshot-fancy-view.png) |
+| ![Classic View](../images/screenshot-classic-view.png) | ![Fancy View](../images/screenshot-fancy-view.png) |
 
 - But going to `http://localhost:4200/todo` clears all the to-do items!
 - ...pause for thought...

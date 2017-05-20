@@ -42,7 +42,7 @@ Equivalent:
 </ul>
 ```
 
-![Adding a remove Button](_includes/images/two-way-databinding.png)
+![Adding a remove Button](../images/two-way-databinding.png)
 
 ---
 <!-- .slide: id="two-way-data-binding-example-2" -->
@@ -82,7 +82,7 @@ Total items to do: {{ thingsToDo.length }}
 ```
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 <!-- .slide: id="two-way-data-binding-quiz-1" -->
 ## Quiz
 
@@ -94,7 +94,7 @@ Choose all of the following that are needed to make two-way data binding work.
 4. `()`attribute (as in `(click)=sayHi()`)
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 <!-- .slide: id="two-way-data-binding-answer-1" -->
 ## Answer
 
@@ -105,7 +105,7 @@ the "banana in a box" syntax `[()]` is in fact combination of `[]` and `()`
 
 ---
 
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 <!-- .slide: id="two-way-data-binding-quiz-2" -->
 ## Quiz
 
@@ -117,7 +117,7 @@ Q: What is the shorthand form of `<counter [count]="parentCount" (countChange)="
 4. `<counter [(count)]="parentCount">`
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 <!-- .slide: id="two-way-data-binding-answer-2" -->
 ## Answer
 

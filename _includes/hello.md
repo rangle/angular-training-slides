@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="hello" -->
 ## Building Applications with Angular
 
@@ -168,7 +168,7 @@ export class AppComponent {
 
 ---
 <!-- .slide: id="hello-quiz" -->
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -179,7 +179,7 @@ The name for the root module should be `_________`:
 1. Whatever you want.
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 

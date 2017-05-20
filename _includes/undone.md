@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 
 ## Building Applications with Angular
 
@@ -9,7 +9,7 @@
 ## Everything after this point has *NOT* been edited
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -45,7 +45,7 @@ Usage:
    Body text
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -56,7 +56,7 @@ denotes an attribute named `header` rather than an element selector of
 `header`.
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -98,7 +98,7 @@ Usage:
 4. None. An error will be thrown because multiple bare `<ng-content>` tags are not supported
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -109,7 +109,7 @@ render projected content into that last `<ng-content>` block ignoring
 the others.
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -142,7 +142,7 @@ Usage:
 3. New
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -152,7 +152,7 @@ Correct answer is 3.
 other elements do not get selected.
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -193,7 +193,7 @@ Correct answer is 2.
 not captured by other selectors. It does not blindly select everything
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -223,7 +223,7 @@ Usage:
 1. None. An error will be thrown because `select` does not support multiple matching elements
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -236,7 +236,7 @@ case. Both spans will be rendered.
 4: `select` will greedily match as many elements as it can.
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -259,7 +259,7 @@ export class ClockComponent {
 4. `@Output() onChange = new EventEmitter();`
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -277,7 +277,7 @@ output you should achieve the expected behavior.
 names and that suffixing an output member name with `Change`.
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -289,7 +289,7 @@ names and that suffixing an output member name with `Change`.
 4. `<clock [time]="currentTime" (timeChange)="currentTime=$event"></clock>`
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -305,7 +305,7 @@ between `time` and `timeChange`.
 3: Input/output syntax is not well understood.
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -319,7 +319,7 @@ values?
 4. `<clock [time]="currentTime" (timeChange)="onTimeChange(time)"></clock>`
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -462,7 +462,7 @@ class AppComponent { myNumber = 0 }
 [View Example](http://plnkr.co/edit/nJZQYSV23sCcbb37FzLN?p=preview)
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -474,7 +474,7 @@ Choose all of the following that are needed to make two-way data binding work.
 4. `()`attribute (as in `(click)=sayHi()`)
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -615,7 +615,7 @@ Components can be classified as "smart" or "dumb" depending on how coupled are t
 | A.K.A                   | Container Components | Presentation Components |
 
 ---
-<!-- .slide: data-background="../_includes/images/question-slide.jpg" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -628,7 +628,7 @@ which field of the `@NgModule` decorator should I put the class in?
 1.  None of the above.
 
 +++
-<!-- .slide: data-background="../_includes/images/answer-slide.jpg" -->
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
 
 ## Answer
 

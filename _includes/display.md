@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="display" -->
 ## Building Applications with Angular
 
@@ -50,7 +50,7 @@ export class AppComponent {
 <p *ngFor="let item of thingsToDo">{{item}}</p>
 ```
 
-![ngFor Output](_includes/images/screenshot-ngfor.png)
+![ngFor Output](../images/screenshot-ngfor.png)
 
 ---
 <!-- .slide: id="display-ngfor-exports" -->
@@ -93,7 +93,7 @@ export class AppComponent {
 <p *ngIf="thingsCompleted.length == 0">Nothing completed</p>
 ```
 
-![ngIf Output](_includes/images/screenshot-ngif.png)
+![ngIf Output](../images/screenshot-ngif.png)
 
 ---
 <!-- .slide: id="display-dynamic-content-1" -->
@@ -123,7 +123,7 @@ export class AppComponent {
 <!-- .slide: id="display-dynamic-content-2" -->
 ## Dynamic Content
 
-![Interpolating Method Call](_includes/images/screenshot-method.png)
+![Interpolating Method Call](../images/screenshot-method.png)
 
 ---
 <!-- .slide: id="display-dynamic-content-3" -->
@@ -150,4 +150,4 @@ export class AppComponent {
 
 - Both the list and the summary update every second
 
-![Dynamic Updating](_includes/images/screenshot-dynamic.png)
+![Dynamic Updating](../images/screenshot-dynamic.png)

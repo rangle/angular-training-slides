@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="reactive-forms" -->
 
 ## Building Applications with Angular
@@ -189,7 +189,7 @@ export class GenericInputComponent {
 <!-- .slide: id="reactive-forms-custom-validators-3" -->
 ## Custom Validators
 
-![Custom Validators](_includes/images/screenshot-invalid-time-format.png)
+![Custom Validators](../images/screenshot-invalid-time-format.png)
 
 <!-- preview: https://plnkr.co/edit/m6heM7?p=preview -->
 
@@ -369,7 +369,7 @@ export class StructuredFormComponent implements OnInit {
 <!-- .slide: id="reactive-forms-appearance" -->
 ## Appearance
 
-![Form With Groups](_includes/images/screenshot-grouped-form.png)
+![Form With Groups](../images/screenshot-grouped-form.png)
 
 ---
 <!-- .slide: id="reactive-forms-shortcuts" -->

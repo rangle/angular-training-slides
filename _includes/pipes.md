@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../_includes/images/title-slide.jpg" -->
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="pipes" -->
 ## Building Applications with Angular
 
@@ -38,7 +38,7 @@
 </ul>
 ```
 
-![Converting to Upper Case](_includes/images/screenshot-uppercase.png)
+![Converting to Upper Case](../images/screenshot-uppercase.png)
 
 ---
 <!-- .slide: id="pipes-passing-arguments" -->
@@ -136,4 +136,4 @@ export class TitlecasePipe implements PipeTransform {
 </ul>
 ```
 
-![Converting to Title Case](_includes/images/screenshot-titlecase.png)
+![Converting to Title Case](../images/screenshot-titlecase.png)
