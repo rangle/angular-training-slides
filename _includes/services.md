@@ -1,6 +1,5 @@
 <!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="services" -->
-
 ## Building Applications with Angular
 
 # Services

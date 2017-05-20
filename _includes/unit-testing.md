@@ -1,6 +1,5 @@
 <!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="unit-testing" -->
-
 ## Building Applications with Angular
 
 # Unit Testing

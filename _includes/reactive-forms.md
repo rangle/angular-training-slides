@@ -1,6 +1,5 @@
 <!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="reactive-forms" -->
-
 ## Building Applications with Angular
 
 # Reactive Forms

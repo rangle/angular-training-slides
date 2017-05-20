@@ -1,5 +1,8 @@
+<!-- .slide: data-background="../images/title-slide.jpg" -->
 <!-- .slide: id="two-way-data-binding" -->
-## Two-Way Data Binding
+## Building Applications with Angular
+
+# Two-Way Data Binding
 
 - Combination of an `@Input` with an `@Output` using the *banana in a box* syntax `[(event)]`
 - The name of the event has to be equal to the name of the input plus the suffix "Change".
