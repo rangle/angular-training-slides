@@ -260,6 +260,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 export class AppModule { }
 ```
 
+- Note the store dev tools in chrome will only work once you have injected the `Store` into a component's constructor. 
+
 ---
 <!-- .slide: id="redux-clean-up-html" -->
 ## Clean Up the Main Application's HTML
