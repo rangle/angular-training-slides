@@ -1,5 +1,0 @@
-general:
-  build_dir: slides
-machine:
-  node:
-    version: 6
