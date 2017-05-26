@@ -2,7 +2,7 @@
 <!-- .slide: id="generating-forms" -->
 ## Building Applications with Angular
 
-# Generating Froms Dynamically
+# Generating Forms Dynamically
 
 ---
 
@@ -17,7 +17,7 @@ FIXME: this module needs to be filled in and proof-read
 With reactive forms, since the forms are created and handled primarily through component code and not in the template, it becomes much easier to create dynamic forms. We'll use an example using a JSON based schema:
 
 
-```json
+```js
 {
   "name": "Edit User Profile",
   "fields": [

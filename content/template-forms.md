@@ -84,11 +84,18 @@ export class AppModule { }
 - `newItemForm.valid`: whether the form is valid
 - `newItemForm.value.newItem`: the value of the `newItem` field
 
+#####_src/app/generic-input/generic-input.component.html_
+```html
+<form #newItemForm="ngForm">
+  <p>New Item: <input name="newItem" ngModel></p>
+</form>
+```
+
 ---
 <!-- .slide: id="template-forms-ngmodel-1" -->
 ## NgModel
 
-`NgModel` has similiar properties and more related to specific fields:
+`NgModel` has similar properties and more related to specific fields:
 
 - `value`: the field's value
 - `valid`: the field's validity (Boolean)
@@ -106,6 +113,26 @@ export class AppModule { }
 </form>
 <p>Form valid: {{newItemForm.valid}}</p>
 <p>Form control value: {{newItemForm.value.newItem}}</p>
+```
+
+![Showing Form Values](content/images/screenshot-showing-form-values.png)
+
+<!-- preview: https://plnkr.co/edit/oVQhf641Nx1qpaBG5jeN?p=preview -->
+
+---
+<!-- .slide: id="template-forms-template-variables" -->
+## Template Variables
+
+- Easier to access the control using a template variable
+- The template variable `#newItem` is an instance of `FormControl`
+
+#####_src/app/generic-input/generic-input.component.html_
+```html
+<form #newItemForm="ngForm">
+  <p>New Item: <input name="newItem" #newItem="ngModel" ngModel></p>
+</form>
+<p>Form valid: {{newItemForm.valid}}</p>
+<p>Form control value: {{newItem.value}}</p>
 ```
 
 ![Showing Form Values](content/images/screenshot-showing-form-values.png)
@@ -133,11 +160,11 @@ export class AppModule { }
 
 ---
 <!-- .slide: id="template-forms-handling-form-submissions-2" -->
-## Handling Form Submission
+## Handling Form Submissions
 
 - Modify `addToDo` to take an `NgForm` as input
 
-#####_src/app/generic-input/generic-input.component.html`
+#####_src/app/generic-input/generic-input.component.html_
 ```ts
 import { NgForm } from '@angular/forms';
 
@@ -150,22 +177,6 @@ export class GenericInputComponent implements OnInit {
 ```
 
 <!-- preview: https://plnkr.co/edit/Xxcf46sO5TWK1EKme1qF?p=preview -->
-
----
-<!-- .slide: id="template-forms-performing-validation" -->
-## Performing Validation
-
-- To perform validation, we must create a template variable for the given field `#field="ngModel"`
-
-#####_src/app/generic-input/generic-input.component.html_
-```html
-  ...
-    New Item: <input name="newItem" #newItem="ngModel" ngModel required>
-  ...
-```
-
-- The template variable `#newItem` is an instance of `FormControl`
-- Has `value`, `valid`, `pristine`, and `touched` properties described earlier
 
 ---
 <!-- .slide: id="template-forms-built-in-validators" -->
@@ -183,6 +194,21 @@ export class GenericInputComponent implements OnInit {
   - prevents additional characters from being entered
   - others only produce a warning
 
+---
+<!-- .slide: id="template-forms-performing-validation" -->
+## Performing Validation
+
+- To perform validation, we have to use a template variable for the given field `#field="ngModel"`
+
+#####_src/app/generic-input/generic-input.component.html_
+```html
+  ...
+    New Item: <input name="newItem" #newItem="ngModel" ngModel required>
+  ...
+```
+
+- As mentioned earlier the template variable `#newItem` is an instance of `FormControl`
+- Has `value`, `valid`, `pristine`, and `touched` properties described earlier
 
 ---
 <!-- .slide: id="template-forms-displaying-error-messages" -->
@@ -240,27 +266,10 @@ export class GenericInputComponent implements OnInit {
   <button type="submit" [disabled]="!newItemForm.valid">Add</button>
 </form>
 ```
-
----
-
-## Styling the Form
-
-- Along with data binding `ngModel` gives us information about the control's state
-- Can notify us if the control was touched or changed
-  or if the value became invalid
-- The following CSS class are available for this:
-
-|  Class if true | Class if false | Description                          |
-| -------------- | -------------- | ------------------------------------ |
-| ng-valid       | ng-invalid     | The model is valid                   |
-| ng-dirty       | ng-pristine    | The control has been interacted with |
-| ng-touched     | ng-untouched   | The control has been blurred         |
+<!-- https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview -->
 
 ---
 <!-- .slide: id="template-forms-styling-the-form-3" -->
-
-<!-- https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview -->
-
 ## Styling the Form
 
 - Use these classes and properties with CSS and HTML to create user-friendly forms

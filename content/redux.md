@@ -12,6 +12,7 @@
 1. What are the principal components of the Redux model?
 1. How do we dispatch actions?
 1. How do we respond to state changes?
+1. What tools are available for working with Redux?
 
 ---
 <!-- .slide: id="redux-problem" -->
@@ -87,6 +88,27 @@ FIXME: diagram of state update
     - This is just a convention, but a widely-used one
 
 ---
+<!-- .slide: id="reducers" -->
+## Reducers
+
+- When actions are dispatched, reducers are called passing in the current state and the action being dispatched
+- A reducer is a pure function (without side-effects) with two parameters
+  - `state`: Is the current redux state of your store
+  - `action`: Is an `Object` that contains the `type` and `payload`
+- Reducers should not mutate the state, but return a copy or a new state
+
+```ts
+export function reducer(state: AppState = [], action: Action) {
+  switch (action.type) {
+    case ITEM_ADD:
+      //...do something with state
+    default:
+      return state;
+  }
+}
+```
+
+---
 <!-- .slide: id="redux-plan-for-refactoring" -->
 ## Plan for Refactoring
 
@@ -103,12 +125,37 @@ Notes:
 1. Angular CLI doesn't know anything about @ngrx, so we have to do most of the work by hand
 
 ---
+<!-- .slide: id="redux-tools" -->
+## Redux Tools
+
+- Best way to learn Redux is to visualize what it's doing
+- Use [Redux DevTools Extension](http://extension.remotedev.io/)
+  - Shows application state
+  - Provides visualization of all actions that have been dispatch
+  - Time travelling by moving backwards and forwards on actions that have been dispatch
+
+---
+
 <!-- .slide: id="redux-installing-software" -->
 ## Install Required Software
 
 - `npm install @ngrx/core @ngrx/store --save`
+- We will also install the ngrx dev tools
+  - `npm install @ngrx/store-devtools --save`
 - The `--save` option updates `package.json`
 - So the next person can just do `npm install`
+
+---
+<!-- .slide: id="redux-redux-chrome-extensions" -->
+## Install Redux Chrome Extensions
+
+- Works with many other tools:
+  - Chrome through the [web store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/remotedev/)
+  - [Electron and others](http://extension.remotedev.io/#installation)
+- After installing the extension in Chrome, there should be a tab in Chrome DevTools labelled "Redux".
+
+![](content/images/chrome-redux-devtools.png)
 
 ---
 <!-- .slide: id="redux-create-the-reducer-1" -->
@@ -126,7 +173,7 @@ Notes:
   - ...but only if correctness and programmer time aren't issues
 
 ---
-<!-- .slide: id="redux-create-the-reduce-2" -->
+<!-- .slide: id="redux-create-the-reducer-2" -->
 ## Create the Reducer
 
 - Set up definitions
@@ -194,6 +241,28 @@ export class AppModule { }
 - Note the `provideStore` call in `imports`
 
 ---
+<!-- .slide: id="redux-add-the-storedevtools-to-the-application" -->
+## Add the StoreDevTools to the Application
+
+- Import `StoreDevtoolsModule` into our module
+
+```ts
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+@NgModule({
+  imports: [
+    // ...as before...
+    StoreModule.provideStore(reducer),
+    // Note that you must instrument after importing StoreModule
+    StoreDevtoolsModule.instrumentOnlyWithExtension({})
+  ]
+})
+export class AppModule { }
+```
+
+- Note the store dev tools in chrome will only work once you have injected the `Store` into a component's constructor. 
+
+---
 <!-- .slide: id="redux-clean-up-html" -->
 ## Clean Up the Main Application's HTML
 
@@ -231,6 +300,14 @@ export class AppComponent {
 ```
 
 - Note: no longer storing state in `AppComponent`
+
+---
+<!-- .slide: id="redux-redux-dev-tools" -->
+## Redux DevTools
+
+- New "Redux" tab in our browser's developer tools pane after successful installation, configuration and injecting the store
+
+<img src="/content/images/redux-devtools.png" width="50%"/>
 
 ---
 <!-- .slide: id="redux-update-todo-list-display-1" -->
@@ -401,7 +478,7 @@ export class CollectionEffects {
 ```
 
 ---
-<!-- .slide: id="redux-faq-1" -->
+<!-- .slide: id="redux-faq-is-the-reducer-the-store" -->
 ## FAQ
 
 **Is the reducer the store?**
@@ -412,7 +489,25 @@ our reducers. In the case of `@ngrx`, state is stored within an
 `Observable` stream that can be listened to.
 
 ---
-<!-- .slide: id="redux-faq-2" -->
+<!-- .slide: id="redux-faq-can-i-have-more-than-one-store" -->
+## FAQ
+
+**Can I have more than one store?**
+
+No, redux uses one global store to manage state., however it is common practice
+to divide your store into separate areas of concern.
+
+Just as we can configure our store like this:
+`StoreModule.provideStore(reducer)`
+We are also able to pass in an object and associate a reducer with a given piece
+of our state
+`StoreModule.provideStore({ todos: todosReducer, users: usersReducer })`
+
+We can also take advantage of functional composition, and "combine" multiple
+reducers into one using the `combineReducers` helper function `@ngrx` provides.
+
+---
+<!-- .slide id="redux-faq-does-the-ui-broadcast-actions" -->
 ## FAQ
 
 **Does the UI broadcast actions and store broadcast actions back?**
@@ -422,17 +517,17 @@ dispatch actions through "action creator" methods which can be made
 available through a component or service.
 
 In a more traditional Flux architecture, while a store may have
-broadcasted actions whenever state changed, Redux does not. Instead of
+broadcast actions whenever state changed, Redux does not. Instead of
 reacting to actions dispatched out from our store, we instead react to
 the changes in our state itself, we don't concerned ourselves with
 *how* state has changed.
 
-The actions are generally what we call the events being broadcasted to
+The actions are generally what we call the events being broadcast to
 the store.  When events leave the store due to a state change it is
 done through a store select.
 
 ---
-<!-- .slide: id="redux-faq-3" -->
+<!-- .slide: id="redux-faq-can-we-call-methods-directly" -->
 ## FAQ
 
 **Instead of dealing with observables, can we simply call methods directly?**
@@ -448,7 +543,7 @@ location which is easier to reason about, and our application can
 simply react whenever application state changes.
 
 ---
-<!-- .slide: id="redux-faq-4" -->
+<!-- .slide: id="redux-faq-can-i-roll-my-own" -->
 ## FAQ
 
 **I have an awesome idea/implementation that does the same thing, can I use that?**

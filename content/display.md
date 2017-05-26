@@ -26,7 +26,7 @@
 ```ts
 @Component({
   // ...as before...
-}
+})
 export class AppComponent {
   title = 'To Do';
   thingsToDo = [
@@ -64,7 +64,7 @@ export class AppComponent {
 <p *ngFor="let item of thingsToDo; let i = index">({{i}}) {{item}}</p>
 ```
 
-- Similarly, `*ngFor` exports `first`, `last`, `even` and `odd` booleans which can also be assigned to local variables.
+- Similarly, `*ngFor` exports `first`, `last`, `even` and `odd` Booleans which can also be assigned to local variables.
 
 ---
 <!-- .slide: id="display-ngif-1" -->

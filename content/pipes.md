@@ -23,8 +23,8 @@
 - Very easy to add new ones
 
 ---
-<!-- .slide: id="pipes-adding-a-pipe" -->
-## Adding a Pipe
+<!-- .slide: id="pipes-using-a-pipe" -->
+## Using a Pipe
 
 - Put the name of the pipe inside `{{...}}`
 - Use vertical bar `|` as separator
@@ -32,7 +32,7 @@
 #####_src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
-  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
+  <li *ngFor="let item of thingsToDo; let i = index" [id]="i">
     {{item | uppercase}}
   </li>
 </ul>
@@ -97,7 +97,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TitlecasePipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
+  transform(value: any, arguments?: any): any {
     return null;
   }
 }
@@ -105,8 +105,8 @@ export class TitlecasePipe implements PipeTransform {
 
 - Import declarations from `@angular/core`
 - Decorate class with `@Pipe` using `name` property
-- `transform` accepts initial value and any optional arguments
-- Returns some value
+- `transform` accepts an initial `value` and optionally some `arguments`
+- Returns a transformed value
 
 ---
 <!-- .slide: id="pipes-defining-our-transformation" -->

@@ -28,7 +28,7 @@ Objectives:
 
 1. two-way data bind a property
 2. push notifications to an observer
-3. let Angular know when change detetection is required
+3. let Angular know when change detection is required
 
 +++
 <!-- .slide: data-background="../content/images/answer-slide.jpg" -->
@@ -49,7 +49,7 @@ Definition from RxJS docs:
 
 Let's assume we have an observable, `getData$`. Here is how we tell it we want to log the value it will eventually emit:
 
-```javascript
+```js
 
 getData$.subscribe(data => {
   // when the getData$ observable fires, log the data
@@ -163,7 +163,7 @@ setTimeout(() => {
 * `AsyncPipe` helps us write less by taking an observable and:
   - subscribing to it
   - returning the returned value so it can be placed in your template
-  - unsubscibing, when the value is no longer needed
+  - unsubscribing, when the value is no longer needed
 
 Example (`name$` is an observable):
 

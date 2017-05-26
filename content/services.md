@@ -64,6 +64,8 @@ export class ToDoService {
 - Services need to be registered before they can be used
   - Angular CLI does this automatically for new components
 - Must add the class name to the `providers` field in `src/app/app.module.ts`
+
+Notes:
 - Which means importing the class name from `./to-do.service`
   - Note: must have `./` at the start of the path
   - And must *not* include the `.ts` suffix
@@ -99,12 +101,13 @@ import { ToDoService } from './to-do.service';
 <!-- .slide: id="services-getting-access-to-a-service" -->
 ## Getting Access to a Service
 
-- Define a `private` constructor variable of the appropriate type
-- Angular's *dependency injection* system creates an instance variable with that name
+- Add a variable to the constructor with the type of the service
+- Angular's *dependency injection* system will give the component access to an instance of that class
+  - Angular's default behavior for dependencies is a singleton
+  - `private` means that `toDoService` as a class property of `ToDoListComponent` can only be accessed within the component itself
 
 #####_src/app/to-do-list/to-do-list.component.ts_
 ```ts
-// ...other imports as before...
 import { ToDoService } from '../to-do.service';
 
 @Component({

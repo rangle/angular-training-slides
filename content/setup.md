@@ -111,7 +111,7 @@ add(1, 3);   // returns 4
 add(1, '3'); // causes a compiler error
 
 class TodoItems {
-  items: string[];  // instance variable is a list of strings
+  items: string[];  // or Array<string>
 
   constructor(initialItems: string[]) {
     this.items = initialItems;

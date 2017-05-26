@@ -73,7 +73,9 @@ export class AppComponent {
 }
 ```
 
-- `import` loads definition of Angular components
+- `Component` is a **decorator** used to define Angular components
+- Decorators allows us to alter a class or function
+  - In this case, add metadata for Angular to use
 
 ---
 <!-- .slide: id="hello-whats-in-the-component-2" -->
@@ -128,7 +130,7 @@ export class AppComponent {
 - Components are the core building blocks of Angular applications
   - Application logic + display
   - Everything on a page should be associated with some component
-- Can put HTML and CSS inline by using `template` and `style` as keys
+- Can put HTML and CSS inline using `template` and `style`
 
 ```ts
 import { Component } from '@angular/core';
@@ -136,14 +138,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: '<h1>{{title}}</h1>',          // inline HTML
-  styles: ['h1 { font-weight: normal; }'] // inline styles
+  styles: ['h1 { font-weight: normal; }']  // inline styles
 })
 export class AppComponent {
   title = 'app works!';
 }
 ```
-
-- Resist the temptation
 
 ---
 <!-- .slide: id="hello-template-syntax" -->

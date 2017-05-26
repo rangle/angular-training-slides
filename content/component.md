@@ -39,6 +39,8 @@
 - Component class name is `ToDoListComponent`
 - HTML selector is `app-to-do-list`
   - `app` prefix to prevent namespace collisions
+    - Prefix can be customized when creating the application using `--prefix`
+    - Or by modifying the `prefix` property in `.angular-cli.json`
 - What to put in constructor and `ngOnInit` will be discussed later
 
 #####_src/app/to-do-list/to-do-list.component.ts_
@@ -98,7 +100,8 @@ export class ToDoListComponent implements OnInit {
 }
 ```
 
-Reminder: All decorators in Angulars are functions. Even if you don't pass any arguments in, you'll need to include the parentheses.
+Reminder: Angular decorators are functions.
+Even if you don't pass arguments, you need the parentheses.
 
 ---
 <!-- .slide: id="components-passing-data-2" -->
@@ -117,13 +120,12 @@ Reminder: All decorators in Angulars are functions. Even if you don't pass any a
 
 - Whoops: compiler error!
 
-#####_src/app/app.component.html_ (with error)
+#####_src/app/app.component.html_ (corrected)
 ```html
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
 
-- Have to quote the value inside the double quotes or Angular will try to evaluate it
-
+- Must single-quote the string or Angular will think it's a function.
 
 ---
 <!-- .slide: id="components-passing-data-3" -->
@@ -136,7 +138,7 @@ Reminder: All decorators in Angulars are functions. Even if you don't pass any a
 <app-to-do-list heading="Things To Do"></app-to-do-list>
 ```
 
-Passing strings to components in this way resembles setting properties in html elements.
+Passing strings to components in this way resembles setting properties in HTML elements.
 
 ---
 <!-- .slide: id="components-refactoring-1" -->
@@ -349,7 +351,7 @@ Correct answer is 3.
 1, 2: This may expose confusion in that we're required to pass in a
 reference to a class member (or that we can pass multiple class
 members in at once) whereas `[]` notation really means we're
-evaulating an expression which can actually be anything.
+evaluating an expression which can actually be anything.
 
 4: If no single quotes (`'`) were used this would be the case, however
 `[]` notation will evaluate the passed value as an expression (in the

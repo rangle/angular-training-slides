@@ -46,7 +46,7 @@ export class AppModule { }
 - A loader can be used to load translations
   - `TranslateHttpLoader` can be used to load translations from HTTP
   - `npm install @ngx-translate/http-loader --save`
-- Create a new object of `TranslateHttpLoader(http, prefix, sufix)`
+- Create a new object of `TranslateHttpLoader(http, prefix, suffix)`
   - Optionally define the folder that holds the translation files (defaults to `/assets/i18n/`)
   - Optionally define the file extension for your translation files (defaults to `.json`)
 
