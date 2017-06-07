@@ -33,6 +33,13 @@ FIXME: this module needs to be updated and proof-read
   });
 ```
 
+- `$` in the `thingsToDo$` variable is a naming convention for observables
+
+#####_src/app/app.component.ts_
+```ts
+thingsToDo$ = this.toDoService.getChanges();
+```
+
 ---
 <!-- .slide: id="http-advanced-cancel-request" -->
 ## Cancel a Request
