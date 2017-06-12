@@ -1,8 +1,9 @@
 ---
 layout: lesson
-title: "Introduction to Angular"
 permalink: /
 ---
+
+# {{site.title}}
 
 * [Introduction](/introduction/)
 * [Setup](/setup/)
