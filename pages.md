@@ -1,6 +1,6 @@
 ---
 layout: lesson
-title: "Mixed-Mode Materials"
+title: "Introduction to Angular"
 permalink: /
 ---
 
@@ -13,6 +13,7 @@ permalink: /
 * [Two-Way Data Binding](/two-way-data-binding/)
 * [Augury](/augury/)
 * [Pipes](/pipes/)
+* [Template Projection](/template-projection/)
 * [Services](/services/)
 * [Unit Testing](/unit-testing/)
 * [Translations](/translation/)
