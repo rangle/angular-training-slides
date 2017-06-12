@@ -35,7 +35,7 @@ Equivalent:
 
 - Let's add a remove button to demonstrate two-way data binding
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
@@ -55,7 +55,7 @@ Equivalent:
   - Add the necessary variables as well as the `onComplete` function
 - `this.thingsToDoChange.emit(thingsToDo)` will now automatically update the `thingsToDo` variable in the `AppComponent`
 
-#####_src/app/to-do-list/to-do-list.component.ts_
+#### _src/app/to-do-list/to-do-list.component.ts_
 ```ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 //... other code omitted for readability

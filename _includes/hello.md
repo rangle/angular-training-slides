@@ -59,7 +59,7 @@ The *application* as a whole has:
 <!-- .slide: id="hello-whats-in-the-component-1" -->
 ## What's in the Component?
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 import { Component } from '@angular/core';
 
@@ -81,7 +81,7 @@ export class AppComponent {
 <!-- .slide: id="hello-whats-in-the-component-2" -->
 ## What's in the Component?
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 import { Component } from '@angular/core';
 
@@ -104,7 +104,7 @@ export class AppComponent {
 <!-- .slide: id="hello-whats-in-the-component-3" -->
 ## What's in the Component?
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 import { Component } from '@angular/core';
 

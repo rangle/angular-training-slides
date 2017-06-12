@@ -43,7 +43,7 @@
     - Or by modifying the `prefix` property in `.angular-cli.json`
 - What to put in constructor and `ngOnInit` will be discussed later
 
-#####_src/app/to-do-list/to-do-list.component.ts_
+#### _src/app/to-do-list/to-do-list.component.ts_
 ```
 @Component({
   selector: 'app-to-do-list',
@@ -67,7 +67,7 @@ export class ToDoListComponent implements OnInit {
 
 - Refer to the component by putting its `selector` in another component's template
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p>Summary: {{summary()}}</p>
@@ -85,7 +85,7 @@ export class ToDoListComponent implements OnInit {
   1. Create a variable in the child to receive the value
   1. Use `@Input()` decorator to identify the variable
 
-#####_src/app/to-do-list/to-do-list.component.ts_
+#### _src/app/to-do-list/to-do-list.component.ts_
 ```ts
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -111,7 +111,7 @@ Even if you don't pass arguments, you need the parentheses.
 - And then pass data from the parent
   - Just like a function call
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
@@ -120,7 +120,7 @@ Even if you don't pass arguments, you need the parentheses.
 
 - Whoops: compiler error!
 
-#####_src/app/app.component.html_ (corrected)
+#### _src/app/app.component.html_ (corrected)
 ```html
 <app-to-do-list [heading]="'Things To Do'"></app-to-do-list>
 ```
@@ -149,7 +149,7 @@ Passing strings to components in this way resembles setting properties in HTML e
 - While we're at it, remove the heading from the child component
 - And use a proper list instead of a bunch of paragraphs
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
@@ -165,7 +165,7 @@ Passing strings to components in this way resembles setting properties in HTML e
 
 - Move the loop over the list into the child component's HTML
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">{{item}}</li>
@@ -174,7 +174,7 @@ Passing strings to components in this way resembles setting properties in HTML e
 
 - Create the required variable in the child component class
 
-#####_src/app/to-do-list/to-do-list.component.ts_
+#### _src/app/to-do-list/to-do-list.component.ts_
 ```ts
 export class ToDoListComponent implements OnInit {
 

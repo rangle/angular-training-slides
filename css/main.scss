@@ -54,7 +54,7 @@ $heading1TextShadow: $headingTextShadow;
 $heading1Size: 1.5em;
 $heading2Size: 1.4em;
 $heading3Size: 1em;
-$heading4Size: 1.8em;
+$heading4Size: 0.75em;
 $heading5Size: 0.6em;
 
 
@@ -127,6 +127,12 @@ body {
     position: absolute !important;
     right: 0 !important;
     top: 250px !important;
+  }
+
+  h5 {
+    color: $ranglePurple;
+    font-size: $heading4Size;
+    margin-top: 0.5em;
   }
 
   h5 {

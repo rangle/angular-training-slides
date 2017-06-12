@@ -29,7 +29,7 @@
 - Put the name of the pipe inside `{{...}}`
 - Use vertical bar `|` as separator
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" [id]="i">
@@ -88,7 +88,7 @@ Price is ca$100.12
 <!-- .slide: id="pipes-whats-in-a-pipe" -->
 ## What's in a Pipe?
 
-#####_src/app/titlecase.ts_
+#### _src/app/titlecase.ts_
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -112,7 +112,7 @@ export class TitlecasePipe implements PipeTransform {
 <!-- .slide: id="pipes-defining-our-transformation" -->
 ## Defining Our Transformation
 
-#####_src/app/titlecase.ts_
+#### _src/app/titlecase.ts_
 ```ts
 export class TitlecasePipe implements PipeTransform {
 
@@ -127,7 +127,7 @@ export class TitlecasePipe implements PipeTransform {
 <!-- .slide: id="pipes-using-our-pipe" -->
 ## Using Our Pipe
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">

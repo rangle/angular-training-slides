@@ -31,12 +31,12 @@
 import { HttpModule } from '@angular/http';
 
 @NgModule({
-  ...other content...
+  //...other content...
   imports: [
-    ...other imports...
+    //...other imports...
     HttpModule
   ],
-  ...other content...
+  //...other content...
 })
 export class AppModule {}
 ```
@@ -56,13 +56,11 @@ export class AppModule {}
 _src/db.json_
 ```ts
 {
-  "items": {
-    "todo": [
-      {"id": 0, "text": "Learn JavaScript"},
-      {"id": 1, "text": "Learn Node"},
-      {"id": 2, "text": "Learn Angular"}
-    ]
-  }
+  "items": [
+    {"id": 0, "text": "Learn JavaScript"},
+    {"id": 1, "text": "Learn Node"},
+    {"id": 2, "text": "Learn Angular"}
+  ]
 }
 ```
 
@@ -70,9 +68,9 @@ _src/db.json_
 <!-- .slide: id="http-using-on-startup" -->
 ## Using the HTTP Service on Startup
 
-- Modify `AppComponent` to ask `toDoService` to initialize itself
+- Modify `AppComponent` to ask `ToDoService` to initialize itself
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 import { Component, OnInit } from '@angular/core';
 // ...as before...
@@ -96,7 +94,7 @@ export class AppComponent implements OnInit {
 <!-- .slide: id="http-fetching-data-1" -->
 ## Fetch Data From the Server
 
-#####_src/app/to-do.service.ts_
+#### _src/app/to-do.service.ts_
 ```ts
 export class ToDoService {
 
@@ -108,8 +106,8 @@ export class ToDoService {
       .get(url)
       .map(res => res.json())
       .subscribe(
-        (body) => {
-          this.items = this.jsonToList(body.todo);
+        (body) => { 
+          this.items = body.map(item => item.text);
           this.changes.next(this.items);
         },
         (err) => { console.log(err); }
@@ -123,40 +121,42 @@ export class ToDoService {
 ## Fetch Data From the Server
 
 1. In real applications, `baseUrl` will be a configuration parameter.
-1. Define `url` to point to the top-level key in the "database".
+1. Define `url` to point to the root of your REST API
 1. Use the `http` service to GET that URL...
 1. ...then use `map` to extract the JSON body from the result...
    - This is `Observable.map` on one item, not `Array.map` on many
 1. ...then use `subscribe` to handle the (single) notification from the observable
-   - If all goes well, extract the text of the to-do list items with `jsonToList`
+   - If all goes well, extract the text of the to-do list using `body.map`
    - If there's an error, report it
 
 <!-- comment needed to separate lists -->
 - Note: JSON Server requires us to:
-  1. Store data below top-level keys (hence `items` *and* `todo`)
   1. Store lists as objects with an `id` field
-- Which is why we need `jsonToList`
+- Which is why we need to use `body.map` to extract the text only
 
 ---
 <!-- .slide: id="http-sending-data" -->
 ## Send Data to Server
 
-#####_src/app/to-do.service.ts_
+#### _src/app/to-do.service.ts_
 ```ts
   addItem(item: string) {
-    this.items.push(item);
-    this.changes.next(this.items);
-
     const url = `${this.baseUrl}/items`;
     this.http
-      .post(url, {todo: this.listToJson(this.items)})
+      .post(url, { 'text': item })
       .map(res => res.json())
       .subscribe(
+        (res) => {
+          if (res) {
+            this.items.push(res);
+            this.changes.next(this.items);
+          }
+        },
         (err) => { console.log(err); }
-      );
+        );
   }
 ```
 
 - Note structure of data sent to server (required by JSON Server)
+  - JSON Server will automatically insert the `id`
 - Only handle error returns in `subscribe`
-

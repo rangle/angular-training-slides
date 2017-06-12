@@ -30,7 +30,7 @@
 - Create a button
 - Have its `click` event call `addToDo` with a fixed string
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">{{item}}</li>
@@ -44,7 +44,7 @@
 
 - Create the corresponding method in the component class
 
-#####_src/app/to-do-list/to-do-list.component.ts_
+#### _src/app/to-do-list/to-do-list.component.ts_
 ```ts
 export class ToDoListComponent implements OnInit {
   // ...as before...
@@ -66,7 +66,7 @@ export class ToDoListComponent implements OnInit {
   - `newItem` is *not* a member of the component class
 - Modify the method call to pass that variable
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 // ...as before...
 <p>
@@ -95,7 +95,7 @@ export class ToDoListComponent implements OnInit {
   - and then clear it to empty out the input box
 
 
-#####_src/app/to-do-list/to-do-list.component.ts_
+#### _src/app/to-do-list/to-do-list.component.ts_
 ```ts
 export class ToDoListComponent implements OnInit {
   // ...as before...
@@ -130,7 +130,7 @@ export class ToDoListComponent implements OnInit {
 <!-- .slide: id="events-move-the-html" -->
 ## Move the HTML
 
-#####_src/app/to-do-list/to-do-list.component.html_
+#### _src/app/to-do-list/to-do-list.component.html_
 ```html
 <ul>
   <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">{{item}}</li>
@@ -138,7 +138,7 @@ export class ToDoListComponent implements OnInit {
 <app-generic-input></app-generic-input>
 ```
 
-#####_src/app/generic-input/generic-input.component.html_
+#### _src/app/generic-input/generic-input.component.html_
 ```html
 <p>
   <input #newItem placeholder="item"/>
@@ -153,7 +153,7 @@ export class ToDoListComponent implements OnInit {
 - Remove `addToDo` from `ToDoListComponent`
 - Put it in `GenericInputComponent`
 
-#####_src/app/generic-input/generic-input.component.ts_
+#### _src/app/generic-input/generic-input.component.ts_
 ```ts
 export class GenericInputComponent implements OnInit {
   // ...as before...
@@ -170,7 +170,7 @@ export class GenericInputComponent implements OnInit {
 <!-- .slide: id="events-create-event-emitter-1" -->
 ## Create an Event Emitter
 
-#####_src/app/generic-input/generic-input.component.ts_
+#### _src/app/generic-input/generic-input.component.ts_
 ```ts
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
@@ -209,7 +209,7 @@ export class GenericInputComponent implements OnInit {
 1. Add an event handler in `app.component.html`
    - Name is the name of the `@Output` member variable in `GenericInputComponent`
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>
@@ -224,7 +224,7 @@ export class GenericInputComponent implements OnInit {
 <!-- .slide: id="events-connect-the-wires" -->
 ## Connect the Wires
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 export class AppComponent {
 

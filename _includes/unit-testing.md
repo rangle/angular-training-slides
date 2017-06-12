@@ -69,7 +69,7 @@ Note the following in the generated tests:
 
 - `ng generate pipe capitalize`
 
-#####_src/app/capitalize.pipe.ts_
+#### _src/app/capitalize.pipe.ts_
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
@@ -86,7 +86,7 @@ export class CapitalizePipe implements PipeTransform {
 <!-- .slide: id="unit-testing-starter-code" -->
 ## Starter Code for Testing
 
-#####_src/app/capitalize.pipe.spec.ts_
+#### _src/app/capitalize.pipe.spec.ts_
 ```ts
 import { CapitalizePipe } from './capitalize.pipe';
 
@@ -104,7 +104,7 @@ describe('CapitalizePipe', () => {
 
 - We will need an instance for each test, so instantiate it in the `beforeEach` to avoid duplicating code
 
-#####_src/app/capitalize.pipe.spec.ts_
+#### _src/app/capitalize.pipe.spec.ts_
 ```ts
 describe('CapitalizePipe', () => {
 
@@ -130,7 +130,7 @@ describe('CapitalizePipe', () => {
 - Here we use the `toEqual` Jasmine matcher which performs a deep equality check
   - The `toBe` matcher, which performs a strict equality check (`===`), would also work here
 
-#####_src/app/capitalize.pipe.spec.ts_
+#### _src/app/capitalize.pipe.spec.ts_
 ```ts
 fdescribe('CapitalizePipe', () => {
 
@@ -150,7 +150,7 @@ fdescribe('CapitalizePipe', () => {
 - Let's create a method that will return the number of todos
 - Start by removing existing test code until we have the shell of a simple test for this component
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
 import { AppComponent } from './app.component';
 
@@ -193,7 +193,7 @@ mockToDoService = {
 - Here we write a failing test
 - Next, we'll create the method in `AppComponent` that will make this test pass
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
   describe('the itemCount method', () => {
 
@@ -238,7 +238,7 @@ mockToDoService = {
 - TestBed will also instantiate the `AppComponent` and inject the dependency for us
   - But we must add it to the `declarations` array
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ AppComponent ],
@@ -257,7 +257,7 @@ TestBed.configureTestingModule({
 - The `componentInstance` property of the fixture is an instance of `AppComponent`.
   - Here, we assign to to the `comp` variable to be used later in our tests
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
 let fixture: ComponentFixture<AppComponent>;
 let comp: AppComponent;
@@ -283,7 +283,7 @@ beforeEach(() => {
 - The above test fails because `AppComponent` uses components which we have not declared
 - We could provide mocks for these components, or do a shallow render by adding the `CUSTOM_ELEMENTS_SCHEMA`
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
@@ -301,7 +301,7 @@ Notes:
 - Alternatively, we can have Angular create the real service
 - We can then use `TestBed` to get a reference to the injected instance and set some state
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
 TestBed.configureTestingModule({
   declarations: [ AppComponent ],
@@ -333,7 +333,7 @@ TestBed.configureTestingModule({
 - We can use the `debugElement` to query the generated DOM
 - The test fails because we changed the data in the service after the component was created and the view hasn't detected it
 
-#####_src/app/app.component.spec.ts_
+#### _src/app/app.component.spec.ts_
 ```ts
 describe('AppComponent', () => {
   let comp: AppComponent;

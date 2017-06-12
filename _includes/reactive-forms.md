@@ -32,7 +32,7 @@
 
 - Import `ReactiveFormsModule` from `@angular/forms` into `app.module.ts`
 
-#####_src/app/app.module.ts_
+#### _src/app/app.module.ts_
 ```ts
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -65,7 +65,7 @@ export class AppModule { }
 <!-- .slide: id="reactive-forms-declaring-2" -->
 ## Declaring a Reactive Form
 
-#####_src/app/generic-input/generic-input.component.ts_
+#### _src/app/generic-input/generic-input.component.ts_
 ```ts
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
@@ -109,7 +109,7 @@ export class GenericInputComponent implements OnInit {
 - Angular provides `required`, `maxLength`, `minLength`, and `pattern` validators
 - Validators produce errors which can be checked by calling `hasError` on the `FormControl`
 
-#####_src/app/generic-input/generic-input.components.ts_
+#### _src/app/generic-input/generic-input.components.ts_
 ```ts
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -145,7 +145,7 @@ export class GenericInputComponent {
   - `null` if the field is valid
   - `{ validatorName: true }` if it is not
 
-#####_src/app/generic-input.component.ts_
+#### _src/app/generic-input.component.ts_
 ```ts
 import { FormControl } from '@angular/form';
 
@@ -230,7 +230,7 @@ export class GenericInputComponent {
 - Create a new component for this using `ng generate component structuredForm`
 - Add variables to represent the parts of the form
 
-#####_src/app/structured-form/structured-form.component.ts_
+#### _src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
   mainForm: FormGroup;
@@ -251,7 +251,7 @@ export class StructuredFormComponent implements OnInit {
 
 - Inject `FormBuilder` via our constructor
 
-#####_src/app/structured-form/structured-form.component.ts_
+#### _src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
   // ...as before...
@@ -269,7 +269,7 @@ constructor(
 
 - Use helper methods to create each form group's controls
 
-#####_src/app/structured-form/structured-form.component.ts_
+#### _src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
   // ...as before...
@@ -294,7 +294,7 @@ export class StructuredFormComponent implements OnInit {
 
 - Add the sub-groups to the main form once they have been created
 
-#####_src/app/structured-form/structured-form.component.ts_
+#### _src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
 
@@ -318,7 +318,7 @@ export class StructuredFormComponent implements OnInit {
 <!-- .slide: id="reactive-forms-using-the-form" -->
 ## Using the Form
 
-#####_src/app/structured-form/structured-form.html_
+#### _src/app/structured-form/structured-form.html_
 ```html
 <form [formGroup]="mainForm">
 
@@ -345,7 +345,7 @@ export class StructuredFormComponent implements OnInit {
 
 - Throw away most of the data for now...
 
-#####_src/app/structured-form/structured-form.component.ts_
+#### _src/app/structured-form/structured-form.component.ts_
 ```ts
 export class StructuredFormComponent implements OnInit {
 
@@ -357,7 +357,7 @@ export class StructuredFormComponent implements OnInit {
 }
 ```
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <app-to-do-list [thingsToDo]="thingsToDo"></app-to-do-list>

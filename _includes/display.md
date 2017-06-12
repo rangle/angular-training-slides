@@ -22,7 +22,7 @@
 - Change the title
 - Add a list of strings
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 @Component({
   // ...as before...
@@ -44,7 +44,7 @@ export class AppComponent {
 - Use `*ngFor` to repeat some HTML multiple times
 - The loop variable `item` is created locally
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo">{{item}}</p>
@@ -58,7 +58,7 @@ export class AppComponent {
 
 - We can obtain the 0-based index of each iteration and assign the value to a local variable:
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index">({{i}}) {{item}}</p>
@@ -74,7 +74,7 @@ export class AppComponent {
   - More precisely, whether or not something is added to the DOM
   - See how to show and hide content with styles later
 
-#####_src/app/app.component.ts_
+#### _src/app/app.component.ts_
 ```ts
 export class AppComponent {
   // ...as before...
@@ -86,7 +86,7 @@ export class AppComponent {
 <!-- .slide: id="display-ngif-2" -->
 ## Nothing to See Here, Folks
 
-#####_src/app/app.component.html_
+#### _src/app/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p *ngFor="let item of thingsToDo; let i = index" id="{{i}}">({{i}}) {{item}}</p>
@@ -101,7 +101,7 @@ export class AppComponent {
 
 - Interpolated expressions can include function and method calls
 
-#####_app/component/app.component.ts_
+#### _app/component/app.component.ts_
 ```ts
 export class AppComponent {
   // ...as before...
@@ -111,7 +111,7 @@ export class AppComponent {
 }
 ```
 
-#####_app/component/app.component.html_
+#### _app/component/app.component.html_
 ```html
 <h1>{{title}}</h1>
 <p>Summary: {{summary()}}</p>
@@ -132,7 +132,7 @@ export class AppComponent {
 - Angular notices data changes and updates page according
 - Show this by adding a to-do item to the list every second
 
-#####_app.component/app.component.ts_
+#### _app.component/app.component.ts_
 ```
 export class AppComponent {
   // ...as before...

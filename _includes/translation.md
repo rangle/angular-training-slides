@@ -25,7 +25,7 @@
 <!-- .slide: id="translation-setting-up-2" -->
 ## Setting Up
 
-#####_src/app/app.module.ts_
+#### _src/app/app.module.ts_
 ```ts
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -54,7 +54,7 @@ export class AppModule { }
 <!-- .slide: id="translation-configuring-the-translation-module-2" -->
 ## Configuring the Translation Module
 
-#####_src/app/app.module.ts_
+#### _src/app/app.module.ts_
 ```ts
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http);
@@ -78,7 +78,7 @@ export function HttpLoaderFactory(http: Http) {
 
 - Create JSON files with names based on language codes
 
-#####_assets/i18n/en.json_
+#### _assets/i18n/en.json_
 ```json
 {
   "HOME": {
@@ -87,7 +87,7 @@ export function HttpLoaderFactory(http: Http) {
 }
 ```
 
-#####_assets/i18n/fr.json_
+#### _assets/i18n/fr.json_
 ```json
 {
   "HOME": {
