@@ -1,7 +1,7 @@
 {
-  "name": "webpack-workshop-slides",
+  "name": "rangle-angular-slides",
   "version": "1.0.0",
-  "description": "Slides for the Webpack Workshop",
+  "description": "Slides for Rangle.io's Angular Workshop",
   "main": "dist/bundle.js",
   "repository": {},
   "scripts": {
