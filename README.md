@@ -77,15 +77,13 @@ you must:
 
 1.  Check out [this repository][repo] from GitHub.
 
-1.  Go into the project's `slides` directory.
-
 1.  Run `npm install` to install the JavaScript packages needed by [Reveal.js][reveal].
 
 You only need to do these steps once.
 After that,
 you can view the slides at any time:
 
-1.  Run `npm start` in the `./slides/` directory to run a local server.
+1.  Run `npm start` to run a local server.
     This uses port 8081 by default,
     and will fail with an error if that port is in use.
 
