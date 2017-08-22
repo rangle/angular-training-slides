@@ -56,7 +56,7 @@ export class AppModule { }
 
 #### _src/app/app.module.ts_
 ```ts
-export function HttpLoaderFactory(http: Http) {
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
@@ -65,7 +65,7 @@ export function HttpLoaderFactory(http: Http) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [Http]
+        deps: [HttpClient]
       }
     })
   ]
